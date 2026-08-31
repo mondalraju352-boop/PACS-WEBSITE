@@ -326,7 +326,7 @@
         <div class="notice-badge"><i class="fas fa-bullhorn"></i> নোটিশ</div>
         <div class="notice-ticker">
             <marquee behavior="scroll" direction="left" onmouseover="this.stop();" onmouseout="this.start();" id="noticeText">
-                প্রধান মন্ত্রী ফসল বীমা যোজনার আবেদন চলছে শেষ তারিখ ১৫.০৯.2026। সকল সকল কৃষকদের বিশেষ ভাবে  জানানো হচ্ছে যে আপনারা প্রত্যেকে  সমবায় সমিতিতে এসে "কৃষক নথিভুক্ত কারণ " করে নিন। সময়মতো ঋণ পরিশোধ করুন ও আর্থিক সহায়তা বজায় রাখুন।
+                "প্রধান মন্ত্রী ফসল বীমা যোজনার আবেদন চলছে শেষ তারিখ ১৫.০৯.2026। আপনারা প্রত্যেকে  সমবায় সমিতিতে এসে "কৃষক নথিভুক্ত কারণ " করে নিন। সময়মতো ঋণ পরিশোধ করুন ও আর্থিক সহায়তা বজায় রাখুন।"
             </marquee>
         </div>
     </div>
@@ -424,7 +424,7 @@
                 </div>
                 <h3>সঞ্চয় আমানত (Savings)</h3>
                 <p>নিরাপদ সঞ্চয় এবং সহজে টাকা তোলার সুবিধা সহ আকর্ষণীয় সুদের হারে আমানত অ্যাকাউন্ট।</p>
-                <div class="rate"><i class="fas fa-star" style="color:var(--gold)"></i> সুদের হার: ৪% - ৭%</div>
+                <div class="rate"><i class="fas fa-star" style="color:var(--gold)"></i> সুদের হার: ৪% - ৭ %</div>
                 <button class="card-btn" onclick="window.location.href='application.html'">আবেদন করুন</button>
             </div>
 
@@ -833,10 +833,12 @@
                     
                     setTimeout(() => {
                         closeAdminLogin();
-                        // সম্পূর্ণ লাইভ লিংকটি এখানে বসিয়ে দিন
-                        window.location.href = 'https://mondalraju352-boop.github.io/PACS-WEBSITE/admin.html';
+                        window.location.href = 'admin.html';
                     }, 800);
+                } else {
+                    msg.innerHTML = `<p style="color:#e74c3c;">❌ ${data.message}</p>`;
                 }
+            };
 
             const script = document.createElement('script');
             script.id = callbackName;
