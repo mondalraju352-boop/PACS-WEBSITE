@@ -833,12 +833,10 @@
                     
                     setTimeout(() => {
                         closeAdminLogin();
-                        window.location.href = 'admin.html';
+                        // সম্পূর্ণ লাইভ লিংকটি এখানে বসিয়ে দিন
+                        window.location.href = 'https://mondalraju352-boop.github.io/PACS-WEBSITE/admin.html';
                     }, 800);
-                } else {
-                    msg.innerHTML = `<p style="color:#e74c3c;">❌ ${data.message}</p>`;
                 }
-            };
 
             const script = document.createElement('script');
             script.id = callbackName;
