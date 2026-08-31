@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>প্রতাপপুর সমবায় কৃষি উন্নয়ন সমিতি</title>
+
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preconnect" href="https://translate.google.com">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+        :root {
+            --primary: #075e3b;
+            --primary-dark: #06482e;
+            --primary-light: #0a7a4c;
+            --gold: #d49b00;
+            --gold-light: #f5e6b0;
+            --text-dark: #1f2937;
+            --text-muted: #6b7280;
+            --bg-light: #f5f8f6;
+            --shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+            --shadow-hover: 0 12px 40px rgba(0, 0, 0, 0.15);
+            --radius: 14px;
+            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; background: var(--bg-light); color: var(--text-dark); top: 0 !important; }
+
+        .goog-te-banner-frame.skiptranslate, .goog-te-gadget-icon, .goog-te-banner-frame { display: none !important; }
+        body { top: 0px !important; }
+        .goog-logo-link { display: none !important; }
+        .goog-te-gadget { color: transparent !important; font-size: 0px !important; }
+        .goog-te-gadget .goog-te-combo {
+            margin: 0 !important; padding: 5px 10px !important; border-radius: 6px !important;
+            border: 2px solid var(--gold) !important; font-size: 13px !important; background: #ffffff !important;
+            color: var(--primary) !important; font-weight: bold !important; outline: none !important; cursor: pointer !important;
+        }
+
+        .whatsapp-float {
+            position: fixed; bottom: 30px; right: 30px; background: #25d366; color: white;
+            width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center;
+            justify-content: center; font-size: 32px; box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+            z-index: 999; transition: var(--transition); text-decoration: none;
+        }
+        .whatsapp-float:hover { transform: scale(1.1) rotate(-5deg); box-shadow: 0 6px 30px rgba(37, 211, 102, 0.6); }
+
+        header {
+            background: var(--primary); color: white; padding: 15px 6%; display: flex;
+            justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.15);
+        }
+        .logo-area { display: flex; align-items: center; gap: 16px; }
+        .logo { width: 60px; height: 60px; background: white; color: var(--primary); border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 28px; font-weight: bold; flex-shrink: 0; }
+        .society-name h1 { font-size: 20px; margin-bottom: 3px; letter-spacing: 0.5px; }
+        .society-name p { font-size: 12px; opacity: 0.9; }
+
+        .lang-container { display: flex; align-items: center; gap: 6px; background: rgba(255, 255, 255, 0.12); padding: 6px 14px; border-radius: 25px; border: 1px solid rgba(255, 255, 255, 0.2); }
+        .lang-icon { font-size: 16px; }
+
+        nav {
+            background: white; padding: 12px 6%; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+            display: flex; justify-content: center; align-items: center; gap: 10px 20px; flex-wrap: wrap;
+            position: sticky; top: 90px; z-index: 99;
+        }
+        nav a, .nav-btn-status {
+            text-decoration: none; color: var(--primary); font-weight: 600; font-size: 14px;
+            transition: var(--transition); cursor: pointer; background: none; border: none;
+            font-family: inherit; padding: 6px 4px; position: relative;
+        }
+        nav a::after {
+            content: ''; position: absolute; bottom: -2px; left: 0; width: 0; height: 2px;
+            background: var(--gold); transition: var(--transition);
+        }
+        nav a:hover::after { width: 100%; }
+        nav a:hover { color: var(--gold); }
+
+        .nav-btn-status {
+            background: var(--primary); color: white !important; padding: 8px 18px !important;
+            border-radius: 25px; font-weight: bold; display: inline-flex; align-items: center; gap: 6px;
+        }
+        .nav-btn-status:hover { background: var(--primary-dark); transform: translateY(-2px); box-shadow: 0 4px 15px rgba(7, 94, 59, 0.3); }
+        .nav-btn-status::after { display: none; }
+
+        .nav-btn-kcc {
+            background: var(--gold); color: var(--primary) !important; padding: 8px 20px !important;
+            border-radius: 25px; font-weight: bold; border: 2px solid var(--gold);
+        }
+        .nav-btn-kcc:hover { background: var(--primary); color: white !important; border-color: var(--primary); }
+        .nav-btn-kcc::after { display: none; }
+
+        .notice-container {
+            background: #fff8e1; border-bottom: 2px solid #ffd54f; display: flex;
+            align-items: center; padding: 8px 6%; overflow: hidden;
+        }
+        .notice-badge {
+            background: var(--gold); color: white; padding: 4px 14px; font-weight: bold;
+            border-radius: 5px; white-space: nowrap; font-size: 13px; margin-right: 15px; flex-shrink: 0;
+        }
+        .notice-ticker { width: 100%; overflow: hidden; white-space: nowrap; }
+        .notice-ticker marquee { font-weight: 500; color: #5d4a00; }
+
+        .hero {
+            min-height: 550px; padding: 80px 8%; display: flex; align-items: center;
+            background: linear-gradient(135deg, #e8f5ed 0%, #ffffff 100%); position: relative; overflow: hidden;
+        }
+        .hero::before {
+            content: '🌾'; position: absolute; right: 5%; top: 15%; font-size: 180px; opacity: 0.06; transform: rotate(15deg);
+        }
+        .hero-content { max-width: 650px; position: relative; z-index: 1; }
+        .hero-content .badge {
+            display: inline-block; background: var(--gold); color: white; padding: 4px 16px;
+            border-radius: 20px; font-size: 12px; font-weight: bold; letter-spacing: 1px; margin-bottom: 15px;
+        }
+        .hero h2 { font-size: 48px; line-height: 1.15; color: var(--primary); margin-bottom: 18px; }
+        .hero h2 span { color: var(--gold); }
+        .hero p { font-size: 17px; line-height: 1.8; color: var(--text-muted); margin-bottom: 28px; }
+        .hero-buttons .btn {
+            display: inline-block; padding: 14px 30px; border-radius: 8px; text-decoration: none;
+            font-weight: bold; margin-right: 12px; margin-bottom: 8px; transition: var(--transition);
+        }
+        .btn-primary { background: var(--primary); color: white; }
+        .btn-primary:hover { background: var(--primary-dark); transform: translateY(-3px); box-shadow: 0 6px 25px rgba(7, 94, 59, 0.3); }
+        .btn-secondary { border: 2px solid var(--primary); color: var(--primary); background: transparent; }
+        .btn-secondary:hover { background: var(--primary); color: white; transform: translateY(-3px); }
+        .btn-gold { background: var(--gold); color: var(--primary); }
+        .btn-gold:hover { background: #c48900; transform: translateY(-3px); box-shadow: 0 6px 25px rgba(212, 155, 0, 0.3); }
+
+        .section-padding { padding: 70px 7%; }
+        .section-tag { color: var(--gold); font-weight: bold; letter-spacing: 1px; font-size: 12px; display: block; margin-bottom: 8px; }
+        .section-title { text-align: center; margin-bottom: 50px; }
+        .section-title h2 { color: var(--primary); font-size: 34px; margin-bottom: 12px; }
+        .section-title p { color: var(--text-muted); font-size: 16px; max-width: 600px; margin: 0 auto; }
+
+        .about { background: white; }
+        .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center; }
+        .about-text h2 { color: var(--primary); font-size: 32px; margin-bottom: 18px; }
+        .about-text p { color: var(--text-muted); line-height: 1.8; margin-bottom: 15px; }
+        .about-features { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px; }
+        .about-features li { list-style: none; display: flex; align-items: center; gap: 10px; color: var(--text-muted); font-weight: 500; }
+        .about-features li i { color: var(--gold); font-size: 18px; }
+        .about-box {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white; padding: 45px 35px; border-radius: var(--radius); text-align: center;
+        }
+        .about-box h3 { font-size: 26px; margin-bottom: 10px; }
+        .about-box p { font-size: 14px; opacity: 0.9; color: var(--gold-light); }
+        .about-box .year { font-size: 60px; font-weight: 900; color: var(--gold); display: block; margin: 10px 0; }
+
+        .services { background: var(--bg-light); }
+        .service-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
+        .service-card {
+            background: white; padding: 32px 28px; border-radius: var(--radius); box-shadow: var(--shadow);
+            cursor: pointer; transition: var(--transition); border-bottom: 4px solid transparent;
+        }
+        .service-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-hover); border-bottom-color: var(--gold); }
+        .service-icon { font-size: 40px; margin-bottom: 15px; }
+        .service-card h3 { color: var(--primary); font-size: 20px; margin-bottom: 12px; }
+        .service-card ul { list-style: none; padding: 0; }
+        .service-card li { padding: 7px 0; color: var(--text-muted); border-bottom: 1px solid #f0f0f0; display: flex; align-items: center; gap: 8px; }
+        .service-card li:last-child { border-bottom: none; }
+        .service-card li i { color: var(--gold); font-size: 12px; }
+
+        .products { background: white; }
+        .product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
+        .product-card {
+            background: white; padding: 24px; border-radius: var(--radius); box-shadow: var(--shadow);
+            transition: var(--transition); border: 1px solid #f0f0f0; position: relative;
+        }
+        .product-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-hover); }
+        .product-card .card-img { width: 100%; height: 180px; object-fit: cover; border-radius: 10px; margin-bottom: 15px; background: #e8f5ed; }
+        .product-card h3 { color: var(--primary); font-size: 18px; margin-bottom: 8px; }
+        .product-card p { color: var(--text-muted); line-height: 1.6; font-size: 14px; margin-bottom: 12px; }
+        .product-card .rate { font-weight: bold; color: var(--gold); font-size: 14px; }
+        .product-card .card-btn {
+            display: inline-block; margin-top: 12px; padding: 10px 22px; background: var(--primary);
+            color: white; text-decoration: none; border-radius: 6px; font-size: 13px; font-weight: bold;
+            border: none; cursor: pointer; transition: var(--transition);
+        }
+        .product-card .card-btn:hover { background: var(--primary-dark); color: var(--gold); }
+        .product-card .badge-gold { position: absolute; top: 12px; right: 12px; background: var(--gold); color: var(--primary); padding: 4px 14px; border-radius: 20px; font-size: 11px; font-weight: bold; }
+
+        .steps-section { background: var(--bg-light); }
+        .steps-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; margin-top: 20px; }
+        .step-item { background: white; padding: 30px 20px; border-radius: var(--radius); text-align: center; box-shadow: var(--shadow); transition: var(--transition); }
+        .step-item:hover { transform: translateY(-5px); box-shadow: var(--shadow-hover); }
+        .step-number {
+            display: inline-block; width: 50px; height: 50px; background: var(--gold); color: white;
+            border-radius: 50%; font-size: 24px; font-weight: 800; line-height: 50px; margin-bottom: 15px;
+        }
+        .step-item h4 { color: var(--primary); font-size: 18px; margin-bottom: 8px; }
+        .step-item p { color: var(--text-muted); font-size: 14px; }
+
+        .testimonials { background: white; }
+        .testimonial-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 30px; }
+        .testimonial-card { background: var(--bg-light); padding: 25px; border-radius: var(--radius); border-left: 4px solid var(--gold); transition: var(--transition); }
+        .testimonial-card:hover { transform: translateX(5px); }
+        .testimonial-card p { font-style: italic; color: var(--text-dark); line-height: 1.7; }
+        .testimonial-card h4 { margin-top: 12px; color: var(--primary); font-size: 15px; }
+        .testimonial-card .role { font-size: 12px; color: var(--text-muted); }
+
+        .faq-section { background: var(--bg-light); }
+        .faq-grid { max-width: 800px; margin: 0 auto; }
+        .faq-item { background: white; padding: 18px 24px; border-radius: 10px; margin-bottom: 12px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04); transition: var(--transition); }
+        .faq-item:hover { box-shadow: var(--shadow); }
+        .faq-item summary { font-weight: 700; color: var(--primary); cursor: pointer; font-size: 16px; display: flex; justify-content: space-between; align-items: center; }
+        .faq-item summary::-webkit-details-marker { display: none; }
+        .faq-item summary::after { content: '➕'; font-size: 18px; color: var(--gold); }
+        .faq-item[open] summary::after { content: '➖'; }
+        .faq-item p { color: var(--text-muted); padding-top: 12px; line-height: 1.7; border-top: 1px solid #eee; margin-top: 10px; }
+
+        .downloads { background: #f0f7f4; }
+        .downloads-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        .download-item {
+            background: white; padding: 20px 24px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            display: flex; align-items: center; justify-content: space-between; border-left: 5px solid var(--primary); transition: var(--transition);
+        }
+        .download-item:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+        .download-info h4 { color: var(--primary); font-size: 15px; margin-bottom: 4px; }
+        .download-info p { color: var(--text-muted); font-size: 12px; }
+        .btn-download {
+            background: var(--primary); color: white; text-decoration: none; padding: 8px 16px; border-radius: 6px;
+            font-size: 13px; font-weight: bold; display: inline-flex; align-items: center; gap: 5px; transition: var(--transition); white-space: nowrap; border: none; cursor: pointer;
+        }
+        .btn-download:hover { background: var(--gold); color: var(--primary); }
+
+        .contact { background: linear-gradient(135deg, var(--primary), var(--primary-light)); color: white; text-align: center; padding: 70px 7%; }
+        .contact-content { max-width: 600px; margin: 0 auto; }
+        .contact-content h2 { font-size: 36px; margin-bottom: 15px; }
+        .contact-content p { font-size: 16px; line-height: 1.8; margin-bottom: 25px; opacity: 0.95; }
+        .contact-btn { display: inline-block; padding: 14px 35px; background: var(--gold); color: var(--primary); text-decoration: none; border-radius: 8px; font-weight: bold; transition: var(--transition); }
+        .contact-btn:hover { background: white; transform: translateY(-3px); box-shadow: 0 6px 25px rgba(0, 0, 0, 0.2); }
+        .contact-info-row { display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; margin-top: 30px; }
+        .contact-info-row a { color: white; text-decoration: none; font-size: 14px; display: flex; align-items: center; gap: 8px; opacity: 0.9; transition: var(--transition); }
+        .contact-info-row a:hover { opacity: 1; color: var(--gold); }
+
+        footer { background: #063d28; color: white; padding: 50px 7% 20px; }
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; margin-bottom: 30px; }
+        .footer-brand h3 { font-size: 18px; margin-bottom: 10px; }
+        .footer-brand p { font-size: 14px; line-height: 1.6; opacity: 0.9; }
+        .footer-social { display: flex; gap: 12px; margin-top: 12px; }
+        .footer-social a {
+            display: inline-flex; width: 38px; height: 38px; background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%; align-items: center; justify-content: center; color: white; text-decoration: none; transition: var(--transition); font-size: 16px;
+        }
+        .footer-social a:hover { background: var(--gold); color: var(--primary); transform: translateY(-3px); }
+        .footer-links h4, .footer-contact h4 { font-size: 16px; margin-bottom: 15px; color: var(--gold); }
+        .footer-links a { display: block; color: white; text-decoration: none; margin-bottom: 8px; font-size: 14px; transition: var(--transition); opacity: 0.85; }
+        .footer-links a:hover { opacity: 1; color: var(--gold); padding-left: 5px; }
+        .footer-contact p { font-size: 14px; margin-bottom: 6px; opacity: 0.85; display: flex; align-items: center; gap: 8px; }
+        .footer-bottom { border-top: 1px solid rgba(255, 255, 255, 0.1); padding-top: 20px; text-align: center; font-size: 13px; opacity: 0.7; }
+
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.6);
+            display: none; justify-content: center; align-items: center; z-index: 2000; backdrop-filter: blur(4px);
+        }
+        .modal-box {
+            background: white; padding: 35px 30px; border-radius: var(--radius); max-width: 480px; width: 92%;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25); position: relative; text-align: center; animation: modalFade 0.3s ease-out;
+        }
+        @keyframes modalFade { from { transform: scale(0.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+        .modal-close { position: absolute; top: 14px; right: 18px; font-size: 28px; font-weight: bold; color: #aaa; cursor: pointer; transition: var(--transition); line-height: 1; }
+        .modal-close:hover { color: #000; transform: rotate(90deg); }
+        .modal-box h3 { color: var(--primary); margin-bottom: 8px; }
+        .modal-box .sub { color: var(--text-muted); font-size: 13px; margin-bottom: 20px; }
+        .modal-box input { width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 8px; font-size: 14px; text-align: center; box-sizing: border-box; transition: var(--transition); }
+        .modal-box input:focus { border-color: var(--gold); outline: none; }
+        .modal-box .check-btn {
+            width: 100%; padding: 12px; background: var(--primary); color: white; border: none;
+            border-radius: 8px; font-weight: bold; font-size: 15px; cursor: pointer; transition: var(--transition); margin-top: 10px;
+        }
+        .modal-box .check-btn:hover { background: var(--primary-dark); }
+        .status-result { margin-top: 15px; font-size: 14px; text-align: left; }
+
+        @media (max-width: 900px) {
+            .about-grid { grid-template-columns: 1fr; }
+            .hero h2 { font-size: 34px; }
+            header { flex-direction: column; text-align: center; gap: 12px; position: static; }
+            nav { position: static; flex-direction: column; gap: 8px; padding: 10px 4%; }
+            .society-name h1 { font-size: 17px; }
+            .whatsapp-float { width: 50px; height: 50px; font-size: 26px; bottom: 20px; right: 20px; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <a href="https://wa.me/917047996714" target="_blank" class="whatsapp-float" aria-label="WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <header>
+        <div class="logo-area">
+            <div class="logo">🌾</div>
+            <div class="society-name">
+                <h1>প্রতাপপুর সমবায় কৃষি উন্নয়ন সমিতি লিমিটেড</h1>
+                <p>রেজিস্ট্রেশন: ৬০৪ | তারিখ: ২৯/০৫/১৯৬৯</p>
+            </div>
+        </div>
+        <div class="lang-container notranslate">
+            <span class="lang-icon">🌐</span>
+            <div id="google_translate_element"></div>
+        </div>
+    </header>
+
+    <nav>
+        <a href="#home"><i class="fas fa-home"></i> Home</a>
+        <a href="#about"><i class="fas fa-info-circle"></i> About</a>
+        <a href="#services"><i class="fas fa-hand-holding-heart"></i> Services</a>
+        <a href="#products"><i class="fas fa-box"></i> Products</a>
+        <a href="#downloads"><i class="fas fa-download"></i> Downloads</a>
+        <a href="application.html"><i class="fas fa-pen"></i> Apply Online</a>
+        <button type="button" class="nav-btn-status" onclick="openStatusModal()">
+            <i class="fas fa-search"></i> Status
+        </button>
+        <a href="#contact"><i class="fas fa-phone"></i> Contact</a>
+        <a href="membership.html" class="nav-btn-kcc"><i class="fas fa-star"></i> KCC / Membership</a>
+        <button onclick="openAdminLogin()" style="background:var(--gold); color:var(--primary); padding:8px 18px; border:none; border-radius:25px; font-weight:bold; cursor:pointer; transition:0.3s;">
+            <i class="fas fa-shield-alt"></i>Loging
+        </button>
+    </nav>
+
+    <div class="notice-container">
+        <div class="notice-badge"><i class="fas fa-bullhorn"></i> নোটিশ</div>
+        <div class="notice-ticker">
+            <marquee behavior="scroll" direction="left" onmouseover="this.stop();" onmouseout="this.start();" id="noticeText">
+                নতুন KCC ও মেম্বারশিপ আবেদন শুরু হয়েছে। সময়মতো ঋণ পরিশোধ করুন ও আর্থিক সহায়তা বজায় রাখুন।
+            </marquee>
+        </div>
+    </div>
+
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <span class="badge"><i class="fas fa-flag"></i> ৫৫+ বছরের বিশ্বাস</span>
+            <h2>কৃষকদের ক্ষমতায়ন, <span>সম্প্রদায়</span>কে শক্তিশালী করা</h2>
+            <p>
+                আমরা কৃষক, সদস্য এবং গ্রামীণ সম্প্রদায়ের জন্য সহজলভ্য আর্থিক সেবা
+                ও কৃষি সহায়তা প্রদানে প্রতিশ্রুতিবদ্ধ। ১৯৬৯ সাল থেকে আপনার পাশে।
+            </p>
+            <div class="hero-buttons">
+                <a href="application.html" class="btn btn-primary"><i class="fas fa-arrow-right"></i> আবেদন করুন</a>
+                <a href="#services" class="btn btn-secondary"><i class="fas fa-eye"></i> সেবা দেখুন</a>
+                <a href="membership.html" class="btn btn-gold"><i class="fas fa-user-plus"></i> মেম্বারশিপ</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="about section-padding" id="about">
+        <div class="about-grid">
+            <div class="about-text">
+                <span class="section-tag"><i class="fas fa-leaf"></i> আমাদের সম্পর্কে</span>
+                <h2>গুণমান, বিশ্বাস এবং <span style="color:var(--gold)">বৃদ্ধি</span>তে প্রতিশ্রুতিবদ্ধ</h2>
+                <p>
+                    প্রতাপপুর সমবায় কৃষি উন্নয়ন সমিতি লিঃ গুণমান প্রদান, দীর্ঘমেয়াদী
+                    সম্পর্ক গড়ে তোলা এবং আমাদের গ্রাহক ও সম্প্রদায়ের জন্য অর্থপূর্ণ
+                    মূল্য সৃষ্টিতে প্রতিশ্রুতিবদ্ধ।
+                </p>
+                <p>
+                    বিশ্বাস, উদ্ভাবন এবং দায়িত্বশীল বৃদ্ধির উপর দৃষ্টি নিবদ্ধ করে,
+                    আমরা ক্রমাগত একটি উন্নত ভবিষ্যৎ গড়ে তোলার জন্য কাজ করছি।
+                </p>
+                <ul class="about-features">
+                    <li><i class="fas fa-check-circle"></i> ৫৫+ বছরের বিশ্বাস</li>
+                    <li><i class="fas fa-check-circle"></i> আধুনিক ব্যাংকিং সেবা</li>
+                    <li><i class="fas fa-check-circle"></i> কৃষি- ঋণ</li>
+                    <li><i class="fas fa-check-circle"></i> স্বচ্ছ এবং সুষ্ঠ পরিষেবা </li>
+                </ul>
+            </div>
+            <div class="about-box">
+                <h3>প্রতাপপুর এস.কে.উ. এস.লিঃ</h3>
+                <span class="year">১৯৬৯</span>
+                <p>গুণমান • বিশ্বাস • উদ্ভাবন</p>
+                <p style="margin-top:15px; font-size:13px; opacity:0.8;">
+                    <i class="fas fa-map-marker-alt"></i> প্রতাপপুর, নদিয়া, পশ্চিমবঙ্গ
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="services section-padding" id="services">
+        <div class="section-title">
+            <span class="section-tag"><i class="fas fa-hand-holding-heart"></i> আমাদের পরিষেবা</span>
+            <h2>ঋণ ও আমানত পরিষেবা</h2>
+            <p>আপনার আর্থিক প্রয়োজন ও সঞ্চয়ের জন্য আমাদের বিভিন্ন সমাধান</p>
+        </div>
+        <div class="service-cards">
+            <div class="service-card" onclick="window.location.href='application.html'">
+                <div class="service-icon"><i class="fas fa-hand-holding-usd" style="color:var(--gold)"></i></div>
+                <h3>ঋণ পণ্য</h3>
+                <ul>
+                    <li><i class="fas fa-chevron-right"></i> Kisan Credit Card (KCC)</li>
+                    <li><i class="fas fa-chevron-right"></i> Self Help Group (SHG) Loan</li>
+                    <li><i class="fas fa-chevron-right"></i> Loan Against NSC / KVP / LIC</li>
+                    <li><i class="fas fa-chevron-right"></i> Short Term Consumer Loan</li>
+                </ul>
+            </div>
+            <div class="service-card" onclick="window.location.href='application.html'">
+                <div class="service-icon"><i class="fas fa-piggy-bank" style="color:var(--gold)"></i></div>
+                <h3>আমানত পণ্য</h3>
+                <ul>
+                    <li><i class="fas fa-chevron-right"></i> Savings Deposit Account</li>
+                    <li><i class="fas fa-chevron-right"></i> DBT Enabled CBS Banking</li>
+                    <li><i class="fas fa-chevron-right"></i> Current Account</li>
+                    <li><i class="fas fa-chevron-right"></i> Fixed Deposit</li>
+                    <li><i class="fas fa-chevron-right"></i> Monthly Income Scheme (MIS)</li>
+                    <li><i class="fas fa-chevron-right"></i> Recurring Deposit</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="products section-padding" id="products">
+        <div class="section-title">
+            <h2>আমাদের ঋণ ও আর্থিক পণ্য</h2>
+            <p>আমাদের উপলব্ধ পণ্য এবং আর্থিক সেবা অন্বেষণ করুন</p>
+        </div>
+        <div class="product-grid">
+            <div class="product-card">
+                <div class="card-img" style="background: linear-gradient(135deg, #e8f5ed, #d4f0e0); display:flex; align-items:center; justify-content:center; font-size:50px; color:var(--primary);">
+                    <i class="fas fa-wallet"></i>
+                </div>
+                <h3>সঞ্চয় আমানত (Savings)</h3>
+                <p>নিরাপদ সঞ্চয় এবং সহজে টাকা তোলার সুবিধা সহ আকর্ষণীয় সুদের হারে আমানত অ্যাকাউন্ট।</p>
+                <div class="rate"><i class="fas fa-star" style="color:var(--gold)"></i> সুদের হার: ৪% - ৬%</div>
+                <button class="card-btn" onclick="window.location.href='application.html'">আবেদন করুন</button>
+            </div>
+
+            <div class="product-card" style="border: 2px solid var(--gold);">
+                <span class="badge-gold"><i class="fas fa-crown"></i> জনপ্রিয়</span>
+                <div class="card-img" style="background: linear-gradient(135deg, #f5e6b0, #f0d58a); display:flex; align-items:center; justify-content:center; font-size:50px; color:var(--primary);">
+                    <i class="fas fa-seedling"></i>
+                </div>
+                <h3>কিসান ক্রেডিট কার্ড (KCC)</h3>
+                <p>কৃষকদের জন্য বিশেষ ঋণ সুবিধা। স্বল্প সুদে ফসলি ঋণ ও মেম্বারশিপের সুযোগ।</p>
+                <div class="rate"><i class="fas fa-star" style="color:var(--gold)"></i> বিশেষ সুবিধা: স্বল্প সুদ</div>
+                <button class="card-btn" onclick="window.location.href='membership.html'">আবেদন করুন</button>
+            </div>
+
+            <div class="product-card">
+                <div class="card-img" style="background: linear-gradient(135deg, #e3f0ff, #c5dfff); display:flex; align-items:center; justify-content:center; font-size:50px; color:#1a5276;">
+                    <i class="fas fa-users"></i>
+                </div>
+                <h3>স্বনির্ভর গোষ্ঠী (SHG)</h3>
+                <p>যোগ্য স্বনির্ভর গোষ্ঠী এবং তাদের সদস্যদের জন্য আর্থিক সহায়তা ও সহজ কিস্তি সুবিধা।</p>
+                <div class="rate"><i class="fas fa-star" style="color:var(--gold)"></i> সহজ কিস্তি</div>
+                <button class="card-btn" onclick="window.location.href='application.html'">আবেদন করুন</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="steps-section section-padding">
+        <div class="section-title">
+            <span class="section-tag"><i class="fas fa-route"></i> আবেদন প্রক্রিয়া</span>
+            <h2>কীভাবে আবেদন করবেন?</h2>
+            <p>মাত্র কয়েকটি ধাপে আপনার পছন্দের সেবার জন্য আবেদন করুন</p>
+        </div>
+        <div class="steps-grid">
+            <div class="step-item">
+                <div class="step-number">১</div>
+                <h4>সেবা নির্বাচন</h4>
+                <p>আপনার প্রয়োজনীয় ঋণ বা আমানত সেবা নির্বাচন করুন</p>
+            </div>
+            <div class="step-item">
+                <div class="step-number">২</div>
+                <h4>ফর্ম পূরণ</h4>
+                <p>আবেদন ফর্মে প্রয়োজনীয় সব তথ্য সঠিকভাবে পূরণ করুন</p>
+            </div>
+            <div class="step-item">
+                <div class="step-number">৩</div>
+                <h4>জমা দিন</h4>
+                <p>আবেদন জমা দিন এবং আপনার ইউনিক Application ID সংগ্রহ করুন</p>
+            </div>
+            <div class="step-item">
+                <div class="step-number">৪</div>
+                <h4>স্ট্যাটাস চেক</h4>
+                <p>আপনার Application ID দিয়ে যেকোনো সময় স্ট্যাটাস জানুন</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonials section-padding">
+        <div class="section-title">
+            <span class="section-tag"><i class="fas fa-quote-right"></i> সদস্যদের মতামত</span>
+            <h2>আমাদের সদস্যরা যা বলেন</h2>
+            <p>আমাদের সেবা পেয়ে সদস্যদের অভিজ্ঞতা</p>
+        </div>
+        <div class="testimonial-grid">
+            <div class="testimonial-card">
+                <p>"KCC ঋণ পেয়ে আমার চাষাবাদে অনেক উন্নতি হয়েছে। সময়মতো ঋণ পেয়ে ফসল উৎপাদন বাড়িয়েছি।"</p>
+                <h4>- মোঃ রফিকুল ইসলাম</h4>
+                <span class="role">কৃষক, প্রতাপপুর</span>
+            </div>
+            <div class="testimonial-card">
+                <p>"সঞ্চয় অ্যাকাউন্ট খোলার পর থেকে আমার টাকা নিরাপদে আছে। ডিজিটাল ব্যাংকিং সেবা খুবই সহজ।"</p>
+                <h4>- শ্রীমতি সীতা রায়</h4>
+                <span class="role">গৃহিণী, ডিগম্বরপুর</span>
+            </div>
+            <div class="testimonial-card">
+                <p>"SHG ঋণ পেয়ে আমাদের ছোট ব্যবসা শুরু করতে পেরেছি। সমিতির সহায়তা সত্যিই প্রশংসনীয়।"</p>
+                <h4>- মোছা. আয়েশা খাতুন</h4>
+                <span class="role">SHG সদস্যা, কাদিপুর</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="faq-section section-padding" id="faq">
+        <div class="section-title">
+            <span class="section-tag"><i class="fas fa-question-circle"></i> জিজ্ঞাসা</span>
+            <h2>সাধারণ জিজ্ঞাসিত প্রশ্ন</h2>
+            <p>আমাদের সেবা সম্পর্কে আপনার মনে কিছু প্রশ্ন থাকলে এখানে উত্তর খুঁজুন</p>
+        </div>
+        <div class="faq-grid">
+            <details class="faq-item">
+                <summary>KCC ঋণ পেতে কী কী যোগ্যতা প্রয়োজন?</summary>
+                <p>আপনাকে সমিতির সদস্য হতে হবে এবং নিজের নামে জমির মালিক হতে হবে। এছাড়া KYC সম্পূর্ণ থাকতে হবে। বিস্তারিত জানতে অফিসে যোগাযোগ করুন।</p>
+            </details>
+            <details class="faq-item">
+                <summary>অনলাইন আবেদন করার পর কী হয়?</summary>
+                <p>আবেদন জমা দেওয়ার পর আপনি একটি Application ID পাবেন। আমাদের টিম আপনার আবেদন পর্যালোচনা করবে এবং প্রয়োজনে আপনার সাথে যোগাযোগ করবে।</p>
+            </details>
+            <details class="faq-item">
+                <summary>সঞ্চয় অ্যাকাউন্টে কত সুদ পাওয়া যায়?</summary>
+                <p>বর্তমানে সঞ্চয় অ্যাকাউন্টে বার্ষিক ৪% থেকে ৬% পর্যন্ত সুদ প্রদান করা হয়। সুদের হার সময়ে সময়ে পরিবর্তিত হতে পারে।</p>
+            </details>
+            <details class="faq-item">
+                <summary>Application ID দিয়ে কীভাবে স্ট্যাটাস চেক করব?</summary>
+                <p>হোমপেজের "Status" বাটনে ক্লিক করে আপনার Application ID লিখুন। তাৎক্ষণিকভাবে আপনার আবেদনের বর্তমান অবস্থা দেখতে পাবেন।</p>
+            </details>
+        </div>
+    </section>
+
+    <section class="downloads section-padding" id="downloads">
+        <div class="section-title">
+            <span class="section-tag"><i class="fas fa-download"></i> ডাউনলোড কর্নার</span>
+            <h2>প্রয়োজনীয় ফর্ম ও নথিপত্র</h2>
+            <p>অফলাইন আবেদন এবং তথ্যের জন্য প্রয়োজনীয় ফর্ম ডাউনলোড করুন</p>
+        </div>
+        <div class="downloads-grid">
+            <div class="download-item">
+                <div class="download-info">
+                    <h4><i class="fas fa-file-pdf" style="color:#e74c3c;"></i> KCC ঋণ আবেদন ফর্ম</h4>
+                    <p>PDF ফর্ম্যাট | অফলাইন জমাদানের জন্য</p>
+                </div>
+                <a href="https://drive.google.com/uc?export=download&id=1Vf8wSMY6xQTo7V1X0Yrs_1ovXIPaRgT5" target="_blank" class="btn-download"><i class="fas fa-download"></i> ডাউনলোড</a>
+            </div>
+            <div class="download-item">
+                <div class="download-info">
+                    <h4><i class="fas fa-file-pdf" style="color:#e74c3c;"></i> মেম্বারশিপ ফর্ম</h4>
+                    <p>PDF ফর্ম্যাট | নতুন সদস্য পদ প্রাপ্তির জন্য</p>
+                </div>
+                <a href="https://drive.google.com/uc?export=download&id=1Vf8wSMY6xQTo7V1X0Yrs_1ovXIPaRgT5" target="_blank" class="btn-download"><i class="fas fa-download"></i> ডাউনলোড</a>
+            </div>
+            <div class="download-item">
+                <div class="download-info">
+                    <h4><i class="fas fa-file-pdf" style="color:#e74c3c;"></i> SHG দলগত ঋণ ফর্ম</h4>
+                    <p>PDF ফর্ম্যাট | স্বয়ংসেবা গোষ্ঠীর জন্য</p>
+                </div>
+                <a href="https://drive.google.com/uc?export=download&id=1Vf8wSMY6xQTo7V1X0Yrs_1ovXIPaRgT5" target="_blank" class="btn-download"><i class="fas fa-download"></i> ডাউনলোড</a>
+            </div>
+            <div class="download-item">
+                <div class="download-info">
+                    <h4><i class="fas fa-file-pdf" style="color:#e74c3c;"></i> KYC ও নমিনি আপডেট</h4>
+                    <p>PDF ফর্ম্যাট | তথ্যাদি পরিবর্তনের জন্য</p>
+                </div>
+                <a href="https://drive.google.com/uc?export=download&id=1Vf8wSMY6xQTo7V1X0Yrs_1ovXIPaRgT5" target="_blank" class="btn-download"><i class="fas fa-download"></i> ডাউনলোড</a>
+            </div>
+            <div class="download-item">
+                <div class="download-info">
+                    <h4><i class="fas fa-file-pdf" style="color:#e74c3c;"></i> DBT আবেদন/আপডেট ফর্ম</h4>
+                    <p>PDF ফর্ম্যাট | DBT সুবিধার জন্য</p>
+                </div>
+                <a href="https://drive.google.com/uc?export=download&id=1Vf8wSMY6xQTo7V1X0Yrs_1ovXIPaRgT5" target="_blank" class="btn-download"><i class="fas fa-download"></i> ডাউনলোড</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact" id="contact">
+        <div class="contact-content">
+            <span class="section-tag" style="color:var(--gold-light);"><i class="fas fa-phone-alt"></i> যোগাযোগ</span>
+            <h2>একসাথে একটি উন্নত ভবিষ্যৎ গড়ি</h2>
+            <p>
+                প্রতাপপুর সমবায় কৃষি উন্নয়ন সমিতি লিঃ-এর পরিষেবা সম্পর্কে
+                আরও জানতে অথবা যেকোনো বিষয়ে যোগাযোগ করতে আমাদের সাথে যোগাযোগ করুন।
+            </p>
+            <a href="mailto:pratappurskus@gmail.com" class="contact-btn"><i class="fas fa-envelope"></i> ইমেইল করুন</a>
+            <div class="contact-info-row">
+                <a href="mailto:pratappurskus@gmail.com"><i class="fas fa-envelope"></i> pratappurskus@gmail.com</a>
+                <a href="tel:+917047996714"><i class="fas fa-phone"></i> +91 7047996714</a>
+                <a href="#" target="_blank"><i class="fas fa-map-marker-alt"></i> প্রতাপপুর, নদিয়া</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <h3>🌾 প্রতাপপুর এস.কে.উ. এস.লিঃ</h3>
+                <p>
+                    সঞ্চয়, ঋণ ও আধুনিক ব্যাংকিং পরিষেবায় আপনার বিশ্বস্ত সহযোগী।
+                    ১৯৬৯ সাল থেকে গ্রামীণ জনগণের আর্থিক উন্নয়নে কাজ করছে।
+                </p>
+                <div class="footer-social">
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+            <div class="footer-links">
+                <h4>দ্রুত লিংক</h4>
+                <a href="#home"><i class="fas fa-chevron-right" style="font-size:10px;"></i> হোম</a>
+                <a href="#about"><i class="fas fa-chevron-right" style="font-size:10px;"></i> আমাদের সম্পর্কে</a>
+                <a href="#services"><i class="fas fa-chevron-right" style="font-size:10px;"></i> সেবা</a>
+                <a href="#products"><i class="fas fa-chevron-right" style="font-size:10px;"></i> পণ্য</a>
+                <a href="#downloads"><i class="fas fa-chevron-right" style="font-size:10px;"></i> ডাউনলোড</a>
+                <a href="#contact"><i class="fas fa-chevron-right" style="font-size:10px;"></i> যোগাযোগ</a>
+            </div>
+            <div class="footer-contact">
+                <h4>যোগাযোগের তথ্য</h4>
+                <p><i class="fas fa-envelope"></i> pratappurskus@gmail.com</p>
+                <p><i class="fas fa-phone"></i> +91 7047996714</p>
+                <p><i class="fas fa-map-marker-alt"></i> প্রতাপপুর, নদিয়া, পশ্চিমবঙ্গ</p>
+                <p><i class="fas fa-clock"></i> সকাল ১০টা - বিকেল ৫টা (শনি-বৃহস্পতি)</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© ২০২৬ প্রতাপপুর এস.কে.উ. এস.লিঃ. সমস্ত অধিকার সংরক্ষিত।</p>
+        </div>
+    </footer>
+
+    <!-- ==================== STATUS MODAL ==================== -->
+    <div class="modal-overlay" id="statusModal" onclick="closeStatusModalOnOutside(event)">
+        <div class="modal-box">
+            <span class="modal-close" onclick="closeStatusModal()">&times;</span>
+            <h3><i class="fas fa-search" style="color:var(--gold)"></i> আপনার আবেদনের স্ট্যাটাস</h3>
+            <p class="sub">Application ID দিয়ে বর্তমান অবস্থা জেনে নিন</p>
+            <div style="display:flex; flex-direction:column; gap:10px;">
+                <input type="text" id="checkAppId" placeholder="Application ID দিন (যেমন: KCC_2026-00001)">
+                <button type="button" class="check-btn" onclick="checkApplicationStatus()">
+                    <i class="fas fa-search"></i> স্ট্যাটাস দেখুন
+                </button>
+            </div>
+            <div id="statusResult" class="status-result"></div>
+        </div>
+    </div>
+
+    <!-- ==================== ADMIN LOGIN MODAL (WITH GMAIL OTP) ==================== -->
+    <div class="modal-overlay" id="adminLoginModal" onclick="closeAdminLoginOnOutside(event)">
+        <div class="modal-box" style="max-width:400px;">
+            <span class="modal-close" onclick="closeAdminLogin()">&times;</span>
+            <h3 style="color:var(--primary);"><i class="fas fa-shield-alt"></i> অ্যাডমিন লগইন</h3>
+            <p style="color:var(--text-muted); font-size:13px; margin-bottom:15px;" id="otpInstruction">ইউজারনেম ও পাসওয়ার্ড প্রদান করুন</p>
+            
+            <div style="display:flex; flex-direction:column; gap:12px;" id="loginStep1">
+                <input type="text" id="adminUser" placeholder="ইউজারনেম" style="width:100%; padding:12px; border:2px solid #ddd; border-radius:8px; font-size:14px; box-sizing:border-box;">
+                <input type="password" id="adminPass" placeholder="পাসওয়ার্ড" style="width:100%; padding:12px; border:2px solid #ddd; border-radius:8px; font-size:14px; box-sizing:border-box;">
+                <button type="button" class="check-btn" onclick="requestAdminOtp()" style="background:var(--primary); color:white; border:none; padding:12px; border-radius:8px; font-weight:bold; cursor:pointer;">
+                    <i class="fas fa-paper-plane"></i> ওটিপি (OTP) পাঠান
+                </button>
+            </div>
+
+            <div style="display:none; flex-direction:column; gap:12px;" id="loginStep2">
+                <input type="text" id="adminOtpInput" placeholder="৬ সংখ্যার OTP কোড লিখুন" maxlength="6" style="width:100%; padding:12px; border:2px solid var(--gold); border-radius:8px; font-size:16px; text-align:center; letter-spacing:3px;">
+                <button type="button" class="check-btn" onclick="verifyAdminOtp()" style="background:#28a745; color:white; border:none; padding:12px; border-radius:8px; font-weight:bold; cursor:pointer;">
+                    <i class="fas fa-check-circle"></i> ওটিপি যাচাই করুন
+                </button>
+            </div>
+
+            <div id="adminLoginMsg" style="margin-top:12px; text-align:center; font-size:14px;"></div>
+        </div>
+    </div>
+
+    <!-- Google Translate Script -->
+    <script type="text/javascript" defer>
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'bn',
+                includedLanguages: 'bn,en',
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+                autoDisplay: false
+            }, 'google_translate_element');
+        }
+    </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" defer></script>
+
+    <script>
+        const API_URL = "https://script.google.com/macros/s/AKfycbyeT-KEMXwrmKtDwU12qX1iSZ2L8rnsUDNTjbJBgHZDahtAiTzLQO6qLGKKikZF4ozM/exec";
+
+        document.addEventListener('DOMContentLoaded', function() {
+            fetch(API_URL + "?action=getNotice")
+                .then(response => response.json())
+                .then(data => {
+                    if (data && data.notice) {
+                        document.getElementById('noticeText').innerText = data.notice;
+                    }
+                })
+                .catch(() => {});
+        });
+
+        function checkApplicationStatus() {
+            let appId = document.getElementById('checkAppId').value.trim();
+            let resultDiv = document.getElementById('statusResult');
+
+            if (!appId) {
+                resultDiv.innerHTML = `<p style="color: #e74c3c; text-align:center;">⚠️ অনুগ্রহ করে আপনার Application ID লিখুন।</p>`;
+                return;
+            }
+
+            resultDiv.innerHTML = `<p style="text-align:center; color:#555;"><i class="fas fa-spinner fa-spin"></i> খোঁজ করা হচ্ছে...</p>`;
+
+            const callbackName = 'jsonpCallback_' + Date.now();
+            window[callbackName] = function(data) {
+                delete window[callbackName];
+                const scriptEl = document.getElementById(callbackName);
+                if (scriptEl) scriptEl.remove();
+                
+                if (data && data.status === "success" && data.appStatus !== "Not Found") {
+                    let statusColor = "#d49b00";
+                    let icon = '⏳';
+                    let statusText = (data.appStatus || 'Pending').trim();
+                    
+                    if (statusText.toLowerCase() === "approved") {
+                        statusColor = "#075e3b";
+                        icon = '✅';
+                    } else if (statusText.toLowerCase() === "rejected") {
+                        statusColor = "#dc3545";
+                        icon = '❌';
+                    }
+
+                    let reasonHtml = '';
+                    if (statusText.toLowerCase() === "rejected" && data.rejectReason) {
+                        reasonHtml = `<p style="margin-top: 8px; color: #dc3545; background: #fdf2f2; padding: 8px; border-radius: 6px;"><strong>⚠️ কারণ (Reason):</strong> ${data.rejectReason}</p>`;
+                    }
+
+                    resultDiv.innerHTML = `
+                        <div style="background: #f9f9f9; padding: 15px; border-radius: 10px; border-left: 4px solid ${statusColor}; margin-top: 10px;">
+                            <p style="margin-bottom: 6px;"><strong>📌 Application ID:</strong> ${data.applicationId}</p>
+                            <p style="margin-bottom: 6px;"><strong>👤 নাম:</strong> ${data.name}</p>
+                            <p style="margin-bottom: 6px;"><strong>📂 আবেদনের ধরন:</strong> ${data.type}</p>
+                            <p style="margin-bottom: 6px;"><strong>📅 জমার তারিখ:</strong> ${data.submitDate || 'N/A'}</p>
+                            <p style="margin-bottom: 4px;"><strong>📌 বর্তমান স্ট্যাটাস:</strong> <span style="color: ${statusColor}; font-weight: bold; text-transform: uppercase;">${icon} ${statusText}</span></p>
+                            ${reasonHtml}
+                        </div>
+                    `;
+                } else {
+                    resultDiv.innerHTML = `
+                        <div style="background: #fff3cd; padding: 15px; border-radius: 10px; border-left: 4px solid #ffc107; margin-top: 10px;">
+                            <p style="color: #856404; text-align:center;">🔍 এই Application ID দিয়ে কোনো আবেদন পাওয়া যায়নি।</p>
+                        </div>
+                    `;
+                }
+            };
+
+            const script = document.createElement('script');
+            script.id = callbackName;
+            script.src = API_URL + '?id=' + encodeURIComponent(appId) + '&callback=' + callbackName;
+            script.onerror = function() {
+                delete window[callbackName];
+                script.remove();
+                resultDiv.innerHTML = `<p style="color: #721c24; text-align:center;">⚠️ সার্ভারের সাথে সংযোগ স্থাপন করা যায়নি।</p>`;
+            };
+            document.body.appendChild(script);
+        }
+
+        function requestAdminOtp() {
+            const user = document.getElementById('adminUser').value.trim();
+            const pass = document.getElementById('adminPass').value.trim();
+            const msg = document.getElementById('adminLoginMsg');
+
+            if (!user || !pass) {
+                msg.innerHTML = '<p style="color:#e74c3c;">⚠️ ইউজারনেম ও পাসওয়ার্ড দিন</p>';
+                return;
+            }
+
+            // ইমেল আইডি হাইড করে শুধু প্রসেসিং মেসেজ রাখা হলো
+            msg.innerHTML = '<p style="color:#555;"><i class="fas fa-spinner fa-spin"></i> ওটিপি (OTP) পাঠানো হচ্ছে, অনুগ্রহ করে অপেক্ষা করুন...</p>';
+
+            const callbackName = 'otpCallback_' + Date.now();
+            window[callbackName] = function(data) {
+                delete window[callbackName];
+                const scriptEl = document.getElementById(callbackName);
+                if (scriptEl) scriptEl.remove();
+
+                if (data.status === 'success') {
+                    msg.innerHTML = '<p style="color:#27ae60;">✅ OTP পাঠানো হয়েছে! আপনার ইমেল চেক করুন।</p>';
+                    document.getElementById('loginStep1').style.display = 'none';
+                    document.getElementById('loginStep2').style.display = 'flex';
+                    document.getElementById('otpInstruction').innerText = 'আপনার ইমেলে পাঠানো ৬ সংখ্যার ওটিপি লিখুন';
+                    document.getElementById('adminOtpInput').focus();
+                } else {
+                    msg.innerHTML = `<p style="color:#e74c3c;">❌ ${data.message}</p>`;
+                }
+            };
+
+            const script = document.createElement('script');
+            script.id = callbackName;
+            script.src = `${API_URL}?action=sendOtp&username=${encodeURIComponent(user)}&password=${encodeURIComponent(pass)}&callback=${callbackName}`;
+            script.onerror = function() {
+                delete window[callbackName];
+                script.remove();
+                msg.innerHTML = '<p style="color:#e74c3c;">❌ সার্ভার ত্রুটি! আবার চেষ্টা করুন।</p>';
+            };
+            document.body.appendChild(script);
+        }
+
+            const script = document.createElement('script');
+            script.id = callbackName;
+            script.src = `${API_URL}?action=sendOtp&username=${encodeURIComponent(user)}&password=${encodeURIComponent(pass)}&callback=${callbackName}`;
+            document.body.appendChild(script);
+        
+
+        function verifyAdminOtp() {
+            const otp = document.getElementById('adminOtpInput').value.trim();
+            const msg = document.getElementById('adminLoginMsg');
+
+            if (!otp || otp.length !== 6) {
+                msg.innerHTML = '<p style="color:#e74c3c;">⚠️ সঠিক ৬ সংখ্যার ওটিপি দিন</p>';
+                return;
+            }
+
+            msg.innerHTML = '<p style="color:#555;"><i class="fas fa-spinner fa-spin"></i> ওটিপি যাচাই করা হচ্ছে...</p>';
+
+            const callbackName = 'verifyCallback_' + Date.now();
+            window[callbackName] = function(data) {
+                delete window[callbackName];
+                const scriptEl = document.getElementById(callbackName);
+                if (scriptEl) scriptEl.remove();
+
+                if (data.status === 'success') {
+                    msg.innerHTML = '<p style="color:#27ae60;">🎉 সফল! অ্যাডমিন প্যানেল খুলছে...</p>';
+                    localStorage.setItem('adminLoggedIn', 'true');
+                    localStorage.setItem('adminToken', data.token);
+                    
+                    setTimeout(() => {
+                        closeAdminLogin();
+                        window.location.href = 'admin.html';
+                    }, 800);
+                } else {
+                    msg.innerHTML = `<p style="color:#e74c3c;">❌ ${data.message}</p>`;
+                }
+            };
+
+            const script = document.createElement('script');
+            script.id = callbackName;
+            script.src = `${API_URL}?action=verifyOtp&otp=${encodeURIComponent(otp)}&callback=${callbackName}`;
+            document.body.appendChild(script);
+        }
+
+        function openStatusModal() { document.getElementById('statusModal').style.display = 'flex'; document.getElementById('checkAppId').focus(); }
+        function closeStatusModal() { document.getElementById('statusModal').style.display = 'none'; document.getElementById('statusResult').innerHTML = ''; document.getElementById('checkAppId').value = ''; }
+        function closeStatusModalOnOutside(e) { if (e.target.id === 'statusModal') closeStatusModal(); }
+
+        function openAdminLogin() { 
+            document.getElementById('adminLoginModal').style.display = 'flex'; 
+            document.getElementById('loginStep1').style.display = 'flex';
+            document.getElementById('loginStep2').style.display = 'none';
+            document.getElementById('otpInstruction').innerText = 'ইউজারনেম ও পাসওয়ার্ড প্রদান করুন';
+            document.getElementById('adminUser').value = ''; 
+            document.getElementById('adminPass').value = ''; 
+            document.getElementById('adminOtpInput').value = ''; 
+            document.getElementById('adminLoginMsg').innerHTML = ''; 
+            document.getElementById('adminUser').focus(); 
+        }
+        function closeAdminLogin() { document.getElementById('adminLoginModal').style.display = 'none'; }
+        function closeAdminLoginOnOutside(e) { if (e.target.id === 'adminLoginModal') closeAdminLogin(); }
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') { closeStatusModal(); closeAdminLogin(); }
+        });
+    </script>
+</body>
+</html>

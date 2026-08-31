@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New KCC & Membership</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #f4f7fb; padding: 20px; }
+        .form-container { max-width: 700px; margin: auto; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 18px rgba(0,0,0,0.10); border-top: 5px solid #d49b00; }
+        h2 { text-align: center; color: #075e3b; margin-bottom: 25px; border-bottom: 2px solid #d49b00; padding-bottom: 10px; }
+        label { display: block; margin-top: 15px; font-weight: bold; color: #333; font-size: 14px; }
+        input, select, textarea { width: 100%; padding: 10px; margin-top: 5px; border: 1px solid #bbb; border-radius: 5px; font-size: 15px; box-sizing: border-box; }
+        
+        /* Address Section Styling */
+        .address-box { background: #f9f9f9; padding: 15px; border: 1px solid #ddd; border-radius: 8px; margin-top: 20px; }
+        .address-box h3 { margin-top: 0; color: #123b63; font-size: 16px; border-bottom: 1px dashed #ccc; padding-bottom: 8px; }
+        .address-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .readonly-input { background-color: #e9ecef; color: #555; cursor: not-allowed; font-weight: bold; }
+        
+        .submit-btn { margin-top: 25px; padding: 12px; width: 100%; background: #075e3b; color: white; border: none; border-radius: 5px; font-size: 16px; font-weight: bold; cursor: pointer; }
+        .submit-btn:hover { background: #06482e; }
+        .back-link { display: block; text-align: center; margin-top: 15px; color: #666; text-decoration: none; font-weight: bold; }
+        
+        @media (max-width: 600px) { .address-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+
+<div class="form-container">
+    <h2>নতুন KCC / মেম্বারশিপ আবেদন</h2>
+    
+    <div id="membershipForm">
+        <label>আবেদনের ধরন *</label>
+        <select id="memType" required>
+            <option value="">-- নির্বাচন করুন --</option>
+            <option value="New KCC Loan">New KCC Loan</option>
+            <option value="Society Membership">Society Membership</option>
+        </select>
+
+        <label>আবেদনকারীর নাম (KYC অনুযায়ী) *</label>
+        <input type="text" id="memName" required>
+
+        <label>পিতা / স্বামীর নাম *</label>
+        <input type="text" id="memFather" required>
+
+        <label>মোবাইল নম্বর *</label>
+        <input type="tel" id="memMobile" maxlength="10" required>
+
+        <!-- নির্দিষ্ট ঠিকানার শর্ত (Strict Address Criteria) -->
+        <div class="address-box">
+            <h3>স্থায়ী ঠিকানা (KYC যাচাইয়ের জন্য)</h3>
+            
+            <label>গ্রাম (Village) *</label>
+            <select id="memVillage" required>
+                <option value="">-- আপনার গ্রাম নির্বাচন করুন --</option>
+                <option value="PRATAPPUR">PRATAPPUR</option>
+                <option value="DIGAMBARPUR">DIGAMBARPUR</option>
+                <option value="KADIPUR">KADIPUR</option>
+                <option value="KADAGHATA">KADAGHATA</option>
+                <option value="CHAKPRATAPPUR">CHAKPRATAPPUR</option>
+            </select>
+
+            <div class="address-grid">
+                <div>
+                    <label>পোস্ট অফিস (P.O.)</label>
+                    <input type="text" id="memPO" value="DIGAMBARPUR" class="readonly-input" readonly>
+                </div>
+                <div>
+                    <label>থানা (P.S.)</label>
+                    <input type="text" id="memPS" value="KRISHNAGANJ" class="readonly-input" readonly>
+                </div>
+                <div>
+                    <label>ব্লক (Block)</label>
+                    <input type="text" id="memBlock" value="KRISHNAGANJ" class="readonly-input" readonly>
+                </div>
+                <div>
+                    <label>জেলা (District)</label>
+                    <input type="text" id="memDistrict" value="NADIA" class="readonly-input" readonly>
+                </div>
+            </div>
+
+            <label>পিন কোড (PIN Code) *</label>
+            <input type="text" id="memPin" maxlength="6" placeholder="6 সংখ্যার পিন কোড লিখুন (যেমন: 741506)" required>
+        </div>
+        <!-- ঠিকানা শেষ -->
+
+        <label>PAN নম্বর *</label>
+        <input type="text" id="memPan" required>
+
+        <label>Aadhaar নম্বর *</label>
+        <input type="text" id="memAadhaar" required>
+
+        <label>জমির বিবরণ / পরিমাণ (Land Details) *</label>
+        <textarea id="memLand" rows="3" placeholder="মৌজা, খতিয়ান, দাগ নম্বর এবং জমির পরিমাণ লিখুন" required></textarea>
+
+        <button type="button" class="submit-btn" id="memSubmit">আবেদন জমা দিন</button>
+        <a href="index.html" class="back-link">← হোমপেজে ফিরে যান</a>
+    </div>
+</div>
+
+<!-- জাভাস্ক্রিপ্ট ফাইল কানেকশন -->
+<script src="JS/membership.js"></script>
+</body>
+</html>
