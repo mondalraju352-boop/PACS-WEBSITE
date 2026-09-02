@@ -1,587 +1,6173 @@
 <!DOCTYPE html>
 <html lang="bn">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>অ্যাডমিন প্যানেল - প্রতাপপুর সমবায় কৃষি উন্নয়ন সমিতি</title>
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        অ্যাডমিন প্যানেল - প্রতাপপুর সমবায় কৃষি উন্নয়ন সমিতি
+    </title>
+
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    >
+
 
     <style>
+
+        /* =====================================================
+           ROOT
+        ===================================================== */
+
         :root {
+
             --primary: #075e3b;
+
             --primary-dark: #06482e;
+
             --gold: #d49b00;
+
             --bg-light: #f0f4f8;
-            --shadow: 0 8px 30px rgba(0, 0, 0, 0.10);
+
+            --shadow:
+                0 8px 30px rgba(0, 0, 0, 0.10);
+
             --radius: 14px;
+
             --danger: #dc3545;
+
             --success: #28a745;
+
+            --warning: #ffc107;
+
+            --info: #0d6efd;
+
             --text-muted: #6b7280;
+
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Segoe UI', Arial, sans-serif; background: var(--bg-light); color: #1f2937; min-height: 100vh; padding: 20px; }
+
+
+        /* =====================================================
+           BASIC
+        ===================================================== */
+
+        * {
+
+            margin: 0;
+
+            padding: 0;
+
+            box-sizing: border-box;
+
+        }
+
+
+        body {
+
+            font-family:
+                'Segoe UI',
+                Arial,
+                sans-serif;
+
+            background:
+                var(--bg-light);
+
+            color:
+                #1f2937;
+
+            min-height:
+                100vh;
+
+            padding:
+                20px;
+
+        }
+
+
+
+        /* =====================================================
+           NAVIGATION
+        ===================================================== */
 
         .admin-nav {
-            background: var(--primary); color: white; padding: 12px 6%; display: flex;
-            justify-content: space-between; align-items: center; border-radius: var(--radius) var(--radius) 0 0;
-            flex-wrap: wrap; gap: 10px;
+
+            background:
+                var(--primary);
+
+            color:
+                white;
+
+            padding:
+                12px 6%;
+
+            display:
+                flex;
+
+            justify-content:
+                space-between;
+
+            align-items:
+                center;
+
+            border-radius:
+                var(--radius)
+                var(--radius)
+                0
+                0;
+
+            flex-wrap:
+                wrap;
+
+            gap:
+                10px;
+
         }
-        .admin-nav .brand { font-size: 18px; font-weight: bold; display: flex; align-items: center; gap: 10px; }
-        .admin-nav a { color: white; text-decoration: none; font-size: 14px; padding: 6px 14px; border-radius: 6px; background: rgba(255, 255, 255, 0.1); }
-        .admin-nav .logout-btn { background: var(--danger); color: white; border: none; padding: 6px 16px; border-radius: 6px; cursor: pointer; font-weight: bold; }
+
+
+        .admin-nav .brand {
+
+            font-size:
+                18px;
+
+            font-weight:
+                bold;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            gap:
+                10px;
+
+        }
+
+
+        .admin-nav a {
+
+            color:
+                white;
+
+            text-decoration:
+                none;
+
+            font-size:
+                14px;
+
+            padding:
+                6px 14px;
+
+            border-radius:
+                6px;
+
+            background:
+                rgba(255,255,255,0.10);
+
+        }
+
+
+        .admin-nav .logout-btn {
+
+            background:
+                var(--danger);
+
+            color:
+                white;
+
+            border:
+                none;
+
+            padding:
+                6px 16px;
+
+            border-radius:
+                6px;
+
+            cursor:
+                pointer;
+
+            font-weight:
+                bold;
+
+        }
+
+
+
+        /* =====================================================
+           MAIN CONTAINER
+        ===================================================== */
 
         .admin-container {
-            max-width: 1300px; margin: 0 auto; background: white; padding: 30px 35px;
-            border-radius: 0 0 var(--radius) var(--radius); box-shadow: var(--shadow);
+
+            max-width:
+                1400px;
+
+            margin:
+                0 auto;
+
+            background:
+                white;
+
+            padding:
+                30px 35px;
+
+            border-radius:
+                0 0
+                var(--radius)
+                var(--radius);
+
+            box-shadow:
+                var(--shadow);
+
         }
+
+
+
+        /* =====================================================
+           HEADER
+        ===================================================== */
 
         .admin-header {
-            display: flex; justify-content: space-between; align-items: center;
-            border-bottom: 3px solid var(--gold); padding-bottom: 15px; margin-bottom: 25px;
-            flex-wrap: wrap; gap: 10px;
-        }
-        .admin-header h1 { color: var(--primary); font-size: 26px; }
 
-        .tab-container { display: flex; gap: 5px; margin-bottom: 25px; border-bottom: 2px solid #e5e7eb; flex-wrap: wrap; }
+            display:
+                flex;
+
+            justify-content:
+                space-between;
+
+            align-items:
+                center;
+
+            border-bottom:
+                3px solid
+                var(--gold);
+
+            padding-bottom:
+                15px;
+
+            margin-bottom:
+                20px;
+
+            flex-wrap:
+                wrap;
+
+            gap:
+                10px;
+
+        }
+
+
+        .admin-header h1 {
+
+            color:
+                var(--primary);
+
+            font-size:
+                26px;
+
+        }
+
+
+
+        /* =====================================================
+           SUMMARY CARDS
+        ===================================================== */
+
+        .summary-grid {
+
+            display:
+                grid;
+
+            grid-template-columns:
+                repeat(4, 1fr);
+
+            gap:
+                15px;
+
+            margin-bottom:
+                25px;
+
+        }
+
+
+        .summary-card {
+
+            border-radius:
+                12px;
+
+            padding:
+                18px;
+
+            box-shadow:
+                0 4px 15px
+                rgba(0,0,0,0.07);
+
+            background:
+                #ffffff;
+
+            border:
+                1px solid #e5e7eb;
+
+            display:
+                flex;
+
+            justify-content:
+                space-between;
+
+            align-items:
+                center;
+
+        }
+
+
+        .summary-card .summary-icon {
+
+            width:
+                48px;
+
+            height:
+                48px;
+
+            border-radius:
+                50%;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            font-size:
+                20px;
+
+        }
+
+
+        .summary-card.total
+        .summary-icon {
+
+            background:
+                #fff3cd;
+
+            color:
+                #856404;
+
+        }
+
+
+        .summary-card.pending
+        .summary-icon {
+
+            background:
+                #fff3cd;
+
+            color:
+                #856404;
+
+        }
+
+
+        .summary-card.approved
+        .summary-icon {
+
+            background:
+                #d4edda;
+
+            color:
+                #155724;
+
+        }
+
+
+        .summary-card.rejected
+        .summary-icon {
+
+            background:
+                #f8d7da;
+
+            color:
+                #721c24;
+
+        }
+
+
+        .summary-card h3 {
+
+            font-size:
+                13px;
+
+            color:
+                var(--text-muted);
+
+            margin-bottom:
+                5px;
+
+        }
+
+
+        .summary-card .summary-number {
+
+            font-size:
+                25px;
+
+            font-weight:
+                800;
+
+            color:
+                var(--primary);
+
+        }
+
+
+
+        /* =====================================================
+           TABS
+        ===================================================== */
+
+        .tab-container {
+
+            display:
+                flex;
+
+            gap:
+                5px;
+
+            margin-bottom:
+                25px;
+
+            border-bottom:
+                2px solid #e5e7eb;
+
+            flex-wrap:
+                wrap;
+
+        }
+
+
         .tab-btn {
-            padding: 10px 22px; border: none; background: transparent; font-size: 15px; font-weight: 600;
-            color: var(--text-muted); cursor: pointer; border-bottom: 3px solid transparent; border-radius: 8px 8px 0 0;
-        }
-        .tab-btn.active { color: var(--primary); border-bottom-color: var(--gold); background: #f8f9fa; }
-        .tab-btn .badge { display: inline-block; background: #e5e7eb; color: var(--text-muted); padding: 2px 10px; border-radius: 20px; font-size: 12px; margin-left: 6px; }
-        .tab-btn.active .badge { background: var(--gold); color: white; }
 
-        .tab-content { display: none; }
-        .tab-content.active { display: block; }
+            padding:
+                10px 20px;
+
+            border:
+                none;
+
+            background:
+                transparent;
+
+            font-size:
+                15px;
+
+            font-weight:
+                600;
+
+            color:
+                var(--text-muted);
+
+            cursor:
+                pointer;
+
+            border-bottom:
+                3px solid
+                transparent;
+
+            border-radius:
+                8px 8px 0 0;
+
+        }
+
+
+        .tab-btn.active {
+
+            color:
+                var(--primary);
+
+            border-bottom-color:
+                var(--gold);
+
+            background:
+                #f8f9fa;
+
+        }
+
+
+        .tab-btn .badge {
+
+            display:
+                inline-block;
+
+            background:
+                #e5e7eb;
+
+            color:
+                var(--text-muted);
+
+            padding:
+                2px 10px;
+
+            border-radius:
+                20px;
+
+            font-size:
+                12px;
+
+            margin-left:
+                6px;
+
+        }
+
+
+        .tab-btn.active .badge {
+
+            background:
+                var(--gold);
+
+            color:
+                white;
+
+        }
+
+
+        .tab-content {
+
+            display:
+                none;
+
+        }
+
+
+        .tab-content.active {
+
+            display:
+                block;
+
+        }
+
+
+
+        /* =====================================================
+           SEARCH AREA
+        ===================================================== */
 
         .search-area {
-            display: flex; gap: 15px; flex-wrap: wrap; margin-bottom: 20px;
-            background: #f8f9fa; padding: 15px 20px; border-radius: 10px; align-items: center;
+
+            display:
+                flex;
+
+            gap:
+                12px;
+
+            flex-wrap:
+                wrap;
+
+            margin-bottom:
+                20px;
+
+            background:
+                #f8f9fa;
+
+            padding:
+                15px 20px;
+
+            border-radius:
+                10px;
+
+            align-items:
+                center;
+
         }
-        .search-area input, .search-area select { padding: 10px 14px; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 14px; flex: 1; min-width: 200px; background: white; }
 
-        .table-wrapper { overflow-x: auto; border-radius: 10px; border: 1px solid #e5e7eb; margin-top: 15px; }
-        table { width: 100%; border-collapse: collapse; font-size: 14px; }
-        thead { background: var(--primary); color: white; }
-        th, td { padding: 12px 15px; text-align: left; white-space: nowrap; border-bottom: 1px solid #e5e7eb; }
-        tr:hover { background: #f8f9fa; }
 
-        .status-badge { padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: bold; text-transform: uppercase; display: inline-block; }
-        .status-pending { background: #fff3cd; color: #856404; }
-        .status-approved { background: #d4edda; color: #155724; }
-        .status-rejected { background: #f8d7da; color: #721c24; }
+        .search-area input,
+        .search-area select {
+
+            padding:
+                10px 14px;
+
+            border:
+                2px solid #e0e0e0;
+
+            border-radius:
+                8px;
+
+            font-size:
+                14px;
+
+            flex:
+                1;
+
+            min-width:
+                190px;
+
+            background:
+                white;
+
+        }
+
+
+        .main-action-btn {
+
+            background:
+                var(--primary);
+
+            color:
+                white;
+
+            border:
+                none;
+
+            padding:
+                10px 20px;
+
+            border-radius:
+                8px;
+
+            font-weight:
+                bold;
+
+            cursor:
+                pointer;
+
+        }
+
+
+        .main-action-btn:hover {
+
+            opacity:
+                0.9;
+
+        }
+
+
+
+        /* =====================================================
+           TABLE
+        ===================================================== */
+
+        .table-wrapper {
+
+            overflow-x:
+                auto;
+
+            border-radius:
+                10px;
+
+            border:
+                1px solid #e5e7eb;
+
+            margin-top:
+                15px;
+
+        }
+
+
+        table {
+
+            width:
+                100%;
+
+            border-collapse:
+                collapse;
+
+            font-size:
+                14px;
+
+        }
+
+
+        thead {
+
+            background:
+                var(--primary);
+
+            color:
+                white;
+
+        }
+
+
+        th,
+        td {
+
+            padding:
+                12px 15px;
+
+            text-align:
+                left;
+
+            white-space:
+                nowrap;
+
+            border-bottom:
+                1px solid #e5e7eb;
+
+        }
+
+
+        tr:hover {
+
+            background:
+                #f8f9fa;
+
+        }
+
+
+
+        /* =====================================================
+           STATUS
+        ===================================================== */
+
+        .status-badge {
+
+            padding:
+                4px 12px;
+
+            border-radius:
+                20px;
+
+            font-size:
+                12px;
+
+            font-weight:
+                bold;
+
+            text-transform:
+                uppercase;
+
+            display:
+                inline-block;
+
+        }
+
+
+        .status-pending {
+
+            background:
+                #fff3cd;
+
+            color:
+                #856404;
+
+        }
+
+
+        .status-approved {
+
+            background:
+                #d4edda;
+
+            color:
+                #155724;
+
+        }
+
+
+        .status-rejected {
+
+            background:
+                #f8d7da;
+
+            color:
+                #721c24;
+
+        }
+
+
+
+        /* =====================================================
+           VIEW DETAILS BUTTON
+        ===================================================== */
+
+        .view-btn {
+
+            background:
+                var(--info);
+
+            color:
+                white;
+
+            border:
+                none;
+
+            padding:
+                6px 11px;
+
+            border-radius:
+                6px;
+
+            cursor:
+                pointer;
+
+            font-size:
+                12px;
+
+            font-weight:
+                bold;
+
+            white-space:
+                nowrap;
+
+        }
+
+
+        .view-btn:hover {
+
+            opacity:
+                0.9;
+
+        }
+
+
+
+        /* =====================================================
+           UPDATE BUTTON
+        ===================================================== */
+
+        .update-btn {
+
+            background:
+                var(--primary);
+
+            color:
+                white;
+
+            border:
+                none;
+
+            padding:
+                6px 9px;
+
+            border-radius:
+                5px;
+
+            cursor:
+                pointer;
+
+            font-weight:
+                bold;
+
+        }
+
+
+        .status-select {
+
+            padding:
+                5px;
+
+            border:
+                1px solid #ccc;
+
+            border-radius:
+                5px;
+
+            margin-right:
+                4px;
+
+        }
+
+
+
+        /* =====================================================
+           ATTENDANCE
+        ===================================================== */
 
         .attendance-box {
-            background: #f8f9fa; border: 2px dashed var(--primary); padding: 25px; border-radius: 12px;
-            max-width: 600px; margin: 0 auto 20px auto;
+
+            background:
+                #f8f9fa;
+
+            border:
+                2px dashed
+                var(--primary);
+
+            padding:
+                25px;
+
+            border-radius:
+                12px;
+
+            max-width:
+                650px;
+
+            margin:
+                0 auto 20px auto;
+
         }
-        .attendance-form-group { margin-bottom: 15px; }
-        .attendance-form-group label { display: block; font-weight: bold; margin-bottom: 6px; color: var(--primary); }
-        .attendance-form-group select, .attendance-form-group input { width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 8px; font-size: 15px; background: white; }
-        .att-btn { width: 100%; padding: 12px; background: var(--success); color: white; border: none; border-radius: 8px; font-size: 16px; font-weight: bold; cursor: pointer; }
-        
-        .loading-overlay, .no-data { text-align: center; padding: 40px; color: var(--text-muted); }
-        .toast-container { position: fixed; top: 30px; right: 30px; z-index: 9999; display: flex; flex-direction: column; gap: 10px; }
-        .toast { padding: 14px 18px; border-radius: 10px; color: white; font-weight: 600; font-size: 14px; box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
-        .toast.success { background: var(--success); }
-        .toast.error { background: var(--danger); }
+
+
+        .attendance-notice {
+
+            padding:
+                12px 15px;
+
+            border-radius:
+                8px;
+
+            margin-bottom:
+                18px;
+
+            text-align:
+                center;
+
+            font-weight:
+                bold;
+
+            font-size:
+                14px;
+
+        }
+
+
+        .attendance-notice.open {
+
+            background:
+                #d4edda;
+
+            color:
+                #155724;
+
+            border:
+                1px solid #b7dfc0;
+
+        }
+
+
+        .attendance-notice.closed {
+
+            background:
+                #f8d7da;
+
+            color:
+                #721c24;
+
+            border:
+                1px solid #f1b0b7;
+
+        }
+
+
+        .attendance-form-group {
+
+            margin-bottom:
+                15px;
+
+        }
+
+
+        .attendance-form-group label {
+
+            display:
+                block;
+
+            font-weight:
+                bold;
+
+            margin-bottom:
+                6px;
+
+            color:
+                var(--primary);
+
+        }
+
+
+        .attendance-form-group select,
+        .attendance-form-group input {
+
+            width:
+                100%;
+
+            padding:
+                12px;
+
+            border:
+                2px solid #ddd;
+
+            border-radius:
+                8px;
+
+            font-size:
+                15px;
+
+            background:
+                white;
+
+        }
+
+
+        .att-btn {
+
+            width:
+                100%;
+
+            padding:
+                12px;
+
+            background:
+                var(--success);
+
+            color:
+                white;
+
+            border:
+                none;
+
+            border-radius:
+                8px;
+
+            font-size:
+                16px;
+
+            font-weight:
+                bold;
+
+            cursor:
+                pointer;
+
+        }
+
+
+        .att-btn:hover {
+
+            opacity:
+                0.9;
+
+        }
+
+
+        .att-btn:disabled {
+
+            background:
+                #9ca3af;
+
+            cursor:
+                not-allowed;
+
+            opacity:
+                0.8;
+
+        }
+
+
+
+        /* =====================================================
+           LOADING / NO DATA
+        ===================================================== */
+
+        .loading-overlay,
+        .no-data {
+
+            text-align:
+                center;
+
+            padding:
+                40px;
+
+            color:
+                var(--text-muted);
+
+        }
+
+
+
+        /* =====================================================
+           TOAST
+        ===================================================== */
+
+        .toast-container {
+
+            position:
+                fixed;
+
+            top:
+                30px;
+
+            right:
+                30px;
+
+            z-index:
+                9999;
+
+            display:
+                flex;
+
+            flex-direction:
+                column;
+
+            gap:
+                10px;
+
+        }
+
+
+        .toast {
+
+            padding:
+                14px 18px;
+
+            border-radius:
+                10px;
+
+            color:
+                white;
+
+            font-weight:
+                600;
+
+            font-size:
+                14px;
+
+            box-shadow:
+                0 5px 15px
+                rgba(0,0,0,0.2);
+
+            max-width:
+                360px;
+
+        }
+
+
+        .toast.success {
+
+            background:
+                var(--success);
+
+        }
+
+
+        .toast.error {
+
+            background:
+                var(--danger);
+
+        }
+
+
+
+        /* =====================================================
+           MODAL
+        ===================================================== */
+
+        .modal-overlay {
+
+            position:
+                fixed;
+
+            inset:
+                0;
+
+            background:
+                rgba(0,0,0,0.55);
+
+            display:
+                none;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            padding:
+                20px;
+
+            z-index:
+                10000;
+
+        }
+
+
+        .modal-overlay.show {
+
+            display:
+                flex;
+
+        }
+
+
+        .details-modal {
+
+            background:
+                white;
+
+            width:
+                100%;
+
+            max-width:
+                950px;
+
+            max-height:
+                90vh;
+
+            overflow-y:
+                auto;
+
+            border-radius:
+                15px;
+
+            box-shadow:
+                0 20px 60px
+                rgba(0,0,0,0.30);
+
+            position:
+                relative;
+
+        }
+
+
+        .modal-header {
+
+            background:
+                var(--primary);
+
+            color:
+                white;
+
+            padding:
+                18px 22px;
+
+            display:
+                flex;
+
+            justify-content:
+                space-between;
+
+            align-items:
+                center;
+
+            position:
+                sticky;
+
+            top:
+                0;
+
+            z-index:
+                2;
+
+        }
+
+
+        .modal-header h2 {
+
+            font-size:
+                20px;
+
+        }
+
+
+        .modal-close {
+
+            background:
+                transparent;
+
+            color:
+                white;
+
+            border:
+                none;
+
+            font-size:
+                24px;
+
+            cursor:
+                pointer;
+
+            width:
+                38px;
+
+            height:
+                38px;
+
+            border-radius:
+                50%;
+
+        }
+
+
+        .modal-close:hover {
+
+            background:
+                rgba(255,255,255,0.15);
+
+        }
+
+
+        .modal-body {
+
+            padding:
+                25px;
+
+        }
+
+
+        .detail-top {
+
+            display:
+                flex;
+
+            justify-content:
+                space-between;
+
+            align-items:
+                center;
+
+            background:
+                #f8f9fa;
+
+            padding:
+                15px;
+
+            border-radius:
+                10px;
+
+            margin-bottom:
+                20px;
+
+            flex-wrap:
+                wrap;
+
+            gap:
+                10px;
+
+        }
+
+
+        .detail-id {
+
+            font-weight:
+                800;
+
+            color:
+                var(--primary);
+
+            font-size:
+                17px;
+
+        }
+
+
+        .details-grid {
+
+            display:
+                grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap:
+                12px;
+
+        }
+
+
+        .detail-item {
+
+            border:
+                1px solid #e5e7eb;
+
+            border-radius:
+                8px;
+
+            padding:
+                12px;
+
+            background:
+                white;
+
+        }
+
+
+        .detail-item.full {
+
+            grid-column:
+                1 / -1;
+
+        }
+
+
+        .detail-label {
+
+            display:
+                block;
+
+            font-size:
+                12px;
+
+            font-weight:
+                bold;
+
+            color:
+                var(--text-muted);
+
+            margin-bottom:
+                5px;
+
+        }
+
+
+        .detail-value {
+
+            display:
+                block;
+
+            font-size:
+                14px;
+
+            color:
+                #111827;
+
+            word-break:
+                break-word;
+
+            white-space:
+                pre-wrap;
+
+        }
+
+
+        .modal-footer {
+
+            padding:
+                15px 25px;
+
+            border-top:
+                1px solid #e5e7eb;
+
+            text-align:
+                right;
+
+        }
+
+
+        .modal-footer button {
+
+            background:
+                var(--primary);
+
+            color:
+                white;
+
+            border:
+                none;
+
+            padding:
+                9px 20px;
+
+            border-radius:
+                7px;
+
+            cursor:
+                pointer;
+
+            font-weight:
+                bold;
+
+        }
+
+
+
+        /* =====================================================
+           REPORT
+        ===================================================== */
+
+        #reportTable th,
+        #reportTable td {
+
+            text-align:
+                center;
+
+        }
+
+
+        #reportTable th:first-child,
+        #reportTable td:first-child {
+
+            text-align:
+                left;
+
+            position:
+                sticky;
+
+            left:
+                0;
+
+            background:
+                white;
+
+            z-index:
+                1;
+
+        }
+
+
+        #reportTable thead th:first-child {
+
+            background:
+                var(--primary);
+
+        }
+
+
+
+        /* =====================================================
+           RESPONSIVE
+        ===================================================== */
+
+        @media(max-width: 900px) {
+
+            .summary-grid {
+
+                grid-template-columns:
+                    repeat(2, 1fr);
+
+            }
+
+        }
+
+
+        @media(max-width: 768px) {
+
+            body {
+
+                padding:
+                    8px;
+
+            }
+
+
+            .admin-container {
+
+                padding:
+                    20px 15px;
+
+            }
+
+
+            .admin-header h1 {
+
+                font-size:
+                    20px;
+
+            }
+
+
+            .tab-btn {
+
+                padding:
+                    8px 12px;
+
+                font-size:
+                    13px;
+
+            }
+
+
+            th,
+            td {
+
+                padding:
+                    9px 10px;
+
+            }
+
+
+            .summary-grid {
+
+                grid-template-columns:
+                    1fr;
+
+            }
+
+
+            .details-grid {
+
+                grid-template-columns:
+                    1fr;
+
+            }
+
+
+            .detail-item.full {
+
+                grid-column:
+                    auto;
+
+            }
+
+
+            .toast-container {
+
+                right:
+                    10px;
+
+                left:
+                    10px;
+
+            }
+
+
+            .toast {
+
+                max-width:
+                    none;
+
+            }
+
+        }
+
     </style>
+
 </head>
+
+
 
 <body>
 
+
+    <!-- =====================================================
+         ADMIN NAVIGATION
+    ====================================================== -->
+
     <div class="admin-nav">
-        <div class="brand"><i class="fas fa-leaf"></i> <span>অ্যাডমিন প্যানেল</span></div>
-        <div>
-            <a href="index.html"><i class="fas fa-home"></i> হোম</a>
-            <button class="logout-btn" onclick="adminLogout()" style="margin-left:10px;"><i class="fas fa-sign-out-alt"></i> লগআউট</button>
+
+        <div class="brand">
+
+            <i class="fas fa-leaf"></i>
+
+            <span>
+                অ্যাডমিন প্যানেল
+            </span>
+
         </div>
+
+
+        <div>
+
+            <a href="index.html">
+
+                <i class="fas fa-home"></i>
+
+                হোম
+
+            </a>
+
+
+            <button
+                class="logout-btn"
+                onclick="adminLogout()"
+                style="margin-left:10px;"
+            >
+
+                <i class="fas fa-sign-out-alt"></i>
+
+                লগআউট
+
+            </button>
+
+        </div>
+
     </div>
+
+
+
+    <!-- =====================================================
+         MAIN
+    ====================================================== -->
 
     <div class="admin-container">
 
+
+        <!-- HEADER -->
+
         <div class="admin-header">
-            <h1><i class="fas fa-tachometer-alt"></i> আবেদন ও হাজিরা ব্যবস্থাপনা</h1>
-            <span class="stats-badge" id="totalCount" style="background:var(--gold); color:var(--primary); padding:6px 16px; border-radius:20px; font-weight:bold;">মোট: ০টি</span>
+
+            <h1>
+
+                <i class="fas fa-tachometer-alt"></i>
+
+                আবেদন ও হাজিরা ব্যবস্থাপনা
+
+            </h1>
+
+
+            <span
+                class="stats-badge"
+                id="totalCount"
+                style="
+                    background:var(--gold);
+                    color:var(--primary);
+                    padding:6px 16px;
+                    border-radius:20px;
+                    font-weight:bold;
+                "
+            >
+
+                মোট: ০টি
+
+            </span>
+
         </div>
+
+
+
+        <!-- =================================================
+             SUMMARY
+        ================================================== -->
+
+        <div class="summary-grid">
+
+
+            <div class="summary-card total">
+
+                <div>
+
+                    <h3>
+                        মোট আবেদন
+                    </h3>
+
+                    <div
+                        class="summary-number"
+                        id="summaryTotal"
+                    >
+                        ০
+                    </div>
+
+                </div>
+
+                <div class="summary-icon">
+
+                    <i class="fas fa-file-alt"></i>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="summary-card pending">
+
+                <div>
+
+                    <h3>
+                        পেন্ডিং
+                    </h3>
+
+                    <div
+                        class="summary-number"
+                        id="summaryPending"
+                    >
+                        ০
+                    </div>
+
+                </div>
+
+                <div class="summary-icon">
+
+                    <i class="fas fa-clock"></i>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="summary-card approved">
+
+                <div>
+
+                    <h3>
+                        অ্যাপ্রুভড
+                    </h3>
+
+                    <div
+                        class="summary-number"
+                        id="summaryApproved"
+                    >
+                        ০
+                    </div>
+
+                </div>
+
+                <div class="summary-icon">
+
+                    <i class="fas fa-check-circle"></i>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="summary-card rejected">
+
+                <div>
+
+                    <h3>
+                        রিজেক্টেড
+                    </h3>
+
+                    <div
+                        class="summary-number"
+                        id="summaryRejected"
+                    >
+                        ০
+                    </div>
+
+                </div>
+
+                <div class="summary-icon">
+
+                    <i class="fas fa-times-circle"></i>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- =================================================
+             TABS
+        ================================================== -->
 
         <div class="tab-container">
-            <button class="tab-btn active" data-tab="pending"><i class="fas fa-clock"></i> পেন্ডিং <span class="badge" id="pendingCount">০</span></button>
-            <button class="tab-btn" data-tab="approved"><i class="fas fa-check-circle"></i> অ্যাপ্রুভড <span class="badge" id="approvedCount">০</span></button>
-            <button class="tab-btn" data-tab="rejected"><i class="fas fa-times-circle"></i> রিজেক্টেড <span class="badge" id="rejectedCount">০</span></button>
-            <button class="tab-btn" data-tab="all"><i class="fas fa-list"></i> সব আবেদন <span class="badge" id="allCount">০</span></button>
-            <button class="tab-btn" data-tab="attendance"><i class="fas fa-user-clock"></i> স্টাফ হাজিরা <span class="badge" id="attCount">০</span></button>
-            <button class="tab-btn" data-tab="report"><i class="fas fa-calendar-alt"></i> মাসিক রিপোর্ট</button>
+
+
+            <button
+                class="tab-btn active"
+                data-tab="pending"
+            >
+
+                <i class="fas fa-clock"></i>
+
+                পেন্ডিং
+
+                <span
+                    class="badge"
+                    id="pendingCount"
+                >
+                    ০
+                </span>
+
+            </button>
+
+
+
+            <button
+                class="tab-btn"
+                data-tab="approved"
+            >
+
+                <i class="fas fa-check-circle"></i>
+
+                অ্যাপ্রুভড
+
+                <span
+                    class="badge"
+                    id="approvedCount"
+                >
+                    ০
+                </span>
+
+            </button>
+
+
+
+            <button
+                class="tab-btn"
+                data-tab="rejected"
+            >
+
+                <i class="fas fa-times-circle"></i>
+
+                রিজেক্টেড
+
+                <span
+                    class="badge"
+                    id="rejectedCount"
+                >
+                    ০
+                </span>
+
+            </button>
+
+
+
+            <button
+                class="tab-btn"
+                data-tab="all"
+            >
+
+                <i class="fas fa-list"></i>
+
+                সব আবেদন
+
+                <span
+                    class="badge"
+                    id="allCount"
+                >
+                    ০
+                </span>
+
+            </button>
+
+
+
+            <button
+                class="tab-btn"
+                data-tab="attendance"
+            >
+
+                <i class="fas fa-user-clock"></i>
+
+                স্টাফ হাজিরা
+
+                <span
+                    class="badge"
+                    id="attCount"
+                >
+                    ০
+                </span>
+
+            </button>
+
+
+
+            <button
+                class="tab-btn"
+                data-tab="report"
+            >
+
+                <i class="fas fa-calendar-alt"></i>
+
+                মাসিক রিপোর্ট
+
+            </button>
+
+
         </div>
 
-        <!-- PENDING TAB -->
-        <div id="tab-pending" class="tab-content active">
+
+
+        <!-- =================================================
+             PENDING
+        ================================================== -->
+
+        <div
+            id="tab-pending"
+            class="tab-content active"
+        >
+
+
             <div class="search-area">
-                <input type="text" id="searchPending" placeholder="🔍 ID বা নাম দিয়ে খুঁজুন...">
-                <button onclick="loadApplications()" style="background:var(--primary); color:white; border:none; padding:10px 20px; border-radius:8px; font-weight:bold; cursor:pointer;">রিফ্রেশ</button>
+
+
+                <input
+                    type="text"
+                    id="searchPending"
+                    placeholder="🔍 ID / নাম / মোবাইল দিয়ে খুঁজুন..."
+                >
+
+
+                <select
+                    id="filterPendingType"
+                >
+
+                    <option value="">
+                        সব আবেদন প্রকার
+                    </option>
+
+                    <option value="KCC Loan">
+                        KCC Loan
+                    </option>
+
+                    <option value="SHG Loan">
+                        SHG Loan
+                    </option>
+
+                    <option value="Loan Against NSC / KVP / LIC">
+                        NSC / KVP / LIC
+                    </option>
+
+                    <option value="Consumer Loan">
+                        Consumer Loan
+                    </option>
+
+                    <option value="Savings Deposit Account">
+                        Savings Account
+                    </option>
+
+                    <option value="Current Account">
+                        Current Account
+                    </option>
+
+                    <option value="Fixed Deposit">
+                        Fixed Deposit
+                    </option>
+
+                    <option value="MIS Deposit">
+                        MIS Deposit
+                    </option>
+
+                    <option value="Recurring Deposit">
+                        Recurring Deposit
+                    </option>
+
+                </select>
+
+
+                <button
+                    class="main-action-btn"
+                    onclick="loadApplications()"
+                >
+
+                    <i class="fas fa-sync"></i>
+
+                    রিফ্রেশ
+
+                </button>
+
+
             </div>
+
+
             <div class="table-wrapper">
-                <div class="loading-overlay" id="pendingLoading"><i class="fas fa-spinner fa-spin"></i> লোড হচ্ছে...</div>
-                <table id="pendingTable" style="display:none;">
+
+
+                <div
+                    class="loading-overlay"
+                    id="pendingLoading"
+                >
+
+                    <i class="fas fa-spinner fa-spin"></i>
+
+                    লোড হচ্ছে...
+
+                </div>
+
+
+                <table
+                    id="pendingTable"
+                    style="display:none;"
+                >
+
                     <thead>
+
                         <tr>
+
                             <th>ক্রম</th>
+
                             <th>তারিখ</th>
+
                             <th>Application ID</th>
+
                             <th>আবেদনের ধরন</th>
+
                             <th>নাম</th>
+
                             <th>মোবাইল</th>
+
                             <th>পরিমাণ</th>
+
                             <th>স্ট্যাটাস</th>
+
+                            <th>বিস্তারিত</th>
+
                             <th>স্ট্যাটাস পরিবর্তন</th>
+
                         </tr>
+
                     </thead>
+
+
                     <tbody id="pendingBody"></tbody>
-                </table>
-                <div class="no-data" id="pendingNoData" style="display:none;">কোনো পেন্ডিং আবেদন নেই</div>
-            </div>
-        </div>
 
-        <!-- APPROVED TAB -->
-        <div id="tab-approved" class="tab-content">
-            <div class="table-wrapper">
-                <table id="approvedTable" style="display:none;">
-                    <thead>
-                        <tr>
-                            <th>ক্রম</th>
-                            <th>তারিখ</th>
-                            <th>Application ID</th>
-                            <th>আবেদনের ধরন</th>
-                            <th>নাম</th>
-                            <th>মোবাইল</th>
-                            <th>পরিমাণ</th>
-                            <th>স্ট্যাটাস</th>
-                        </tr>
-                    </thead>
-                    <tbody id="approvedBody"></tbody>
                 </table>
-                <div class="no-data" id="approvedNoData" style="display:none;">কোনো অ্যাপ্রুভড আবেদন নেই</div>
-            </div>
-        </div>
 
-        <!-- REJECTED TAB -->
-        <div id="tab-rejected" class="tab-content">
-            <div class="table-wrapper">
-                <table id="rejectedTable" style="display:none;">
-                    <thead>
-                        <tr>
-                            <th>ক্রম</th>
-                            <th>তারিখ</th>
-                            <th>Application ID</th>
-                            <th>আবেদনের ধরন</th>
-                            <th>নাম</th>
-                            <th>মোবাইল</th>
-                            <th>পরিমাণ</th>
-                            <th>স্ট্যাটাস</th>
-                            <th>রিজেক্ট রিজন</th>
-                        </tr>
-                    </thead>
-                    <tbody id="rejectedBody"></tbody>
-                </table>
-                <div class="no-data" id="rejectedNoData" style="display:none;">কোনো রিজেক্টেড আবেদন নেই</div>
-            </div>
-        </div>
 
-        <!-- ALL TAB -->
-        <div id="tab-all" class="tab-content">
-            <div class="table-wrapper">
-                <table id="allTable" style="display:none;">
-                    <thead>
-                        <tr>
-                            <th>ক্রম</th>
-                            <th>তারিখ</th>
-                            <th>Application ID</th>
-                            <th>আবেদনের ধরন</th>
-                            <th>নাম</th>
-                            <th>মোবাইল</th>
-                            <th>পরিমাণ</th>
-                            <th>স্ট্যাটাস</th>
-                        </tr>
-                    </thead>
-                    <tbody id="allBody"></tbody>
-                </table>
-                <div class="no-data" id="allNoData" style="display:none;">কোনো আবেদন পাওয়া যায়নি</div>
-            </div>
-        </div>
+                <div
+                    class="no-data"
+                    id="pendingNoData"
+                    style="display:none;"
+                >
 
-        <!-- ATTENDANCE TAB -->
-        <div id="tab-attendance" class="tab-content">
-            <div class="attendance-box">
-                <h3 style="color:var(--primary); margin-bottom:15px; text-align:center;"><i class="fas fa-user-clock"></i> স্টাফ হাজিরা রেজিস্টার (দুপুর ১২:০০ টা পর্যন্ত)</h3>
-                <div class="attendance-form-group">
-                    <label>স্টাফ নির্বাচন করুন:</label>
-                    <select id="staffSelect">
-                        <option value="">-- স্টাফ নির্বাচন করুন --</option>
-                        <option value="PATIT PABAN ROY" data-id="PSKUS/001" data-desig="MANAGER">STAFF/PSKUS/001 - PATIT PABAN ROY (MANAGER)</option>
-                        <option value="RAJU MONDAL" data-id="PSKUS/002" data-desig="STAFF">STAFF/PSKUS/002 - RAJU MONDAL (ACCOUNTENT)</option>
-                        <option value="PINKI DAS" data-id="PSKUS/003" data-desig="STAFF">STAFF/PSKUS/003 - PINKI DAS (SAJANI)</option>
-                        <option value="NILIMA BISWAS" data-id="PSKUS/004" data-desig="STAFF">STAFF/PSKUS/004 - NILIMA BISWAS (SAJANI)</option>
-                        <option value="STAFF NAME 5" data-id="PSKUS/005" data-desig="STAFF">STAFF/PSKUS/005 - STAFF NAME 5 (CLERK)</option>
-                    </select>
+                    কোনো পেন্ডিং আবেদন নেই
+
                 </div>
-                <div class="attendance-form-group">
-                    <label>স্ট্যাটাস:</label>
-                    <select id="attendanceStatus" onchange="onStatusChanged()">
-                        <option value="Present">Present (উপস্থিত)</option>
-                        <option value="Absent">Absent (অনুপস্থিত)</option>
-                    </select>
-                </div>
-                <div class="attendance-form-group" id="absentReasonGroup" style="display:none;">
-                    <label>অনুপস্থিতির কারণ:</label>
-                    <input type="text" id="absentReasonInput" value="Not presented by self">
-                </div>
-                <button type="button" class="att-btn" onclick="submitAttendance()">হাজিরা সাবমিট করুন</button>
+
             </div>
 
-            <div class="table-wrapper">
-                <table id="attTable" style="display:none;">
-                    <thead>
-                        <tr>
-                            <th>ক্রম</th>
-                            <th>তারিখ</th>
-                            <th>সময়</th>
-                            <th>স্টাফ আইডি</th>
-                            <th>স্টাফের নাম</th>
-                            <th>পদবি</th>
-                            <th>স্ট্যাটাস</th>
-                            <th>অনুপস্থিতির কারণ</th>
-                        </tr>
-                    </thead>
-                    <tbody id="attBody"></tbody>
-                </table>
-                <div class="no-data" id="attNoData" style="display:none;">কোনো হাজিরা রেকর্ড নেই</div>
-            </div>
         </div>
 
-        <!-- MONTHLY REPORT TAB -->
-        <div id="tab-report" class="tab-content">
+
+
+        <!-- =================================================
+             APPROVED
+        ================================================== -->
+
+        <div
+            id="tab-approved"
+            class="tab-content"
+        >
+
             <div class="search-area">
-                <select id="reportMonth" onchange="generateMonthlyReport()">
-                    <option value="0">JANUARY - জানুয়ারি</option><option value="1">FEBRUARY - ফেব্রুয়ারি</option><option value="2">MARCH - মার্চ</option>
-                    <option value="3">APRIL - এপ্রিল</option><option value="4">MAY - মে</option><option value="5">JUNE - জুন</option>
-                    <option value="6">JULY - জুলাই</option><option value="7">AUGUST - আগস্ট</option><option value="8">SEPTEMBER - সেপ্টেম্বর</option>
-                    <option value="9">OCTOBER - অক্টোবর</option><option value="10">NOVEMBER - নভেম্বর</option><option value="11">DECEMBER - ডিসেম্বর</option>
+
+                <input
+                    type="text"
+                    id="searchApproved"
+                    placeholder="🔍 ID / নাম / মোবাইল দিয়ে খুঁজুন..."
+                >
+
+
+                <select
+                    id="filterApprovedType"
+                >
+
+                    <option value="">
+                        সব আবেদন প্রকার
+                    </option>
+
+                    <option value="KCC Loan">
+                        KCC Loan
+                    </option>
+
+                    <option value="SHG Loan">
+                        SHG Loan
+                    </option>
+
+                    <option value="Consumer Loan">
+                        Consumer Loan
+                    </option>
+
+                    <option value="Savings Deposit Account">
+                        Savings Account
+                    </option>
+
+                    <option value="Current Account">
+                        Current Account
+                    </option>
+
+                    <option value="Fixed Deposit">
+                        Fixed Deposit
+                    </option>
+
+                    <option value="MIS Deposit">
+                        MIS Deposit
+                    </option>
+
+                    <option value="Recurring Deposit">
+                        Recurring Deposit
+                    </option>
+
                 </select>
-                <select id="reportYear" onchange="generateMonthlyReport()">
-                    <option value="2026">2026</option>
-                    <option value="2027">2027</option>
-                    <option value="2028">2028</option>
-                    <option value="2029">2029</option>
-                    <option value="2030">2030</option>
-                </select>
+
             </div>
+
+
             <div class="table-wrapper">
-                <table id="reportTable">
-                    <thead><tr id="reportHeaderRow"><th>স্টাফ আইডি / নাম</th></tr></thead>
-                    <tbody id="reportBodies"></tbody>
+
+                <table
+                    id="approvedTable"
+                    style="display:none;"
+                >
+
+                    <thead>
+
+                        <tr>
+
+                            <th>ক্রম</th>
+
+                            <th>তারিখ</th>
+
+                            <th>Application ID</th>
+
+                            <th>আবেদনের ধরন</th>
+
+                            <th>নাম</th>
+
+                            <th>মোবাইল</th>
+
+                            <th>পরিমাণ</th>
+
+                            <th>স্ট্যাটাস</th>
+
+                            <th>বিস্তারিত</th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="approvedBody"></tbody>
+
                 </table>
+
+
+                <div
+                    class="no-data"
+                    id="approvedNoData"
+                    style="display:none;"
+                >
+
+                    কোনো অ্যাপ্রুভড আবেদন নেই
+
+                </div>
+
             </div>
+
         </div>
+
+
+
+        <!-- =================================================
+             REJECTED
+        ================================================== -->
+
+        <div
+            id="tab-rejected"
+            class="tab-content"
+        >
+
+            <div class="search-area">
+
+                <input
+                    type="text"
+                    id="searchRejected"
+                    placeholder="🔍 ID / নাম / মোবাইল দিয়ে খুঁজুন..."
+                >
+
+            </div>
+
+
+            <div class="table-wrapper">
+
+                <table
+                    id="rejectedTable"
+                    style="display:none;"
+                >
+
+                    <thead>
+
+                        <tr>
+
+                            <th>ক্রম</th>
+
+                            <th>তারিখ</th>
+
+                            <th>Application ID</th>
+
+                            <th>আবেদনের ধরন</th>
+
+                            <th>নাম</th>
+
+                            <th>মোবাইল</th>
+
+                            <th>পরিমাণ</th>
+
+                            <th>স্ট্যাটাস</th>
+
+                            <th>রিজেক্ট রিজন</th>
+
+                            <th>বিস্তারিত</th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="rejectedBody"></tbody>
+
+                </table>
+
+
+                <div
+                    class="no-data"
+                    id="rejectedNoData"
+                    style="display:none;"
+                >
+
+                    কোনো রিজেক্টেড আবেদন নেই
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             ALL
+        ================================================== -->
+
+        <div
+            id="tab-all"
+            class="tab-content"
+        >
+
+            <div class="search-area">
+
+
+                <input
+                    type="text"
+                    id="searchAll"
+                    placeholder="🔍 ID / নাম / মোবাইল দিয়ে খুঁজুন..."
+                >
+
+
+                <select
+                    id="filterAllStatus"
+                >
+
+                    <option value="">
+                        সব স্ট্যাটাস
+                    </option>
+
+                    <option value="Pending">
+                        Pending
+                    </option>
+
+                    <option value="Approved">
+                        Approved
+                    </option>
+
+                    <option value="Rejected">
+                        Rejected
+                    </option>
+
+                </select>
+
+
+                <select
+                    id="filterAllType"
+                >
+
+                    <option value="">
+                        সব আবেদন প্রকার
+                    </option>
+
+                    <option value="KCC Loan">
+                        KCC Loan
+                    </option>
+
+                    <option value="SHG Loan">
+                        SHG Loan
+                    </option>
+
+                    <option value="Consumer Loan">
+                        Consumer Loan
+                    </option>
+
+                    <option value="Savings Deposit Account">
+                        Savings Account
+                    </option>
+
+                    <option value="Current Account">
+                        Current Account
+                    </option>
+
+                    <option value="Fixed Deposit">
+                        Fixed Deposit
+                    </option>
+
+                    <option value="MIS Deposit">
+                        MIS Deposit
+                    </option>
+
+                    <option value="Recurring Deposit">
+                        Recurring Deposit
+                    </option>
+
+                </select>
+
+
+                <button
+                    class="main-action-btn"
+                    onclick="loadApplications()"
+                >
+
+                    <i class="fas fa-sync"></i>
+
+                    রিফ্রেশ
+
+                </button>
+
+            </div>
+
+
+            <div class="table-wrapper">
+
+                <table
+                    id="allTable"
+                    style="display:none;"
+                >
+
+                    <thead>
+
+                        <tr>
+
+                            <th>ক্রম</th>
+
+                            <th>তারিখ</th>
+
+                            <th>Application ID</th>
+
+                            <th>আবেদনের ধরন</th>
+
+                            <th>নাম</th>
+
+                            <th>মোবাইল</th>
+
+                            <th>পরিমাণ</th>
+
+                            <th>স্ট্যাটাস</th>
+
+                            <th>বিস্তারিত</th>
+
+                            <th>স্ট্যাটাস পরিবর্তন</th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="allBody"></tbody>
+
+                </table>
+
+
+                <div
+                    class="no-data"
+                    id="allNoData"
+                    style="display:none;"
+                >
+
+                    কোনো আবেদন পাওয়া যায়নি
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             ATTENDANCE
+        ================================================== -->
+
+        <div
+            id="tab-attendance"
+            class="tab-content"
+        >
+
+
+            <div class="attendance-box">
+
+
+                <h3
+                    style="
+                        color:var(--primary);
+                        margin-bottom:15px;
+                        text-align:center;
+                    "
+                >
+
+                    <i class="fas fa-user-clock"></i>
+
+                    স্টাফ হাজিরা রেজিস্টার
+
+                </h3>
+
+
+                <div
+                    id="attendanceNotice"
+                    class="attendance-notice open"
+                >
+
+                    <i class="fas fa-clock"></i>
+
+                    হাজিরা গ্রহণের সময় চলছে।
+
+                    <br>
+
+                    <small>
+                        হাজিরা গ্রহণের শেষ সময়: দুপুর ১২:০০টা
+                    </small>
+
+                </div>
+
+
+                <div
+                    class="attendance-form-group"
+                >
+
+                    <label>
+                        স্টাফ নির্বাচন করুন:
+                    </label>
+
+
+                    <select id="staffSelect">
+
+                        <option value="">
+                            -- স্টাফ নির্বাচন করুন --
+                        </option>
+
+
+                        <option
+                            value="PATIT PABAN ROY"
+                            data-id="PSKUS/001"
+                            data-desig="MANAGER"
+                        >
+
+                            STAFF/PSKUS/001 -
+                            PATIT PABAN ROY
+                            (MANAGER)
+
+                        </option>
+
+
+                        <option
+                            value="RAJU MONDAL"
+                            data-id="PSKUS/002"
+                            data-desig="STAFF"
+                        >
+
+                            STAFF/PSKUS/002 -
+                            RAJU MONDAL
+                            (ACCOUNTENT)
+
+                        </option>
+
+
+                        <option
+                            value="PINKI DAS"
+                            data-id="PSKUS/003"
+                            data-desig="STAFF"
+                        >
+
+                            STAFF/PSKUS/003 -
+                            PINKI DAS
+                            (SAJANI)
+
+                        </option>
+
+
+                        <option
+                            value="NILIMA BISWAS"
+                            data-id="PSKUS/004"
+                            data-desig="STAFF"
+                        >
+
+                            STAFF/PSKUS/004 -
+                            NILIMA BISWAS
+                            (SAJANI)
+
+                        </option>
+
+
+                        <option
+                            value="STAFF NAME 5"
+                            data-id="PSKUS/005"
+                            data-desig="STAFF"
+                        >
+
+                            STAFF/PSKUS/005 -
+                            STAFF NAME 5
+                            (CLERK)
+
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+
+                <div
+                    class="attendance-form-group"
+                >
+
+                    <label>
+                        স্ট্যাটাস:
+                    </label>
+
+
+                    <select
+                        id="attendanceStatus"
+                        onchange="onStatusChanged()"
+                    >
+
+                        <option value="Present">
+                            Present (উপস্থিত)
+                        </option>
+
+                        <option value="Absent">
+                            Absent (অনুপস্থিত)
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+
+                <div
+                    class="attendance-form-group"
+                    id="absentReasonGroup"
+                    style="display:none;"
+                >
+
+                    <label>
+                        অনুপস্থিতির কারণ:
+                    </label>
+
+
+                    <input
+                        type="text"
+                        id="absentReasonInput"
+                        value="Not presented by self"
+                    >
+
+                </div>
+
+
+                <button
+                    type="button"
+                    id="attendanceSubmitBtn"
+                    class="att-btn"
+                    onclick="submitAttendance()"
+                >
+
+                    <i class="fas fa-check"></i>
+
+                    হাজিরা সাবমিট করুন
+
+                </button>
+
+
+            </div>
+
+
+
+            <div class="table-wrapper">
+
+
+                <table
+                    id="attTable"
+                    style="display:none;"
+                >
+
+                    <thead>
+
+                        <tr>
+
+                            <th>ক্রম</th>
+
+                            <th>তারিখ</th>
+
+                            <th>সময়</th>
+
+                            <th>স্টাফ আইডি</th>
+
+                            <th>স্টাফের নাম</th>
+
+                            <th>পদবি</th>
+
+                            <th>স্ট্যাটাস</th>
+
+                            <th>অনুপস্থিতির কারণ</th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="attBody"></tbody>
+
+                </table>
+
+
+                <div
+                    class="no-data"
+                    id="attNoData"
+                    style="display:none;"
+                >
+
+                    কোনো হাজিরা রেকর্ড নেই
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             MONTHLY REPORT
+        ================================================== -->
+
+        <div
+            id="tab-report"
+            class="tab-content"
+        >
+
+
+            <div class="search-area">
+
+
+                <select
+                    id="reportMonth"
+                    onchange="generateMonthlyReport()"
+                >
+
+                    <option value="0">
+                        JANUARY - জানুয়ারি
+                    </option>
+
+                    <option value="1">
+                        FEBRUARY - ফেব্রুয়ারি
+                    </option>
+
+                    <option value="2">
+                        MARCH - মার্চ
+                    </option>
+
+                    <option value="3">
+                        APRIL - এপ্রিল
+                    </option>
+
+                    <option value="4">
+                        MAY - মে
+                    </option>
+
+                    <option value="5">
+                        JUNE - জুন
+                    </option>
+
+                    <option value="6">
+                        JULY - জুলাই
+                    </option>
+
+                    <option value="7">
+                        AUGUST - আগস্ট
+                    </option>
+
+                    <option value="8">
+                        SEPTEMBER - সেপ্টেম্বর
+                    </option>
+
+                    <option value="9">
+                        OCTOBER - অক্টোবর
+                    </option>
+
+                    <option value="10">
+                        NOVEMBER - নভেম্বর
+                    </option>
+
+                    <option value="11">
+                        DECEMBER - ডিসেম্বর
+                    </option>
+
+                </select>
+
+
+                <select
+                    id="reportYear"
+                    onchange="generateMonthlyReport()"
+                >
+
+                    <option value="2026">
+                        2026
+                    </option>
+
+                    <option value="2027">
+                        2027
+                    </option>
+
+                    <option value="2028">
+                        2028
+                    </option>
+
+                    <option value="2029">
+                        2029
+                    </option>
+
+                    <option value="2030">
+                        2030
+                    </option>
+
+                </select>
+
+
+            </div>
+
+
+            <div class="table-wrapper">
+
+
+                <table id="reportTable">
+
+                    <thead>
+
+                        <tr id="reportHeaderRow">
+
+                            <th>
+                                স্টাফ আইডি / নাম
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="reportBodies"></tbody>
+
+                </table>
+
+
+            </div>
+
+        </div>
+
 
     </div>
 
-    <div class="toast-container" id="toastContainer"></div>
+
+
+    <!-- =====================================================
+         TOAST
+    ====================================================== -->
+
+    <div
+        class="toast-container"
+        id="toastContainer"
+    ></div>
+
+
+
+    <!-- =====================================================
+         APPLICATION DETAILS MODAL
+    ====================================================== -->
+
+    <div
+        class="modal-overlay"
+        id="detailsModal"
+        onclick="closeModalOnOverlay(event)"
+    >
+
+
+        <div
+            class="details-modal"
+            onclick="event.stopPropagation()"
+        >
+
+
+            <div class="modal-header">
+
+
+                <h2>
+
+                    <i class="fas fa-file-alt"></i>
+
+                    Application Details
+
+                </h2>
+
+
+                <button
+                    class="modal-close"
+                    onclick="closeDetailsModal()"
+                >
+
+                    &times;
+
+                </button>
+
+
+            </div>
+
+
+
+            <div
+                class="modal-body"
+                id="detailsModalBody"
+            >
+
+                <!-- Dynamic Details -->
+
+            </div>
+
+
+
+            <div class="modal-footer">
+
+                <button
+                    onclick="closeDetailsModal()"
+                >
+
+                    বন্ধ করুন
+
+                </button>
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+    ====================================================== -->
 
     <script>
-        const API_URL = "https://script.google.com/macros/s/AKfycbwSmyOEAbqxk6xVUTyn5OlvlkD7thczZ2F7_bu1XZCN5Ma3vEy9LosDAeUc_4EdYfUf/exec";
+
+
+        /* =====================================================
+           API URL
+        ===================================================== */
+
+        const API_URL =
+            "https://script.google.com/macros/s/AKfycbwSmyOEAbqxk6xVUTyn5OlvlkD7thczZ2F7_bu1XZCN5Ma3vEy9LosDAeUc_4EdYfUf/exec";
+
+
+
+        /* =====================================================
+           GLOBAL DATA
+        ===================================================== */
+
         let allApplications = [];
+
         let allAttendance = [];
 
-        window.addEventListener('DOMContentLoaded', function() {
-            const isLoggedIn = localStorage.getItem('adminLoggedIn');
-            if (isLoggedIn !== 'true') {
-                window.location.href = 'index.html';
-                return;
-            }
 
-            document.querySelectorAll('.tab-btn').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-                    this.classList.add('active');
-                    const tab = this.dataset.tab;
-                    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-                    document.getElementById(`tab-${tab}`).classList.add('active');
-                    if (tab === 'attendance') loadAttendanceData();
-                    if (tab === 'report') {
-                        document.getElementById('reportMonth').value = new Date().getMonth();
-                        generateMonthlyReport();
-                    }
-                    if (tab !== 'attendance' && tab !== 'report') loadApplications();
-                });
-            });
 
-            loadApplications();
-            loadAttendanceData();
-        });
+        /* =====================================================
+           PAGE LOAD
+        ===================================================== */
 
-        function onStatusChanged() {
-            const status = document.getElementById('attendanceStatus').value;
-            const reasonGroup = document.getElementById('absentReasonGroup');
-            const reasonInput = document.getElementById('absentReasonInput');
-            if (status === 'Absent') {
-                reasonGroup.style.display = 'block';
-                reasonInput.value = 'Not presented by self';
-            } else {
-                reasonGroup.style.display = 'none';
-                reasonInput.value = '';
-            }
-        }
+        window.addEventListener(
+            "DOMContentLoaded",
+            function() {
 
-        function loadApplications() {
-            fetch(API_URL + "?action=getAll")
-                .then(res => res.json())
-                .then(data => {
-                    if (data.status === 'success' && data.data) {
-                        allApplications = data.data;
-                        updateCounts();
-                        renderTable('pending', allApplications.filter(a => (a.Status || 'Pending') === 'Pending'));
-                        renderTable('approved', allApplications.filter(a => a.Status === 'Approved'));
-                        renderTable('rejected', allApplications.filter(a => a.Status === 'Rejected'));
-                        renderTable('all', allApplications);
-                    }
-                });
-        }
 
-        function updateCounts() {
-            const pending = allApplications.filter(a => (a.Status || 'Pending') === 'Pending').length;
-            const approved = allApplications.filter(a => a.Status === 'Approved').length;
-            const rejected = allApplications.filter(a => a.Status === 'Rejected').length;
-            document.getElementById('pendingCount').textContent = pending;
-            document.getElementById('approvedCount').textContent = approved;
-            document.getElementById('rejectedCount').textContent = rejected;
-            document.getElementById('allCount').textContent = allApplications.length;
-            document.getElementById('totalCount').textContent = `মোট: ${allApplications.length}টি`;
-        }
+                const isLoggedIn =
+                    localStorage.getItem(
+                        "adminLoggedIn"
+                    );
 
-        function renderTable(tab, apps) {
-            const tbody = document.getElementById(`${tab}Body`);
-            const table = document.getElementById(`${tab}Table`);
-            const noData = document.getElementById(`${tab}NoData`);
-            if(!tbody) return;
-            tbody.innerHTML = '';
-            if(!apps || apps.length === 0) {
-                if(table) table.style.display = 'none';
-                if(noData) noData.style.display = 'block';
-                return;
-            }
-            if(table) table.style.display = 'table';
-            if(noData) noData.style.display = 'none';
 
-            apps.forEach((app, index) => {
-                const status = app.Status || 'Pending';
-                const badge = status === 'Approved' ? 'status-approved' : (status === 'Rejected' ? 'status-rejected' : 'status-pending');
-                const tr = document.createElement('tr');
-                let updateCol = tab === 'pending' || tab === 'all' ? `
-                    <td>
-                        <select id="status_${tab}_${index}" style="padding:4px;">
-                            <option value="Pending" ${status === 'Pending'?'selected':''}>Pending</option>
-                            <option value="Approved" ${status === 'Approved'?'selected':''}>Approved</option>
-                            <option value="Rejected" ${status === 'Rejected'?'selected':''}>Rejected</option>
-                        </select>
-                        <button onclick="updateAppStatus('${app['Application ID'] || app.applicationId}', '${tab}', ${index})" style="background:var(--primary); color:white; border:none; padding:4px 8px; border-radius:4px; cursor:pointer;">আপডেট</button>
-                    </td>
-                ` : '';
+                if (
+                    isLoggedIn !== "true"
+                ) {
 
-                tr.innerHTML = `
-                    <td>${index + 1}</td>
-                    <td>${app['Date & Time'] || 'N/A'}</td>
-                    <td><strong>${app['Application ID'] || 'N/A'}</strong></td>
-                    <td>${app['Application Type'] || 'N/A'}</td>
-                    <td>${app['Applicant Name'] || 'N/A'}</td>
-                    <td>${app['Mobile Number'] || 'N/A'}</td>
-                    <td>${app['Amount'] || 'N/A'}</td>
-                    <td><span class="status-badge ${badge}">${status}</span></td>
-                    ${tab === 'rejected' ? `<td>${app['Reject Reason'] || 'N/A'}</td>` : ''}
-                    ${updateCol}
-                `;
-                tbody.appendChild(tr);
-            });
-        }
+                    window.location.href =
+                        "index.html";
 
-        function updateAppStatus(appId, tab, index) {
-            const newStatus = document.getElementById(`status_${tab}_${index}`).value;
-            let reason = '';
-            if(newStatus === 'Rejected') {
-                reason = prompt("রিজেক্ট করার কারণ লিখুন:", "Not available");
-                if(!reason) return;
-            }
-            fetch(API_URL, {
-                method: 'POST',
-                headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-                body: JSON.stringify({ action: 'updateStatus', applicationId: appId, status: newStatus, rejectReason: reason })
-            })
-            .then(res => res.json())
-            .then(data => {
-                if(data.status === 'success') {
-                    showToast("স্ট্যাটাস সফলভাবে আপডেট হয়েছে!", "success");
-                    loadApplications();
-                } else {
-                    showToast("সমস্যা হয়েছে!", "error");
+                    return;
+
                 }
-            });
-        }
 
-        function loadAttendanceData() {
-            fetch(API_URL + "?action=getAttendance")
-                .then(res => res.json())
-                .then(data => {
-                    if (data.status === 'success' && data.data) {
-                        allAttendance = data.data;
-                        document.getElementById('attCount').textContent = allAttendance.length;
-                        const tbody = document.getElementById('attBody');
-                        const table = document.getElementById('attTable');
-                        const noData = document.getElementById('attNoData');
-                        tbody.innerHTML = '';
-                        if(allAttendance.length > 0) {
-                            table.style.display = 'table';
-                            noData.style.display = 'none';
-                            allAttendance.forEach((item, index) => {
-                                const st = item['স্ট্যাটাস'] || item['Status'] || 'Present';
-                                const badge = st === 'Present' ? 'status-approved' : 'status-rejected';
-                                const tr = document.createElement('tr');
-                                tr.innerHTML = `
-                                    <td>${index + 1}</td>
-                                    <td>${item['তারিখ'] || item['Date'] || 'N/A'}</td>
-                                    <td>${item['সময়'] || item['Time'] || 'N/A'}</td>
-                                    <td><strong>${item['স্টাফ আইডি'] || item['Staff ID'] || 'N/A'}</strong></td>
-                                    <td>${item['স্টাফের নাম'] || item['Staff Name'] || 'N/A'}</td>
-                                    <td>${item['পদবি (Designation)'] || item['Designation'] || 'N/A'}</td>
-                                    <td><span class="status-badge ${badge}">${st}</span></td>
-                                    <td>${item['অনুপস্থিতির কারণ'] || item['Absent Reason'] || 'N/A'}</td>
-                                `;
-                                tbody.appendChild(tr);
-                            });
-                        } else {
-                            table.style.display = 'none';
-                            noData.style.display = 'block';
-                        }
+
+
+                setupTabs();
+
+                setupSearchEvents();
+
+                updateAttendanceTimeState();
+
+                setInterval(
+                    updateAttendanceTimeState,
+                    30000
+                );
+
+
+                loadApplications();
+
+                loadAttendanceData();
+
+
+            }
+        );
+
+
+
+        /* =====================================================
+           TABS
+        ===================================================== */
+
+        function setupTabs() {
+
+
+            document
+                .querySelectorAll(".tab-btn")
+                .forEach(
+                    function(btn) {
+
+
+                        btn.addEventListener(
+                            "click",
+                            function() {
+
+
+                                document
+                                    .querySelectorAll(
+                                        ".tab-btn"
+                                    )
+                                    .forEach(
+                                        function(b) {
+
+                                            b.classList.remove(
+                                                "active"
+                                            );
+
+                                        }
+                                    );
+
+
+                                this.classList.add(
+                                    "active"
+                                );
+
+
+                                const tab =
+                                    this.dataset.tab;
+
+
+                                document
+                                    .querySelectorAll(
+                                        ".tab-content"
+                                    )
+                                    .forEach(
+                                        function(c) {
+
+                                            c.classList.remove(
+                                                "active"
+                                            );
+
+                                        }
+                                    );
+
+
+                                const target =
+                                    document.getElementById(
+                                        "tab-" + tab
+                                    );
+
+
+                                if (target) {
+
+                                    target.classList.add(
+                                        "active"
+                                    );
+
+                                }
+
+
+                                if (
+                                    tab ===
+                                    "attendance"
+                                ) {
+
+                                    updateAttendanceTimeState();
+
+                                    loadAttendanceData();
+
+                                }
+
+
+                                else if (
+                                    tab ===
+                                    "report"
+                                ) {
+
+                                    document.getElementById(
+                                        "reportMonth"
+                                    ).value =
+                                        new Date()
+                                            .getMonth();
+
+
+                                    generateMonthlyReport();
+
+                                }
+
+
+                                else {
+
+                                    loadApplications();
+
+                                }
+
+
+                            }
+                        );
+
+
                     }
-                });
+                );
+
         }
 
-        function submitAttendance() {
-            const staffSelect = document.getElementById('staffSelect');
-            const staffName = staffSelect.value;
-            const selectedOption = staffSelect.options[staffSelect.selectedIndex];
-            const staffId = selectedOption ? selectedOption.getAttribute('data-id') : '';
-            const designation = selectedOption ? selectedOption.getAttribute('data-desig') : 'STAFF';
-            const status = document.getElementById('attendanceStatus').value;
-            const reason = document.getElementById('absentReasonInput').value.trim() || 'Not presented by self';
 
-            if (!staffName) {
-                showToast('দয়া করে প্রথমে স্টাফ নির্বাচন করুন।', 'error');
-                return;
-            }
 
-            fetch(API_URL, {
-                method: 'POST',
-                headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-                body: JSON.stringify({ action: 'saveAttendance', staffId, staffName, designation, status, reason })
-            })
-            .then(res => res.json())
-            .then(data => {
-                if (data.status === 'success') {
-                    showToast(data.message, 'success');
-                    document.getElementById('staffSelect').value = '';
-                    loadAttendanceData();
-                } else {
-                    showToast(data.message, 'error');
-                }
-            });
-        }
+        /* =====================================================
+           SEARCH EVENTS
+        ===================================================== */
 
-        function generateMonthlyReport() {
-            const month = parseInt(document.getElementById('reportMonth').value);
-            const year = parseInt(document.getElementById('reportYear').value);
-            const daysInMonth = new Date(year, month + 1, 0).getDate();
+        function setupSearchEvents() {
 
-            const headerRow = document.getElementById('reportHeaderRow');
-            let headerHtml = '<th>স্টাফ আইডি / নাম</th>';
-            for(let d=1; d<=daysInMonth; d++) {
-                headerHtml += `<th style="text-align:center; font-size:12px;">${d}</th>`;
-            }
-            headerRow.innerHTML = headerHtml;
 
-            const staffList = [
-                { id: "PSKUS/001", name: "PATIT PABAN ROY" },
-                { id: "PSKUS/002", name: "RAJU MONDAL" },
-                { id: "PSKUS/003", name: "PINKI DAS" },
-                { id: "PSKUS/004", name: "NILIMA BISWAS" },
-                { id: "PSKUS/005", name: "STAFF NAME 5" }
+            const searchIds = [
+
+                "searchPending",
+
+                "searchApproved",
+
+                "searchRejected",
+
+                "searchAll"
+
             ];
 
-            const tbody = document.getElementById('reportBodies');
-            tbody.innerHTML = '';
 
-            staffList.forEach(staff => {
-                let tr = document.createElement('tr');
-                let rowHtml = `<td><strong>${staff.id}</strong><br><span style="font-size:11px; color:#666;">${staff.name}</span></td>`;
+            searchIds.forEach(
+                function(id) {
 
-                for(let d=1; d<=daysInMonth; d++) {
-                    let dateObj = new Date(year, month, d);
-                    let dayOfWeek = dateObj.getDay();
-                    
-                    let isHoliday = false;
-                    if(dayOfWeek === 0) {
-                        isHoliday = true; // Sunday
-                    } else if(dayOfWeek === 6) {
-                        let saturdayCount = Math.floor((d - 1) / 7) + 1;
-                        if(saturdayCount === 2 || saturdayCount === 4) isHoliday = true;
+
+                    const input =
+                        document.getElementById(
+                            id
+                        );
+
+
+                    if (input) {
+
+                        input.addEventListener(
+                            "input",
+                            function() {
+
+                                renderAllApplicationTables();
+
+                            }
+                        );
+
                     }
 
-                    let formattedDate = `${String(d).padStart(2,'0')}/${String(month+1).padStart(2,'0')}/${year}`;
-                    
-                    let attRecord = allAttendance.find(a => {
-                        let rDate = a['তারিখ'] || a['Date'] || '';
-                        let rId = a['স্টাফ আইডি'] || a['Staff ID'] || '';
-                        return rDate === formattedDate && rId === staff.id;
-                    });
+                }
+            );
 
-                    let cellBg = '#ffffff';
-                    let cellText = '-';
 
-                    if(isHoliday) {
-                        cellBg = '#e2e8f0'; // ছুটির দিন গ্রে কালার
-                        cellText = 'H';
-                    } else if(attRecord) {
-                        let st = attRecord['স্ট্যাটাস'] || attRecord['Status'];
-                        if(st === 'Present') {
-                            cellBg = '#86efac'; // সবুজ (Green fill)
-                            cellText = 'P';
-                        } else {
-                            cellBg = '#fca5a5'; // লাল (Red fill)
-                            cellText = 'A';
+
+            const filterIds = [
+
+                "filterPendingType",
+
+                "filterApprovedType",
+
+                "filterAllStatus",
+
+                "filterAllType"
+
+            ];
+
+
+            filterIds.forEach(
+                function(id) {
+
+
+                    const el =
+                        document.getElementById(
+                            id
+                        );
+
+
+                    if (el) {
+
+                        el.addEventListener(
+                            "change",
+                            function() {
+
+                                renderAllApplicationTables();
+
+                            }
+                        );
+
+                    }
+
+                }
+            );
+
+        }
+
+
+
+        /* =====================================================
+           LOAD APPLICATIONS
+        ===================================================== */
+
+        function loadApplications() {
+
+
+            const loading =
+                document.getElementById(
+                    "pendingLoading"
+                );
+
+
+            if (loading) {
+
+                loading.style.display =
+                    "block";
+
+            }
+
+
+            fetch(
+                API_URL +
+                "?action=getAll"
+            )
+
+            .then(
+                function(res) {
+
+                    return res.json();
+
+                }
+            )
+
+            .then(
+                function(data) {
+
+
+                    if (
+                        data.status ===
+                        "success" &&
+                        data.data
+                    ) {
+
+
+                        allApplications =
+                            Array.isArray(
+                                data.data
+                            )
+                            ? data.data
+                            : [];
+
+
+                        updateCounts();
+
+                        renderAllApplicationTables();
+
+                    }
+
+
+                    else {
+
+
+                        showToast(
+                            data.message ||
+                            "Application data পাওয়া যায়নি।",
+                            "error"
+                        );
+
+                    }
+
+                }
+            )
+
+            .catch(
+                function(error) {
+
+
+                    console.error(error);
+
+
+                    showToast(
+                        "Server-এর সাথে সংযোগ করা যাচ্ছে না।",
+                        "error"
+                    );
+
+                }
+            )
+
+            .finally(
+                function() {
+
+
+                    if (loading) {
+
+                        loading.style.display =
+                            "none";
+
+                    }
+
+                }
+            );
+
+        }
+
+
+
+        /* =====================================================
+           UPDATE COUNTS
+        ===================================================== */
+
+        function updateCounts() {
+
+
+            const pending =
+                allApplications.filter(
+                    function(a) {
+
+                        return (
+                            a.Status ||
+                            "Pending"
+                        ) === "Pending";
+
+                    }
+                ).length;
+
+
+            const approved =
+                allApplications.filter(
+                    function(a) {
+
+                        return (
+                            a.Status ===
+                            "Approved"
+                        );
+
+                    }
+                ).length;
+
+
+            const rejected =
+                allApplications.filter(
+                    function(a) {
+
+                        return (
+                            a.Status ===
+                            "Rejected"
+                        );
+
+                    }
+                ).length;
+
+
+            const total =
+                allApplications.length;
+
+
+
+            document.getElementById(
+                "pendingCount"
+            ).textContent =
+                pending;
+
+
+            document.getElementById(
+                "approvedCount"
+            ).textContent =
+                approved;
+
+
+            document.getElementById(
+                "rejectedCount"
+            ).textContent =
+                rejected;
+
+
+            document.getElementById(
+                "allCount"
+            ).textContent =
+                total;
+
+
+            document.getElementById(
+                "totalCount"
+            ).textContent =
+                "মোট: " +
+                total +
+                "টি";
+
+
+
+            document.getElementById(
+                "summaryTotal"
+            ).textContent =
+                total;
+
+
+            document.getElementById(
+                "summaryPending"
+            ).textContent =
+                pending;
+
+
+            document.getElementById(
+                "summaryApproved"
+            ).textContent =
+                approved;
+
+
+            document.getElementById(
+                "summaryRejected"
+            ).textContent =
+                rejected;
+
+        }
+
+
+
+        /* =====================================================
+           FILTER APPLICATIONS
+        ===================================================== */
+
+        function filterApplicationList(
+            apps,
+            searchId,
+            typeId,
+            statusId
+        ) {
+
+
+            let result =
+                Array.isArray(apps)
+                ? [...apps]
+                : [];
+
+
+            const searchEl =
+                searchId
+                ? document.getElementById(
+                    searchId
+                )
+                : null;
+
+
+            const typeEl =
+                typeId
+                ? document.getElementById(
+                    typeId
+                )
+                : null;
+
+
+            const statusEl =
+                statusId
+                ? document.getElementById(
+                    statusId
+                )
+                : null;
+
+
+            const search =
+                searchEl
+                ? searchEl.value
+                    .trim()
+                    .toLowerCase()
+                : "";
+
+
+            const type =
+                typeEl
+                ? typeEl.value
+                : "";
+
+
+            const status =
+                statusEl
+                ? statusEl.value
+                : "";
+
+
+
+            if (search) {
+
+
+                result =
+                    result.filter(
+                        function(app) {
+
+
+                            const id =
+                                String(
+                                    app[
+                                        "Application ID"
+                                    ] ||
+                                    app.applicationId ||
+                                    ""
+                                ).toLowerCase();
+
+
+                            const name =
+                                String(
+                                    app[
+                                        "Applicant Name"
+                                    ] ||
+                                    ""
+                                ).toLowerCase();
+
+
+                            const mobile =
+                                String(
+                                    app[
+                                        "Mobile Number"
+                                    ] ||
+                                    ""
+                                ).toLowerCase();
+
+
+                            return (
+                                id.includes(search) ||
+                                name.includes(search) ||
+                                mobile.includes(search)
+                            );
+
                         }
-                    }
+                    );
 
-                    rowHtml += `<td style="background-color:${cellBg}; text-align:center; font-weight:bold; font-size:12px;" title="${formattedDate}">${cellText}</td>`;
+            }
+
+
+
+            if (type) {
+
+
+                result =
+                    result.filter(
+                        function(app) {
+
+
+                            const appType =
+                                String(
+                                    app[
+                                        "Application Type"
+                                    ] ||
+                                    ""
+                                );
+
+
+                            return (
+                                appType ===
+                                type
+                            );
+
+                        }
+                    );
+
+            }
+
+
+
+            if (status) {
+
+
+                result =
+                    result.filter(
+                        function(app) {
+
+
+                            const appStatus =
+                                app.Status ||
+                                "Pending";
+
+
+                            return (
+                                appStatus ===
+                                status
+                            );
+
+                        }
+                    );
+
+            }
+
+
+            return result;
+
+        }
+
+
+
+        /* =====================================================
+           RENDER ALL TABLES
+        ===================================================== */
+
+        function renderAllApplicationTables() {
+
+
+            const pendingApps =
+                filterApplicationList(
+                    allApplications.filter(
+                        function(a) {
+
+                            return (
+                                a.Status ||
+                                "Pending"
+                            ) === "Pending";
+
+                        }
+                    ),
+                    "searchPending",
+                    "filterPendingType",
+                    null
+                );
+
+
+            const approvedApps =
+                filterApplicationList(
+                    allApplications.filter(
+                        function(a) {
+
+                            return (
+                                a.Status ===
+                                "Approved"
+                            );
+
+                        }
+                    ),
+                    "searchApproved",
+                    "filterApprovedType",
+                    null
+                );
+
+
+            const rejectedApps =
+                filterApplicationList(
+                    allApplications.filter(
+                        function(a) {
+
+                            return (
+                                a.Status ===
+                                "Rejected"
+                            );
+
+                        }
+                    ),
+                    "searchRejected",
+                    null,
+                    null
+                );
+
+
+            const allApps =
+                filterApplicationList(
+                    allApplications,
+                    "searchAll",
+                    "filterAllType",
+                    "filterAllStatus"
+                );
+
+
+            renderTable(
+                "pending",
+                pendingApps
+            );
+
+
+            renderTable(
+                "approved",
+                approvedApps
+            );
+
+
+            renderTable(
+                "rejected",
+                rejectedApps
+            );
+
+
+            renderTable(
+                "all",
+                allApps
+            );
+
+        }
+
+
+
+        /* =====================================================
+           RENDER TABLE
+        ===================================================== */
+
+        function renderTable(
+            tab,
+            apps
+        ) {
+
+
+            const tbody =
+                document.getElementById(
+                    tab + "Body"
+                );
+
+
+            const table =
+                document.getElementById(
+                    tab + "Table"
+                );
+
+
+            const noData =
+                document.getElementById(
+                    tab + "NoData"
+                );
+
+
+            if (!tbody) {
+
+                return;
+
+            }
+
+
+            tbody.innerHTML =
+                "";
+
+
+
+            if (
+                !apps ||
+                apps.length === 0
+            ) {
+
+
+                if (table) {
+
+                    table.style.display =
+                        "none";
+
                 }
 
-                tr.innerHTML = rowHtml;
-                tbody.appendChild(tr);
-            });
+
+                if (noData) {
+
+                    noData.style.display =
+                        "block";
+
+                }
+
+
+                return;
+
+            }
+
+
+
+            if (table) {
+
+                table.style.display =
+                    "table";
+
+            }
+
+
+            if (noData) {
+
+                noData.style.display =
+                    "none";
+
+            }
+
+
+
+            apps.forEach(
+                function(app, index) {
+
+
+                    const status =
+                        app.Status ||
+                        "Pending";
+
+
+                    let badge =
+                        "status-pending";
+
+
+                    if (
+                        status ===
+                        "Approved"
+                    ) {
+
+                        badge =
+                            "status-approved";
+
+                    }
+
+
+                    else if (
+                        status ===
+                        "Rejected"
+                    ) {
+
+                        badge =
+                            "status-rejected";
+
+                    }
+
+
+
+                    const appId =
+                        app[
+                            "Application ID"
+                        ] ||
+                        app.applicationId ||
+                        "";
+
+
+
+                    const tr =
+                        document.createElement(
+                            "tr"
+                        );
+
+
+
+                    let updateCol =
+                        "";
+
+
+                    if (
+                        tab === "pending" ||
+                        tab === "all"
+                    ) {
+
+
+                        updateCol = `
+
+                            <td>
+
+                                <select
+                                    id="status_${tab}_${index}"
+                                    class="status-select"
+                                >
+
+                                    <option
+                                        value="Pending"
+                                        ${status === "Pending" ? "selected" : ""}
+                                    >
+                                        Pending
+                                    </option>
+
+                                    <option
+                                        value="Approved"
+                                        ${status === "Approved" ? "selected" : ""}
+                                    >
+                                        Approved
+                                    </option>
+
+                                    <option
+                                        value="Rejected"
+                                        ${status === "Rejected" ? "selected" : ""}
+                                    >
+                                        Rejected
+                                    </option>
+
+                                </select>
+
+
+                                <button
+                                    class="update-btn"
+                                    onclick="updateAppStatus(
+                                        '${escapeJs(appId)}',
+                                        '${tab}',
+                                        ${index}
+                                    )"
+                                >
+
+                                    আপডেট
+
+                                </button>
+
+                            </td>
+
+                        `;
+
+                    }
+
+
+
+                    tr.innerHTML = `
+
+                        <td>
+                            ${index + 1}
+                        </td>
+
+                        <td>
+                            ${escapeHtml(
+                                app["Date & Time"] ||
+                                "N/A"
+                            )}
+                        </td>
+
+                        <td>
+
+                            <strong>
+                                ${escapeHtml(
+                                    appId ||
+                                    "N/A"
+                                )}
+                            </strong>
+
+                        </td>
+
+                        <td>
+                            ${escapeHtml(
+                                app[
+                                    "Application Type"
+                                ] ||
+                                "N/A"
+                            )}
+                        </td>
+
+                        <td>
+                            ${escapeHtml(
+                                app[
+                                    "Applicant Name"
+                                ] ||
+                                "N/A"
+                            )}
+                        </td>
+
+                        <td>
+                            ${escapeHtml(
+                                app[
+                                    "Mobile Number"
+                                ] ||
+                                "N/A"
+                            )}
+                        </td>
+
+                        <td>
+                            ${escapeHtml(
+                                app[
+                                    "Amount"
+                                ] ||
+                                "N/A"
+                            )}
+                        </td>
+
+                        <td>
+
+                            <span
+                                class="status-badge ${badge}"
+                            >
+
+                                ${escapeHtml(
+                                    status
+                                )}
+
+                            </span>
+
+                        </td>
+
+
+                        ${
+                            tab === "rejected"
+                            ?
+                            `
+                                <td>
+                                    ${escapeHtml(
+                                        app[
+                                            "Reject Reason"
+                                        ] ||
+                                        "N/A"
+                                    )}
+                                </td>
+                            `
+                            :
+                            ""
+                        }
+
+
+                        <td>
+
+                            <button
+                                class="view-btn"
+                                onclick="openApplicationDetailsByIndex(
+                                    '${tab}',
+                                    ${index}
+                                )"
+                            >
+
+                                <i class="fas fa-eye"></i>
+
+                                বিস্তারিত
+
+                            </button>
+
+                        </td>
+
+
+                        ${updateCol}
+
+                    `;
+
+
+                    tbody.appendChild(
+                        tr
+                    );
+
+
+                }
+            );
+
         }
 
-        function showToast(message, type = 'success') {
-            const container = document.getElementById('toastContainer');
-            const toast = document.createElement('div');
-            toast.className = `toast ${type}`;
-            toast.innerText = message;
-            container.appendChild(toast);
-            setTimeout(() => toast.remove(), 4000);
+
+
+        /* =====================================================
+           FIND CURRENT APP FROM TABLE
+        ===================================================== */
+
+        function openApplicationDetailsByIndex(
+            tab,
+            index
+        ) {
+
+
+            let apps = [];
+
+
+            if (
+                tab === "pending"
+            ) {
+
+
+                apps =
+                    filterApplicationList(
+                        allApplications.filter(
+                            function(a) {
+
+                                return (
+                                    a.Status ||
+                                    "Pending"
+                                ) === "Pending";
+
+                            }
+                        ),
+                        "searchPending",
+                        "filterPendingType",
+                        null
+                    );
+
+            }
+
+
+            else if (
+                tab === "approved"
+            ) {
+
+
+                apps =
+                    filterApplicationList(
+                        allApplications.filter(
+                            function(a) {
+
+                                return (
+                                    a.Status ===
+                                    "Approved"
+                                );
+
+                            }
+                        ),
+                        "searchApproved",
+                        "filterApprovedType",
+                        null
+                    );
+
+            }
+
+
+            else if (
+                tab === "rejected"
+            ) {
+
+
+                apps =
+                    filterApplicationList(
+                        allApplications.filter(
+                            function(a) {
+
+                                return (
+                                    a.Status ===
+                                    "Rejected"
+                                );
+
+                            }
+                        ),
+                        "searchRejected",
+                        null,
+                        null
+                    );
+
+            }
+
+
+            else if (
+                tab === "all"
+            ) {
+
+
+                apps =
+                    filterApplicationList(
+                        allApplications,
+                        "searchAll",
+                        "filterAllType",
+                        "filterAllStatus"
+                    );
+
+            }
+
+
+
+            const app =
+                apps[index];
+
+
+            if (app) {
+
+                openApplicationDetails(
+                    app
+                );
+
+            }
+
         }
+
+
+
+        /* =====================================================
+           APPLICATION DETAILS MODAL
+        ===================================================== */
+
+        function openApplicationDetails(
+            app
+        ) {
+
+
+            const modal =
+                document.getElementById(
+                    "detailsModal"
+                );
+
+
+            const body =
+                document.getElementById(
+                    "detailsModalBody"
+                );
+
+
+            if (!modal || !body) {
+
+                return;
+
+            }
+
+
+
+            const appId =
+                app[
+                    "Application ID"
+                ] ||
+                app.applicationId ||
+                "N/A";
+
+
+            const status =
+                app.Status ||
+                "Pending";
+
+
+            let badge =
+                "status-pending";
+
+
+            if (
+                status ===
+                "Approved"
+            ) {
+
+                badge =
+                    "status-approved";
+
+            }
+
+
+            else if (
+                status ===
+                "Rejected"
+            ) {
+
+                badge =
+                    "status-rejected";
+
+            }
+
+
+
+            let html = `
+
+                <div class="detail-top">
+
+                    <div>
+
+                        <div
+                            class="detail-label"
+                        >
+                            Application ID
+                        </div>
+
+                        <div
+                            class="detail-id"
+                        >
+                            ${escapeHtml(appId)}
+                        </div>
+
+                    </div>
+
+
+                    <div>
+
+                        <span
+                            class="status-badge ${badge}"
+                        >
+
+                            ${escapeHtml(status)}
+
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="details-grid">
+
+            `;
+
+
+
+            const preferredOrder = [
+
+                "Date & Time",
+
+                "Application ID",
+
+                "Application Type",
+
+                "Applicant Name",
+
+                "Father Name",
+
+                "Father / Husband Name",
+
+                "Mother Name",
+
+                "Mother's Name",
+
+                "Mobile Number",
+
+                "Address",
+
+                "Amount",
+
+                "Loan Amount",
+
+                "Security Type",
+
+                "Certificate Number",
+
+                "Policy Number",
+
+                "PAN",
+
+                "Aadhaar",
+
+                "Reject Reason",
+
+                "Status"
+
+            ];
+
+
+
+            const usedKeys =
+                new Set();
+
+
+            preferredOrder.forEach(
+                function(key) {
+
+
+                    if (
+                        Object.prototype.hasOwnProperty.call(
+                            app,
+                            key
+                        )
+                    ) {
+
+
+                        const value =
+                            app[key];
+
+
+                        if (
+                            value !==
+                            null &&
+                            value !==
+                            undefined &&
+                            String(value).trim() !==
+                            ""
+                        ) {
+
+
+                            usedKeys.add(
+                                key
+                            );
+
+
+                            html +=
+                                createDetailItem(
+                                    key,
+                                    value,
+                                    isLongField(key)
+                                );
+
+                        }
+
+                    }
+
+                }
+            );
+
+
+
+            Object.keys(app).forEach(
+                function(key) {
+
+
+                    if (
+                        usedKeys.has(
+                            key
+                        )
+                    ) {
+
+                        return;
+
+                    }
+
+
+                    const value =
+                        app[key];
+
+
+                    if (
+                        value ===
+                        null ||
+                        value ===
+                        undefined ||
+                        String(value).trim() ===
+                        ""
+                    ) {
+
+                        return;
+
+                    }
+
+
+                    html +=
+                        createDetailItem(
+                            key,
+                            value,
+                            isLongField(key)
+                        );
+
+                }
+            );
+
+
+
+            html += `
+
+                </div>
+
+            `;
+
+
+            body.innerHTML =
+                html;
+
+
+            modal.classList.add(
+                "show"
+            );
+
+
+            document.body.style.overflow =
+                "hidden";
+
+        }
+
+
+
+        /* =====================================================
+           CREATE DETAIL ITEM
+        ===================================================== */
+
+        function createDetailItem(
+            key,
+            value,
+            isFull
+        ) {
+
+
+            return `
+
+                <div
+                    class="detail-item ${isFull ? "full" : ""}"
+                >
+
+                    <span
+                        class="detail-label"
+                    >
+
+                        ${escapeHtml(
+                            humanizeKey(key)
+                        )}
+
+                    </span>
+
+
+                    <span
+                        class="detail-value"
+                    >
+
+                        ${escapeHtml(
+                            value
+                        )}
+
+                    </span>
+
+                </div>
+
+            `;
+
+        }
+
+
+
+        /* =====================================================
+           HUMANIZE KEY
+        ===================================================== */
+
+        function humanizeKey(
+            key
+        ) {
+
+
+            const map = {
+
+                "Date & Time":
+                    "আবেদনের তারিখ ও সময়",
+
+                "Application ID":
+                    "Application ID",
+
+                "Application Type":
+                    "আবেদনের ধরন",
+
+                "Applicant Name":
+                    "আবেদনকারীর নাম",
+
+                "Father Name":
+                    "পিতা / স্বামীর নাম",
+
+                "Father / Husband Name":
+                    "পিতা / স্বামীর নাম",
+
+                "Mother Name":
+                    "মায়ের নাম",
+
+                "Mother's Name":
+                    "মায়ের নাম",
+
+                "Mobile Number":
+                    "মোবাইল নম্বর",
+
+                "Address":
+                    "ঠিকানা",
+
+                "Amount":
+                    "পরিমাণ",
+
+                "Loan Amount":
+                    "ঋণের পরিমাণ",
+
+                "Security Type":
+                    "Security-এর ধরন",
+
+                "Certificate Number":
+                    "Certificate Number",
+
+                "Policy Number":
+                    "Policy Number",
+
+                "PAN":
+                    "PAN",
+
+                "Aadhaar":
+                    "Aadhaar",
+
+                "Reject Reason":
+                    "রিজেক্ট করার কারণ",
+
+                "Status":
+                    "স্ট্যাটাস"
+
+            };
+
+
+            return (
+                map[key] ||
+                key
+            );
+
+        }
+
+
+
+        /* =====================================================
+           LONG FIELD
+        ===================================================== */
+
+        function isLongField(
+            key
+        ) {
+
+
+            const lower =
+                String(
+                    key
+                ).toLowerCase();
+
+
+            return (
+                lower.includes(
+                    "address"
+                ) ||
+                lower.includes(
+                    "ঠিকানা"
+                ) ||
+                lower.includes(
+                    "reason"
+                ) ||
+                lower.includes(
+                    "description"
+                ) ||
+                lower.includes(
+                    "remarks"
+                ) ||
+                lower.includes(
+                    "details"
+                )
+            );
+
+        }
+
+
+
+        /* =====================================================
+           CLOSE MODAL
+        ===================================================== */
+
+        function closeDetailsModal() {
+
+
+            const modal =
+                document.getElementById(
+                    "detailsModal"
+                );
+
+
+            if (modal) {
+
+                modal.classList.remove(
+                    "show"
+                );
+
+            }
+
+
+            document.body.style.overflow =
+                "";
+
+        }
+
+
+
+        function closeModalOnOverlay(
+            event
+        ) {
+
+
+            if (
+                event.target.id ===
+                "detailsModal"
+            ) {
+
+                closeDetailsModal();
+
+            }
+
+        }
+
+
+
+        document.addEventListener(
+            "keydown",
+            function(event) {
+
+
+                if (
+                    event.key ===
+                    "Escape"
+                ) {
+
+                    closeDetailsModal();
+
+                }
+
+            }
+        );
+
+
+
+        /* =====================================================
+           UPDATE APPLICATION STATUS
+        ===================================================== */
+
+        function updateAppStatus(
+            appId,
+            tab,
+            index
+        ) {
+
+
+            const select =
+                document.getElementById(
+                    `status_${tab}_${index}`
+                );
+
+
+            if (!select) {
+
+                return;
+
+            }
+
+
+            const newStatus =
+                select.value;
+
+
+            let reason =
+                "";
+
+
+
+            if (
+                newStatus ===
+                "Rejected"
+            ) {
+
+
+                reason =
+                    prompt(
+                        "রিজেক্ট করার কারণ লিখুন:",
+                        "Not available"
+                    );
+
+
+                if (
+                    !reason
+                ) {
+
+                    return;
+
+                }
+
+            }
+
+
+
+            fetch(
+                API_URL,
+                {
+
+                    method:
+                        "POST",
+
+                    headers: {
+
+                        "Content-Type":
+                            "text/plain;charset=utf-8"
+
+                    },
+
+                    body:
+                        JSON.stringify({
+
+                            action:
+                                "updateStatus",
+
+                            applicationId:
+                                appId,
+
+                            status:
+                                newStatus,
+
+                            rejectReason:
+                                reason
+
+                        })
+
+                }
+            )
+
+            .then(
+                function(res) {
+
+                    return res.json();
+
+                }
+            )
+
+            .then(
+                function(data) {
+
+
+                    if (
+                        data.status ===
+                        "success"
+                    ) {
+
+
+                        showToast(
+                            "স্ট্যাটাস সফলভাবে আপডেট হয়েছে!",
+                            "success"
+                        );
+
+
+                        loadApplications();
+
+                    }
+
+
+                    else {
+
+
+                        showToast(
+                            data.message ||
+                            "সমস্যা হয়েছে!",
+                            "error"
+                        );
+
+                    }
+
+                }
+            )
+
+            .catch(
+                function(error) {
+
+
+                    console.error(
+                        error
+                    );
+
+
+                    showToast(
+                        "Status update করা যাচ্ছে না।",
+                        "error"
+                    );
+
+                }
+            );
+
+        }
+
+
+
+        /* =====================================================
+           ATTENDANCE TIME CHECK
+        ===================================================== */
+
+        function updateAttendanceTimeState() {
+
+
+            const now =
+                new Date();
+
+
+            const indiaTime =
+                new Intl.DateTimeFormat(
+                    "en-IN",
+                    {
+
+                        timeZone:
+                            "Asia/Kolkata",
+
+                        hour:
+                            "2-digit",
+
+                        minute:
+                            "2-digit",
+
+                        second:
+                            "2-digit",
+
+                        hour12:
+                            false
+
+                    }
+                )
+                .formatToParts(
+                    now
+                );
+
+
+            let hour =
+                0;
+
+            let minute =
+                0;
+
+
+            indiaTime.forEach(
+                function(part) {
+
+
+                    if (
+                        part.type ===
+                        "hour"
+                    ) {
+
+                        hour =
+                            parseInt(
+                                part.value,
+                                10
+                            );
+
+                    }
+
+
+                    if (
+                        part.type ===
+                        "minute"
+                    ) {
+
+                        minute =
+                            parseInt(
+                                part.value,
+                                10
+                            );
+
+                    }
+
+                }
+            );
+
+
+
+            const totalMinutes =
+                (
+                    hour * 60
+                ) +
+                minute;
+
+
+            const limitMinutes =
+                12 * 60;
+
+
+            const isClosed =
+                totalMinutes >=
+                limitMinutes;
+
+
+
+            const notice =
+                document.getElementById(
+                    "attendanceNotice"
+                );
+
+
+            const button =
+                document.getElementById(
+                    "attendanceSubmitBtn"
+                );
+
+
+            if (!notice || !button) {
+
+                return;
+
+            }
+
+
+
+            if (
+                isClosed
+            ) {
+
+
+                notice.className =
+                    "attendance-notice closed";
+
+
+                notice.innerHTML = `
+
+                    <i class="fas fa-lock"></i>
+
+                    আজকের হাজিরা গ্রহণের সময় শেষ হয়েছে।
+
+                    <br>
+
+                    <small>
+
+                        দুপুর ১২:০০টার পর
+                        কোনো স্টাফের হাজিরা
+                        গ্রহণ করা হবে না।
+
+                    </small>
+
+                `;
+
+
+                button.disabled =
+                    true;
+
+
+                button.innerHTML = `
+
+                    <i class="fas fa-lock"></i>
+
+                    হাজিরা গ্রহণ বন্ধ
+
+                `;
+
+            }
+
+
+            else {
+
+
+                notice.className =
+                    "attendance-notice open";
+
+
+                notice.innerHTML = `
+
+                    <i class="fas fa-clock"></i>
+
+                    হাজিরা গ্রহণের সময় চলছে।
+
+                    <br>
+
+                    <small>
+
+                        হাজিরা গ্রহণের শেষ সময়:
+                        দুপুর ১২:০০টা
+
+                    </small>
+
+                `;
+
+
+                button.disabled =
+                    false;
+
+
+                button.innerHTML = `
+
+                    <i class="fas fa-check"></i>
+
+                    হাজিরা সাবমিট করুন
+
+                `;
+
+            }
+
+        }
+
+
+
+        /* =====================================================
+           STATUS CHANGED
+        ===================================================== */
+
+        function onStatusChanged() {
+
+
+            const status =
+                document.getElementById(
+                    "attendanceStatus"
+                ).value;
+
+
+            const reasonGroup =
+                document.getElementById(
+                    "absentReasonGroup"
+                );
+
+
+            const reasonInput =
+                document.getElementById(
+                    "absentReasonInput"
+                );
+
+
+            if (
+                status ===
+                "Absent"
+            ) {
+
+
+                reasonGroup.style.display =
+                    "block";
+
+
+                reasonInput.value =
+                    "Not presented by self";
+
+            }
+
+
+            else {
+
+
+                reasonGroup.style.display =
+                    "none";
+
+
+                reasonInput.value =
+                    "";
+
+            }
+
+        }
+
+
+
+        /* =====================================================
+           LOAD ATTENDANCE
+        ===================================================== */
+
+        function loadAttendanceData() {
+
+
+            fetch(
+                API_URL +
+                "?action=getAttendance"
+            )
+
+            .then(
+                function(res) {
+
+                    return res.json();
+
+                }
+            )
+
+            .then(
+                function(data) {
+
+
+                    if (
+                        data.status ===
+                        "success" &&
+                        data.data
+                    ) {
+
+
+                        allAttendance =
+                            Array.isArray(
+                                data.data
+                            )
+                            ? data.data
+                            : [];
+
+
+                        document.getElementById(
+                            "attCount"
+                        ).textContent =
+                            allAttendance.length;
+
+
+                        const tbody =
+                            document.getElementById(
+                                "attBody"
+                            );
+
+
+                        const table =
+                            document.getElementById(
+                                "attTable"
+                            );
+
+
+                        const noData =
+                            document.getElementById(
+                                "attNoData"
+                            );
+
+
+                        tbody.innerHTML =
+                            "";
+
+
+                        if (
+                            allAttendance.length >
+                            0
+                        ) {
+
+
+                            table.style.display =
+                                "table";
+
+
+                            noData.style.display =
+                                "none";
+
+
+                            allAttendance.forEach(
+                                function(
+                                    item,
+                                    index
+                                ) {
+
+
+                                    const st =
+                                        item[
+                                            "স্ট্যাটাস"
+                                        ] ||
+                                        item[
+                                            "Status"
+                                        ] ||
+                                        "Present";
+
+
+                                    const badge =
+                                        st ===
+                                        "Present"
+                                        ?
+                                        "status-approved"
+                                        :
+                                        "status-rejected";
+
+
+                                    const tr =
+                                        document.createElement(
+                                            "tr"
+                                        );
+
+
+                                    tr.innerHTML = `
+
+                                        <td>
+                                            ${index + 1}
+                                        </td>
+
+                                        <td>
+                                            ${escapeHtml(
+                                                item[
+                                                    "তারিখ"
+                                                ] ||
+                                                item[
+                                                    "Date"
+                                                ] ||
+                                                "N/A"
+                                            )}
+                                        </td>
+
+                                        <td>
+                                            ${escapeHtml(
+                                                item[
+                                                    "সময়"
+                                                ] ||
+                                                item[
+                                                    "Time"
+                                                ] ||
+                                                "N/A"
+                                            )}
+                                        </td>
+
+                                        <td>
+
+                                            <strong>
+
+                                                ${escapeHtml(
+                                                    item[
+                                                        "স্টাফ আইডি"
+                                                    ] ||
+                                                    item[
+                                                        "Staff ID"
+                                                    ] ||
+                                                    "N/A"
+                                                )}
+
+                                            </strong>
+
+                                        </td>
+
+                                        <td>
+                                            ${escapeHtml(
+                                                item[
+                                                    "স্টাফের নাম"
+                                                ] ||
+                                                item[
+                                                    "Staff Name"
+                                                ] ||
+                                                "N/A"
+                                            )}
+                                        </td>
+
+                                        <td>
+                                            ${escapeHtml(
+                                                item[
+                                                    "পদবি (Designation)"
+                                                ] ||
+                                                item[
+                                                    "Designation"
+                                                ] ||
+                                                "N/A"
+                                            )}
+                                        </td>
+
+                                        <td>
+
+                                            <span
+                                                class="status-badge ${badge}"
+                                            >
+
+                                                ${escapeHtml(
+                                                    st
+                                                )}
+
+                                            </span>
+
+                                        </td>
+
+                                        <td>
+                                            ${escapeHtml(
+                                                item[
+                                                    "অনুপস্থিতির কারণ"
+                                                ] ||
+                                                item[
+                                                    "Absent Reason"
+                                                ] ||
+                                                "N/A"
+                                            )}
+                                        </td>
+
+                                    `;
+
+
+                                    tbody.appendChild(
+                                        tr
+                                    );
+
+
+                                }
+                            );
+
+                        }
+
+
+                        else {
+
+
+                            table.style.display =
+                                "none";
+
+
+                            noData.style.display =
+                                "block";
+
+                        }
+
+                    }
+
+                }
+            )
+
+            .catch(
+                function(error) {
+
+
+                    console.error(
+                        error
+                    );
+
+
+                    showToast(
+                        "Attendance data load করা যাচ্ছে না।",
+                        "error"
+                    );
+
+                }
+            );
+
+        }
+
+
+
+        /* =====================================================
+           SUBMIT ATTENDANCE
+        ===================================================== */
+
+        function submitAttendance() {
+
+
+            updateAttendanceTimeState();
+
+
+            const button =
+                document.getElementById(
+                    "attendanceSubmitBtn"
+                );
+
+
+            if (
+                button.disabled
+            ) {
+
+
+                showToast(
+                    "দুপুর ১২:০০টার পর আজকের হাজিরা গ্রহণ করা যাবে না।",
+                    "error"
+                );
+
+
+                return;
+
+            }
+
+
+
+            const staffSelect =
+                document.getElementById(
+                    "staffSelect"
+                );
+
+
+            const staffName =
+                staffSelect.value;
+
+
+            const selectedOption =
+                staffSelect.options[
+                    staffSelect.selectedIndex
+                ];
+
+
+            const staffId =
+                selectedOption
+                ?
+                selectedOption.getAttribute(
+                    "data-id"
+                )
+                :
+                "";
+
+
+            const designation =
+                selectedOption
+                ?
+                selectedOption.getAttribute(
+                    "data-desig"
+                )
+                :
+                "STAFF";
+
+
+            const status =
+                document.getElementById(
+                    "attendanceStatus"
+                ).value;
+
+
+            const reason =
+                document.getElementById(
+                    "absentReasonInput"
+                ).value.trim()
+                ||
+                "Not presented by self";
+
+
+
+            if (
+                !staffName
+            ) {
+
+
+                showToast(
+                    "দয়া করে প্রথমে স্টাফ নির্বাচন করুন।",
+                    "error"
+                );
+
+
+                return;
+
+            }
+
+
+
+            button.disabled =
+                true;
+
+
+            button.innerHTML = `
+
+                <i class="fas fa-spinner fa-spin"></i>
+
+                সংরক্ষণ হচ্ছে...
+
+            `;
+
+
+
+            fetch(
+                API_URL,
+                {
+
+                    method:
+                        "POST",
+
+                    headers: {
+
+                        "Content-Type":
+                            "text/plain;charset=utf-8"
+
+                    },
+
+                    body:
+                        JSON.stringify({
+
+                            action:
+                                "saveAttendance",
+
+                            staffId:
+                                staffId,
+
+                            staffName:
+                                staffName,
+
+                            designation:
+                                designation,
+
+                            status:
+                                status,
+
+                            reason:
+                                reason
+
+                        })
+
+                }
+            )
+
+            .then(
+                function(res) {
+
+                    return res.json();
+
+                }
+            )
+
+            .then(
+                function(data) {
+
+
+                    if (
+                        data.status ===
+                        "success"
+                    ) {
+
+
+                        showToast(
+                            data.message ||
+                            "হাজিরা সফলভাবে সংরক্ষিত হয়েছে।",
+                            "success"
+                        );
+
+
+                        document.getElementById(
+                            "staffSelect"
+                        ).value =
+                            "";
+
+
+                        document.getElementById(
+                            "attendanceStatus"
+                        ).value =
+                            "Present";
+
+
+                        onStatusChanged();
+
+
+                        loadAttendanceData();
+
+
+                    }
+
+
+                    else {
+
+
+                        showToast(
+                            data.message ||
+                            "হাজিরা সংরক্ষণ করা যায়নি।",
+                            "error"
+                        );
+
+                    }
+
+                }
+            )
+
+            .catch(
+                function(error) {
+
+
+                    console.error(
+                        error
+                    );
+
+
+                    showToast(
+                        "Attendance save করা যাচ্ছে না।",
+                        "error"
+                    );
+
+                }
+            )
+
+            .finally(
+                function() {
+
+
+                    updateAttendanceTimeState();
+
+
+                }
+            );
+
+        }
+
+
+
+        /* =====================================================
+           MONTHLY REPORT
+        ===================================================== */
+
+        function generateMonthlyReport() {
+
+
+            const month =
+                parseInt(
+                    document.getElementById(
+                        "reportMonth"
+                    ).value
+                );
+
+
+            const year =
+                parseInt(
+                    document.getElementById(
+                        "reportYear"
+                    ).value
+                );
+
+
+            const daysInMonth =
+                new Date(
+                    year,
+                    month + 1,
+                    0
+                ).getDate();
+
+
+
+            const headerRow =
+                document.getElementById(
+                    "reportHeaderRow"
+                );
+
+
+            let headerHtml =
+                "<th>স্টাফ আইডি / নাম</th>";
+
+
+            for (
+                let d = 1;
+                d <= daysInMonth;
+                d++
+            ) {
+
+
+                headerHtml += `
+
+                    <th
+                        style="
+                            text-align:center;
+                            font-size:12px;
+                        "
+                    >
+
+                        ${d}
+
+                    </th>
+
+                `;
+
+            }
+
+
+            headerRow.innerHTML =
+                headerHtml;
+
+
+
+            const staffList = [
+
+                {
+                    id:
+                        "PSKUS/001",
+
+                    name:
+                        "PATIT PABAN ROY"
+
+                },
+
+                {
+                    id:
+                        "PSKUS/002",
+
+                    name:
+                        "RAJU MONDAL"
+
+                },
+
+                {
+                    id:
+                        "PSKUS/003",
+
+                    name:
+                        "PINKI DAS"
+
+                },
+
+                {
+                    id:
+                        "PSKUS/004",
+
+                    name:
+                        "NILIMA BISWAS"
+
+                },
+
+                {
+                    id:
+                        "PSKUS/005",
+
+                    name:
+                        "STAFF NAME 5"
+
+                }
+
+            ];
+
+
+
+            const tbody =
+                document.getElementById(
+                    "reportBodies"
+                );
+
+
+            tbody.innerHTML =
+                "";
+
+
+
+            staffList.forEach(
+                function(staff) {
+
+
+                    const tr =
+                        document.createElement(
+                            "tr"
+                        );
+
+
+                    let rowHtml = `
+
+                        <td>
+
+                            <strong>
+                                ${escapeHtml(
+                                    staff.id
+                                )}
+                            </strong>
+
+                            <br>
+
+                            <span
+                                style="
+                                    font-size:11px;
+                                    color:#666;
+                                "
+                            >
+
+                                ${escapeHtml(
+                                    staff.name
+                                )}
+
+                            </span>
+
+                        </td>
+
+                    `;
+
+
+
+                    for (
+                        let d = 1;
+                        d <= daysInMonth;
+                        d++
+                    ) {
+
+
+                        const dateObj =
+                            new Date(
+                                year,
+                                month,
+                                d
+                            );
+
+
+                        const dayOfWeek =
+                            dateObj.getDay();
+
+
+                        let isHoliday =
+                            false;
+
+
+
+                        if (
+                            dayOfWeek ===
+                            0
+                        ) {
+
+                            isHoliday =
+                                true;
+
+                        }
+
+
+                        else if (
+                            dayOfWeek ===
+                            6
+                        ) {
+
+
+                            const saturdayCount =
+                                Math.floor(
+                                    (d - 1) /
+                                    7
+                                ) + 1;
+
+
+                            if (
+                                saturdayCount ===
+                                    2 ||
+                                saturdayCount ===
+                                    4
+                            ) {
+
+                                isHoliday =
+                                    true;
+
+                            }
+
+                        }
+
+
+
+                        const formattedDate =
+
+                            String(d)
+                                .padStart(
+                                    2,
+                                    "0"
+                                ) +
+
+                            "/" +
+
+                            String(
+                                month + 1
+                            )
+                                .padStart(
+                                    2,
+                                    "0"
+                                ) +
+
+                            "/" +
+
+                            year;
+
+
+
+                        const attRecord =
+                            allAttendance.find(
+                                function(a) {
+
+
+                                    const rDate =
+                                        a[
+                                            "তারিখ"
+                                        ] ||
+                                        a[
+                                            "Date"
+                                        ] ||
+                                        "";
+
+
+                                    const rId =
+                                        a[
+                                            "স্টাফ আইডি"
+                                        ] ||
+                                        a[
+                                            "Staff ID"
+                                        ] ||
+                                        "";
+
+
+                                    return (
+                                        String(
+                                            rDate
+                                        ) ===
+                                        formattedDate &&
+
+                                        String(
+                                            rId
+                                        ) ===
+                                        staff.id
+                                    );
+
+                                }
+                            );
+
+
+
+                        let cellBg =
+                            "#ffffff";
+
+
+                        let cellText =
+                            "-";
+
+
+
+                        if (
+                            isHoliday
+                        ) {
+
+
+                            cellBg =
+                                "#e2e8f0";
+
+
+                            cellText =
+                                "H";
+
+                        }
+
+
+                        else if (
+                            attRecord
+                        ) {
+
+
+                            const st =
+                                attRecord[
+                                    "স্ট্যাটাস"
+                                ] ||
+                                attRecord[
+                                    "Status"
+                                ];
+
+
+                            if (
+                                st ===
+                                "Present"
+                            ) {
+
+
+                                cellBg =
+                                    "#86efac";
+
+
+                                cellText =
+                                    "P";
+
+                            }
+
+
+                            else {
+
+
+                                cellBg =
+                                    "#fca5a5";
+
+
+                                cellText =
+                                    "A";
+
+                            }
+
+                        }
+
+
+
+                        rowHtml += `
+
+                            <td
+
+                                style="
+                                    background-color:${cellBg};
+                                    text-align:center;
+                                    font-weight:bold;
+                                    font-size:12px;
+                                "
+
+                                title="${formattedDate}"
+                            >
+
+                                ${cellText}
+
+                            </td>
+
+                        `;
+
+                    }
+
+
+
+                    tr.innerHTML =
+                        rowHtml;
+
+
+                    tbody.appendChild(
+                        tr
+                    );
+
+
+                }
+            );
+
+        }
+
+
+
+        /* =====================================================
+           TOAST
+        ===================================================== */
+
+        function showToast(
+            message,
+            type = "success"
+        ) {
+
+
+            const container =
+                document.getElementById(
+                    "toastContainer"
+                );
+
+
+            const toast =
+                document.createElement(
+                    "div"
+                );
+
+
+            toast.className =
+                "toast " +
+                type;
+
+
+            toast.innerText =
+                message;
+
+
+            container.appendChild(
+                toast
+            );
+
+
+            setTimeout(
+                function() {
+
+                    toast.remove();
+
+                },
+                4000
+            );
+
+        }
+
+
+
+        /* =====================================================
+           ESCAPE HTML
+        ===================================================== */
+
+        function escapeHtml(
+            value
+        ) {
+
+
+            if (
+                value ===
+                    null ||
+                value ===
+                    undefined
+            ) {
+
+                return "";
+
+            }
+
+
+            return String(
+                value
+            )
+
+            .replace(
+                /&/g,
+                "&amp;"
+            )
+
+            .replace(
+                /</g,
+                "&lt;"
+            )
+
+            .replace(
+                />/g,
+                "&gt;"
+            )
+
+            .replace(
+                /"/g,
+                "&quot;"
+            )
+
+            .replace(
+                /'/g,
+                "&#039;"
+            );
+
+        }
+
+
+
+        /* =====================================================
+           ESCAPE JS
+        ===================================================== */
+
+        function escapeJs(
+            value
+        ) {
+
+
+            return String(
+                value ||
+                ""
+            )
+
+            .replace(
+                /\\/g,
+                "\\\\"
+            )
+
+            .replace(
+                /'/g,
+                "\\'"
+            )
+
+            .replace(
+                /\r/g,
+                "\\r"
+            )
+
+            .replace(
+                /\n/g,
+                "\\n"
+            );
+
+        }
+
+
+
+        /* =====================================================
+           LOGOUT
+        ===================================================== */
 
         function adminLogout() {
-            localStorage.removeItem('adminLoggedIn');
-            window.location.href = 'index.html';
+
+
+            localStorage.removeItem(
+                "adminLoggedIn"
+            );
+
+
+            window.location.href =
+                "index.html";
+
         }
+
+
     </script>
+
+
 </body>
+
 </html>
