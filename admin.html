@@ -853,9 +853,9 @@ function generateMonthlyReport(){
   $('reportHeaderRow').innerHTML=
     '<th>স্টাফ ID / নাম</th>'+
     Array.from({length:days},(_,i)=>`<th>${i+1}</th>`).join('')+
-    '<th class="report-total-head">PRESENT</th><th class="report-total-head">ABSENT</th>'+
+    '<th class="report-total-head">TOTAL PRESENT</th><th class="report-total-head">TOTAL ABSENT</th>'+
     `<th class="report-total-head">MANTHLY HOLIDEY(${holidayCount})</th>`+
-    '<th class="report-total-head">TOTAL WARKING DAY(TOTAL DAY OF MANTH-HOLIDEY)</th>';
+    '<th class="report-total-head">TOTAL WARKING DAY</th>';
 
   const staff=[
     ['PSKUS/001','PATIT PABAN ROY'],['PSKUS/002','RAJU MONDAL'],['PSKUS/003','PINKI DAS'],
