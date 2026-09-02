@@ -1,6173 +1,1083 @@
 <!DOCTYPE html>
 <html lang="bn">
-
 <head>
-
-    <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-
-    <title>
-        অ্যাডমিন প্যানেল - প্রতাপপুর সমবায় কৃষি উন্নয়ন সমিতি
-    </title>
-
-
-    <link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-    >
-
-
-    <style>
-
-        /* =====================================================
-           ROOT
-        ===================================================== */
-
-        :root {
-
-            --primary: #075e3b;
-
-            --primary-dark: #06482e;
-
-            --gold: #d49b00;
-
-            --bg-light: #f0f4f8;
-
-            --shadow:
-                0 8px 30px rgba(0, 0, 0, 0.10);
-
-            --radius: 14px;
-
-            --danger: #dc3545;
-
-            --success: #28a745;
-
-            --warning: #ffc107;
-
-            --info: #0d6efd;
-
-            --text-muted: #6b7280;
-
-        }
-
-
-
-        /* =====================================================
-           BASIC
-        ===================================================== */
-
-        * {
-
-            margin: 0;
-
-            padding: 0;
-
-            box-sizing: border-box;
-
-        }
-
-
-        body {
-
-            font-family:
-                'Segoe UI',
-                Arial,
-                sans-serif;
-
-            background:
-                var(--bg-light);
-
-            color:
-                #1f2937;
-
-            min-height:
-                100vh;
-
-            padding:
-                20px;
-
-        }
-
-
-
-        /* =====================================================
-           NAVIGATION
-        ===================================================== */
-
-        .admin-nav {
-
-            background:
-                var(--primary);
-
-            color:
-                white;
-
-            padding:
-                12px 6%;
-
-            display:
-                flex;
-
-            justify-content:
-                space-between;
-
-            align-items:
-                center;
-
-            border-radius:
-                var(--radius)
-                var(--radius)
-                0
-                0;
-
-            flex-wrap:
-                wrap;
-
-            gap:
-                10px;
-
-        }
-
-
-        .admin-nav .brand {
-
-            font-size:
-                18px;
-
-            font-weight:
-                bold;
-
-            display:
-                flex;
-
-            align-items:
-                center;
-
-            gap:
-                10px;
-
-        }
-
-
-        .admin-nav a {
-
-            color:
-                white;
-
-            text-decoration:
-                none;
-
-            font-size:
-                14px;
-
-            padding:
-                6px 14px;
-
-            border-radius:
-                6px;
-
-            background:
-                rgba(255,255,255,0.10);
-
-        }
-
-
-        .admin-nav .logout-btn {
-
-            background:
-                var(--danger);
-
-            color:
-                white;
-
-            border:
-                none;
-
-            padding:
-                6px 16px;
-
-            border-radius:
-                6px;
-
-            cursor:
-                pointer;
-
-            font-weight:
-                bold;
-
-        }
-
-
-
-        /* =====================================================
-           MAIN CONTAINER
-        ===================================================== */
-
-        .admin-container {
-
-            max-width:
-                1400px;
-
-            margin:
-                0 auto;
-
-            background:
-                white;
-
-            padding:
-                30px 35px;
-
-            border-radius:
-                0 0
-                var(--radius)
-                var(--radius);
-
-            box-shadow:
-                var(--shadow);
-
-        }
-
-
-
-        /* =====================================================
-           HEADER
-        ===================================================== */
-
-        .admin-header {
-
-            display:
-                flex;
-
-            justify-content:
-                space-between;
-
-            align-items:
-                center;
-
-            border-bottom:
-                3px solid
-                var(--gold);
-
-            padding-bottom:
-                15px;
-
-            margin-bottom:
-                20px;
-
-            flex-wrap:
-                wrap;
-
-            gap:
-                10px;
-
-        }
-
-
-        .admin-header h1 {
-
-            color:
-                var(--primary);
-
-            font-size:
-                26px;
-
-        }
-
-
-
-        /* =====================================================
-           SUMMARY CARDS
-        ===================================================== */
-
-        .summary-grid {
-
-            display:
-                grid;
-
-            grid-template-columns:
-                repeat(4, 1fr);
-
-            gap:
-                15px;
-
-            margin-bottom:
-                25px;
-
-        }
-
-
-        .summary-card {
-
-            border-radius:
-                12px;
-
-            padding:
-                18px;
-
-            box-shadow:
-                0 4px 15px
-                rgba(0,0,0,0.07);
-
-            background:
-                #ffffff;
-
-            border:
-                1px solid #e5e7eb;
-
-            display:
-                flex;
-
-            justify-content:
-                space-between;
-
-            align-items:
-                center;
-
-        }
-
-
-        .summary-card .summary-icon {
-
-            width:
-                48px;
-
-            height:
-                48px;
-
-            border-radius:
-                50%;
-
-            display:
-                flex;
-
-            align-items:
-                center;
-
-            justify-content:
-                center;
-
-            font-size:
-                20px;
-
-        }
-
-
-        .summary-card.total
-        .summary-icon {
-
-            background:
-                #fff3cd;
-
-            color:
-                #856404;
-
-        }
-
-
-        .summary-card.pending
-        .summary-icon {
-
-            background:
-                #fff3cd;
-
-            color:
-                #856404;
-
-        }
-
-
-        .summary-card.approved
-        .summary-icon {
-
-            background:
-                #d4edda;
-
-            color:
-                #155724;
-
-        }
-
-
-        .summary-card.rejected
-        .summary-icon {
-
-            background:
-                #f8d7da;
-
-            color:
-                #721c24;
-
-        }
-
-
-        .summary-card h3 {
-
-            font-size:
-                13px;
-
-            color:
-                var(--text-muted);
-
-            margin-bottom:
-                5px;
-
-        }
-
-
-        .summary-card .summary-number {
-
-            font-size:
-                25px;
-
-            font-weight:
-                800;
-
-            color:
-                var(--primary);
-
-        }
-
-
-
-        /* =====================================================
-           TABS
-        ===================================================== */
-
-        .tab-container {
-
-            display:
-                flex;
-
-            gap:
-                5px;
-
-            margin-bottom:
-                25px;
-
-            border-bottom:
-                2px solid #e5e7eb;
-
-            flex-wrap:
-                wrap;
-
-        }
-
-
-        .tab-btn {
-
-            padding:
-                10px 20px;
-
-            border:
-                none;
-
-            background:
-                transparent;
-
-            font-size:
-                15px;
-
-            font-weight:
-                600;
-
-            color:
-                var(--text-muted);
-
-            cursor:
-                pointer;
-
-            border-bottom:
-                3px solid
-                transparent;
-
-            border-radius:
-                8px 8px 0 0;
-
-        }
-
-
-        .tab-btn.active {
-
-            color:
-                var(--primary);
-
-            border-bottom-color:
-                var(--gold);
-
-            background:
-                #f8f9fa;
-
-        }
-
-
-        .tab-btn .badge {
-
-            display:
-                inline-block;
-
-            background:
-                #e5e7eb;
-
-            color:
-                var(--text-muted);
-
-            padding:
-                2px 10px;
-
-            border-radius:
-                20px;
-
-            font-size:
-                12px;
-
-            margin-left:
-                6px;
-
-        }
-
-
-        .tab-btn.active .badge {
-
-            background:
-                var(--gold);
-
-            color:
-                white;
-
-        }
-
-
-        .tab-content {
-
-            display:
-                none;
-
-        }
-
-
-        .tab-content.active {
-
-            display:
-                block;
-
-        }
-
-
-
-        /* =====================================================
-           SEARCH AREA
-        ===================================================== */
-
-        .search-area {
-
-            display:
-                flex;
-
-            gap:
-                12px;
-
-            flex-wrap:
-                wrap;
-
-            margin-bottom:
-                20px;
-
-            background:
-                #f8f9fa;
-
-            padding:
-                15px 20px;
-
-            border-radius:
-                10px;
-
-            align-items:
-                center;
-
-        }
-
-
-        .search-area input,
-        .search-area select {
-
-            padding:
-                10px 14px;
-
-            border:
-                2px solid #e0e0e0;
-
-            border-radius:
-                8px;
-
-            font-size:
-                14px;
-
-            flex:
-                1;
-
-            min-width:
-                190px;
-
-            background:
-                white;
-
-        }
-
-
-        .main-action-btn {
-
-            background:
-                var(--primary);
-
-            color:
-                white;
-
-            border:
-                none;
-
-            padding:
-                10px 20px;
-
-            border-radius:
-                8px;
-
-            font-weight:
-                bold;
-
-            cursor:
-                pointer;
-
-        }
-
-
-        .main-action-btn:hover {
-
-            opacity:
-                0.9;
-
-        }
-
-
-
-        /* =====================================================
-           TABLE
-        ===================================================== */
-
-        .table-wrapper {
-
-            overflow-x:
-                auto;
-
-            border-radius:
-                10px;
-
-            border:
-                1px solid #e5e7eb;
-
-            margin-top:
-                15px;
-
-        }
-
-
-        table {
-
-            width:
-                100%;
-
-            border-collapse:
-                collapse;
-
-            font-size:
-                14px;
-
-        }
-
-
-        thead {
-
-            background:
-                var(--primary);
-
-            color:
-                white;
-
-        }
-
-
-        th,
-        td {
-
-            padding:
-                12px 15px;
-
-            text-align:
-                left;
-
-            white-space:
-                nowrap;
-
-            border-bottom:
-                1px solid #e5e7eb;
-
-        }
-
-
-        tr:hover {
-
-            background:
-                #f8f9fa;
-
-        }
-
-
-
-        /* =====================================================
-           STATUS
-        ===================================================== */
-
-        .status-badge {
-
-            padding:
-                4px 12px;
-
-            border-radius:
-                20px;
-
-            font-size:
-                12px;
-
-            font-weight:
-                bold;
-
-            text-transform:
-                uppercase;
-
-            display:
-                inline-block;
-
-        }
-
-
-        .status-pending {
-
-            background:
-                #fff3cd;
-
-            color:
-                #856404;
-
-        }
-
-
-        .status-approved {
-
-            background:
-                #d4edda;
-
-            color:
-                #155724;
-
-        }
-
-
-        .status-rejected {
-
-            background:
-                #f8d7da;
-
-            color:
-                #721c24;
-
-        }
-
-
-
-        /* =====================================================
-           VIEW DETAILS BUTTON
-        ===================================================== */
-
-        .view-btn {
-
-            background:
-                var(--info);
-
-            color:
-                white;
-
-            border:
-                none;
-
-            padding:
-                6px 11px;
-
-            border-radius:
-                6px;
-
-            cursor:
-                pointer;
-
-            font-size:
-                12px;
-
-            font-weight:
-                bold;
-
-            white-space:
-                nowrap;
-
-        }
-
-
-        .view-btn:hover {
-
-            opacity:
-                0.9;
-
-        }
-
-
-
-        /* =====================================================
-           UPDATE BUTTON
-        ===================================================== */
-
-        .update-btn {
-
-            background:
-                var(--primary);
-
-            color:
-                white;
-
-            border:
-                none;
-
-            padding:
-                6px 9px;
-
-            border-radius:
-                5px;
-
-            cursor:
-                pointer;
-
-            font-weight:
-                bold;
-
-        }
-
-
-        .status-select {
-
-            padding:
-                5px;
-
-            border:
-                1px solid #ccc;
-
-            border-radius:
-                5px;
-
-            margin-right:
-                4px;
-
-        }
-
-
-
-        /* =====================================================
-           ATTENDANCE
-        ===================================================== */
-
-        .attendance-box {
-
-            background:
-                #f8f9fa;
-
-            border:
-                2px dashed
-                var(--primary);
-
-            padding:
-                25px;
-
-            border-radius:
-                12px;
-
-            max-width:
-                650px;
-
-            margin:
-                0 auto 20px auto;
-
-        }
-
-
-        .attendance-notice {
-
-            padding:
-                12px 15px;
-
-            border-radius:
-                8px;
-
-            margin-bottom:
-                18px;
-
-            text-align:
-                center;
-
-            font-weight:
-                bold;
-
-            font-size:
-                14px;
-
-        }
-
-
-        .attendance-notice.open {
-
-            background:
-                #d4edda;
-
-            color:
-                #155724;
-
-            border:
-                1px solid #b7dfc0;
-
-        }
-
-
-        .attendance-notice.closed {
-
-            background:
-                #f8d7da;
-
-            color:
-                #721c24;
-
-            border:
-                1px solid #f1b0b7;
-
-        }
-
-
-        .attendance-form-group {
-
-            margin-bottom:
-                15px;
-
-        }
-
-
-        .attendance-form-group label {
-
-            display:
-                block;
-
-            font-weight:
-                bold;
-
-            margin-bottom:
-                6px;
-
-            color:
-                var(--primary);
-
-        }
-
-
-        .attendance-form-group select,
-        .attendance-form-group input {
-
-            width:
-                100%;
-
-            padding:
-                12px;
-
-            border:
-                2px solid #ddd;
-
-            border-radius:
-                8px;
-
-            font-size:
-                15px;
-
-            background:
-                white;
-
-        }
-
-
-        .att-btn {
-
-            width:
-                100%;
-
-            padding:
-                12px;
-
-            background:
-                var(--success);
-
-            color:
-                white;
-
-            border:
-                none;
-
-            border-radius:
-                8px;
-
-            font-size:
-                16px;
-
-            font-weight:
-                bold;
-
-            cursor:
-                pointer;
-
-        }
-
-
-        .att-btn:hover {
-
-            opacity:
-                0.9;
-
-        }
-
-
-        .att-btn:disabled {
-
-            background:
-                #9ca3af;
-
-            cursor:
-                not-allowed;
-
-            opacity:
-                0.8;
-
-        }
-
-
-
-        /* =====================================================
-           LOADING / NO DATA
-        ===================================================== */
-
-        .loading-overlay,
-        .no-data {
-
-            text-align:
-                center;
-
-            padding:
-                40px;
-
-            color:
-                var(--text-muted);
-
-        }
-
-
-
-        /* =====================================================
-           TOAST
-        ===================================================== */
-
-        .toast-container {
-
-            position:
-                fixed;
-
-            top:
-                30px;
-
-            right:
-                30px;
-
-            z-index:
-                9999;
-
-            display:
-                flex;
-
-            flex-direction:
-                column;
-
-            gap:
-                10px;
-
-        }
-
-
-        .toast {
-
-            padding:
-                14px 18px;
-
-            border-radius:
-                10px;
-
-            color:
-                white;
-
-            font-weight:
-                600;
-
-            font-size:
-                14px;
-
-            box-shadow:
-                0 5px 15px
-                rgba(0,0,0,0.2);
-
-            max-width:
-                360px;
-
-        }
-
-
-        .toast.success {
-
-            background:
-                var(--success);
-
-        }
-
-
-        .toast.error {
-
-            background:
-                var(--danger);
-
-        }
-
-
-
-        /* =====================================================
-           MODAL
-        ===================================================== */
-
-        .modal-overlay {
-
-            position:
-                fixed;
-
-            inset:
-                0;
-
-            background:
-                rgba(0,0,0,0.55);
-
-            display:
-                none;
-
-            align-items:
-                center;
-
-            justify-content:
-                center;
-
-            padding:
-                20px;
-
-            z-index:
-                10000;
-
-        }
-
-
-        .modal-overlay.show {
-
-            display:
-                flex;
-
-        }
-
-
-        .details-modal {
-
-            background:
-                white;
-
-            width:
-                100%;
-
-            max-width:
-                950px;
-
-            max-height:
-                90vh;
-
-            overflow-y:
-                auto;
-
-            border-radius:
-                15px;
-
-            box-shadow:
-                0 20px 60px
-                rgba(0,0,0,0.30);
-
-            position:
-                relative;
-
-        }
-
-
-        .modal-header {
-
-            background:
-                var(--primary);
-
-            color:
-                white;
-
-            padding:
-                18px 22px;
-
-            display:
-                flex;
-
-            justify-content:
-                space-between;
-
-            align-items:
-                center;
-
-            position:
-                sticky;
-
-            top:
-                0;
-
-            z-index:
-                2;
-
-        }
-
-
-        .modal-header h2 {
-
-            font-size:
-                20px;
-
-        }
-
-
-        .modal-close {
-
-            background:
-                transparent;
-
-            color:
-                white;
-
-            border:
-                none;
-
-            font-size:
-                24px;
-
-            cursor:
-                pointer;
-
-            width:
-                38px;
-
-            height:
-                38px;
-
-            border-radius:
-                50%;
-
-        }
-
-
-        .modal-close:hover {
-
-            background:
-                rgba(255,255,255,0.15);
-
-        }
-
-
-        .modal-body {
-
-            padding:
-                25px;
-
-        }
-
-
-        .detail-top {
-
-            display:
-                flex;
-
-            justify-content:
-                space-between;
-
-            align-items:
-                center;
-
-            background:
-                #f8f9fa;
-
-            padding:
-                15px;
-
-            border-radius:
-                10px;
-
-            margin-bottom:
-                20px;
-
-            flex-wrap:
-                wrap;
-
-            gap:
-                10px;
-
-        }
-
-
-        .detail-id {
-
-            font-weight:
-                800;
-
-            color:
-                var(--primary);
-
-            font-size:
-                17px;
-
-        }
-
-
-        .details-grid {
-
-            display:
-                grid;
-
-            grid-template-columns:
-                repeat(2, 1fr);
-
-            gap:
-                12px;
-
-        }
-
-
-        .detail-item {
-
-            border:
-                1px solid #e5e7eb;
-
-            border-radius:
-                8px;
-
-            padding:
-                12px;
-
-            background:
-                white;
-
-        }
-
-
-        .detail-item.full {
-
-            grid-column:
-                1 / -1;
-
-        }
-
-
-        .detail-label {
-
-            display:
-                block;
-
-            font-size:
-                12px;
-
-            font-weight:
-                bold;
-
-            color:
-                var(--text-muted);
-
-            margin-bottom:
-                5px;
-
-        }
-
-
-        .detail-value {
-
-            display:
-                block;
-
-            font-size:
-                14px;
-
-            color:
-                #111827;
-
-            word-break:
-                break-word;
-
-            white-space:
-                pre-wrap;
-
-        }
-
-
-        .modal-footer {
-
-            padding:
-                15px 25px;
-
-            border-top:
-                1px solid #e5e7eb;
-
-            text-align:
-                right;
-
-        }
-
-
-        .modal-footer button {
-
-            background:
-                var(--primary);
-
-            color:
-                white;
-
-            border:
-                none;
-
-            padding:
-                9px 20px;
-
-            border-radius:
-                7px;
-
-            cursor:
-                pointer;
-
-            font-weight:
-                bold;
-
-        }
-
-
-
-        /* =====================================================
-           REPORT
-        ===================================================== */
-
-        #reportTable th,
-        #reportTable td {
-
-            text-align:
-                center;
-
-        }
-
-
-        #reportTable th:first-child,
-        #reportTable td:first-child {
-
-            text-align:
-                left;
-
-            position:
-                sticky;
-
-            left:
-                0;
-
-            background:
-                white;
-
-            z-index:
-                1;
-
-        }
-
-
-        #reportTable thead th:first-child {
-
-            background:
-                var(--primary);
-
-        }
-
-
-
-        /* =====================================================
-           RESPONSIVE
-        ===================================================== */
-
-        @media(max-width: 900px) {
-
-            .summary-grid {
-
-                grid-template-columns:
-                    repeat(2, 1fr);
-
-            }
-
-        }
-
-
-        @media(max-width: 768px) {
-
-            body {
-
-                padding:
-                    8px;
-
-            }
-
-
-            .admin-container {
-
-                padding:
-                    20px 15px;
-
-            }
-
-
-            .admin-header h1 {
-
-                font-size:
-                    20px;
-
-            }
-
-
-            .tab-btn {
-
-                padding:
-                    8px 12px;
-
-                font-size:
-                    13px;
-
-            }
-
-
-            th,
-            td {
-
-                padding:
-                    9px 10px;
-
-            }
-
-
-            .summary-grid {
-
-                grid-template-columns:
-                    1fr;
-
-            }
-
-
-            .details-grid {
-
-                grid-template-columns:
-                    1fr;
-
-            }
-
-
-            .detail-item.full {
-
-                grid-column:
-                    auto;
-
-            }
-
-
-            .toast-container {
-
-                right:
-                    10px;
-
-                left:
-                    10px;
-
-            }
-
-
-            .toast {
-
-                max-width:
-                    none;
-
-            }
-
-        }
-
-    </style>
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Panel - PRATAPPUR SKUS LTD.</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+:root{
+  --green:#075e3b;--green2:#06482e;--gold:#d49b00;
+  --bg:#eef3f0;--white:#fff;--text:#1f2937;
+  --muted:#6b7280;--danger:#dc3545;--success:#198754;
+  --warning:#d39e00;--info:#0d6efd;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"Segoe UI",Arial,sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+button,input,select{font:inherit}
+button{cursor:pointer}
+.hidden{display:none!important}
+
+/* LOGIN */
+#loginPage{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
+.login-card{width:min(430px,100%);background:#fff;border-radius:18px;box-shadow:0 15px 45px #0002;overflow:hidden}
+.login-head{background:linear-gradient(135deg,var(--green2),var(--green));color:#fff;text-align:center;padding:30px 22px}
+.login-logo{width:72px;height:72px;border-radius:50%;background:#fff;color:var(--gold);display:flex;align-items:center;justify-content:center;font-size:34px;margin:0 auto 12px;border:4px solid #e6c35a}
+.login-head h1{font-size:22px}.login-head p{font-size:13px;margin-top:6px}
+.login-body{padding:25px}
+.login-step{display:none}.login-step.active{display:block}
+.field{margin-bottom:15px}.field label{display:block;font-weight:700;color:var(--green);margin-bottom:6px}
+.field input,.field select{width:100%;padding:12px 13px;border:1px solid #ccd5d0;border-radius:9px;outline:none;background:#fff}
+.field input:focus,.field select:focus{border-color:var(--green);box-shadow:0 0 0 3px #075e3b18}
+.primary-btn{width:100%;border:0;border-radius:9px;background:var(--green);color:#fff;padding:12px;font-weight:700}
+.primary-btn:hover{background:var(--green2)}
+.otp-note{background:#edf7ef;border-left:4px solid var(--green);padding:11px;margin-bottom:15px;font-size:13px}
+.back-link{border:0;background:none;color:var(--green);font-weight:700;margin-top:12px}
+.login-error{color:var(--danger);font-size:13px;margin:10px 0;min-height:18px}
+.timer{text-align:center;color:var(--muted);font-size:13px;margin-top:10px}
+
+/* DASHBOARD */
+#dashboard{min-height:100vh}
+.topbar{background:var(--green);color:#fff;padding:13px 4%;display:flex;align-items:center;justify-content:space-between;gap:15px;flex-wrap:wrap}
+.brand{font-weight:800;font-size:18px}.brand small{display:block;font-size:11px;font-weight:400;margin-top:2px}
+.top-actions{display:flex;align-items:center;gap:9px}
+.top-actions button{border:0;border-radius:7px;padding:8px 13px;color:#fff;background:#ffffff18}
+.top-actions .logout{background:var(--danger)}
+.container{max-width:1450px;margin:auto;padding:24px}
+.header{display:flex;justify-content:space-between;align-items:center;border-bottom:3px solid var(--gold);padding-bottom:14px;margin-bottom:20px;gap:15px}
+.header h2{color:var(--green);font-size:25px}.header span{color:var(--muted);font-size:13px}
+.summary{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:22px}
+.card{background:#fff;border:1px solid #e0e6e2;border-radius:12px;padding:17px;box-shadow:0 4px 15px #0000000b}
+.summary .card{display:flex;justify-content:space-between;align-items:center}
+.card h3{font-size:13px;color:var(--muted);margin-bottom:4px}.number{font-size:27px;font-weight:800;color:var(--green)}
+.icon{width:45px;height:45px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:#eef7ef;color:var(--green)}
+.tabs{display:flex;gap:5px;flex-wrap:wrap;border-bottom:2px solid #dfe5e1;margin-bottom:18px}
+.tab{border:0;background:transparent;padding:10px 16px;color:var(--muted);font-weight:700;border-bottom:3px solid transparent;border-radius:8px 8px 0 0}
+.tab.active{color:var(--green);border-bottom-color:var(--gold);background:#fff}
+.tab-content{display:none}.tab-content.active{display:block}
+.toolbar{display:flex;gap:10px;flex-wrap:wrap;background:#fff;padding:14px;border-radius:11px;margin-bottom:14px}
+.toolbar input,.toolbar select{padding:10px;border:1px solid #d4dcd7;border-radius:8px;min-width:180px}
+.action{border:0;background:var(--green);color:#fff;padding:10px 15px;border-radius:8px;font-weight:700}
+.table-wrap{background:#fff;border:1px solid #dfe5e1;border-radius:10px;overflow:auto}
+table{width:100%;border-collapse:collapse;min-width:900px;font-size:13px}
+th{background:var(--green);color:#fff;text-align:left;padding:11px;white-space:nowrap}
+td{padding:10px 11px;border-bottom:1px solid #e7ece9;white-space:nowrap}
+tr:hover td{background:#f7faf8}
+.badge{display:inline-block;border-radius:20px;padding:4px 10px;font-weight:700;font-size:11px}
+.pending{background:#fff3cd;color:#856404}.approved{background:#d4edda;color:#155724}.rejected{background:#f8d7da;color:#721c24}
+.small-btn{border:0;color:#fff;background:var(--info);padding:6px 9px;border-radius:6px;font-size:11px}
+.status-select{padding:6px;border:1px solid #ccd5d0;border-radius:6px}
+.no-data{text-align:center;padding:30px;color:var(--muted);background:#fff}
+.loading{text-align:center;padding:30px;background:#fff;color:var(--green)}
+.att-box{max-width:680px;margin:0 auto 20px;background:#fff;border:2px dashed var(--green);border-radius:12px;padding:22px}
+.att-box h3{text-align:center;color:var(--green);margin-bottom:15px}
+.notice{padding:10px;border-radius:8px;text-align:center;margin-bottom:15px;font-weight:700}
+.notice.open{background:#dff2e3;color:#155724}.notice.closed{background:#f8d7da;color:#721c24}
+.att-group{margin-bottom:13px}.att-group label{display:block;font-weight:700;color:var(--green);margin-bottom:5px}
+.att-group select,.att-group input{width:100%;padding:11px;border:1px solid #ccd5d0;border-radius:8px}
+.report-wrap{overflow:auto;background:#fff;border-radius:10px}.report-wrap table{min-width:1200px}
+.toast{position:fixed;right:20px;bottom:20px;z-index:1000;max-width:380px;background:#222;color:#fff;padding:13px 16px;border-radius:9px;box-shadow:0 8px 25px #0003}
+.toast.success{background:var(--success)}.toast.error{background:var(--danger)}
+.modal{position:fixed;inset:0;background:#0007;display:none;align-items:center;justify-content:center;padding:20px;z-index:900}
+.modal.show{display:flex}.modal-box{background:#fff;width:min(800px,100%);max-height:85vh;overflow:auto;border-radius:13px}
+.modal-head{padding:15px 18px;background:var(--green);color:#fff;display:flex;justify-content:space-between}
+.modal-head button{background:none;border:0;color:#fff;font-size:24px}.modal-body{padding:20px}
+.details-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.detail{border:1px solid #e0e5e2;padding:10px;border-radius:8px}.detail b{display:block;color:var(--green);font-size:12px;margin-bottom:4px}.detail span{word-break:break-word}
+@media(max-width:900px){.summary{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){.container{padding:13px}.summary{grid-template-columns:1fr}.details-grid{grid-template-columns:1fr}.header{display:block}.header span{display:block;margin-top:5px}}
+
+    /* Monthly attendance calendar status colours */
+    .monthly-report .present-cell, #reportTable .present-cell { background:#d9f7e3 !important; color:#087a3d !important; }
+    .monthly-report .absent-cell, #reportTable .absent-cell { background:#ffe0e0 !important; color:#c62828 !important; }
+    .monthly-report .holiday-cell, #reportTable .holiday-cell { background:#fff3df !important; color:#e67e00 !important; font-weight:900 !important; }
+    .monthly-report .empty-cell, #reportTable .empty-cell { color:#999 !important; }
+    #reportTable td.present-cell, #reportTable td.absent-cell { border-radius:4px; }
+    #reportTable td.present-cell { background:#d9f7e3 !important; color:#087a3d !important; font-weight:900 !important; font-size:14px; }
+    #reportTable td.absent-cell { background:#ffe0e0 !important; color:#c62828 !important; font-weight:900 !important; font-size:14px; }
+    .monthly-summary { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-bottom:14px; }
+    .monthly-summary-card { background:#fff; border:1px solid #dfe5e1; border-radius:10px; padding:13px 16px; text-align:center; box-shadow:0 3px 10px #0000000a; }
+    .monthly-summary-card .label { display:block; color:var(--muted); font-size:12px; font-weight:700; margin-bottom:4px; }
+    .monthly-summary-card .value { display:block; font-size:23px; font-weight:900; }
+    .monthly-summary-card.present .value { color:#087a3d; }
+    .monthly-summary-card.absent .value { color:#c62828; }
+    .monthly-summary-card.working .value { color:var(--green); }
+    .report-total-head { background:var(--green2) !important; text-align:center !important; }
+    .report-total-cell { text-align:center; font-weight:900; white-space:nowrap; }
+    .report-total-cell.present-total { color:#087a3d; background:#effaf2; }
+    .report-total-cell.absent-total { color:#c62828; background:#fff2f2; }
+    .report-total-cell.holiday-total { color:#e67e00; background:#fff3df; }
+    .report-total-cell.working-total { color:#075e3b; background:#eef9f1; }
+    @media(max-width:700px){ .monthly-summary{grid-template-columns:1fr;} }
+    /* Staff-wise attendance summary */
+    .staff-summary-box{background:#fff;border:1px solid #dfe5e1;border-radius:12px;padding:16px;margin-top:16px;box-shadow:0 4px 15px #0000000b}
+    .staff-summary-title{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+    .staff-summary-title h3{color:var(--green);font-size:18px}
+    .staff-summary-wrap{overflow:auto;border:1px solid #e3e9e5;border-radius:9px}
+    #staffSummaryTable{min-width:900px}
+    #staffSummaryTable th{text-align:center}
+    #staffSummaryTable th:first-child,#staffSummaryTable td:first-child{text-align:left}
+    #staffSummaryTable td{text-align:center;font-weight:800}
+    .summary-present{color:#087a3d;background:#effaf2}
+    .summary-absent{color:#c62828;background:#fff2f2}
+    .summary-total{color:#075e3b;background:#eef9f1}
+    .summary-holiday{color:#e67e00;background:#fff3df}
+    .summary-working{color:#075e3b;background:#eef9f1}
+    .salary-btn{border:0;background:var(--gold);color:#fff;padding:7px 10px;border-radius:6px;font-weight:800;font-size:11px}
+    .salary-btn:hover{background:#b88400}
+    .salary-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+    .salary-field label{display:block;font-size:12px;font-weight:700;color:var(--green);margin-bottom:5px}
+    .salary-field input{width:100%;padding:10px;border:1px solid #ccd5d0;border-radius:8px}
+    .salary-result{margin-top:14px;padding:14px;border-radius:9px;background:#eef9f1;border:1px solid #cfe4d4}
+    .salary-result strong{color:var(--green)}
+    @media(max-width:600px){.salary-grid{grid-template-columns:1fr}}
+</style>
 </head>
-
-
 
 <body>
 
-
-    <!-- =====================================================
-         ADMIN NAVIGATION
-    ====================================================== -->
-
-    <div class="admin-nav">
-
-        <div class="brand">
-
-            <i class="fas fa-leaf"></i>
-
-            <span>
-                অ্যাডমিন প্যানেল
-            </span>
-
-        </div>
-
-
-        <div>
-
-            <a href="index.html">
-
-                <i class="fas fa-home"></i>
-
-                হোম
-
-            </a>
-
-
-            <button
-                class="logout-btn"
-                onclick="adminLogout()"
-                style="margin-left:10px;"
-            >
-
-                <i class="fas fa-sign-out-alt"></i>
-
-                লগআউট
-
-            </button>
-
-        </div>
-
+<!-- ================= LOGIN ================= -->
+<section id="loginPage">
+  <div class="login-card">
+    <div class="login-head">
+      <div class="login-logo"><i class="fas fa-shield-halved"></i></div>
+      <h1>PRATAPPUR SKUS LTD.</h1>
+      <p>Secure Administrator Login</p>
     </div>
 
-
-
-    <!-- =====================================================
-         MAIN
-    ====================================================== -->
-
-    <div class="admin-container">
-
-
-        <!-- HEADER -->
-
-        <div class="admin-header">
-
-            <h1>
-
-                <i class="fas fa-tachometer-alt"></i>
-
-                আবেদন ও হাজিরা ব্যবস্থাপনা
-
-            </h1>
-
-
-            <span
-                class="stats-badge"
-                id="totalCount"
-                style="
-                    background:var(--gold);
-                    color:var(--primary);
-                    padding:6px 16px;
-                    border-radius:20px;
-                    font-weight:bold;
-                "
-            >
-
-                মোট: ০টি
-
-            </span>
-
+    <div class="login-body">
+      <div id="step1" class="login-step active">
+        <div class="field">
+          <label>Username</label>
+          <input id="loginUser" type="text" autocomplete="username">
         </div>
-
-
-
-        <!-- =================================================
-             SUMMARY
-        ================================================== -->
-
-        <div class="summary-grid">
-
-
-            <div class="summary-card total">
-
-                <div>
-
-                    <h3>
-                        মোট আবেদন
-                    </h3>
-
-                    <div
-                        class="summary-number"
-                        id="summaryTotal"
-                    >
-                        ০
-                    </div>
-
-                </div>
-
-                <div class="summary-icon">
-
-                    <i class="fas fa-file-alt"></i>
-
-                </div>
-
-            </div>
-
-
-
-            <div class="summary-card pending">
-
-                <div>
-
-                    <h3>
-                        পেন্ডিং
-                    </h3>
-
-                    <div
-                        class="summary-number"
-                        id="summaryPending"
-                    >
-                        ০
-                    </div>
-
-                </div>
-
-                <div class="summary-icon">
-
-                    <i class="fas fa-clock"></i>
-
-                </div>
-
-            </div>
-
-
-
-            <div class="summary-card approved">
-
-                <div>
-
-                    <h3>
-                        অ্যাপ্রুভড
-                    </h3>
-
-                    <div
-                        class="summary-number"
-                        id="summaryApproved"
-                    >
-                        ০
-                    </div>
-
-                </div>
-
-                <div class="summary-icon">
-
-                    <i class="fas fa-check-circle"></i>
-
-                </div>
-
-            </div>
-
-
-
-            <div class="summary-card rejected">
-
-                <div>
-
-                    <h3>
-                        রিজেক্টেড
-                    </h3>
-
-                    <div
-                        class="summary-number"
-                        id="summaryRejected"
-                    >
-                        ০
-                    </div>
-
-                </div>
-
-                <div class="summary-icon">
-
-                    <i class="fas fa-times-circle"></i>
-
-                </div>
-
-            </div>
-
-
+        <div class="field">
+          <label>Password</label>
+          <input id="loginPass" type="password" autocomplete="current-password">
         </div>
+        <div id="loginError1" class="login-error"></div>
+        <button class="primary-btn" onclick="startAdminLogin()">
+          <i class="fas fa-right-to-bracket"></i> Login & Send OTP
+        </button>
+      </div>
 
-
-
-        <!-- =================================================
-             TABS
-        ================================================== -->
-
-        <div class="tab-container">
-
-
-            <button
-                class="tab-btn active"
-                data-tab="pending"
-            >
-
-                <i class="fas fa-clock"></i>
-
-                পেন্ডিং
-
-                <span
-                    class="badge"
-                    id="pendingCount"
-                >
-                    ০
-                </span>
-
-            </button>
-
-
-
-            <button
-                class="tab-btn"
-                data-tab="approved"
-            >
-
-                <i class="fas fa-check-circle"></i>
-
-                অ্যাপ্রুভড
-
-                <span
-                    class="badge"
-                    id="approvedCount"
-                >
-                    ০
-                </span>
-
-            </button>
-
-
-
-            <button
-                class="tab-btn"
-                data-tab="rejected"
-            >
-
-                <i class="fas fa-times-circle"></i>
-
-                রিজেক্টেড
-
-                <span
-                    class="badge"
-                    id="rejectedCount"
-                >
-                    ০
-                </span>
-
-            </button>
-
-
-
-            <button
-                class="tab-btn"
-                data-tab="all"
-            >
-
-                <i class="fas fa-list"></i>
-
-                সব আবেদন
-
-                <span
-                    class="badge"
-                    id="allCount"
-                >
-                    ০
-                </span>
-
-            </button>
-
-
-
-            <button
-                class="tab-btn"
-                data-tab="attendance"
-            >
-
-                <i class="fas fa-user-clock"></i>
-
-                স্টাফ হাজিরা
-
-                <span
-                    class="badge"
-                    id="attCount"
-                >
-                    ০
-                </span>
-
-            </button>
-
-
-
-            <button
-                class="tab-btn"
-                data-tab="report"
-            >
-
-                <i class="fas fa-calendar-alt"></i>
-
-                মাসিক রিপোর্ট
-
-            </button>
-
-
+      <div id="step2" class="login-step">
+        <div class="otp-note">
+          <i class="fas fa-envelope"></i>
+          আপনার Admin Email-এ ৬ সংখ্যার OTP পাঠানো হয়েছে। OTP না এলে Spam/Junk folder-ও দেখুন।
         </div>
-
-
-
-        <!-- =================================================
-             PENDING
-        ================================================== -->
-
-        <div
-            id="tab-pending"
-            class="tab-content active"
-        >
-
-
-            <div class="search-area">
-
-
-                <input
-                    type="text"
-                    id="searchPending"
-                    placeholder="🔍 ID / নাম / মোবাইল দিয়ে খুঁজুন..."
-                >
-
-
-                <select
-                    id="filterPendingType"
-                >
-
-                    <option value="">
-                        সব আবেদন প্রকার
-                    </option>
-
-                    <option value="KCC Loan">
-                        KCC Loan
-                    </option>
-
-                    <option value="SHG Loan">
-                        SHG Loan
-                    </option>
-
-                    <option value="Loan Against NSC / KVP / LIC">
-                        NSC / KVP / LIC
-                    </option>
-
-                    <option value="Consumer Loan">
-                        Consumer Loan
-                    </option>
-
-                    <option value="Savings Deposit Account">
-                        Savings Account
-                    </option>
-
-                    <option value="Current Account">
-                        Current Account
-                    </option>
-
-                    <option value="Fixed Deposit">
-                        Fixed Deposit
-                    </option>
-
-                    <option value="MIS Deposit">
-                        MIS Deposit
-                    </option>
-
-                    <option value="Recurring Deposit">
-                        Recurring Deposit
-                    </option>
-
-                </select>
-
-
-                <button
-                    class="main-action-btn"
-                    onclick="loadApplications()"
-                >
-
-                    <i class="fas fa-sync"></i>
-
-                    রিফ্রেশ
-
-                </button>
-
-
-            </div>
-
-
-            <div class="table-wrapper">
-
-
-                <div
-                    class="loading-overlay"
-                    id="pendingLoading"
-                >
-
-                    <i class="fas fa-spinner fa-spin"></i>
-
-                    লোড হচ্ছে...
-
-                </div>
-
-
-                <table
-                    id="pendingTable"
-                    style="display:none;"
-                >
-
-                    <thead>
-
-                        <tr>
-
-                            <th>ক্রম</th>
-
-                            <th>তারিখ</th>
-
-                            <th>Application ID</th>
-
-                            <th>আবেদনের ধরন</th>
-
-                            <th>নাম</th>
-
-                            <th>মোবাইল</th>
-
-                            <th>পরিমাণ</th>
-
-                            <th>স্ট্যাটাস</th>
-
-                            <th>বিস্তারিত</th>
-
-                            <th>স্ট্যাটাস পরিবর্তন</th>
-
-                        </tr>
-
-                    </thead>
-
-
-                    <tbody id="pendingBody"></tbody>
-
-                </table>
-
-
-                <div
-                    class="no-data"
-                    id="pendingNoData"
-                    style="display:none;"
-                >
-
-                    কোনো পেন্ডিং আবেদন নেই
-
-                </div>
-
-            </div>
-
+        <div class="field">
+          <label>OTP</label>
+          <input id="otpInput" type="text" inputmode="numeric" maxlength="6" placeholder="৬ সংখ্যার OTP">
         </div>
-
-
-
-        <!-- =================================================
-             APPROVED
-        ================================================== -->
-
-        <div
-            id="tab-approved"
-            class="tab-content"
-        >
-
-            <div class="search-area">
-
-                <input
-                    type="text"
-                    id="searchApproved"
-                    placeholder="🔍 ID / নাম / মোবাইল দিয়ে খুঁজুন..."
-                >
-
-
-                <select
-                    id="filterApprovedType"
-                >
-
-                    <option value="">
-                        সব আবেদন প্রকার
-                    </option>
-
-                    <option value="KCC Loan">
-                        KCC Loan
-                    </option>
-
-                    <option value="SHG Loan">
-                        SHG Loan
-                    </option>
-
-                    <option value="Consumer Loan">
-                        Consumer Loan
-                    </option>
-
-                    <option value="Savings Deposit Account">
-                        Savings Account
-                    </option>
-
-                    <option value="Current Account">
-                        Current Account
-                    </option>
-
-                    <option value="Fixed Deposit">
-                        Fixed Deposit
-                    </option>
-
-                    <option value="MIS Deposit">
-                        MIS Deposit
-                    </option>
-
-                    <option value="Recurring Deposit">
-                        Recurring Deposit
-                    </option>
-
-                </select>
-
-            </div>
-
-
-            <div class="table-wrapper">
-
-                <table
-                    id="approvedTable"
-                    style="display:none;"
-                >
-
-                    <thead>
-
-                        <tr>
-
-                            <th>ক্রম</th>
-
-                            <th>তারিখ</th>
-
-                            <th>Application ID</th>
-
-                            <th>আবেদনের ধরন</th>
-
-                            <th>নাম</th>
-
-                            <th>মোবাইল</th>
-
-                            <th>পরিমাণ</th>
-
-                            <th>স্ট্যাটাস</th>
-
-                            <th>বিস্তারিত</th>
-
-                        </tr>
-
-                    </thead>
-
-
-                    <tbody id="approvedBody"></tbody>
-
-                </table>
-
-
-                <div
-                    class="no-data"
-                    id="approvedNoData"
-                    style="display:none;"
-                >
-
-                    কোনো অ্যাপ্রুভড আবেদন নেই
-
-                </div>
-
-            </div>
-
-        </div>
-
-
-
-        <!-- =================================================
-             REJECTED
-        ================================================== -->
-
-        <div
-            id="tab-rejected"
-            class="tab-content"
-        >
-
-            <div class="search-area">
-
-                <input
-                    type="text"
-                    id="searchRejected"
-                    placeholder="🔍 ID / নাম / মোবাইল দিয়ে খুঁজুন..."
-                >
-
-            </div>
-
-
-            <div class="table-wrapper">
-
-                <table
-                    id="rejectedTable"
-                    style="display:none;"
-                >
-
-                    <thead>
-
-                        <tr>
-
-                            <th>ক্রম</th>
-
-                            <th>তারিখ</th>
-
-                            <th>Application ID</th>
-
-                            <th>আবেদনের ধরন</th>
-
-                            <th>নাম</th>
-
-                            <th>মোবাইল</th>
-
-                            <th>পরিমাণ</th>
-
-                            <th>স্ট্যাটাস</th>
-
-                            <th>রিজেক্ট রিজন</th>
-
-                            <th>বিস্তারিত</th>
-
-                        </tr>
-
-                    </thead>
-
-
-                    <tbody id="rejectedBody"></tbody>
-
-                </table>
-
-
-                <div
-                    class="no-data"
-                    id="rejectedNoData"
-                    style="display:none;"
-                >
-
-                    কোনো রিজেক্টেড আবেদন নেই
-
-                </div>
-
-            </div>
-
-        </div>
-
-
-
-        <!-- =================================================
-             ALL
-        ================================================== -->
-
-        <div
-            id="tab-all"
-            class="tab-content"
-        >
-
-            <div class="search-area">
-
-
-                <input
-                    type="text"
-                    id="searchAll"
-                    placeholder="🔍 ID / নাম / মোবাইল দিয়ে খুঁজুন..."
-                >
-
-
-                <select
-                    id="filterAllStatus"
-                >
-
-                    <option value="">
-                        সব স্ট্যাটাস
-                    </option>
-
-                    <option value="Pending">
-                        Pending
-                    </option>
-
-                    <option value="Approved">
-                        Approved
-                    </option>
-
-                    <option value="Rejected">
-                        Rejected
-                    </option>
-
-                </select>
-
-
-                <select
-                    id="filterAllType"
-                >
-
-                    <option value="">
-                        সব আবেদন প্রকার
-                    </option>
-
-                    <option value="KCC Loan">
-                        KCC Loan
-                    </option>
-
-                    <option value="SHG Loan">
-                        SHG Loan
-                    </option>
-
-                    <option value="Consumer Loan">
-                        Consumer Loan
-                    </option>
-
-                    <option value="Savings Deposit Account">
-                        Savings Account
-                    </option>
-
-                    <option value="Current Account">
-                        Current Account
-                    </option>
-
-                    <option value="Fixed Deposit">
-                        Fixed Deposit
-                    </option>
-
-                    <option value="MIS Deposit">
-                        MIS Deposit
-                    </option>
-
-                    <option value="Recurring Deposit">
-                        Recurring Deposit
-                    </option>
-
-                </select>
-
-
-                <button
-                    class="main-action-btn"
-                    onclick="loadApplications()"
-                >
-
-                    <i class="fas fa-sync"></i>
-
-                    রিফ্রেশ
-
-                </button>
-
-            </div>
-
-
-            <div class="table-wrapper">
-
-                <table
-                    id="allTable"
-                    style="display:none;"
-                >
-
-                    <thead>
-
-                        <tr>
-
-                            <th>ক্রম</th>
-
-                            <th>তারিখ</th>
-
-                            <th>Application ID</th>
-
-                            <th>আবেদনের ধরন</th>
-
-                            <th>নাম</th>
-
-                            <th>মোবাইল</th>
-
-                            <th>পরিমাণ</th>
-
-                            <th>স্ট্যাটাস</th>
-
-                            <th>বিস্তারিত</th>
-
-                            <th>স্ট্যাটাস পরিবর্তন</th>
-
-                        </tr>
-
-                    </thead>
-
-
-                    <tbody id="allBody"></tbody>
-
-                </table>
-
-
-                <div
-                    class="no-data"
-                    id="allNoData"
-                    style="display:none;"
-                >
-
-                    কোনো আবেদন পাওয়া যায়নি
-
-                </div>
-
-            </div>
-
-        </div>
-
-
-
-        <!-- =================================================
-             ATTENDANCE
-        ================================================== -->
-
-        <div
-            id="tab-attendance"
-            class="tab-content"
-        >
-
-
-            <div class="attendance-box">
-
-
-                <h3
-                    style="
-                        color:var(--primary);
-                        margin-bottom:15px;
-                        text-align:center;
-                    "
-                >
-
-                    <i class="fas fa-user-clock"></i>
-
-                    স্টাফ হাজিরা রেজিস্টার
-
-                </h3>
-
-
-                <div
-                    id="attendanceNotice"
-                    class="attendance-notice open"
-                >
-
-                    <i class="fas fa-clock"></i>
-
-                    হাজিরা গ্রহণের সময় চলছে।
-
-                    <br>
-
-                    <small>
-                        হাজিরা গ্রহণের শেষ সময়: দুপুর ১২:০০টা
-                    </small>
-
-                </div>
-
-
-                <div
-                    class="attendance-form-group"
-                >
-
-                    <label>
-                        স্টাফ নির্বাচন করুন:
-                    </label>
-
-
-                    <select id="staffSelect">
-
-                        <option value="">
-                            -- স্টাফ নির্বাচন করুন --
-                        </option>
-
-
-                        <option
-                            value="PATIT PABAN ROY"
-                            data-id="PSKUS/001"
-                            data-desig="MANAGER"
-                        >
-
-                            STAFF/PSKUS/001 -
-                            PATIT PABAN ROY
-                            (MANAGER)
-
-                        </option>
-
-
-                        <option
-                            value="RAJU MONDAL"
-                            data-id="PSKUS/002"
-                            data-desig="STAFF"
-                        >
-
-                            STAFF/PSKUS/002 -
-                            RAJU MONDAL
-                            (ACCOUNTENT)
-
-                        </option>
-
-
-                        <option
-                            value="PINKI DAS"
-                            data-id="PSKUS/003"
-                            data-desig="STAFF"
-                        >
-
-                            STAFF/PSKUS/003 -
-                            PINKI DAS
-                            (SAJANI)
-
-                        </option>
-
-
-                        <option
-                            value="NILIMA BISWAS"
-                            data-id="PSKUS/004"
-                            data-desig="STAFF"
-                        >
-
-                            STAFF/PSKUS/004 -
-                            NILIMA BISWAS
-                            (SAJANI)
-
-                        </option>
-
-
-                        <option
-                            value="STAFF NAME 5"
-                            data-id="PSKUS/005"
-                            data-desig="STAFF"
-                        >
-
-                            STAFF/PSKUS/005 -
-                            STAFF NAME 5
-                            (CLERK)
-
-                        </option>
-
-                    </select>
-
-                </div>
-
-
-
-                <div
-                    class="attendance-form-group"
-                >
-
-                    <label>
-                        স্ট্যাটাস:
-                    </label>
-
-
-                    <select
-                        id="attendanceStatus"
-                        onchange="onStatusChanged()"
-                    >
-
-                        <option value="Present">
-                            Present (উপস্থিত)
-                        </option>
-
-                        <option value="Absent">
-                            Absent (অনুপস্থিত)
-                        </option>
-
-                    </select>
-
-                </div>
-
-
-
-                <div
-                    class="attendance-form-group"
-                    id="absentReasonGroup"
-                    style="display:none;"
-                >
-
-                    <label>
-                        অনুপস্থিতির কারণ:
-                    </label>
-
-
-                    <input
-                        type="text"
-                        id="absentReasonInput"
-                        value="Not presented by self"
-                    >
-
-                </div>
-
-
-                <button
-                    type="button"
-                    id="attendanceSubmitBtn"
-                    class="att-btn"
-                    onclick="submitAttendance()"
-                >
-
-                    <i class="fas fa-check"></i>
-
-                    হাজিরা সাবমিট করুন
-
-                </button>
-
-
-            </div>
-
-
-
-            <div class="table-wrapper">
-
-
-                <table
-                    id="attTable"
-                    style="display:none;"
-                >
-
-                    <thead>
-
-                        <tr>
-
-                            <th>ক্রম</th>
-
-                            <th>তারিখ</th>
-
-                            <th>সময়</th>
-
-                            <th>স্টাফ আইডি</th>
-
-                            <th>স্টাফের নাম</th>
-
-                            <th>পদবি</th>
-
-                            <th>স্ট্যাটাস</th>
-
-                            <th>অনুপস্থিতির কারণ</th>
-
-                        </tr>
-
-                    </thead>
-
-
-                    <tbody id="attBody"></tbody>
-
-                </table>
-
-
-                <div
-                    class="no-data"
-                    id="attNoData"
-                    style="display:none;"
-                >
-
-                    কোনো হাজিরা রেকর্ড নেই
-
-                </div>
-
-            </div>
-
-        </div>
-
-
-
-        <!-- =================================================
-             MONTHLY REPORT
-        ================================================== -->
-
-        <div
-            id="tab-report"
-            class="tab-content"
-        >
-
-
-            <div class="search-area">
-
-
-                <select
-                    id="reportMonth"
-                    onchange="generateMonthlyReport()"
-                >
-
-                    <option value="0">
-                        JANUARY - জানুয়ারি
-                    </option>
-
-                    <option value="1">
-                        FEBRUARY - ফেব্রুয়ারি
-                    </option>
-
-                    <option value="2">
-                        MARCH - মার্চ
-                    </option>
-
-                    <option value="3">
-                        APRIL - এপ্রিল
-                    </option>
-
-                    <option value="4">
-                        MAY - মে
-                    </option>
-
-                    <option value="5">
-                        JUNE - জুন
-                    </option>
-
-                    <option value="6">
-                        JULY - জুলাই
-                    </option>
-
-                    <option value="7">
-                        AUGUST - আগস্ট
-                    </option>
-
-                    <option value="8">
-                        SEPTEMBER - সেপ্টেম্বর
-                    </option>
-
-                    <option value="9">
-                        OCTOBER - অক্টোবর
-                    </option>
-
-                    <option value="10">
-                        NOVEMBER - নভেম্বর
-                    </option>
-
-                    <option value="11">
-                        DECEMBER - ডিসেম্বর
-                    </option>
-
-                </select>
-
-
-                <select
-                    id="reportYear"
-                    onchange="generateMonthlyReport()"
-                >
-
-                    <option value="2026">
-                        2026
-                    </option>
-
-                    <option value="2027">
-                        2027
-                    </option>
-
-                    <option value="2028">
-                        2028
-                    </option>
-
-                    <option value="2029">
-                        2029
-                    </option>
-
-                    <option value="2030">
-                        2030
-                    </option>
-
-                </select>
-
-
-            </div>
-
-
-            <div class="table-wrapper">
-
-
-                <table id="reportTable">
-
-                    <thead>
-
-                        <tr id="reportHeaderRow">
-
-                            <th>
-                                স্টাফ আইডি / নাম
-                            </th>
-
-                        </tr>
-
-                    </thead>
-
-
-                    <tbody id="reportBodies"></tbody>
-
-                </table>
-
-
-            </div>
-
-        </div>
-
-
+        <div id="loginError2" class="login-error"></div>
+        <button class="primary-btn" onclick="verifyOTP()">
+          <i class="fas fa-check-circle"></i> Verify OTP
+        </button>
+        <div id="otpTimer" class="timer"></div>
+        <button class="back-link" onclick="backToLogin()">← Back to Login</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= DASHBOARD ================= -->
+<section id="dashboard" class="hidden">
+  <div class="topbar">
+    <div class="brand">
+      <i class="fas fa-building-columns"></i> PRATAPPUR SKUS LTD.
+      <small>Administrator Control Panel</small>
+    </div>
+    <div class="top-actions">
+      <button onclick="loadApplications();loadAttendanceData()"><i class="fas fa-sync"></i> Refresh</button>
+      <button class="logout" onclick="logoutAdmin()"><i class="fas fa-sign-out-alt"></i> Logout</button>
+    </div>
+  </div>
+
+  <main class="container">
+    <div class="header">
+      <div>
+        <h2><i class="fas fa-gauge-high"></i> Admin Dashboard</h2>
+        <span>অনলাইন আবেদন, স্ট্যাটাস ও স্টাফ হাজিরা ব্যবস্থাপনা</span>
+      </div>
+      <div id="sessionInfo"></div>
     </div>
 
-
-
-    <!-- =====================================================
-         TOAST
-    ====================================================== -->
-
-    <div
-        class="toast-container"
-        id="toastContainer"
-    ></div>
-
-
-
-    <!-- =====================================================
-         APPLICATION DETAILS MODAL
-    ====================================================== -->
-
-    <div
-        class="modal-overlay"
-        id="detailsModal"
-        onclick="closeModalOnOverlay(event)"
-    >
-
-
-        <div
-            class="details-modal"
-            onclick="event.stopPropagation()"
-        >
-
-
-            <div class="modal-header">
-
-
-                <h2>
-
-                    <i class="fas fa-file-alt"></i>
-
-                    Application Details
-
-                </h2>
-
-
-                <button
-                    class="modal-close"
-                    onclick="closeDetailsModal()"
-                >
-
-                    &times;
-
-                </button>
-
-
-            </div>
-
-
-
-            <div
-                class="modal-body"
-                id="detailsModalBody"
-            >
-
-                <!-- Dynamic Details -->
-
-            </div>
-
-
-
-            <div class="modal-footer">
-
-                <button
-                    onclick="closeDetailsModal()"
-                >
-
-                    বন্ধ করুন
-
-                </button>
-
-            </div>
-
-
-        </div>
-
-
+    <div class="summary">
+      <div class="card"><div><h3>মোট আবেদন</h3><div id="summaryTotal" class="number">0</div></div><div class="icon"><i class="fas fa-file-lines"></i></div></div>
+      <div class="card"><div><h3>পেন্ডিং</h3><div id="summaryPending" class="number">0</div></div><div class="icon"><i class="fas fa-clock"></i></div></div>
+      <div class="card"><div><h3>অ্যাপ্রুভড</h3><div id="summaryApproved" class="number">0</div></div><div class="icon"><i class="fas fa-circle-check"></i></div></div>
+      <div class="card"><div><h3>রিজেক্টেড</h3><div id="summaryRejected" class="number">0</div></div><div class="icon"><i class="fas fa-circle-xmark"></i></div></div>
     </div>
 
-
-
-    <!-- =====================================================
-         JAVASCRIPT
-    ====================================================== -->
-
-    <script>
-
-
-        /* =====================================================
-           API URL
-        ===================================================== */
-
-        const API_URL =
-            "https://script.google.com/macros/s/AKfycbwSmyOEAbqxk6xVUTyn5OlvlkD7thczZ2F7_bu1XZCN5Ma3vEy9LosDAeUc_4EdYfUf/exec";
-
-
-
-        /* =====================================================
-           GLOBAL DATA
-        ===================================================== */
-
-        let allApplications = [];
-
-        let allAttendance = [];
-
-
-
-        /* =====================================================
-           PAGE LOAD
-        ===================================================== */
-
-        window.addEventListener(
-            "DOMContentLoaded",
-            function() {
-
-
-                const isLoggedIn =
-                    localStorage.getItem(
-                        "adminLoggedIn"
-                    );
-
-
-                if (
-                    isLoggedIn !== "true"
-                ) {
-
-                    window.location.href =
-                        "index.html";
-
-                    return;
-
-                }
-
-
-
-                setupTabs();
-
-                setupSearchEvents();
-
-                updateAttendanceTimeState();
-
-                setInterval(
-                    updateAttendanceTimeState,
-                    30000
-                );
-
-
-                loadApplications();
-
-                loadAttendanceData();
-
-
-            }
-        );
-
-
-
-        /* =====================================================
-           TABS
-        ===================================================== */
-
-        function setupTabs() {
-
-
-            document
-                .querySelectorAll(".tab-btn")
-                .forEach(
-                    function(btn) {
-
-
-                        btn.addEventListener(
-                            "click",
-                            function() {
-
-
-                                document
-                                    .querySelectorAll(
-                                        ".tab-btn"
-                                    )
-                                    .forEach(
-                                        function(b) {
-
-                                            b.classList.remove(
-                                                "active"
-                                            );
-
-                                        }
-                                    );
-
-
-                                this.classList.add(
-                                    "active"
-                                );
-
-
-                                const tab =
-                                    this.dataset.tab;
-
-
-                                document
-                                    .querySelectorAll(
-                                        ".tab-content"
-                                    )
-                                    .forEach(
-                                        function(c) {
-
-                                            c.classList.remove(
-                                                "active"
-                                            );
-
-                                        }
-                                    );
-
-
-                                const target =
-                                    document.getElementById(
-                                        "tab-" + tab
-                                    );
-
-
-                                if (target) {
-
-                                    target.classList.add(
-                                        "active"
-                                    );
-
-                                }
-
-
-                                if (
-                                    tab ===
-                                    "attendance"
-                                ) {
-
-                                    updateAttendanceTimeState();
-
-                                    loadAttendanceData();
-
-                                }
-
-
-                                else if (
-                                    tab ===
-                                    "report"
-                                ) {
-
-                                    document.getElementById(
-                                        "reportMonth"
-                                    ).value =
-                                        new Date()
-                                            .getMonth();
-
-
-                                    generateMonthlyReport();
-
-                                }
-
-
-                                else {
-
-                                    loadApplications();
-
-                                }
-
-
-                            }
-                        );
-
-
-                    }
-                );
-
-        }
-
-
-
-        /* =====================================================
-           SEARCH EVENTS
-        ===================================================== */
-
-        function setupSearchEvents() {
-
-
-            const searchIds = [
-
-                "searchPending",
-
-                "searchApproved",
-
-                "searchRejected",
-
-                "searchAll"
-
-            ];
-
-
-            searchIds.forEach(
-                function(id) {
-
-
-                    const input =
-                        document.getElementById(
-                            id
-                        );
-
-
-                    if (input) {
-
-                        input.addEventListener(
-                            "input",
-                            function() {
-
-                                renderAllApplicationTables();
-
-                            }
-                        );
-
-                    }
-
-                }
-            );
-
-
-
-            const filterIds = [
-
-                "filterPendingType",
-
-                "filterApprovedType",
-
-                "filterAllStatus",
-
-                "filterAllType"
-
-            ];
-
-
-            filterIds.forEach(
-                function(id) {
-
-
-                    const el =
-                        document.getElementById(
-                            id
-                        );
-
-
-                    if (el) {
-
-                        el.addEventListener(
-                            "change",
-                            function() {
-
-                                renderAllApplicationTables();
-
-                            }
-                        );
-
-                    }
-
-                }
-            );
-
-        }
-
-
-
-        /* =====================================================
-           LOAD APPLICATIONS
-        ===================================================== */
-
-        function loadApplications() {
-
-
-            const loading =
-                document.getElementById(
-                    "pendingLoading"
-                );
-
-
-            if (loading) {
-
-                loading.style.display =
-                    "block";
-
-            }
-
-
-            fetch(
-                API_URL +
-                "?action=getAll"
-            )
-
-            .then(
-                function(res) {
-
-                    return res.json();
-
-                }
-            )
-
-            .then(
-                function(data) {
-
-
-                    if (
-                        data.status ===
-                        "success" &&
-                        data.data
-                    ) {
-
-
-                        allApplications =
-                            Array.isArray(
-                                data.data
-                            )
-                            ? data.data
-                            : [];
-
-
-                        updateCounts();
-
-                        renderAllApplicationTables();
-
-                    }
-
-
-                    else {
-
-
-                        showToast(
-                            data.message ||
-                            "Application data পাওয়া যায়নি।",
-                            "error"
-                        );
-
-                    }
-
-                }
-            )
-
-            .catch(
-                function(error) {
-
-
-                    console.error(error);
-
-
-                    showToast(
-                        "Server-এর সাথে সংযোগ করা যাচ্ছে না।",
-                        "error"
-                    );
-
-                }
-            )
-
-            .finally(
-                function() {
-
-
-                    if (loading) {
-
-                        loading.style.display =
-                            "none";
-
-                    }
-
-                }
-            );
-
-        }
-
-
-
-        /* =====================================================
-           UPDATE COUNTS
-        ===================================================== */
-
-        function updateCounts() {
-
-
-            const pending =
-                allApplications.filter(
-                    function(a) {
-
-                        return (
-                            a.Status ||
-                            "Pending"
-                        ) === "Pending";
-
-                    }
-                ).length;
-
-
-            const approved =
-                allApplications.filter(
-                    function(a) {
-
-                        return (
-                            a.Status ===
-                            "Approved"
-                        );
-
-                    }
-                ).length;
-
-
-            const rejected =
-                allApplications.filter(
-                    function(a) {
-
-                        return (
-                            a.Status ===
-                            "Rejected"
-                        );
-
-                    }
-                ).length;
-
-
-            const total =
-                allApplications.length;
-
-
-
-            document.getElementById(
-                "pendingCount"
-            ).textContent =
-                pending;
-
-
-            document.getElementById(
-                "approvedCount"
-            ).textContent =
-                approved;
-
-
-            document.getElementById(
-                "rejectedCount"
-            ).textContent =
-                rejected;
-
-
-            document.getElementById(
-                "allCount"
-            ).textContent =
-                total;
-
-
-            document.getElementById(
-                "totalCount"
-            ).textContent =
-                "মোট: " +
-                total +
-                "টি";
-
-
-
-            document.getElementById(
-                "summaryTotal"
-            ).textContent =
-                total;
-
-
-            document.getElementById(
-                "summaryPending"
-            ).textContent =
-                pending;
-
-
-            document.getElementById(
-                "summaryApproved"
-            ).textContent =
-                approved;
-
-
-            document.getElementById(
-                "summaryRejected"
-            ).textContent =
-                rejected;
-
-        }
-
-
-
-        /* =====================================================
-           FILTER APPLICATIONS
-        ===================================================== */
-
-        function filterApplicationList(
-            apps,
-            searchId,
-            typeId,
-            statusId
-        ) {
-
-
-            let result =
-                Array.isArray(apps)
-                ? [...apps]
-                : [];
-
-
-            const searchEl =
-                searchId
-                ? document.getElementById(
-                    searchId
-                )
-                : null;
-
-
-            const typeEl =
-                typeId
-                ? document.getElementById(
-                    typeId
-                )
-                : null;
-
-
-            const statusEl =
-                statusId
-                ? document.getElementById(
-                    statusId
-                )
-                : null;
-
-
-            const search =
-                searchEl
-                ? searchEl.value
-                    .trim()
-                    .toLowerCase()
-                : "";
-
-
-            const type =
-                typeEl
-                ? typeEl.value
-                : "";
-
-
-            const status =
-                statusEl
-                ? statusEl.value
-                : "";
-
-
-
-            if (search) {
-
-
-                result =
-                    result.filter(
-                        function(app) {
-
-
-                            const id =
-                                String(
-                                    app[
-                                        "Application ID"
-                                    ] ||
-                                    app.applicationId ||
-                                    ""
-                                ).toLowerCase();
-
-
-                            const name =
-                                String(
-                                    app[
-                                        "Applicant Name"
-                                    ] ||
-                                    ""
-                                ).toLowerCase();
-
-
-                            const mobile =
-                                String(
-                                    app[
-                                        "Mobile Number"
-                                    ] ||
-                                    ""
-                                ).toLowerCase();
-
-
-                            return (
-                                id.includes(search) ||
-                                name.includes(search) ||
-                                mobile.includes(search)
-                            );
-
-                        }
-                    );
-
-            }
-
-
-
-            if (type) {
-
-
-                result =
-                    result.filter(
-                        function(app) {
-
-
-                            const appType =
-                                String(
-                                    app[
-                                        "Application Type"
-                                    ] ||
-                                    ""
-                                );
-
-
-                            return (
-                                appType ===
-                                type
-                            );
-
-                        }
-                    );
-
-            }
-
-
-
-            if (status) {
-
-
-                result =
-                    result.filter(
-                        function(app) {
-
-
-                            const appStatus =
-                                app.Status ||
-                                "Pending";
-
-
-                            return (
-                                appStatus ===
-                                status
-                            );
-
-                        }
-                    );
-
-            }
-
-
-            return result;
-
-        }
-
-
-
-        /* =====================================================
-           RENDER ALL TABLES
-        ===================================================== */
-
-        function renderAllApplicationTables() {
-
-
-            const pendingApps =
-                filterApplicationList(
-                    allApplications.filter(
-                        function(a) {
-
-                            return (
-                                a.Status ||
-                                "Pending"
-                            ) === "Pending";
-
-                        }
-                    ),
-                    "searchPending",
-                    "filterPendingType",
-                    null
-                );
-
-
-            const approvedApps =
-                filterApplicationList(
-                    allApplications.filter(
-                        function(a) {
-
-                            return (
-                                a.Status ===
-                                "Approved"
-                            );
-
-                        }
-                    ),
-                    "searchApproved",
-                    "filterApprovedType",
-                    null
-                );
-
-
-            const rejectedApps =
-                filterApplicationList(
-                    allApplications.filter(
-                        function(a) {
-
-                            return (
-                                a.Status ===
-                                "Rejected"
-                            );
-
-                        }
-                    ),
-                    "searchRejected",
-                    null,
-                    null
-                );
-
-
-            const allApps =
-                filterApplicationList(
-                    allApplications,
-                    "searchAll",
-                    "filterAllType",
-                    "filterAllStatus"
-                );
-
-
-            renderTable(
-                "pending",
-                pendingApps
-            );
-
-
-            renderTable(
-                "approved",
-                approvedApps
-            );
-
-
-            renderTable(
-                "rejected",
-                rejectedApps
-            );
-
-
-            renderTable(
-                "all",
-                allApps
-            );
-
-        }
-
-
-
-        /* =====================================================
-           RENDER TABLE
-        ===================================================== */
-
-        function renderTable(
-            tab,
-            apps
-        ) {
-
-
-            const tbody =
-                document.getElementById(
-                    tab + "Body"
-                );
-
-
-            const table =
-                document.getElementById(
-                    tab + "Table"
-                );
-
-
-            const noData =
-                document.getElementById(
-                    tab + "NoData"
-                );
-
-
-            if (!tbody) {
-
-                return;
-
-            }
-
-
-            tbody.innerHTML =
-                "";
-
-
-
-            if (
-                !apps ||
-                apps.length === 0
-            ) {
-
-
-                if (table) {
-
-                    table.style.display =
-                        "none";
-
-                }
-
-
-                if (noData) {
-
-                    noData.style.display =
-                        "block";
-
-                }
-
-
-                return;
-
-            }
-
-
-
-            if (table) {
-
-                table.style.display =
-                    "table";
-
-            }
-
-
-            if (noData) {
-
-                noData.style.display =
-                    "none";
-
-            }
-
-
-
-            apps.forEach(
-                function(app, index) {
-
-
-                    const status =
-                        app.Status ||
-                        "Pending";
-
-
-                    let badge =
-                        "status-pending";
-
-
-                    if (
-                        status ===
-                        "Approved"
-                    ) {
-
-                        badge =
-                            "status-approved";
-
-                    }
-
-
-                    else if (
-                        status ===
-                        "Rejected"
-                    ) {
-
-                        badge =
-                            "status-rejected";
-
-                    }
-
-
-
-                    const appId =
-                        app[
-                            "Application ID"
-                        ] ||
-                        app.applicationId ||
-                        "";
-
-
-
-                    const tr =
-                        document.createElement(
-                            "tr"
-                        );
-
-
-
-                    let updateCol =
-                        "";
-
-
-                    if (
-                        tab === "pending" ||
-                        tab === "all"
-                    ) {
-
-
-                        updateCol = `
-
-                            <td>
-
-                                <select
-                                    id="status_${tab}_${index}"
-                                    class="status-select"
-                                >
-
-                                    <option
-                                        value="Pending"
-                                        ${status === "Pending" ? "selected" : ""}
-                                    >
-                                        Pending
-                                    </option>
-
-                                    <option
-                                        value="Approved"
-                                        ${status === "Approved" ? "selected" : ""}
-                                    >
-                                        Approved
-                                    </option>
-
-                                    <option
-                                        value="Rejected"
-                                        ${status === "Rejected" ? "selected" : ""}
-                                    >
-                                        Rejected
-                                    </option>
-
-                                </select>
-
-
-                                <button
-                                    class="update-btn"
-                                    onclick="updateAppStatus(
-                                        '${escapeJs(appId)}',
-                                        '${tab}',
-                                        ${index}
-                                    )"
-                                >
-
-                                    আপডেট
-
-                                </button>
-
-                            </td>
-
-                        `;
-
-                    }
-
-
-
-                    tr.innerHTML = `
-
-                        <td>
-                            ${index + 1}
-                        </td>
-
-                        <td>
-                            ${escapeHtml(
-                                app["Date & Time"] ||
-                                "N/A"
-                            )}
-                        </td>
-
-                        <td>
-
-                            <strong>
-                                ${escapeHtml(
-                                    appId ||
-                                    "N/A"
-                                )}
-                            </strong>
-
-                        </td>
-
-                        <td>
-                            ${escapeHtml(
-                                app[
-                                    "Application Type"
-                                ] ||
-                                "N/A"
-                            )}
-                        </td>
-
-                        <td>
-                            ${escapeHtml(
-                                app[
-                                    "Applicant Name"
-                                ] ||
-                                "N/A"
-                            )}
-                        </td>
-
-                        <td>
-                            ${escapeHtml(
-                                app[
-                                    "Mobile Number"
-                                ] ||
-                                "N/A"
-                            )}
-                        </td>
-
-                        <td>
-                            ${escapeHtml(
-                                app[
-                                    "Amount"
-                                ] ||
-                                "N/A"
-                            )}
-                        </td>
-
-                        <td>
-
-                            <span
-                                class="status-badge ${badge}"
-                            >
-
-                                ${escapeHtml(
-                                    status
-                                )}
-
-                            </span>
-
-                        </td>
-
-
-                        ${
-                            tab === "rejected"
-                            ?
-                            `
-                                <td>
-                                    ${escapeHtml(
-                                        app[
-                                            "Reject Reason"
-                                        ] ||
-                                        "N/A"
-                                    )}
-                                </td>
-                            `
-                            :
-                            ""
-                        }
-
-
-                        <td>
-
-                            <button
-                                class="view-btn"
-                                onclick="openApplicationDetailsByIndex(
-                                    '${tab}',
-                                    ${index}
-                                )"
-                            >
-
-                                <i class="fas fa-eye"></i>
-
-                                বিস্তারিত
-
-                            </button>
-
-                        </td>
-
-
-                        ${updateCol}
-
-                    `;
-
-
-                    tbody.appendChild(
-                        tr
-                    );
-
-
-                }
-            );
-
-        }
-
-
-
-        /* =====================================================
-           FIND CURRENT APP FROM TABLE
-        ===================================================== */
-
-        function openApplicationDetailsByIndex(
-            tab,
-            index
-        ) {
-
-
-            let apps = [];
-
-
-            if (
-                tab === "pending"
-            ) {
-
-
-                apps =
-                    filterApplicationList(
-                        allApplications.filter(
-                            function(a) {
-
-                                return (
-                                    a.Status ||
-                                    "Pending"
-                                ) === "Pending";
-
-                            }
-                        ),
-                        "searchPending",
-                        "filterPendingType",
-                        null
-                    );
-
-            }
-
-
-            else if (
-                tab === "approved"
-            ) {
-
-
-                apps =
-                    filterApplicationList(
-                        allApplications.filter(
-                            function(a) {
-
-                                return (
-                                    a.Status ===
-                                    "Approved"
-                                );
-
-                            }
-                        ),
-                        "searchApproved",
-                        "filterApprovedType",
-                        null
-                    );
-
-            }
-
-
-            else if (
-                tab === "rejected"
-            ) {
-
-
-                apps =
-                    filterApplicationList(
-                        allApplications.filter(
-                            function(a) {
-
-                                return (
-                                    a.Status ===
-                                    "Rejected"
-                                );
-
-                            }
-                        ),
-                        "searchRejected",
-                        null,
-                        null
-                    );
-
-            }
-
-
-            else if (
-                tab === "all"
-            ) {
-
-
-                apps =
-                    filterApplicationList(
-                        allApplications,
-                        "searchAll",
-                        "filterAllType",
-                        "filterAllStatus"
-                    );
-
-            }
-
-
-
-            const app =
-                apps[index];
-
-
-            if (app) {
-
-                openApplicationDetails(
-                    app
-                );
-
-            }
-
-        }
-
-
-
-        /* =====================================================
-           APPLICATION DETAILS MODAL
-        ===================================================== */
-
-        function openApplicationDetails(
-            app
-        ) {
-
-
-            const modal =
-                document.getElementById(
-                    "detailsModal"
-                );
-
-
-            const body =
-                document.getElementById(
-                    "detailsModalBody"
-                );
-
-
-            if (!modal || !body) {
-
-                return;
-
-            }
-
-
-
-            const appId =
-                app[
-                    "Application ID"
-                ] ||
-                app.applicationId ||
-                "N/A";
-
-
-            const status =
-                app.Status ||
-                "Pending";
-
-
-            let badge =
-                "status-pending";
-
-
-            if (
-                status ===
-                "Approved"
-            ) {
-
-                badge =
-                    "status-approved";
-
-            }
-
-
-            else if (
-                status ===
-                "Rejected"
-            ) {
-
-                badge =
-                    "status-rejected";
-
-            }
-
-
-
-            let html = `
-
-                <div class="detail-top">
-
-                    <div>
-
-                        <div
-                            class="detail-label"
-                        >
-                            Application ID
-                        </div>
-
-                        <div
-                            class="detail-id"
-                        >
-                            ${escapeHtml(appId)}
-                        </div>
-
-                    </div>
-
-
-                    <div>
-
-                        <span
-                            class="status-badge ${badge}"
-                        >
-
-                            ${escapeHtml(status)}
-
-                        </span>
-
-                    </div>
-
-                </div>
-
-
-                <div class="details-grid">
-
-            `;
-
-
-
-            const preferredOrder = [
-
-                "Date & Time",
-
-                "Application ID",
-
-                "Application Type",
-
-                "Applicant Name",
-
-                "Father Name",
-
-                "Father / Husband Name",
-
-                "Mother Name",
-
-                "Mother's Name",
-
-                "Mobile Number",
-
-                "Address",
-
-                "Amount",
-
-                "Loan Amount",
-
-                "Security Type",
-
-                "Certificate Number",
-
-                "Policy Number",
-
-                "PAN",
-
-                "Aadhaar",
-
-                "Reject Reason",
-
-                "Status"
-
-            ];
-
-
-
-            const usedKeys =
-                new Set();
-
-
-            preferredOrder.forEach(
-                function(key) {
-
-
-                    if (
-                        Object.prototype.hasOwnProperty.call(
-                            app,
-                            key
-                        )
-                    ) {
-
-
-                        const value =
-                            app[key];
-
-
-                        if (
-                            value !==
-                            null &&
-                            value !==
-                            undefined &&
-                            String(value).trim() !==
-                            ""
-                        ) {
-
-
-                            usedKeys.add(
-                                key
-                            );
-
-
-                            html +=
-                                createDetailItem(
-                                    key,
-                                    value,
-                                    isLongField(key)
-                                );
-
-                        }
-
-                    }
-
-                }
-            );
-
-
-
-            Object.keys(app).forEach(
-                function(key) {
-
-
-                    if (
-                        usedKeys.has(
-                            key
-                        )
-                    ) {
-
-                        return;
-
-                    }
-
-
-                    const value =
-                        app[key];
-
-
-                    if (
-                        value ===
-                        null ||
-                        value ===
-                        undefined ||
-                        String(value).trim() ===
-                        ""
-                    ) {
-
-                        return;
-
-                    }
-
-
-                    html +=
-                        createDetailItem(
-                            key,
-                            value,
-                            isLongField(key)
-                        );
-
-                }
-            );
-
-
-
-            html += `
-
-                </div>
-
-            `;
-
-
-            body.innerHTML =
-                html;
-
-
-            modal.classList.add(
-                "show"
-            );
-
-
-            document.body.style.overflow =
-                "hidden";
-
-        }
-
-
-
-        /* =====================================================
-           CREATE DETAIL ITEM
-        ===================================================== */
-
-        function createDetailItem(
-            key,
-            value,
-            isFull
-        ) {
-
-
-            return `
-
-                <div
-                    class="detail-item ${isFull ? "full" : ""}"
-                >
-
-                    <span
-                        class="detail-label"
-                    >
-
-                        ${escapeHtml(
-                            humanizeKey(key)
-                        )}
-
-                    </span>
-
-
-                    <span
-                        class="detail-value"
-                    >
-
-                        ${escapeHtml(
-                            value
-                        )}
-
-                    </span>
-
-                </div>
-
-            `;
-
-        }
-
-
-
-        /* =====================================================
-           HUMANIZE KEY
-        ===================================================== */
-
-        function humanizeKey(
-            key
-        ) {
-
-
-            const map = {
-
-                "Date & Time":
-                    "আবেদনের তারিখ ও সময়",
-
-                "Application ID":
-                    "Application ID",
-
-                "Application Type":
-                    "আবেদনের ধরন",
-
-                "Applicant Name":
-                    "আবেদনকারীর নাম",
-
-                "Father Name":
-                    "পিতা / স্বামীর নাম",
-
-                "Father / Husband Name":
-                    "পিতা / স্বামীর নাম",
-
-                "Mother Name":
-                    "মায়ের নাম",
-
-                "Mother's Name":
-                    "মায়ের নাম",
-
-                "Mobile Number":
-                    "মোবাইল নম্বর",
-
-                "Address":
-                    "ঠিকানা",
-
-                "Amount":
-                    "পরিমাণ",
-
-                "Loan Amount":
-                    "ঋণের পরিমাণ",
-
-                "Security Type":
-                    "Security-এর ধরন",
-
-                "Certificate Number":
-                    "Certificate Number",
-
-                "Policy Number":
-                    "Policy Number",
-
-                "PAN":
-                    "PAN",
-
-                "Aadhaar":
-                    "Aadhaar",
-
-                "Reject Reason":
-                    "রিজেক্ট করার কারণ",
-
-                "Status":
-                    "স্ট্যাটাস"
-
-            };
-
-
-            return (
-                map[key] ||
-                key
-            );
-
-        }
-
-
-
-        /* =====================================================
-           LONG FIELD
-        ===================================================== */
-
-        function isLongField(
-            key
-        ) {
-
-
-            const lower =
-                String(
-                    key
-                ).toLowerCase();
-
-
-            return (
-                lower.includes(
-                    "address"
-                ) ||
-                lower.includes(
-                    "ঠিকানা"
-                ) ||
-                lower.includes(
-                    "reason"
-                ) ||
-                lower.includes(
-                    "description"
-                ) ||
-                lower.includes(
-                    "remarks"
-                ) ||
-                lower.includes(
-                    "details"
-                )
-            );
-
-        }
-
-
-
-        /* =====================================================
-           CLOSE MODAL
-        ===================================================== */
-
-        function closeDetailsModal() {
-
-
-            const modal =
-                document.getElementById(
-                    "detailsModal"
-                );
-
-
-            if (modal) {
-
-                modal.classList.remove(
-                    "show"
-                );
-
-            }
-
-
-            document.body.style.overflow =
-                "";
-
-        }
-
-
-
-        function closeModalOnOverlay(
-            event
-        ) {
-
-
-            if (
-                event.target.id ===
-                "detailsModal"
-            ) {
-
-                closeDetailsModal();
-
-            }
-
-        }
-
-
-
-        document.addEventListener(
-            "keydown",
-            function(event) {
-
-
-                if (
-                    event.key ===
-                    "Escape"
-                ) {
-
-                    closeDetailsModal();
-
-                }
-
-            }
-        );
-
-
-
-        /* =====================================================
-           UPDATE APPLICATION STATUS
-        ===================================================== */
-
-        function updateAppStatus(
-            appId,
-            tab,
-            index
-        ) {
-
-
-            const select =
-                document.getElementById(
-                    `status_${tab}_${index}`
-                );
-
-
-            if (!select) {
-
-                return;
-
-            }
-
-
-            const newStatus =
-                select.value;
-
-
-            let reason =
-                "";
-
-
-
-            if (
-                newStatus ===
-                "Rejected"
-            ) {
-
-
-                reason =
-                    prompt(
-                        "রিজেক্ট করার কারণ লিখুন:",
-                        "Not available"
-                    );
-
-
-                if (
-                    !reason
-                ) {
-
-                    return;
-
-                }
-
-            }
-
-
-
-            fetch(
-                API_URL,
-                {
-
-                    method:
-                        "POST",
-
-                    headers: {
-
-                        "Content-Type":
-                            "text/plain;charset=utf-8"
-
-                    },
-
-                    body:
-                        JSON.stringify({
-
-                            action:
-                                "updateStatus",
-
-                            applicationId:
-                                appId,
-
-                            status:
-                                newStatus,
-
-                            rejectReason:
-                                reason
-
-                        })
-
-                }
-            )
-
-            .then(
-                function(res) {
-
-                    return res.json();
-
-                }
-            )
-
-            .then(
-                function(data) {
-
-
-                    if (
-                        data.status ===
-                        "success"
-                    ) {
-
-
-                        showToast(
-                            "স্ট্যাটাস সফলভাবে আপডেট হয়েছে!",
-                            "success"
-                        );
-
-
-                        loadApplications();
-
-                    }
-
-
-                    else {
-
-
-                        showToast(
-                            data.message ||
-                            "সমস্যা হয়েছে!",
-                            "error"
-                        );
-
-                    }
-
-                }
-            )
-
-            .catch(
-                function(error) {
-
-
-                    console.error(
-                        error
-                    );
-
-
-                    showToast(
-                        "Status update করা যাচ্ছে না।",
-                        "error"
-                    );
-
-                }
-            );
-
-        }
-
-
-
-        /* =====================================================
-           ATTENDANCE TIME CHECK
-        ===================================================== */
-
-        function updateAttendanceTimeState() {
-
-
-            const now =
-                new Date();
-
-
-            const indiaTime =
-                new Intl.DateTimeFormat(
-                    "en-IN",
-                    {
-
-                        timeZone:
-                            "Asia/Kolkata",
-
-                        hour:
-                            "2-digit",
-
-                        minute:
-                            "2-digit",
-
-                        second:
-                            "2-digit",
-
-                        hour12:
-                            false
-
-                    }
-                )
-                .formatToParts(
-                    now
-                );
-
-
-            let hour =
-                0;
-
-            let minute =
-                0;
-
-
-            indiaTime.forEach(
-                function(part) {
-
-
-                    if (
-                        part.type ===
-                        "hour"
-                    ) {
-
-                        hour =
-                            parseInt(
-                                part.value,
-                                10
-                            );
-
-                    }
-
-
-                    if (
-                        part.type ===
-                        "minute"
-                    ) {
-
-                        minute =
-                            parseInt(
-                                part.value,
-                                10
-                            );
-
-                    }
-
-                }
-            );
-
-
-
-            const totalMinutes =
-                (
-                    hour * 60
-                ) +
-                minute;
-
-
-            const limitMinutes =
-                12 * 60;
-
-
-            const isClosed =
-                totalMinutes >=
-                limitMinutes;
-
-
-
-            const notice =
-                document.getElementById(
-                    "attendanceNotice"
-                );
-
-
-            const button =
-                document.getElementById(
-                    "attendanceSubmitBtn"
-                );
-
-
-            if (!notice || !button) {
-
-                return;
-
-            }
-
-
-
-            if (
-                isClosed
-            ) {
-
-
-                notice.className =
-                    "attendance-notice closed";
-
-
-                notice.innerHTML = `
-
-                    <i class="fas fa-lock"></i>
-
-                    আজকের হাজিরা গ্রহণের সময় শেষ হয়েছে।
-
-                    <br>
-
-                    <small>
-
-                        দুপুর ১২:০০টার পর
-                        কোনো স্টাফের হাজিরা
-                        গ্রহণ করা হবে না।
-
-                    </small>
-
-                `;
-
-
-                button.disabled =
-                    true;
-
-
-                button.innerHTML = `
-
-                    <i class="fas fa-lock"></i>
-
-                    হাজিরা গ্রহণ বন্ধ
-
-                `;
-
-            }
-
-
-            else {
-
-
-                notice.className =
-                    "attendance-notice open";
-
-
-                notice.innerHTML = `
-
-                    <i class="fas fa-clock"></i>
-
-                    হাজিরা গ্রহণের সময় চলছে।
-
-                    <br>
-
-                    <small>
-
-                        হাজিরা গ্রহণের শেষ সময়:
-                        দুপুর ১২:০০টা
-
-                    </small>
-
-                `;
-
-
-                button.disabled =
-                    false;
-
-
-                button.innerHTML = `
-
-                    <i class="fas fa-check"></i>
-
-                    হাজিরা সাবমিট করুন
-
-                `;
-
-            }
-
-        }
-
-
-
-        /* =====================================================
-           STATUS CHANGED
-        ===================================================== */
-
-        function onStatusChanged() {
-
-
-            const status =
-                document.getElementById(
-                    "attendanceStatus"
-                ).value;
-
-
-            const reasonGroup =
-                document.getElementById(
-                    "absentReasonGroup"
-                );
-
-
-            const reasonInput =
-                document.getElementById(
-                    "absentReasonInput"
-                );
-
-
-            if (
-                status ===
-                "Absent"
-            ) {
-
-
-                reasonGroup.style.display =
-                    "block";
-
-
-                reasonInput.value =
-                    "Not presented by self";
-
-            }
-
-
-            else {
-
-
-                reasonGroup.style.display =
-                    "none";
-
-
-                reasonInput.value =
-                    "";
-
-            }
-
-        }
-
-
-
-        /* =====================================================
-           LOAD ATTENDANCE
-        ===================================================== */
-
-        function loadAttendanceData() {
-
-
-            fetch(
-                API_URL +
-                "?action=getAttendance"
-            )
-
-            .then(
-                function(res) {
-
-                    return res.json();
-
-                }
-            )
-
-            .then(
-                function(data) {
-
-
-                    if (
-                        data.status ===
-                        "success" &&
-                        data.data
-                    ) {
-
-
-                        allAttendance =
-                            Array.isArray(
-                                data.data
-                            )
-                            ? data.data
-                            : [];
-
-
-                        document.getElementById(
-                            "attCount"
-                        ).textContent =
-                            allAttendance.length;
-
-
-                        const tbody =
-                            document.getElementById(
-                                "attBody"
-                            );
-
-
-                        const table =
-                            document.getElementById(
-                                "attTable"
-                            );
-
-
-                        const noData =
-                            document.getElementById(
-                                "attNoData"
-                            );
-
-
-                        tbody.innerHTML =
-                            "";
-
-
-                        if (
-                            allAttendance.length >
-                            0
-                        ) {
-
-
-                            table.style.display =
-                                "table";
-
-
-                            noData.style.display =
-                                "none";
-
-
-                            allAttendance.forEach(
-                                function(
-                                    item,
-                                    index
-                                ) {
-
-
-                                    const st =
-                                        item[
-                                            "স্ট্যাটাস"
-                                        ] ||
-                                        item[
-                                            "Status"
-                                        ] ||
-                                        "Present";
-
-
-                                    const badge =
-                                        st ===
-                                        "Present"
-                                        ?
-                                        "status-approved"
-                                        :
-                                        "status-rejected";
-
-
-                                    const tr =
-                                        document.createElement(
-                                            "tr"
-                                        );
-
-
-                                    tr.innerHTML = `
-
-                                        <td>
-                                            ${index + 1}
-                                        </td>
-
-                                        <td>
-                                            ${escapeHtml(
-                                                item[
-                                                    "তারিখ"
-                                                ] ||
-                                                item[
-                                                    "Date"
-                                                ] ||
-                                                "N/A"
-                                            )}
-                                        </td>
-
-                                        <td>
-                                            ${escapeHtml(
-                                                item[
-                                                    "সময়"
-                                                ] ||
-                                                item[
-                                                    "Time"
-                                                ] ||
-                                                "N/A"
-                                            )}
-                                        </td>
-
-                                        <td>
-
-                                            <strong>
-
-                                                ${escapeHtml(
-                                                    item[
-                                                        "স্টাফ আইডি"
-                                                    ] ||
-                                                    item[
-                                                        "Staff ID"
-                                                    ] ||
-                                                    "N/A"
-                                                )}
-
-                                            </strong>
-
-                                        </td>
-
-                                        <td>
-                                            ${escapeHtml(
-                                                item[
-                                                    "স্টাফের নাম"
-                                                ] ||
-                                                item[
-                                                    "Staff Name"
-                                                ] ||
-                                                "N/A"
-                                            )}
-                                        </td>
-
-                                        <td>
-                                            ${escapeHtml(
-                                                item[
-                                                    "পদবি (Designation)"
-                                                ] ||
-                                                item[
-                                                    "Designation"
-                                                ] ||
-                                                "N/A"
-                                            )}
-                                        </td>
-
-                                        <td>
-
-                                            <span
-                                                class="status-badge ${badge}"
-                                            >
-
-                                                ${escapeHtml(
-                                                    st
-                                                )}
-
-                                            </span>
-
-                                        </td>
-
-                                        <td>
-                                            ${escapeHtml(
-                                                item[
-                                                    "অনুপস্থিতির কারণ"
-                                                ] ||
-                                                item[
-                                                    "Absent Reason"
-                                                ] ||
-                                                "N/A"
-                                            )}
-                                        </td>
-
-                                    `;
-
-
-                                    tbody.appendChild(
-                                        tr
-                                    );
-
-
-                                }
-                            );
-
-                        }
-
-
-                        else {
-
-
-                            table.style.display =
-                                "none";
-
-
-                            noData.style.display =
-                                "block";
-
-                        }
-
-                    }
-
-                }
-            )
-
-            .catch(
-                function(error) {
-
-
-                    console.error(
-                        error
-                    );
-
-
-                    showToast(
-                        "Attendance data load করা যাচ্ছে না।",
-                        "error"
-                    );
-
-                }
-            );
-
-        }
-
-
-
-        /* =====================================================
-           SUBMIT ATTENDANCE
-        ===================================================== */
-
-        function submitAttendance() {
-
-
-            updateAttendanceTimeState();
-
-
-            const button =
-                document.getElementById(
-                    "attendanceSubmitBtn"
-                );
-
-
-            if (
-                button.disabled
-            ) {
-
-
-                showToast(
-                    "দুপুর ১২:০০টার পর আজকের হাজিরা গ্রহণ করা যাবে না।",
-                    "error"
-                );
-
-
-                return;
-
-            }
-
-
-
-            const staffSelect =
-                document.getElementById(
-                    "staffSelect"
-                );
-
-
-            const staffName =
-                staffSelect.value;
-
-
-            const selectedOption =
-                staffSelect.options[
-                    staffSelect.selectedIndex
-                ];
-
-
-            const staffId =
-                selectedOption
-                ?
-                selectedOption.getAttribute(
-                    "data-id"
-                )
-                :
-                "";
-
-
-            const designation =
-                selectedOption
-                ?
-                selectedOption.getAttribute(
-                    "data-desig"
-                )
-                :
-                "STAFF";
-
-
-            const status =
-                document.getElementById(
-                    "attendanceStatus"
-                ).value;
-
-
-            const reason =
-                document.getElementById(
-                    "absentReasonInput"
-                ).value.trim()
-                ||
-                "Not presented by self";
-
-
-
-            if (
-                !staffName
-            ) {
-
-
-                showToast(
-                    "দয়া করে প্রথমে স্টাফ নির্বাচন করুন।",
-                    "error"
-                );
-
-
-                return;
-
-            }
-
-
-
-            button.disabled =
-                true;
-
-
-            button.innerHTML = `
-
-                <i class="fas fa-spinner fa-spin"></i>
-
-                সংরক্ষণ হচ্ছে...
-
-            `;
-
-
-
-            fetch(
-                API_URL,
-                {
-
-                    method:
-                        "POST",
-
-                    headers: {
-
-                        "Content-Type":
-                            "text/plain;charset=utf-8"
-
-                    },
-
-                    body:
-                        JSON.stringify({
-
-                            action:
-                                "saveAttendance",
-
-                            staffId:
-                                staffId,
-
-                            staffName:
-                                staffName,
-
-                            designation:
-                                designation,
-
-                            status:
-                                status,
-
-                            reason:
-                                reason
-
-                        })
-
-                }
-            )
-
-            .then(
-                function(res) {
-
-                    return res.json();
-
-                }
-            )
-
-            .then(
-                function(data) {
-
-
-                    if (
-                        data.status ===
-                        "success"
-                    ) {
-
-
-                        showToast(
-                            data.message ||
-                            "হাজিরা সফলভাবে সংরক্ষিত হয়েছে।",
-                            "success"
-                        );
-
-
-                        document.getElementById(
-                            "staffSelect"
-                        ).value =
-                            "";
-
-
-                        document.getElementById(
-                            "attendanceStatus"
-                        ).value =
-                            "Present";
-
-
-                        onStatusChanged();
-
-
-                        loadAttendanceData();
-
-
-                    }
-
-
-                    else {
-
-
-                        showToast(
-                            data.message ||
-                            "হাজিরা সংরক্ষণ করা যায়নি।",
-                            "error"
-                        );
-
-                    }
-
-                }
-            )
-
-            .catch(
-                function(error) {
-
-
-                    console.error(
-                        error
-                    );
-
-
-                    showToast(
-                        "Attendance save করা যাচ্ছে না।",
-                        "error"
-                    );
-
-                }
-            )
-
-            .finally(
-                function() {
-
-
-                    updateAttendanceTimeState();
-
-
-                }
-            );
-
-        }
-
-
-
-        /* =====================================================
-           MONTHLY REPORT
-        ===================================================== */
-
-        function generateMonthlyReport() {
-
-
-            const month =
-                parseInt(
-                    document.getElementById(
-                        "reportMonth"
-                    ).value
-                );
-
-
-            const year =
-                parseInt(
-                    document.getElementById(
-                        "reportYear"
-                    ).value
-                );
-
-
-            const daysInMonth =
-                new Date(
-                    year,
-                    month + 1,
-                    0
-                ).getDate();
-
-
-
-            const headerRow =
-                document.getElementById(
-                    "reportHeaderRow"
-                );
-
-
-            let headerHtml =
-                "<th>স্টাফ আইডি / নাম</th>";
-
-
-            for (
-                let d = 1;
-                d <= daysInMonth;
-                d++
-            ) {
-
-
-                headerHtml += `
-
-                    <th
-                        style="
-                            text-align:center;
-                            font-size:12px;
-                        "
-                    >
-
-                        ${d}
-
-                    </th>
-
-                `;
-
-            }
-
-
-            headerRow.innerHTML =
-                headerHtml;
-
-
-
-            const staffList = [
-
-                {
-                    id:
-                        "PSKUS/001",
-
-                    name:
-                        "PATIT PABAN ROY"
-
-                },
-
-                {
-                    id:
-                        "PSKUS/002",
-
-                    name:
-                        "RAJU MONDAL"
-
-                },
-
-                {
-                    id:
-                        "PSKUS/003",
-
-                    name:
-                        "PINKI DAS"
-
-                },
-
-                {
-                    id:
-                        "PSKUS/004",
-
-                    name:
-                        "NILIMA BISWAS"
-
-                },
-
-                {
-                    id:
-                        "PSKUS/005",
-
-                    name:
-                        "STAFF NAME 5"
-
-                }
-
-            ];
-
-
-
-            const tbody =
-                document.getElementById(
-                    "reportBodies"
-                );
-
-
-            tbody.innerHTML =
-                "";
-
-
-
-            staffList.forEach(
-                function(staff) {
-
-
-                    const tr =
-                        document.createElement(
-                            "tr"
-                        );
-
-
-                    let rowHtml = `
-
-                        <td>
-
-                            <strong>
-                                ${escapeHtml(
-                                    staff.id
-                                )}
-                            </strong>
-
-                            <br>
-
-                            <span
-                                style="
-                                    font-size:11px;
-                                    color:#666;
-                                "
-                            >
-
-                                ${escapeHtml(
-                                    staff.name
-                                )}
-
-                            </span>
-
-                        </td>
-
-                    `;
-
-
-
-                    for (
-                        let d = 1;
-                        d <= daysInMonth;
-                        d++
-                    ) {
-
-
-                        const dateObj =
-                            new Date(
-                                year,
-                                month,
-                                d
-                            );
-
-
-                        const dayOfWeek =
-                            dateObj.getDay();
-
-
-                        let isHoliday =
-                            false;
-
-
-
-                        if (
-                            dayOfWeek ===
-                            0
-                        ) {
-
-                            isHoliday =
-                                true;
-
-                        }
-
-
-                        else if (
-                            dayOfWeek ===
-                            6
-                        ) {
-
-
-                            const saturdayCount =
-                                Math.floor(
-                                    (d - 1) /
-                                    7
-                                ) + 1;
-
-
-                            if (
-                                saturdayCount ===
-                                    2 ||
-                                saturdayCount ===
-                                    4
-                            ) {
-
-                                isHoliday =
-                                    true;
-
-                            }
-
-                        }
-
-
-
-                        const formattedDate =
-
-                            String(d)
-                                .padStart(
-                                    2,
-                                    "0"
-                                ) +
-
-                            "/" +
-
-                            String(
-                                month + 1
-                            )
-                                .padStart(
-                                    2,
-                                    "0"
-                                ) +
-
-                            "/" +
-
-                            year;
-
-
-
-                        const attRecord =
-                            allAttendance.find(
-                                function(a) {
-
-
-                                    const rDate =
-                                        a[
-                                            "তারিখ"
-                                        ] ||
-                                        a[
-                                            "Date"
-                                        ] ||
-                                        "";
-
-
-                                    const rId =
-                                        a[
-                                            "স্টাফ আইডি"
-                                        ] ||
-                                        a[
-                                            "Staff ID"
-                                        ] ||
-                                        "";
-
-
-                                    return (
-                                        String(
-                                            rDate
-                                        ) ===
-                                        formattedDate &&
-
-                                        String(
-                                            rId
-                                        ) ===
-                                        staff.id
-                                    );
-
-                                }
-                            );
-
-
-
-                        let cellBg =
-                            "#ffffff";
-
-
-                        let cellText =
-                            "-";
-
-
-
-                        if (
-                            isHoliday
-                        ) {
-
-
-                            cellBg =
-                                "#e2e8f0";
-
-
-                            cellText =
-                                "H";
-
-                        }
-
-
-                        else if (
-                            attRecord
-                        ) {
-
-
-                            const st =
-                                attRecord[
-                                    "স্ট্যাটাস"
-                                ] ||
-                                attRecord[
-                                    "Status"
-                                ];
-
-
-                            if (
-                                st ===
-                                "Present"
-                            ) {
-
-
-                                cellBg =
-                                    "#86efac";
-
-
-                                cellText =
-                                    "P";
-
-                            }
-
-
-                            else {
-
-
-                                cellBg =
-                                    "#fca5a5";
-
-
-                                cellText =
-                                    "A";
-
-                            }
-
-                        }
-
-
-
-                        rowHtml += `
-
-                            <td
-
-                                style="
-                                    background-color:${cellBg};
-                                    text-align:center;
-                                    font-weight:bold;
-                                    font-size:12px;
-                                "
-
-                                title="${formattedDate}"
-                            >
-
-                                ${cellText}
-
-                            </td>
-
-                        `;
-
-                    }
-
-
-
-                    tr.innerHTML =
-                        rowHtml;
-
-
-                    tbody.appendChild(
-                        tr
-                    );
-
-
-                }
-            );
-
-        }
-
-
-
-        /* =====================================================
-           TOAST
-        ===================================================== */
-
-        function showToast(
-            message,
-            type = "success"
-        ) {
-
-
-            const container =
-                document.getElementById(
-                    "toastContainer"
-                );
-
-
-            const toast =
-                document.createElement(
-                    "div"
-                );
-
-
-            toast.className =
-                "toast " +
-                type;
-
-
-            toast.innerText =
-                message;
-
-
-            container.appendChild(
-                toast
-            );
-
-
-            setTimeout(
-                function() {
-
-                    toast.remove();
-
-                },
-                4000
-            );
-
-        }
-
-
-
-        /* =====================================================
-           ESCAPE HTML
-        ===================================================== */
-
-        function escapeHtml(
-            value
-        ) {
-
-
-            if (
-                value ===
-                    null ||
-                value ===
-                    undefined
-            ) {
-
-                return "";
-
-            }
-
-
-            return String(
-                value
-            )
-
-            .replace(
-                /&/g,
-                "&amp;"
-            )
-
-            .replace(
-                /</g,
-                "&lt;"
-            )
-
-            .replace(
-                />/g,
-                "&gt;"
-            )
-
-            .replace(
-                /"/g,
-                "&quot;"
-            )
-
-            .replace(
-                /'/g,
-                "&#039;"
-            );
-
-        }
-
-
-
-        /* =====================================================
-           ESCAPE JS
-        ===================================================== */
-
-        function escapeJs(
-            value
-        ) {
-
-
-            return String(
-                value ||
-                ""
-            )
-
-            .replace(
-                /\\/g,
-                "\\\\"
-            )
-
-            .replace(
-                /'/g,
-                "\\'"
-            )
-
-            .replace(
-                /\r/g,
-                "\\r"
-            )
-
-            .replace(
-                /\n/g,
-                "\\n"
-            );
-
-        }
-
-
-
-        /* =====================================================
-           LOGOUT
-        ===================================================== */
-
-        function adminLogout() {
-
-
-            localStorage.removeItem(
-                "adminLoggedIn"
-            );
-
-
-            window.location.href =
-                "index.html";
-
-        }
-
-
-    </script>
-
-
+    <div class="tabs">
+      <button class="tab active" data-tab="pending">Pending <span id="pendingCount">0</span></button>
+      <button class="tab" data-tab="approved">Approved <span id="approvedCount">0</span></button>
+      <button class="tab" data-tab="rejected">Rejected <span id="rejectedCount">0</span></button>
+      <button class="tab" data-tab="all">সব আবেদন <span id="allCount">0</span></button>
+      <button class="tab" data-tab="attendance">স্টাফ হাজিরা <span id="attCount">0</span></button>
+      <button class="tab" data-tab="report">মাসিক রিপোর্ট</button>
+      <button class="tab" data-tab="staff-summary">স্টাফ সামারি</button>
+    </div>
+
+    <div id="tab-pending" class="tab-content active">
+      <div class="toolbar">
+        <input id="searchPending" placeholder="ID / নাম / মোবাইল">
+        <select id="filterPendingType"><option value="">সব আবেদন প্রকার</option></select>
+        <button class="action" onclick="loadApplications()"><i class="fas fa-sync"></i> Refresh</button>
+      </div>
+      <div id="pendingLoading" class="loading">আবেদন লোড হচ্ছে...</div>
+      <div class="table-wrap"><table id="pendingTable" class="hidden"><thead><tr><th>ক্রম</th><th>তারিখ</th><th>Application ID</th><th>ধরন</th><th>নাম</th><th>মোবাইল</th><th>পরিমাণ</th><th>স্ট্যাটাস</th><th>বিস্তারিত</th><th>পরিবর্তন</th></tr></thead><tbody id="pendingBody"></tbody></table></div>
+      <div id="pendingNoData" class="no-data hidden">কোনো পেন্ডিং আবেদন নেই।</div>
+    </div>
+
+    <div id="tab-approved" class="tab-content">
+      <div class="toolbar"><input id="searchApproved" placeholder="ID / নাম / মোবাইল"><select id="filterApprovedType"><option value="">সব আবেদন প্রকার</option></select></div>
+      <div class="table-wrap"><table id="approvedTable" class="hidden"><thead><tr><th>ক্রম</th><th>তারিখ</th><th>Application ID</th><th>ধরন</th><th>নাম</th><th>মোবাইল</th><th>পরিমাণ</th><th>স্ট্যাটাস</th><th>বিস্তারিত</th></tr></thead><tbody id="approvedBody"></tbody></table></div>
+      <div id="approvedNoData" class="no-data hidden">কোনো অ্যাপ্রুভড আবেদন নেই।</div>
+    </div>
+
+    <div id="tab-rejected" class="tab-content">
+      <div class="toolbar"><input id="searchRejected" placeholder="ID / নাম / মোবাইল"></div>
+      <div class="table-wrap"><table id="rejectedTable" class="hidden"><thead><tr><th>ক্রম</th><th>তারিখ</th><th>Application ID</th><th>ধরন</th><th>নাম</th><th>মোবাইল</th><th>পরিমাণ</th><th>স্ট্যাটাস</th><th>রিজেক্ট কারণ</th><th>বিস্তারিত</th></tr></thead><tbody id="rejectedBody"></tbody></table></div>
+      <div id="rejectedNoData" class="no-data hidden">কোনো রিজেক্টেড আবেদন নেই।</div>
+    </div>
+
+    <div id="tab-all" class="tab-content">
+      <div class="toolbar">
+        <input id="searchAll" placeholder="ID / নাম / মোবাইল">
+        <select id="filterAllStatus"><option value="">সব স্ট্যাটাস</option><option>Pending</option><option>Approved</option><option>Rejected</option></select>
+        <select id="filterAllType"><option value="">সব আবেদন প্রকার</option></select>
+        <button class="action" onclick="loadApplications()"><i class="fas fa-sync"></i> Refresh</button>
+      </div>
+      <div class="table-wrap"><table id="allTable" class="hidden"><thead><tr><th>ক্রম</th><th>তারিখ</th><th>Application ID</th><th>ধরন</th><th>নাম</th><th>মোবাইল</th><th>পরিমাণ</th><th>স্ট্যাটাস</th><th>বিস্তারিত</th><th>পরিবর্তন</th></tr></thead><tbody id="allBody"></tbody></table></div>
+      <div id="allNoData" class="no-data hidden">কোনো আবেদন পাওয়া যায়নি।</div>
+    </div>
+
+    <div id="tab-attendance" class="tab-content">
+      <div class="att-box">
+        <h3><i class="fas fa-user-clock"></i> Staff Attendance</h3>
+        <div id="attendanceNotice" class="notice open">হাজিরা গ্রহণের সময় চলছে। শেষ সময়: দুপুর ১২:০০টা</div>
+        <div class="att-group"><label>স্টাফ নির্বাচন করুন</label>
+          <select id="staffSelect">
+            <option value="">-- নির্বাচন করুন --</option>
+            <option value="PATIT PABAN ROY" data-id="PSKUS/001" data-desig="MANAGER">PSKUS/001 - PATIT PABAN ROY (MANAGER)</option>
+            <option value="RAJU MONDAL" data-id="PSKUS/002" data-desig="ACCOUNTENT">PSKUS/002 - RAJU MONDAL (ACCOUNTENT)</option>
+            <option value="PINKI DAS" data-id="PSKUS/003" data-desig="SAJANI">PSKUS/003 - PINKI DAS (SAJANI)</option>
+            <option value="NILIMA BISWAS" data-id="PSKUS/004" data-desig="SAJANI">PSKUS/004 - NILIMA BISWAS (SAJANI)</option>
+            <option value="STAFF NAME 5" data-id="PSKUS/005" data-desig="CLERK">PSKUS/005 - STAFF NAME 5 (CLERK)</option>
+          </select>
+        </div>
+        <div class="att-group"><label>স্ট্যাটাস</label><select id="attendanceStatus" onchange="onStatusChanged()"><option value="Present">Present (উপস্থিত)</option><option value="Absent">Absent (অনুপস্থিত)</option></select></div>
+        <div id="absentReasonGroup" class="att-group hidden"><label>অনুপস্থিতির কারণ</label><input id="absentReasonInput" value="Not presented by self"></div>
+        <button id="attendanceSubmitBtn" class="action" style="width:100%" onclick="submitAttendance()"><i class="fas fa-check"></i> হাজিরা সাবমিট করুন</button>
+      </div>
+      <div class="table-wrap"><table id="attTable" class="hidden"><thead><tr><th>ক্রম</th><th>তারিখ</th><th>সময়</th><th>স্টাফ আইডি</th><th>স্টাফের নাম</th><th>পদবি</th><th>স্ট্যাটাস</th><th>কারণ</th></tr></thead><tbody id="attBody"></tbody></table></div>
+      <div id="attNoData" class="no-data hidden">কোনো হাজিরা রেকর্ড নেই।</div>
+    </div>
+
+    <div id="tab-report" class="tab-content">
+      <div class="toolbar"><select id="reportMonth" onchange="generateMonthlyReport()"></select><select id="reportYear" onchange="generateMonthlyReport()"></select></div>
+      <div class="report-wrap"><table id="reportTable"><thead><tr id="reportHeaderRow"></tr></thead><tbody id="reportBodies"></tbody></table></div>
+    </div>
+  </main>
+</section>
+
+
+    <div id="tab-staff-summary" class="tab-content">
+      <div class="toolbar">
+        <select id="staffSummaryMonth" onchange="generateStaffSummary()"></select>
+        <select id="staffSummaryYear" onchange="generateStaffSummary()"></select>
+        <button class="action" onclick="generateStaffSummary()"><i class="fas fa-calculator"></i> Summary Refresh</button>
+      </div>
+      <div class="staff-summary-box">
+        <div class="staff-summary-title">
+          <h3><i class="fas fa-users"></i> Staff Wise Attendance Summary</h3>
+          <span style="color:var(--muted);font-size:12px">নির্বাচিত মাস অনুযায়ী হিসাব</span>
+        </div>
+        <div class="staff-summary-wrap">
+          <table id="staffSummaryTable">
+            <thead><tr>
+              <th>STAFF ID / NAME</th>
+              <th>TOTAL PRESENT</th>
+              <th>TOTAL ABSENT</th>
+              <th>TOTAL ATTENDANCE</th>
+              <th>MANTHLY HOLIDEY</th>
+              <th>TOTAL WARKING DAY</th>
+              <th>ATTENDANCE %</th>
+              <th>SALARY SLIP</th>
+            </tr></thead>
+            <tbody id="staffSummaryBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+<div id="detailsModal" class="modal" onclick="if(event.target===this)closeDetails()">
+  <div class="modal-box">
+    <div class="modal-head"><b><i class="fas fa-file-lines"></i> Application Details</b><button onclick="closeDetails()">&times;</button></div>
+    <div id="detailsBody" class="modal-body"></div>
+  </div>
+</div>
+
+<div id="salaryModal" class="modal" onclick="if(event.target===this)closeSalarySlip()">
+  <div class="modal-box">
+    <div class="modal-head"><b><i class="fas fa-file-invoice-dollar"></i> Staff Salary Slip</b><button onclick="closeSalarySlip()">&times;</button></div>
+    <div class="modal-body">
+      <div id="salaryStaffInfo" style="background:#eef9f1;padding:12px;border-radius:8px;margin-bottom:15px"></div>
+      <div class="salary-grid">
+        <div class="salary-field"><label>Basic Salary (Fixed)</label><input id="salaryBasic" type="number" min="0" value="25990" readonly></div>
+        <div class="salary-field"><label>Dearness Allowance (DA) — 25.70%</label><input id="salaryDA" type="number" min="0" value="0" readonly></div>
+        <div class="salary-field"><label>HRA — 12%</label><input id="salaryHRA" type="number" min="0" value="0" readonly></div>
+        <div class="salary-field"><label>Mediclaim</label><input id="salaryMediclaim" type="number" min="0" value="500" readonly></div>
+        <div class="salary-field"><label>Income Per Day</label><input id="salaryPerDay" type="number" min="0" value="0" readonly></div>
+        <div class="salary-field"><label>Actual Earning (Present Days)</label><input id="salaryActual" type="number" min="0" value="0" readonly></div>
+        <div class="salary-field"><label>Provident Fund — 12% of (Basic + DA)</label><input id="salaryPF" type="number" min="0" value="0" readonly></div>
+        <div class="salary-field"><label>Professional Tax</label><input id="salaryPT" type="number" min="0" value="150" readonly></div>
+      </div>
+      <div id="salaryResult" class="salary-result"></div>
+      <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:14px;flex-wrap:wrap">
+        <button class="action" onclick="printSalarySlip()"><i class="fas fa-print"></i> Print Salary Slip</button>
+        <button class="small-btn" style="background:#6b7280" onclick="closeSalarySlip()">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="toast" class="toast hidden"></div>
+
+<script>
+/* =========================================================
+   FINAL ADMIN CONFIGURATION
+   IMPORTANT: This is the CURRENT Apps Script Web App URL.
+   ========================================================= */
+const API_URL = "https://script.google.com/macros/s/AKfycbyeT-KEMXwrmKtDwU12qX1iSZ2L8rnsUDNTjbJBgHZDahtAiTzLQO6qLGKKikZF4ozM/exec";
+
+const SESSION_KEY = "PSKUS_ADMIN_TOKEN";
+const USER_KEY = "PSKUS_ADMIN_USER";
+let allApplications = [];
+let allAttendance = [];
+let otpTimerHandle = null;
+
+const applicationTypes = [
+  "KCC Loan","SHG Loan","Loan Against NSC / KVP / LIC","Consumer Loan",
+  "Savings Deposit Account","Current Account","Fixed Deposit","MIS Deposit","Recurring Deposit"
+];
+
+function $(id){ return document.getElementById(id); }
+
+function escapeHtml(value){
+  return String(value ?? "")
+    .replace(/&/g,"&amp;").replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;").replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+}
+
+function showToast(message,type=""){
+  const t=$("toast"); t.textContent=message; t.className="toast "+type;
+  setTimeout(()=>t.classList.add("hidden"),3500);
+}
+
+function getToken(){ return localStorage.getItem(SESSION_KEY) || ""; }
+
+function clearSession(){
+  localStorage.removeItem(SESSION_KEY);
+  localStorage.removeItem(USER_KEY);
+}
+
+function showLogin(){
+  $("loginPage").classList.remove("hidden");
+  $("dashboard").classList.add("hidden");
+  $("step1").classList.add("active");
+  $("step2").classList.remove("active");
+}
+
+function showDashboard(){
+  $("loginPage").classList.add("hidden");
+  $("dashboard").classList.remove("hidden");
+  $("sessionInfo").textContent="Administrator";
+  initDashboard();
+}
+
+/* ---------- LOGIN + OTP ---------- */
+
+async function getJson(url){
+  const response = await fetch(url,{method:"GET",cache:"no-store"});
+  const text = await response.text();
+  let data;
+  try{ data=JSON.parse(text); }
+  catch(e){ throw new Error("Server থেকে সঠিক JSON response পাওয়া যায়নি।"); }
+  return data;
+}
+
+async function startAdminLogin(){
+  const user=$("loginUser").value.trim();
+  const pass=$("loginPass").value.trim();
+  $("loginError1").textContent="";
+  if(!user || !pass){
+    $("loginError1").textContent="Username এবং Password দিন।";
+    return;
+  }
+
+  const btn=document.querySelector("#step1 .primary-btn");
+  btn.disabled=true; btn.innerHTML='<i class="fas fa-spinner fa-spin"></i> যাচাই হচ্ছে...';
+
+  try{
+    const loginData=await getJson(
+      API_URL+"?action=adminLogin&username="+encodeURIComponent(user)+"&password="+encodeURIComponent(pass)
+    );
+
+    if(loginData.status!=="success"){
+      throw new Error(loginData.message || "Username/Password ভুল।");
+    }
+
+    const otpData=await getJson(
+      API_URL+"?action=sendOtp&username="+encodeURIComponent(user)+"&password="+encodeURIComponent(pass)
+    );
+
+    if(otpData.status!=="success"){
+      throw new Error(otpData.message || "OTP পাঠানো যায়নি।");
+    }
+
+    sessionStorage.setItem("PSKUS_LOGIN_USER",user);
+    sessionStorage.setItem("PSKUS_LOGIN_PASS",pass);
+    $("step1").classList.remove("active");
+    $("step2").classList.add("active");
+    $("otpInput").focus();
+    startOtpTimer(300);
+    showToast("OTP সফলভাবে পাঠানো হয়েছে।","success");
+  }catch(err){
+    console.error(err);
+    $("loginError1").textContent=err.message || "Server-এর সাথে যোগাযোগ করা যাচ্ছে না।";
+  }finally{
+    btn.disabled=false; btn.innerHTML='<i class="fas fa-right-to-bracket"></i> Login & Send OTP';
+  }
+}
+
+async function verifyOTP(){
+  const otp=$("otpInput").value.trim();
+  const user=sessionStorage.getItem("PSKUS_LOGIN_USER") || "";
+  $("loginError2").textContent="";
+
+  if(!/^\d{6}$/.test(otp)){
+    $("loginError2").textContent="সঠিক ৬ সংখ্যার OTP দিন।";
+    return;
+  }
+
+  const btn=document.querySelector("#step2 .primary-btn");
+  btn.disabled=true; btn.innerHTML='<i class="fas fa-spinner fa-spin"></i> যাচাই হচ্ছে...';
+
+  try{
+    const data=await getJson(
+      API_URL+"?action=verifyOtp&otp="+encodeURIComponent(otp)
+    );
+
+    if(data.status!=="success" || !data.token){
+      throw new Error(data.message || "OTP verification failed.");
+    }
+
+    localStorage.setItem(SESSION_KEY,data.token);
+    localStorage.setItem(USER_KEY,user);
+    sessionStorage.removeItem("PSKUS_LOGIN_USER");
+    sessionStorage.removeItem("PSKUS_LOGIN_PASS");
+    stopOtpTimer();
+    showDashboard();
+    showToast("Admin Login সফল হয়েছে।","success");
+  }catch(err){
+    console.error(err);
+    $("loginError2").textContent=err.message || "OTP verification করা যাচ্ছে না।";
+  }finally{
+    btn.disabled=false; btn.innerHTML='<i class="fas fa-check-circle"></i> Verify OTP';
+  }
+}
+
+function backToLogin(){
+  stopOtpTimer();
+  $("step2").classList.remove("active");
+  $("step1").classList.add("active");
+  $("loginError2").textContent="";
+}
+
+function startOtpTimer(seconds){
+  stopOtpTimer();
+  let left=seconds;
+  $("otpTimer").textContent="OTP valid প্রায় "+Math.ceil(left/60)+" মিনিট।";
+  otpTimerHandle=setInterval(()=>{
+    left--;
+    if(left<=0){stopOtpTimer();$("otpTimer").textContent="OTP-এর সময় শেষ হয়েছে। আবার Login করে OTP নিন।";return;}
+    $("otpTimer").textContent="OTP valid: "+Math.floor(left/60)+":"+String(left%60).padStart(2,"0");
+  },1000);
+}
+function stopOtpTimer(){ if(otpTimerHandle)clearInterval(otpTimerHandle); otpTimerHandle=null; }
+
+function logoutAdmin(){
+  clearSession();
+  sessionStorage.clear();
+  location.reload();
+}
+
+/* ---------- API ---------- */
+
+async function apiGet(action,params={}){
+  const token=getToken();
+  const q=new URLSearchParams({action,...params});
+  if(token) q.set("token",token);
+  const data=await getJson(API_URL+"?"+q.toString());
+  if(data.status==="error" && /Unauthorized|login required|invalid/i.test(data.message||"")){
+    clearSession(); showLogin(); throw new Error("Admin session শেষ হয়েছে। আবার Login করুন।");
+  }
+  return data;
+}
+
+async function apiPost(payload){
+  const body={...payload,token:getToken()};
+  const response=await fetch(API_URL,{
+    method:"POST",
+    headers:{"Content-Type":"text/plain;charset=utf-8"},
+    body:JSON.stringify(body)
+  });
+  const text=await response.text();
+  let data;
+  try{data=JSON.parse(text)}catch(e){throw new Error("Server থেকে সঠিক response পাওয়া যায়নি।")}
+  if(data.status==="error" && /Unauthorized|login required|invalid/i.test(data.message||"")){
+    clearSession(); showLogin(); throw new Error("Admin session শেষ হয়েছে। আবার Login করুন।");
+  }
+  return data;
+}
+
+/* ---------- DASHBOARD ---------- */
+
+function initDashboard(){
+  buildTypeFilters();
+  buildReportSelectors();
+  buildStaffSummarySelectors();
+  setupTabs();
+  setupFilters();
+  updateAttendanceTimeState();
+  loadApplications();
+  loadAttendanceData();
+  generateMonthlyReport();
+  generateStaffSummary();
+}
+
+function buildTypeFilters(){
+  ["filterPendingType","filterApprovedType","filterAllType"].forEach(id=>{
+    const el=$(id); if(!el)return;
+    el.innerHTML='<option value="">সব আবেদন প্রকার</option>'+
+      applicationTypes.map(x=>`<option value="${escapeHtml(x)}">${escapeHtml(x)}</option>`).join("");
+  });
+}
+
+function setupTabs(){
+  document.querySelectorAll(".tab").forEach(btn=>{
+    btn.onclick=()=>{
+      document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));
+      document.querySelectorAll(".tab-content").forEach(x=>x.classList.remove("active"));
+      btn.classList.add("active");
+      $("tab-"+btn.dataset.tab).classList.add("active");
+      if(btn.dataset.tab==="attendance")loadAttendanceData();
+      if(btn.dataset.tab==="report")generateMonthlyReport();
+      if(btn.dataset.tab==="staff-summary")generateStaffSummary();
+    };
+  });
+}
+
+function setupFilters(){
+  ["searchPending","searchApproved","searchRejected","searchAll"].forEach(id=>{
+    $(id).addEventListener("input",renderAllTables);
+  });
+  ["filterPendingType","filterApprovedType","filterAllType","filterAllStatus"].forEach(id=>{
+    $(id).addEventListener("change",renderAllTables);
+  });
+}
+
+async function loadApplications(){
+  $("pendingLoading").classList.remove("hidden");
+  try{
+    const data=await apiGet("getAll");
+    if(data.status!=="success")throw new Error(data.message||"Application data পাওয়া যায়নি।");
+    allApplications=Array.isArray(data.data)?data.data:[];
+    updateCounts();
+    renderAllTables();
+  }catch(err){
+    console.error(err);
+    showToast(err.message||"Application data load করা যাচ্ছে না।","error");
+  }finally{
+    $("pendingLoading").classList.add("hidden");
+  }
+}
+
+function updateCounts(){
+  const pending=allApplications.filter(a=>(a.Status||"Pending")==="Pending").length;
+  const approved=allApplications.filter(a=>a.Status==="Approved").length;
+  const rejected=allApplications.filter(a=>a.Status==="Rejected").length;
+  $("summaryTotal").textContent=allApplications.length;
+  $("summaryPending").textContent=pending;
+  $("summaryApproved").textContent=approved;
+  $("summaryRejected").textContent=rejected;
+  $("pendingCount").textContent=pending;
+  $("approvedCount").textContent=approved;
+  $("rejectedCount").textContent=rejected;
+  $("allCount").textContent=allApplications.length;
+}
+
+function filterApps(apps,searchId,typeId,statusId){
+  let result=[...apps];
+  const search=searchId?$(searchId).value.trim().toLowerCase():"";
+  const type=typeId?$(typeId).value:"";
+  const status=statusId?$(statusId).value:"";
+  if(search){
+    result=result.filter(a=>{
+      return String(a["Application ID"]||"").toLowerCase().includes(search) ||
+             String(a["Applicant Name"]||"").toLowerCase().includes(search) ||
+             String(a["Mobile Number"]||"").toLowerCase().includes(search);
+    });
+  }
+  if(type)result=result.filter(a=>String(a["Application Type"]||"")===type);
+  if(status)result=result.filter(a=>(a.Status||"Pending")===status);
+  return result;
+}
+
+function renderAllTables(){
+  renderTable("pending",
+    filterApps(allApplications.filter(a=>(a.Status||"Pending")==="Pending"),"searchPending","filterPendingType",null));
+  renderTable("approved",
+    filterApps(allApplications.filter(a=>a.Status==="Approved"),"searchApproved","filterApprovedType",null));
+  renderTable("rejected",
+    filterApps(allApplications.filter(a=>a.Status==="Rejected"),"searchRejected",null,null));
+  renderTable("all",
+    filterApps(allApplications,"searchAll","filterAllType","filterAllStatus"));
+}
+
+function amountOf(a){
+  return a["Amount"]||a["Deposit"]||a["Monthly Amount"]||"";
+}
+
+function statusBadge(status){
+  const cls=status==="Approved"?"approved":status==="Rejected"?"rejected":"pending";
+  return `<span class="badge ${cls}">${escapeHtml(status||"Pending")}</span>`;
+}
+
+function renderTable(tab,apps){
+  const tbody=$(tab+"Body"), table=$(tab+"Table"), noData=$(tab+"NoData");
+  tbody.innerHTML="";
+  if(!apps.length){table.classList.add("hidden");noData.classList.remove("hidden");return}
+  table.classList.remove("hidden");noData.classList.add("hidden");
+
+  apps.forEach((a,index)=>{
+    const status=a.Status||"Pending";
+    const id=String(a["Application ID"]||"");
+    const tr=document.createElement("tr");
+    let change="";
+    if(tab==="pending"||tab==="all"){
+      change=`<select id="status_${tab}_${index}" class="status-select">
+        <option value="Pending" ${status==="Pending"?"selected":""}>Pending</option>
+        <option value="Approved" ${status==="Approved"?"selected":""}>Approved</option>
+        <option value="Rejected" ${status==="Rejected"?"selected":""}>Rejected</option>
+      </select>
+      <button class="small-btn" onclick="updateAppStatus('${escapeJs(id)}','${tab}',${index})">Save</button>`;
+    }
+    tr.innerHTML=`
+      <td>${index+1}</td>
+      <td>${escapeHtml(a["Date & Time"]||"")}</td>
+      <td><b>${escapeHtml(id)}</b></td>
+      <td>${escapeHtml(a["Application Type"]||"")}</td>
+      <td>${escapeHtml(a["Applicant Name"]||"")}</td>
+      <td>${escapeHtml(a["Mobile Number"]||"")}</td>
+      <td>${escapeHtml(amountOf(a))}</td>
+      <td>${statusBadge(status)}</td>
+      ${tab==="rejected"?`<td>${escapeHtml(a["Reject Reason"]||"")}</td>`:""}
+      <td><button class="small-btn" onclick='showDetails(${JSON.stringify(a)})'><i class="fas fa-eye"></i> View</button></td>
+      ${change?`<td>${change}</td>`:""}`;
+    tbody.appendChild(tr);
+  });
+}
+
+function escapeJs(v){return String(v).replace(/\\/g,"\\\\").replace(/'/g,"\\'");}
+
+async function updateAppStatus(appId,tab,index){
+  const select=$("status_"+tab+"_"+index); if(!select)return;
+  const newStatus=select.value;
+  let reason="";
+  if(newStatus==="Rejected"){
+    reason=prompt("রিজেক্ট করার কারণ লিখুন:","Not available")||"";
+    if(!reason)return;
+  }
+  try{
+    const data=await apiPost({action:"updateStatus",applicationId:appId,status:newStatus,rejectReason:reason});
+    if(data.status!=="success")throw new Error(data.message||"Status update failed.");
+    showToast("Status সফলভাবে আপডেট হয়েছে।","success");
+    await loadApplications();
+  }catch(err){showToast(err.message||"Status update করা যাচ্ছে না।","error")}
+}
+
+/* ---------- DETAILS ---------- */
+
+function showDetails(app){
+  const body=$("detailsBody");
+  const keys=[
+    "Application ID","Application Type","Date & Time","Applicant Name","Father/Husband Name",
+    "Mother Name","Mobile Number","Address","Amount","PAN","Aadhaar","DOB","Occupation",
+    "Tenure","Nominee Name","SHG Name","Member Count","Security Type","Certificate Number",
+    "Business Type","Business Name","Loan Purpose","Land Details","Status","Reject Reason"
+  ];
+  body.innerHTML='<div class="details-grid">'+keys.map(k=>
+    `<div class="detail"><b>${escapeHtml(k)}</b><span>${escapeHtml(app[k]??"")}</span></div>`
+  ).join("")+'</div>';
+  $("detailsModal").classList.add("show");
+}
+function closeDetails(){$("detailsModal").classList.remove("show")}
+
+/* ---------- ATTENDANCE ---------- */
+
+function updateAttendanceTimeState(){
+  const parts=new Intl.DateTimeFormat("en-IN",{timeZone:"Asia/Kolkata",hour:"2-digit",minute:"2-digit",hour12:false}).formatToParts(new Date());
+  const hour=Number(parts.find(x=>x.type==="hour")?.value||0);
+  const minute=Number(parts.find(x=>x.type==="minute")?.value||0);
+  const closed=hour*60+minute>=720;
+  const notice=$("attendanceNotice"),btn=$("attendanceSubmitBtn");
+  if(closed){
+    notice.className="notice closed";
+    notice.innerHTML='<i class="fas fa-lock"></i> আজকের হাজিরা গ্রহণের সময় শেষ হয়েছে।<br><small>দুপুর ১২:০০টার পর কোনো হাজিরা গ্রহণ করা হবে না।</small>';
+    btn.disabled=true;btn.innerHTML='<i class="fas fa-lock"></i> হাজিরা গ্রহণ বন্ধ';
+  }else{
+    notice.className="notice open";
+    notice.innerHTML='<i class="fas fa-clock"></i> হাজিরা গ্রহণের সময় চলছে।<br><small>শেষ সময়: দুপুর ১২:০০টা</small>';
+    btn.disabled=false;btn.innerHTML='<i class="fas fa-check"></i> হাজিরা সাবমিট করুন';
+  }
+}
+
+function onStatusChanged(){
+  const absent=$("attendanceStatus").value==="Absent";
+  $("absentReasonGroup").classList.toggle("hidden",!absent);
+  if(absent)$("absentReasonInput").value="Not presented by self";
+}
+
+async function loadAttendanceData(){
+  try{
+    const data=await apiGet("getAttendance");
+    if(data.status!=="success")throw new Error(data.message||"Attendance data পাওয়া যায়নি।");
+    allAttendance=Array.isArray(data.data)?data.data:[];
+    $("attCount").textContent=allAttendance.length;
+    // Keep Staff Wise Summary synchronized with the same live attendance dataset.
+    generateStaffSummary();
+    const tbody=$("attBody");
+    tbody.innerHTML="";
+    if(!allAttendance.length){
+      $("attTable").classList.add("hidden");$("attNoData").classList.remove("hidden");return;
+    }
+    $("attTable").classList.remove("hidden");$("attNoData").classList.add("hidden");
+    allAttendance.forEach((a,i)=>{
+      const tr=document.createElement("tr");
+      const status=a["স্ট্যাটাস"]||a.Status||"Present";
+      tr.innerHTML=`
+        <td>${i+1}</td>
+        <td>${escapeHtml(a["তারিখ"]||"")}</td>
+        <td>${escapeHtml(a["সময়"]||"")}</td>
+        <td>${escapeHtml(a["স্টাফ আইডি"]||"")}</td>
+        <td>${escapeHtml(a["স্টাফের নাম"]||"")}</td>
+        <td>${escapeHtml(a["পদবি (Designation)"]||"")}</td>
+        <td>${statusBadge(status==="Present"?"Approved":"Rejected").replace(status==="Present"?"Approved":"Rejected",escapeHtml(status))}</td>
+        <td>${escapeHtml(a["অনুপস্থিতির কারণ"]||"")}</td>`;
+      tbody.appendChild(tr);
+    });
+    generateMonthlyReport();
+  }catch(err){showToast(err.message||"Attendance data load করা যাচ্ছে না।","error")}
+}
+
+async function submitAttendance(){
+  updateAttendanceTimeState();
+  const btn=$("attendanceSubmitBtn");
+  if(btn.disabled){showToast("দুপুর ১২:০০টার পর হাজিরা নেওয়া যাবে না।","error");return}
+  const sel=$("staffSelect"), opt=sel.options[sel.selectedIndex];
+  if(!sel.value){showToast("দয়া করে স্টাফ নির্বাচন করুন।","error");return}
+  btn.disabled=true;btn.innerHTML='<i class="fas fa-spinner fa-spin"></i> সংরক্ষণ হচ্ছে...';
+  try{
+    const status=$("attendanceStatus").value;
+    const reason=$("absentReasonInput").value.trim()||"Not presented by self";
+    const data=await apiPost({
+      action:"saveAttendance",
+      staffId:opt.getAttribute("data-id")||"",
+      staffName:sel.value,
+      designation:opt.getAttribute("data-desig")||"STAFF",
+      status,
+      reason
+    });
+    if(data.status!=="success")throw new Error(data.message||"Attendance save failed.");
+    showToast(data.message||"হাজিরা সফলভাবে সংরক্ষিত হয়েছে।","success");
+    sel.value="";$("attendanceStatus").value="Present";onStatusChanged();
+    await loadAttendanceData();
+  }catch(err){showToast(err.message||"Attendance save করা যাচ্ছে না।","error")}
+  finally{updateAttendanceTimeState()}
+}
+
+/* ---------- MONTHLY REPORT ---------- */
+
+function buildReportSelectors(){
+  const months=["JANUARY - জানুয়ারি","FEBRUARY - ফেব্রুয়ারি","MARCH - মার্চ","APRIL - এপ্রিল","MAY - মে","JUNE - জুন","JULY - জুলাই","AUGUST - আগস্ট","SEPTEMBER - সেপ্টেম্বর","OCTOBER - অক্টোবর","NOVEMBER - নভেম্বর","DECEMBER - ডিসেম্বর"];
+  $("reportMonth").innerHTML=months.map((m,i)=>`<option value="${i}">${m}</option>`).join("");
+  const y=new Date().getFullYear();
+  $("reportYear").innerHTML=Array.from({length:5},(_,i)=>`<option value="${y-i}">${y-i}</option>`).join("");
+  $("reportMonth").value=new Date().getMonth();$("reportYear").value=y;
+}
+
+function attendanceFor(staffId,year,month,day){
+  const target=String(day).padStart(2,"0")+"/"+String(month+1).padStart(2,"0")+"/"+year;
+  return allAttendance.find(a=>{
+    const id=String(a["স্টাফ আইডি"]||"").replace(/^['"]/,"");
+    const date=String(a["তারিখ"]||"").replace(/^['"]/,"");
+    return id===staffId && date===target;
+  });
+}
+
+function generateMonthlyReport(){
+  if(!$('reportMonth'))return;
+  const month=Number($('reportMonth').value),year=Number($('reportYear').value);
+  const days=new Date(year,month+1,0).getDate();
+
+  // Month-level tracking totals. These count actual Present/Absent records
+  // for the selected month and update automatically after attendance submission.
+  let monthPresent=0, monthAbsent=0;
+
+  // Count holidays from the calendar rules for the selected month.
+  // Sunday + 2nd and 4th Saturday are treated as holidays.
+  let holidayCount=0;
+  for(let d=1;d<=days;d++){
+    const date=new Date(year,month,d);
+    const sun=date.getDay()===0;
+    const sat=date.getDay()===6;
+    const nthSat=Math.floor((d-1)/7)+1;
+    if(sun || (sat && (nthSat===2 || nthSat===4))) holidayCount++;
+  }
+  const workingDays=days-holidayCount;
+
+  $('reportHeaderRow').innerHTML=
+    '<th>স্টাফ ID / নাম</th>'+
+    Array.from({length:days},(_,i)=>`<th>${i+1}</th>`).join('')+
+    '<th class="report-total-head">PRESENT</th><th class="report-total-head">ABSENT</th>'+
+    `<th class="report-total-head">MANTHLY HOLIDEY(${holidayCount})</th>`+
+    '<th class="report-total-head">TOTAL WARKING DAY(TOTAL DAY OF MANTH-HOLIDEY)</th>';
+
+  const staff=[
+    ['PSKUS/001','PATIT PABAN ROY'],['PSKUS/002','RAJU MONDAL'],['PSKUS/003','PINKI DAS'],
+    ['PSKUS/004','NILIMA BISWAS'],['PSKUS/005','STAFF NAME 5']
+  ];
+
+  $('reportBodies').innerHTML=staff.map(([id,name])=>{
+    let cells='', presentCount=0, absentCount=0;
+
+    for(let d=1;d<=days;d++){
+      const date=new Date(year,month,d),sun=date.getDay()===0,sat=date.getDay()===6;
+      const nthSat=Math.floor((d-1)/7)+1;
+      const holiday=sun||(sat&&(nthSat===2||nthSat===4));
+      const rec=attendanceFor(id,year,month,d);
+      const status=rec?String(rec['স্ট্যাটাস']||rec.Status||'').trim():'';
+
+      if(status==='Present'){ presentCount++; monthPresent++; }
+      if(status==='Absent'){ absentCount++; monthAbsent++; }
+
+      const mark=holiday?'H':status==='Present'?'P':status==='Absent'?'A':'-';
+      const cellClass=holiday?'holiday-cell':status==='Present'?'present-cell':status==='Absent'?'absent-cell':'empty-cell';
+      const label=holiday?'HOLIDAY':status==='Present'?'PRESENT':status==='Absent'?'ABSENT':'';
+      cells+=`<td class="${cellClass}" title="${label}" style="text-align:center;font-weight:800">${mark}</td>`;
+    }
+
+    return `<tr><td><b>${escapeHtml(id)}</b><br><small>${escapeHtml(name)}</small></td>${cells}`+
+      `<td class="report-total-cell present-total">${presentCount}</td>`+
+      `<td class="report-total-cell absent-total">${absentCount}</td>`+
+      `<td class="report-total-cell holiday-total">${holidayCount}</td>`+
+      `<td class="report-total-cell working-total">${workingDays}</td></tr>`;
+  }).join('');
+
+  if($('monthlyPresentTotal')) $('monthlyPresentTotal').textContent=monthPresent;
+  if($('monthlyAbsentTotal')) $('monthlyAbsentTotal').textContent=monthAbsent;
+  if($('monthlyRecordTotal')) $('monthlyRecordTotal').textContent=monthPresent+monthAbsent;
+}
+
+
+/* ---------- STAFF WISE SUMMARY ---------- */
+
+function buildStaffSummarySelectors(){
+  const months=["JANUARY - জানুয়ারি","FEBRUARY - ফেব্রুয়ারি","MARCH - মার্চ","APRIL - এপ্রিল","MAY - মে","JUNE - জুন","JULY - জুলাই","AUGUST - আগস্ট","SEPTEMBER - সেপ্টেম্বর","OCTOBER - অক্টোবর","NOVEMBER - নভেম্বর","DECEMBER - ডিসেম্বর"];
+  const m=$('staffSummaryMonth'),ySel=$('staffSummaryYear');
+  if(!m||!ySel)return;
+  m.innerHTML=months.map((x,i)=>`<option value="${i}">${x}</option>`).join('');
+  const y=new Date().getFullYear();
+  ySel.innerHTML=Array.from({length:5},(_,i)=>`<option value="${y-i}">${y-i}</option>`).join('');
+  m.value=new Date().getMonth(); ySel.value=y;
+}
+
+function getMonthHolidayInfo(year,month){
+  const days=new Date(year,month+1,0).getDate();
+  let holidayCount=0;
+  for(let d=1;d<=days;d++){
+    const date=new Date(year,month,d);
+    const sun=date.getDay()===0, sat=date.getDay()===6;
+    const nthSat=Math.floor((d-1)/7)+1;
+    if(sun || (sat && (nthSat===2 || nthSat===4))) holidayCount++;
+  }
+  return {days,holidayCount,workingDays:days-holidayCount};
+}
+
+function generateStaffSummary(){
+  if(!$('staffSummaryMonth')||!$('staffSummaryYear'))return;
+  const month=Number($('staffSummaryMonth').value), year=Number($('staffSummaryYear').value);
+  const info=getMonthHolidayInfo(year,month);
+  const staff=[
+    ['PSKUS/001','PATIT PABAN ROY'],['PSKUS/002','RAJU MONDAL'],['PSKUS/003','PINKI DAS'],
+    ['PSKUS/004','NILIMA BISWAS'],['PSKUS/005','STAFF NAME 5']
+  ];
+  let grandPresent=0,grandAbsent=0;
+  const rows=staff.map(([id,name])=>{
+    let present=0,absent=0;
+    for(let d=1;d<=info.days;d++){
+      const rec=attendanceFor(id,year,month,d);
+      const status=rec?String(rec['স্ট্যাটাস']||rec.Status||'').trim():'';
+      if(status==='Present')present++;
+      if(status==='Absent')absent++;
+    }
+    grandPresent+=present; grandAbsent+=absent;
+    const total=present+absent;
+    const pct=info.workingDays>0?((present/info.workingDays)*100):0;
+    return `<tr>
+      <td><b>${escapeHtml(id)}</b><br><small>${escapeHtml(name)}</small></td>
+      <td class="summary-present">${present}</td>
+      <td class="summary-absent">${absent}</td>
+      <td class="summary-total">${total}</td>
+      <td class="summary-holiday">${info.holidayCount}</td>
+      <td class="summary-working">${info.workingDays}</td>
+      <td>${pct.toFixed(1)}%</td>
+      <td><button class="salary-btn" onclick="openSalarySlip('${escapeJs(id)}','${escapeJs(name)}',${present},${absent},${info.holidayCount},${info.workingDays},'${month}','${year}')"><i class="fas fa-file-invoice-dollar"></i> Generate</button></td>
+    </tr>`;
+  }).join('');
+  $('staffSummaryBody').innerHTML=rows;
+}
+
+let salaryContext=null;
+function openSalarySlip(id,name,present,absent,holiday,working,month,year){
+  salaryContext={id,name,present,absent,holiday,working,month:Number(month),year:Number(year)};
+  const monthText=$('staffSummaryMonth').selectedOptions[0]?.text||'';
+  $('salaryStaffInfo').innerHTML=`<b>${escapeHtml(name)}</b> (${escapeHtml(id)})<br><small>Month: ${escapeHtml(monthText)} ${year} &nbsp; | &nbsp; Present: ${present} &nbsp; | &nbsp; Absent: ${absent} &nbsp; | &nbsp; Monthly Holiday: ${holiday} &nbsp; | &nbsp; Working Day: ${working}</small>`;
+  $('salaryBasic').value=25990;
+  calculateSalary();
+  $('salaryModal').classList.add('show');
+}
+function closeSalarySlip(){$('salaryModal').classList.remove('show');salaryContext=null}
+
+/* ---------- SALARY CALCULATION ----------
+   Salary rules supplied for STAFF:
+   Basic Salary = ₹25,990
+   DA = Basic × 25.70%
+   HRA = Basic × 12%
+   Mediclaim = ₹500
+   Gross Earning = Basic + DA + HRA + Mediclaim
+   Income Per Day = Gross Earning / (Total Days - Monthly Holiday)
+   Actual Earning = Income Per Day × Present Days
+   PF = (Basic + DA) × 12%
+   Professional Tax = ₹150
+   Net Salary = Actual Earning - (PF + Professional Tax)
+------------------------------------------------------------ */
+function getSalaryCalculation(){
+  if(!salaryContext)return null;
+
+  const basic=25990;
+  const da=basic*0.257;
+  const hra=basic*0.12;
+  const mediclaim=500;
+  const gross=basic+da+hra+mediclaim;
+  const working=Number(salaryContext.working)||0;
+  const present=Number(salaryContext.present)||0;
+  const incomePerDay=working>0?gross/working:0;
+  const actualEarning=incomePerDay*present;
+  const pf=(basic+da)*0.12;
+  const professionalTax=150;
+  const totalDeduction=pf+professionalTax;
+  const netSalary=actualEarning-totalDeduction;
+
+  return {basic,da,hra,mediclaim,gross,working,present,incomePerDay,actualEarning,pf,professionalTax,totalDeduction,netSalary};
+}
+
+function calculateSalary(){
+  const c=getSalaryCalculation();
+  if(!c)return;
+
+  $('salaryBasic').value=c.basic.toFixed(2);
+  $('salaryDA').value=c.da.toFixed(2);
+  $('salaryHRA').value=c.hra.toFixed(2);
+  $('salaryMediclaim').value=c.mediclaim.toFixed(2);
+  $('salaryPerDay').value=c.incomePerDay.toFixed(2);
+  $('salaryActual').value=c.actualEarning.toFixed(2);
+  $('salaryPF').value=c.pf.toFixed(2);
+  $('salaryPT').value=c.professionalTax.toFixed(2);
+
+  $('salaryResult').innerHTML=`
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+      <span>Gross Earning</span><strong>₹ ${c.gross.toFixed(2)}</strong>
+      <span>Income Per Day</span><strong>₹ ${c.incomePerDay.toFixed(2)}</strong>
+      <span>Actual Earning</span><strong>₹ ${c.actualEarning.toFixed(2)}</strong>
+      <span>Total Deduction (PF + PT)</span><strong>₹ ${c.totalDeduction.toFixed(2)}</strong>
+      <span>Final Net Salary</span><strong style="font-size:20px">₹ ${c.netSalary.toFixed(2)}</strong>
+    </div>`;
+}
+
+function printSalarySlip(){
+  if(!salaryContext)return;
+  const c=getSalaryCalculation();
+  if(!c)return;
+
+  const monthText=$('staffSummaryMonth').selectedOptions[0]?.text||'';
+  const w=window.open('','_blank','width=850,height=950');
+  if(!w){showToast('Print window blocked. Browser থেকে popup allow করুন।','error');return;}
+
+  w.document.write(`<!doctype html><html><head><title>Salary Slip - ${escapeHtml(salaryContext.name)}</title>
+  <style>
+    body{font-family:Arial,sans-serif;padding:28px;color:#1f2937;background:#fff}
+    .head{text-align:center;border:2px solid #075e3b;border-bottom:4px solid #d49b00;padding:15px;border-radius:8px}
+    .head h1{color:#075e3b;margin:0 0 5px;font-size:24px}
+    .head p{margin:4px;font-weight:700}
+    .staff{margin-top:16px;border:1px solid #cfd8d3;border-radius:8px;padding:12px;display:grid;grid-template-columns:1fr 1fr;gap:7px}
+    .section{margin-top:16px;border:1px solid #cfd8d3;border-radius:8px;overflow:hidden}
+    .section h3{margin:0;background:#075e3b;color:#fff;padding:9px 12px;font-size:14px}
+    .row{display:flex;justify-content:space-between;padding:8px 12px;border-bottom:1px solid #edf0ee}
+    .row:last-child{border-bottom:0}
+    .earning{background:#f1faf3}.deduct{background:#fff5f5}.total{font-size:19px;font-weight:800;background:#eef9f1;color:#075e3b}
+    .note{font-size:11px;color:#555;margin-top:12px;line-height:1.5}
+    .sig{margin-top:65px;display:flex;justify-content:space-between;font-weight:700}
+    .sig span{width:220px;text-align:center;border-top:1px solid #333;padding-top:7px}
+    @media print{button{display:none}body{padding:12px}}
+  </style></head><body>
+  <div class="head"><h1>PRATAPPUR SAMABAY KRISHI UNNAYAN SAMITY LIMITED</h1><p>STAFF SALARY SLIP</p><p>${escapeHtml(monthText)} ${salaryContext.year}</p></div>
+  <div class="staff"><div><b>Staff ID:</b> ${escapeHtml(salaryContext.id)}</div><div><b>Staff Name:</b> ${escapeHtml(salaryContext.name)}</div><div><b>Total Present:</b> ${salaryContext.present} Day</div><div><b>Total Absent:</b> ${salaryContext.absent} Day</div><div><b>Monthly Holiday:</b> ${salaryContext.holiday} Day</div><div><b>Total Working Day:</b> ${salaryContext.working} Day</div></div>
+  <div class="section"><h3>EARNING DETAILS</h3>
+    <div class="row earning"><b>Basic Salary</b><span>₹ ${c.basic.toFixed(2)}</span></div>
+    <div class="row"><b>Dearness Allowance (DA) — 25.70%</b><span>₹ ${c.da.toFixed(2)}</span></div>
+    <div class="row"><b>HRA — 12%</b><span>₹ ${c.hra.toFixed(2)}</span></div>
+    <div class="row"><b>Mediclaim</b><span>₹ ${c.mediclaim.toFixed(2)}</span></div>
+    <div class="row total"><b>GROSS EARNING</b><span>₹ ${c.gross.toFixed(2)}</span></div>
+    <div class="row"><b>Income Per Day = Gross ÷ Working Day</b><span>₹ ${c.incomePerDay.toFixed(2)}</span></div>
+    <div class="row"><b>Actual Earning = Income Per Day × Present Day</b><span>₹ ${c.actualEarning.toFixed(2)}</span></div>
+  </div>
+  <div class="section"><h3>DEDUCTION DETAILS</h3>
+    <div class="row deduct"><b>Provident Fund = (Basic + DA) × 12%</b><span>₹ ${c.pf.toFixed(2)}</span></div>
+    <div class="row deduct"><b>Professional Tax</b><span>₹ ${c.professionalTax.toFixed(2)}</span></div>
+    <div class="row"><b>TOTAL DEDUCTION</b><span>₹ ${c.totalDeduction.toFixed(2)}</span></div>
+    <div class="row total"><b>FINAL NET SALARY</b><span>₹ ${c.netSalary.toFixed(2)}</span></div>
+  </div>
+  <div class="note">Calculation rule: Gross Earning = Basic + DA + HRA + Mediclaim. Income Per Day = Gross Earning ÷ (Total Days of Month − Monthly Holiday). Actual Earning = Income Per Day × Present Days. PF = (Basic + DA) × 12%. Professional Tax = ₹150. Final Net Salary = Actual Earning − Total Deduction.</div>
+  <div class="sig"><span>Employee Signature</span><span>Authorized Signature</span></div>
+  <script>window.onload=function(){window.print()}<\/script></body></html>`);
+  w.document.close();
+}
+
+/* ---------- START ---------- */
+
+document.addEventListener("DOMContentLoaded",()=>{
+  if(getToken()){
+    showDashboard();
+  }else{
+    showLogin();
+  }
+  setInterval(updateAttendanceTimeState,30000);
+});
+</script>
 </body>
-
 </html>
