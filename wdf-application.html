@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SHG Welfare Fund Claim Application - Pratappur SKUS Ltd.</title>
+<style>
+:root{
+  --navy:#073b6b; --blue:#0b65b2; --cyan:#0d8bdc; --gold:#d9a441;
+  --light:#f3f8fc; --border:#c9d8e6; --text:#17324d; --muted:#60778e;
+  --green:#138a5b; --red:#b42318;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,"Noto Sans Bengali",sans-serif;background:#eef4f8;color:var(--text)}
+.topbar{height:7px;background:linear-gradient(90deg,var(--navy),var(--cyan),var(--gold))}
+.container{max-width:1050px;margin:28px auto;padding:0 18px}
+.card{background:#fff;border:1px solid #d8e4ee;border-radius:18px;box-shadow:0 12px 35px rgba(12,54,88,.10);overflow:hidden}
+.header{background:linear-gradient(135deg,#063864,#0a6caf);color:#fff;padding:28px 30px;display:flex;gap:22px;align-items:center}
+.logo{width:72px;height:72px;border-radius:50%;background:#fff;color:var(--navy);display:flex;align-items:center;justify-content:center;font-weight:900;font-size:19px;border:4px solid rgba(255,255,255,.65)}
+.header h1{font-size:23px;margin:0 0 6px;letter-spacing:.3px}
+.header p{margin:3px 0;font-size:13px;opacity:.92}
+.badge{display:inline-block;margin-top:10px;padding:7px 12px;border-radius:20px;background:rgba(255,255,255,.15);font-size:12px;font-weight:700}
+.body{padding:28px}
+.section{border:1px solid var(--border);border-radius:14px;margin-bottom:20px;overflow:hidden;background:#fff}
+.section-title{padding:13px 17px;background:linear-gradient(90deg,#e9f4fc,#f8fbfe);border-left:5px solid var(--cyan);font-size:15px;font-weight:800;color:var(--navy)}
+.section-body{padding:18px}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}
+.field label{display:block;font-size:12px;font-weight:800;color:#39556d;margin-bottom:6px}
+input,select,textarea{width:100%;padding:11px 12px;border:1px solid #b9ccdc;border-radius:9px;background:#fbfdff;color:#17324d;font-size:14px;outline:none}
+input:focus,select:focus,textarea:focus{border-color:var(--cyan);box-shadow:0 0 0 3px rgba(13,139,220,.10)}
+input[readonly]{background:#f2f6f9}
+.required{color:var(--red)}
+.full{grid-column:1/-1}
+button{border:0;border-radius:10px;padding:12px 18px;font-weight:800;cursor:pointer}
+.primary{background:linear-gradient(135deg,#075fae,#0d8bdc);color:#fff}
+.success{background:linear-gradient(135deg,#0a7b51,#16a36f);color:#fff}
+.secondary{background:#e9f0f5;color:#29475f}
+button:disabled{opacity:.6;cursor:not-allowed}
+.verify-row{display:grid;grid-template-columns:1fr 190px;gap:10px}
+.notice{padding:13px 15px;border-radius:10px;background:#eef8ff;border-left:4px solid var(--cyan);font-size:13px;line-height:1.55}
+.success-note{background:#edf9f2;border-left-color:var(--green)}
+.purpose-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.purpose{border:2px solid #d7e4ef;border-radius:12px;padding:15px;text-align:center;cursor:pointer;background:#fff;transition:.2s}
+.purpose:hover,.purpose.active{border-color:var(--cyan);background:#f1f9ff;transform:translateY(-1px)}
+.purpose strong{display:block;color:var(--navy);font-size:14px}
+.purpose span{font-size:12px;color:var(--muted)}
+.conditional{display:none}
+.conditional.show{display:block}
+.amount{font-size:18px!important;font-weight:900!important;color:var(--green)!important;background:#f1fbf6!important}
+.actions{display:flex;gap:10px;justify-content:flex-end;margin-top:12px}
+.hidden{display:none!important}
+.status{margin-top:12px;font-size:13px;font-weight:700}
+.preview{display:none}
+.preview.show{display:block}
+.print-sheet{width:100%;background:#fff;color:#172b3d}
+.print-head{text-align:center;border-bottom:3px solid var(--navy);padding-bottom:12px}
+.print-head h2{margin:0;color:var(--navy);font-size:21px}
+.print-head h3{margin:6px 0;color:#0a6caf;font-size:17px}
+.print-head p{margin:2px;font-size:11px;color:#4b6275}
+.print-meta{display:grid;grid-template-columns:1fr 1fr;border:1px solid #9fb4c7;margin-top:12px}
+.print-meta div{padding:7px 9px;border-right:1px solid #9fb4c7;border-bottom:1px solid #9fb4c7;font-size:11px}
+.print-meta div:nth-child(even){border-right:0}
+.print-section{margin-top:13px}
+.print-section h4{margin:0;padding:7px 9px;background:#eaf3fa;color:var(--navy);border-left:4px solid var(--cyan);font-size:12px}
+.print-table{width:100%;border-collapse:collapse;font-size:10.5px}
+.print-table td{border:1px solid #aebdca;padding:6px 7px;vertical-align:top}
+.print-table td:nth-child(odd){font-weight:800;width:18%;background:#f8fafc}
+.signature-row{display:grid;grid-template-columns:1fr 1fr;gap:45px;margin-top:38px}
+.sig{text-align:center;border-top:1px solid #263d52;padding-top:7px;font-size:11px;min-height:55px}
+.office{margin-top:24px;border:1px solid #839bad}
+.office h4{margin:0;background:#eef3f7;padding:8px;color:var(--navy);font-size:12px}
+.office-grid{display:grid;grid-template-columns:1fr 1fr}
+.office-grid div{padding:8px;border:1px solid #c5d1da;font-size:10.5px;min-height:35px}
+.footer-note{text-align:center;font-size:9px;color:#63788a;margin-top:12px}
+.print-actions{display:flex;justify-content:center;gap:10px;margin:18px 0}
+@media(max-width:700px){
+ .grid,.purpose-grid{grid-template-columns:1fr}
+ .verify-row{grid-template-columns:1fr}
+ .header{padding:22px;align-items:flex-start}
+ .header h1{font-size:18px}.body{padding:17px}
+}
+@media print{
+ @page{size:A4 portrait;margin:10mm}
+ body{background:#fff}
+ .no-print,.topbar,.header,.body>.section,.print-actions{display:none!important}
+ .container{max-width:none;margin:0;padding:0}
+ .card{border:0;box-shadow:none;border-radius:0}
+ .body{padding:0}
+ .preview{display:block!important}
+ .print-sheet{font-family:Arial,"Noto Sans Bengali",sans-serif}
+}
+</style>
+</head>
+<body>
+<div class="topbar"></div>
+
+<div class="container">
+<div class="card">
+  <div class="header no-print">
+    <div class="logo">SKUS</div>
+    <div>
+      <h1>PRATAPPUR SAMABAY KRISHI UNNAYAN SAMITI LTD.</h1>
+      <p>Pratappur, Digambarpur, Krishnaganj, Nadia</p>
+      <p>SHG MEMBER WELFARE FUND</p>
+      <span class="badge">SEPARATE WDF CLAIM APPLICATION</span>
+    </div>
+  </div>
+
+  <div class="body">
+    <div class="section no-print">
+      <div class="section-title">1. SHG MEMBER VERIFICATION</div>
+      <div class="section-body">
+        <div class="notice">এই পৃথক WDF interface-এ আবেদন করার আগে Google Sheet-এ নিবন্ধিত SHG সদস্যের Aadhaar verification সফল হতে হবে।</div>
+        <br>
+        <div class="verify-row">
+          <input id="aadhar" maxlength="12" inputmode="numeric" autocomplete="off" placeholder="Enter 12 digit Aadhaar number">
+          <button id="verifyBtn" class="primary" type="button">VERIFY MEMBER</button>
+        </div>
+        <div id="verifyStatus" class="status"></div>
+      </div>
+    </div>
+
+    <div id="applicationArea" class="hidden no-print">
+      <div class="section">
+        <div class="section-title">2. VERIFIED MEMBER INFORMATION</div>
+        <div class="section-body">
+          <div class="grid">
+            <div class="field"><label>Branch Name</label><input id="branch" readonly></div>
+            <div class="field"><label>Name Of SHG</label><input id="groupName" readonly></div>
+            <div class="field"><label>SHG Member Name</label><input id="memberName" readonly></div>
+            <div class="field"><label>Guardian Name</label><input id="guardian" readonly></div>
+            <div class="field"><label>Village / Address</label><input id="address" readonly></div>
+            <div class="field"><label>PIN Code</label><input id="pin" readonly></div>
+            <div class="field"><label>Mobile</label><input id="mobile" readonly></div>
+            <div class="field"><label>Group Formation Date</label><input id="formationDate" readonly></div>
+            <div class="field full"><label>Name of PACS</label><input value="PRATAPPUR SKUS LTD." readonly></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-title">3. WDF APPLICATION PURPOSE</div>
+        <div class="section-body">
+          <div class="purpose-grid">
+            <div class="purpose" data-purpose="MEMBER DEATH"><strong>MEMBER DEATH</strong><span>Welfare claim ₹20,000</span></div>
+            <div class="purpose" data-purpose="HUSBAND DEATH"><strong>HUSBAND DEATH</strong><span>Welfare claim ₹10,000</span></div>
+            <div class="purpose" data-purpose="GRADUATION"><strong>GRADUATION</strong><span>Welfare claim ₹1,000</span></div>
+          </div>
+          <input id="purpose" type="hidden">
+        </div>
+      </div>
+
+      <div class="section conditional" id="memberDeath">
+        <div class="section-title">4A. MEMBER DEATH — CLAIM INFORMATION</div>
+        <div class="section-body">
+          <div class="grid">
+            <div class="field"><label>Name of Claimant / Related Person <span class="required">*</span></label><input id="claimPersonDeath" placeholder="Enter claimant / related person's name"></div>
+            <div class="field"><label>Date of Death <span class="required">*</span></label><input id="dateOfDeath" type="date"></div>
+            <div class="field"><label>Death Certificate Number <span class="required">*</span></label><input id="deathCertificateNo" placeholder="Certificate number"></div>
+            <div class="field"><label>Death Certificate Issuing Authority <span class="required">*</span></label><input id="deathIssuingAuthority" placeholder="Issuing authority"></div>
+            <div class="field"><label>Burn / Cremation Certificate Authority <span class="required">*</span></label><input id="burnCertificateAuthority" placeholder="Authority / certificate issuing body"></div>
+            <div class="field"><label>Amount of Claim</label><input id="deathAmount" class="amount" value="₹20,000" readonly></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section conditional" id="husbandDeath">
+        <div class="section-title">4B. HUSBAND DEATH — CLAIM INFORMATION</div>
+        <div class="section-body">
+          <div class="grid">
+            <div class="field"><label>Husband Name <span class="required">*</span></label><input id="husbandName" placeholder="Enter husband name"></div>
+            <div class="field"><label>Date of Death <span class="required">*</span></label><input id="husbandDateOfDeath" type="date"></div>
+            <div class="field"><label>Death Certificate Number <span class="required">*</span></label><input id="husbandDeathCertificateNo" placeholder="Certificate number"></div>
+            <div class="field"><label>Death Certificate Issuing Authority <span class="required">*</span></label><input id="husbandDeathIssuingAuthority" placeholder="Issuing authority"></div>
+            <div class="field"><label>Burn / Cremation Certificate Authority <span class="required">*</span></label><input id="husbandBurnCertificateAuthority" placeholder="Authority / certificate issuing body"></div>
+            <div class="field"><label>Amount of Claim</label><input class="amount" value="₹10,000" readonly></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section conditional" id="graduation">
+        <div class="section-title">4C. GRADUATION — EDUCATIONAL INFORMATION</div>
+        <div class="section-body">
+          <div class="grid">
+            <div class="field"><label>Student / Daughter Name <span class="required">*</span></label><input id="graduationStudentName" placeholder="Student / daughter name"></div>
+            <div class="field"><label>Date of Admission <span class="required">*</span></label><input id="dateOfAdmission" type="date"></div>
+            <div class="field"><label>Madhyamik Pass Board Name <span class="required">*</span></label><input id="madhyamikBoard" placeholder="e.g. WBBSE"></div>
+            <div class="field"><label>Higher Secondary Pass Board Name <span class="required">*</span></label><input id="hsBoard" placeholder="e.g. WBCHSE"></div>
+            <div class="field"><label>School Name <span class="required">*</span></label><input id="schoolName" placeholder="Name of school"></div>
+            <div class="field"><label>Name of College Where Admitted <span class="required">*</span></label><input id="collegeName" placeholder="College name"></div>
+            <div class="field"><label>Amount of Claim</label><input class="amount" value="₹1,000" readonly></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-title">5. APPLICANT & CLAIM DATE</div>
+        <div class="section-body">
+          <div class="grid">
+            <div class="field"><label>Applicant Name <span class="required">*</span></label><input id="applicantName" placeholder="Applicant name"></div>
+            <div class="field"><label>Applicant Email <span class="required">*</span></label><input id="applicantEmail" type="email" placeholder="Email address"></div>
+            <div class="field"><label>Date of Claim / Application Date</label><input id="claimDate" readonly></div>
+            <div class="field"><label>Selected Claim Amount</label><input id="claimAmount" class="amount" readonly></div>
+          </div>
+          <br>
+          <div class="notice">Declaration: I declare that the information provided in this application is true and correct to the best of my knowledge and that the supporting documents are genuine.</div>
+          <div class="actions">
+            <button class="secondary" type="button" id="resetBtn">RESET</button>
+            <button class="success" type="button" id="previewBtn">PREVIEW & SUBMIT</button>
+          </div>
+          <div id="submitStatus" class="status"></div>
+        </div>
+      </div>
+    </div>
+
+    <div id="preview" class="preview">
+      <div class="print-sheet" id="printSheet">
+        <div class="print-head">
+          <h2>PRATAPPUR SAMABAY KRISHI UNNAYAN SAMITI LTD.</h2>
+          <p>Pratappur, Digambarpur, Krishnaganj, Nadia</p>
+          <p>Email: pratappurskus@gmail.com</p>
+          <h3>SHG MEMBER WELFARE FUND — CLAIM APPLICATION</h3>
+        </div>
+
+        <div class="print-meta">
+          <div><b>Application No:</b> <span id="pAppId"></span></div>
+          <div><b>Application Date:</b> <span id="pDate"></span></div>
+          <div><b>WDF Application Purpose:</b> <span id="pPurpose"></span></div>
+          <div><b>Amount of Claim:</b> <span id="pAmount"></span></div>
+        </div>
+
+        <div class="print-section">
+          <h4>1. VERIFIED SHG MEMBER DETAILS</h4>
+          <table class="print-table"><tbody>
+            <tr><td>Branch Name</td><td id="pBranch"></td><td>Name Of SHG</td><td id="pGroup"></td></tr>
+            <tr><td>SHG Member Name</td><td id="pMember"></td><td>Guardian Name</td><td id="pGuardian"></td></tr>
+            <tr><td>Village / Address</td><td id="pAddress"></td><td>PIN Code</td><td id="pPin"></td></tr>
+            <tr><td>Mobile</td><td id="pMobile"></td><td>Aadhaar Number</td><td id="pAadhar"></td></tr>
+            <tr><td>Group Formation Date</td><td id="pFormation"></td><td>Name of PACS</td><td>PRATAPPUR SKUS LTD.</td></tr>
+          </tbody></table>
+        </div>
+
+        <div class="print-section">
+          <h4>2. CLAIM-SPECIFIC INFORMATION</h4>
+          <table class="print-table"><tbody id="pClaimBody"></tbody></table>
+        </div>
+
+        <div class="print-section">
+          <h4>3. APPLICANT DETAILS & DECLARATION</h4>
+          <table class="print-table"><tbody>
+            <tr><td>Applicant Name</td><td id="pApplicant"></td><td>Applicant Email</td><td id="pEmail"></td></tr>
+            <tr><td>Date of Claim</td><td id="pClaimDate"></td><td>Claim Amount</td><td id="pClaimAmount"></td></tr>
+          </tbody></table>
+          <p style="font-size:10.5px;line-height:1.5;margin:9px 2px;">I hereby declare that the information furnished above is true and correct. I understand that the claim will be subject to verification of the relevant records and supporting documents.</p>
+        </div>
+
+        <div class="signature-row">
+          <div class="sig"><b>Signature of Dal Netri / SHG Leader</b><br><br>Date: __________________</div>
+          <div class="sig"><b>Signature of Applicant</b><br><br>Date: __________________</div>
+        </div>
+
+        <div class="office">
+          <h4>FOR OFFICE USE ONLY</h4>
+          <div class="office-grid">
+            <div><b>Application Received On:</b> __________________</div>
+            <div><b>Received By:</b> __________________</div>
+            <div><b>Aadhaar / Member Verified:</b> YES / NO</div>
+            <div><b>Documents Verified:</b> YES / NO</div>
+            <div><b>Claim Recommended:</b> YES / NO</div>
+            <div><b>Claim Approved:</b> YES / NO</div>
+            <div><b>Sanction / Reference No:</b> __________________</div>
+            <div><b>Approved Amount:</b> ₹__________________</div>
+            <div style="grid-column:1/-1;min-height:48px"><b>Office Remarks:</b> ________________________________________________________________</div>
+            <div><b>Authorized Officer Signature:</b> __________________</div>
+            <div><b>Date:</b> __________________</div>
+          </div>
+        </div>
+        <div class="footer-note">This printout is generated from the online SHG Member Welfare Fund claim application system of Pratappur SKUS Ltd.</div>
+      </div>
+
+      <div class="print-actions no-print">
+        <button class="secondary" id="backBtn">BACK TO FORM</button>
+        <button class="primary" id="printBtn">PRINT A4 APPLICATION</button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<script>
+const WDF_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxGURLmyYUIvQMgC_SY3WEMM4H86zcnj3H-8pedHgVs-w48lref0_k08glo9gw7-MJc/exec";
+let verifiedMember = null;
+let currentAppId = "";
+
+function todayISO(){
+  const d=new Date();
+  return String(d.getDate()).padStart(2,'0')+"/"+String(d.getMonth()+1).padStart(2,'0')+"/"+d.getFullYear();
+}
+function appId(){
+  const d=new Date();
+  return "SHGWF-"+d.getFullYear()+String(d.getMonth()+1).padStart(2,'0')+String(d.getDate()).padStart(2,'0')+"-"+Math.floor(10000+Math.random()*90000);
+}
+function setVal(id,v){document.getElementById(id).value=v??""}
+function text(id,v){document.getElementById(id).textContent=v??"—"}
+
+document.getElementById("verifyBtn").addEventListener("click", async ()=>{
+  const aadhar=document.getElementById("aadhar").value.replace(/\D/g,"");
+  const status=document.getElementById("verifyStatus");
+  if(!/^\d{12}$/.test(aadhar)){status.style.color="#b42318";status.textContent="সঠিক ১২ সংখ্যার Aadhaar নম্বর দিন।";return}
+  const btn=document.getElementById("verifyBtn");
+  btn.disabled=true;btn.textContent="VERIFYING...";
+  status.style.color="#60778e";status.textContent="Member verification চলছে...";
+  try{
+    const url=WDF_SCRIPT_URL+"?action=verifyAadhar&aadhar="+encodeURIComponent(aadhar);
+    const r=await fetch(url,{method:"GET"});
+    const data=await r.json();
+    if(!data || data.status!=="success") throw new Error(data?.message||"Member not found");
+    verifiedMember=data.member;
+    setVal("aadhar",data.member.aadhar||aadhar);
+    setVal("branch",data.member.branch);
+    setVal("groupName",data.member.groupName);
+    setVal("memberName",data.member.memberName);
+    setVal("guardian",data.member.guardian);
+    setVal("address",data.member.address);
+    setVal("pin",data.member.pin);
+    setVal("mobile",data.member.mobile);
+    setVal("formationDate",data.member.groupFormationDate);
+    setVal("claimDate",todayISO());
+    document.getElementById("applicationArea").classList.remove("hidden");
+    status.style.color="#138a5b";status.textContent="Member verification successful.";
+    document.getElementById("applicationArea").scrollIntoView({behavior:"smooth"});
+  }catch(e){
+    console.error(e);
+    status.style.color="#b42318";status.textContent=e.message||"Member verification failed.";
+  }finally{
+    btn.disabled=false;btn.textContent="VERIFY MEMBER";
+  }
+});
+
+document.querySelectorAll(".purpose").forEach(card=>{
+  card.addEventListener("click",()=>{
+    document.querySelectorAll(".purpose").forEach(x=>x.classList.remove("active"));
+    card.classList.add("active");
+    const p=card.dataset.purpose;
+    document.getElementById("purpose").value=p;
+    document.querySelectorAll(".conditional").forEach(x=>x.classList.remove("show"));
+    document.getElementById("claimAmount").value =
+      p==="MEMBER DEATH" ? "₹20,000" :
+      p==="HUSBAND DEATH" ? "₹10,000" : "₹1,000";
+    if(p==="MEMBER DEATH") document.getElementById("memberDeath").classList.add("show");
+    if(p==="HUSBAND DEATH") document.getElementById("husbandDeath").classList.add("show");
+    if(p==="GRADUATION") document.getElementById("graduation").classList.add("show");
+  });
+});
+
+function required(id,label){
+  const v=document.getElementById(id).value.trim();
+  if(!v){alert(label+" পূরণ করুন।");document.getElementById(id).focus();return false}
+  return true;
+}
+function escapeHtml(s){
+  return String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));
+}
+
+document.getElementById("previewBtn").addEventListener("click",async ()=>{
+  if(!verifiedMember){alert("প্রথমে Aadhaar দিয়ে member verification করুন।");return}
+  const p=document.getElementById("purpose").value;
+  if(!p){alert("WDF Application Purpose নির্বাচন করুন।");return}
+  if(!required("applicantName","Applicant Name") || !required("applicantEmail","Applicant Email")) return;
+  const email=document.getElementById("applicantEmail").value.trim();
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){alert("সঠিক Email Address দিন।");return}
+
+  if(p==="MEMBER DEATH"){
+    if(!required("claimPersonDeath","Name of Claimant / Related Person") ||
+       !required("dateOfDeath","Date of Death") ||
+       !required("deathCertificateNo","Death Certificate Number") ||
+       !required("deathIssuingAuthority","Death Certificate Issuing Authority") ||
+       !required("burnCertificateAuthority","Burn / Cremation Certificate Authority")) return;
+  }
+  if(p==="HUSBAND DEATH"){
+    if(!required("husbandName","Husband Name") ||
+       !required("husbandDateOfDeath","Date of Death") ||
+       !required("husbandDeathCertificateNo","Death Certificate Number") ||
+       !required("husbandDeathIssuingAuthority","Death Certificate Issuing Authority") ||
+       !required("husbandBurnCertificateAuthority","Burn / Cremation Certificate Authority")) return;
+  }
+  if(p==="GRADUATION"){
+    if(!required("graduationStudentName","Student / Daughter Name") ||
+       !required("dateOfAdmission","Date of Admission") ||
+       !required("madhyamikBoard","Madhyamik Pass Board Name") ||
+       !required("hsBoard","Higher Secondary Pass Board Name") ||
+       !required("schoolName","School Name") ||
+       !required("collegeName","Name of College Where Admitted")) return;
+  }
+
+  currentAppId=appId();
+  const amount=p==="MEMBER DEATH"?"₹20,000":p==="HUSBAND DEATH"?"₹10,000":"₹1,000";
+  text("pAppId",currentAppId);text("pDate",todayISO());text("pPurpose",p);text("pAmount",amount);
+  text("pBranch",verifiedMember.branch);text("pGroup",verifiedMember.groupName);text("pMember",verifiedMember.memberName);
+  text("pGuardian",verifiedMember.guardian);text("pAddress",verifiedMember.address);text("pPin",verifiedMember.pin);
+  text("pMobile",verifiedMember.mobile);text("pAadhar",verifiedMember.aadhar);text("pFormation",verifiedMember.groupFormationDate);
+  text("pApplicant",document.getElementById("applicantName").value.trim());text("pEmail",email);
+  text("pClaimDate",document.getElementById("claimDate").value);text("pClaimAmount",amount);
+
+  let rows="";
+  if(p==="MEMBER DEATH"){
+    rows+=`<tr><td>Claimant / Related Person</td><td>${escapeHtml(document.getElementById("claimPersonDeath").value)}</td><td>Date of Death</td><td>${escapeHtml(document.getElementById("dateOfDeath").value)}</td></tr>`;
+    rows+=`<tr><td>Death Certificate No.</td><td>${escapeHtml(document.getElementById("deathCertificateNo").value)}</td><td>Death Certificate Issuing Authority</td><td>${escapeHtml(document.getElementById("deathIssuingAuthority").value)}</td></tr>`;
+    rows+=`<tr><td>Burn / Cremation Certificate Authority</td><td>${escapeHtml(document.getElementById("burnCertificateAuthority").value)}</td><td>Claim Amount</td><td>₹20,000</td></tr>`;
+  }
+  if(p==="HUSBAND DEATH"){
+    rows+=`<tr><td>Husband Name</td><td>${escapeHtml(document.getElementById("husbandName").value)}</td><td>Date of Death</td><td>${escapeHtml(document.getElementById("husbandDateOfDeath").value)}</td></tr>`;
+    rows+=`<tr><td>Death Certificate No.</td><td>${escapeHtml(document.getElementById("husbandDeathCertificateNo").value)}</td><td>Death Certificate Issuing Authority</td><td>${escapeHtml(document.getElementById("husbandDeathIssuingAuthority").value)}</td></tr>`;
+    rows+=`<tr><td>Burn / Cremation Certificate Authority</td><td>${escapeHtml(document.getElementById("husbandBurnCertificateAuthority").value)}</td><td>Claim Amount</td><td>₹10,000</td></tr>`;
+  }
+  if(p==="GRADUATION"){
+    rows+=`<tr><td>Student / Daughter Name</td><td>${escapeHtml(document.getElementById("graduationStudentName").value)}</td><td>Date of Admission</td><td>${escapeHtml(document.getElementById("dateOfAdmission").value)}</td></tr>`;
+    rows+=`<tr><td>Madhyamik Pass Board</td><td>${escapeHtml(document.getElementById("madhyamikBoard").value)}</td><td>Higher Secondary Pass Board</td><td>${escapeHtml(document.getElementById("hsBoard").value)}</td></tr>`;
+    rows+=`<tr><td>School Name</td><td>${escapeHtml(document.getElementById("schoolName").value)}</td><td>College Where Admitted</td><td>${escapeHtml(document.getElementById("collegeName").value)}</td></tr>`;
+    rows+=`<tr><td>College Where Admitted</td><td>${escapeHtml(document.getElementById("collegeName").value)}</td><td>Claim Amount</td><td>₹1,000</td></tr>`;
+  }
+  document.getElementById("pClaimBody").innerHTML=rows;
+
+  const params=new URLSearchParams({
+    action:"submitApplication",appId:currentAppId,aadhar:verifiedMember.aadhar||"",
+    applicationType:p,claimPersonName:p==="MEMBER DEATH"?document.getElementById("claimPersonDeath").value.trim():"",
+    applicantName:document.getElementById("applicantName").value.trim(),applicantEmail:email,claimDate:document.getElementById("claimDate").value,
+    dateOfDeath:document.getElementById("dateOfDeath")?.value||"",
+    deathCertificateNo:document.getElementById("deathCertificateNo")?.value.trim()||"",
+    deathIssuingAuthority:document.getElementById("deathIssuingAuthority")?.value.trim()||"",
+    burnCertificateAuthority:document.getElementById("burnCertificateAuthority")?.value.trim()||"",
+    husbandName:document.getElementById("husbandName")?.value.trim()||"",
+    husbandDateOfDeath:document.getElementById("husbandDateOfDeath")?.value||"",
+    husbandDeathCertificateNo:document.getElementById("husbandDeathCertificateNo")?.value.trim()||"",
+    husbandDeathIssuingAuthority:document.getElementById("husbandDeathIssuingAuthority")?.value.trim()||"",
+    husbandBurnCertificateAuthority:document.getElementById("husbandBurnCertificateAuthority")?.value.trim()||"",
+    dateOfAdmission:document.getElementById("dateOfAdmission")?.value||"",
+    madhyamikBoard:document.getElementById("madhyamikBoard")?.value.trim()||"",
+    hsBoard:document.getElementById("hsBoard")?.value.trim()||"",
+    schoolName:document.getElementById("schoolName")?.value.trim()||"",
+    collegeName:document.getElementById("collegeName")?.value.trim()||"",
+    graduationStudentName:document.getElementById("graduationStudentName")?.value.trim()||""
+  });
+
+  const status=document.getElementById("submitStatus");
+  status.style.color="#60778e";status.textContent="Application Google Sheet-এ জমা হচ্ছে...";
+  try{
+    const r=await fetch(WDF_SCRIPT_URL+"?"+params.toString(),{method:"GET"});
+    const result=await r.json();
+    if(!result || result.status!=="success") throw new Error(result?.message||"Application submission failed");
+    status.style.color="#138a5b";status.textContent="Application successfully received. A4 printout ready.";
+    document.getElementById("preview").classList.add("show");
+    document.getElementById("preview").scrollIntoView({behavior:"smooth"});
+  }catch(e){
+    console.error(e);
+    status.style.color="#b42318";
+    status.textContent="Application save করতে সমস্যা হয়েছে: "+(e.message||"Unknown error");
+  }
+});
+
+document.getElementById("printBtn").addEventListener("click",()=>window.print());
+document.getElementById("backBtn").addEventListener("click",()=>document.getElementById("applicationArea").scrollIntoView({behavior:"smooth"}));
+document.getElementById("resetBtn").addEventListener("click",()=>location.reload());
+</script>
+</body>
+</html>
