@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>প্রতাপপুর সমবায় কৃষি উন্নয়ন সমিতি লিমিটেড</title>
+
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preconnect" href="https://translate.google.com">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+        :root {
+            --primary: #0a5c36;
+            --primary-dark: #064025;
+            --primary-light: #eaf6ef;
+            --accent: #d97706;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --bg-body: #f8faf9;
+            --border: #e2e8f0;
+            --shadow-sm: 0 4px 12px rgba(0,0,0,0.04);
+            --shadow-md: 0 10px 30px rgba(10,92,54,0.08);
+            --radius: 12px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif; background: var(--bg-body); color: var(--text-main); line-height: 1.6; }
+
+        .top-bar {
+            background: #0f172a;
+            color: #cbd5e1;
+            padding: 8px 6%;
+            font-size: 13px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        .top-bar-left a { color: #f8fafc; text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; gap: 5px; }
+        .top-bar-left a:hover { color: var(--accent); }
+
+        header {
+            background: #ffffff;
+            padding: 16px 6%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: var(--shadow-sm);
+            border-bottom: 1px solid #edf2f0;
+            position: relative;
+            z-index: 50;
+        }
+        .brand-container { display: flex; align-items: center; gap: 18px; }
+        .society-logo {
+            width: 64px; height: 64px; border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-light), #d1fae5);
+            border: 2px solid var(--primary);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 28px; color: var(--primary);
+            box-shadow: 0 4px 15px rgba(10,92,54,0.15);
+            flex-shrink: 0;
+        }
+        .society-titles h1 { font-size: 22px; color: var(--primary-dark); font-weight: 800; }
+        .society-titles p { font-size: 13px; color: var(--text-muted); font-weight: 600; margin-top: 2px; }
+
+        .lang-box { display: flex; align-items: center; gap: 6px; background: #f1f5f9; padding: 6px 12px; border-radius: 6px; border: 1px solid var(--border); }
+        .goog-te-gadget .goog-te-combo { padding: 4px 8px; border-radius: 4px; border: 1px solid #cbd5e1; font-size: 12px; }
+
+        nav {
+            background: var(--primary);
+            padding: 0 6%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        .nav-links { display: flex; align-items: center; list-style: none; }
+        .nav-links a {
+            color: #ffffff;
+            text-decoration: none;
+            padding: 15px 16px;
+            font-size: 14.5px;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            transition: var(--transition);
+        }
+        .nav-links a:hover, .nav-links a.active { background: var(--primary-dark); color: #fde68a; }
+
+        .nav-dropdown { position: relative; }
+        .nav-dropdown summary {
+            list-style: none; cursor: pointer; color: #fff; font-weight: 600; font-size: 14.5px;
+            padding: 15px 16px; display: flex; align-items: center; gap: 6px;
+        }
+        .nav-dropdown summary::-webkit-details-marker { display: none; }
+        .dropdown-menu {
+            position: absolute; top: 100%; left: 0; width: 310px;
+            background: #ffffff; border: 1px solid var(--border); border-top: 3px solid var(--accent);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15); z-index: 110; border-radius: 0 0 var(--radius) var(--radius);
+        }
+        .dropdown-menu a { display: flex; align-items: center; gap: 12px; padding: 12px 16px; color: var(--text-main); border-bottom: 1px solid #f1f5f9; text-decoration: none; font-size: 14px; }
+        .dropdown-menu a:hover { background: var(--primary-light); color: var(--primary); }
+
+        .nav-actions { display: flex; align-items: center; gap: 10px; }
+        .btn-status-nav { background: rgba(255,255,255,0.15); border-radius: 6px; padding: 8px 14px; color: #fff; text-decoration: none; font-weight: 700; font-size: 13.5px; border: 1px solid rgba(255,255,255,0.3); cursor: pointer; }
+        .btn-status-nav:hover { background: #fff; color: var(--primary); }
+        .btn-admin-nav { background: var(--accent); color: #fff; border-radius: 6px; padding: 8px 16px; text-decoration: none; font-weight: 700; font-size: 13.5px; transition: var(--transition); }
+        .btn-admin-nav:hover { background: #b45309; }
+
+        .notice-wrapper { background: #fffbeb; border-bottom: 1px solid #fef3c7; padding: 9px 6%; display: flex; align-items: center; }
+        .notice-tag { background: #dc2626; color: #fff; padding: 3px 10px; font-weight: 800; border-radius: 4px; font-size: 12px; margin-right: 15px; white-space: nowrap; display: flex; align-items: center; gap: 6px; }
+        .notice-ticker marquee { color: #92400e; font-weight: 600; font-size: 14px; }
+
+        .hero {
+            background: radial-gradient(circle at 85% 10%, #dcfce7 0%, transparent 40%), linear-gradient(135deg, #ffffff 0%, #f0fdf4 100%);
+            padding: 70px 6%;
+            position: relative;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .hero-layout { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 40px; align-items: center; }
+        .hero-content h2 { font-size: 38px; font-weight: 900; color: #0f172a; line-height: 1.22; margin-bottom: 18px; }
+        .hero-content h2 span { color: var(--primary); }
+        .hero-content p { font-size: 16px; line-height: 1.7; color: var(--text-muted); margin-bottom: 28px; max-width: 600px; }
+        .hero-pills { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 24px; }
+        .hero-pill { background: #fff; padding: 6px 14px; border-radius: 20px; font-size: 13px; font-weight: 700; color: var(--primary); border: 1px solid #bbf7d0; display: flex; align-items: center; gap: 6px; }
+
+        .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+        .btn-main { padding: 13px 26px; border-radius: 8px; font-weight: 700; font-size: 15px; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; transition: var(--transition); }
+        .btn-primary-hero { background: var(--primary); color: #fff; box-shadow: 0 6px 20px rgba(10,92,54,0.25); }
+        .btn-primary-hero:hover { background: var(--primary-dark); transform: translateY(-2px); }
+        .btn-outline-hero { background: #fff; color: var(--primary); border: 1.5px solid var(--primary); }
+        .btn-outline-hero:hover { background: var(--primary-light); }
+
+        .hero-visual-card { background: #fff; border-radius: 18px; padding: 30px; box-shadow: var(--shadow-md); border: 1px solid var(--border); text-align: center; }
+        .hero-visual-icon { width: 80px; height: 80px; margin: 0 auto 16px; border-radius: 50%; background: var(--primary-light); color: var(--primary); display: flex; align-items: center; justify-content: center; font-size: 36px; }
+        .hero-visual-card h3 { font-size: 20px; color: var(--primary-dark); font-weight: 800; margin-bottom: 6px; }
+        .hero-visual-card p { font-size: 14px; color: var(--text-muted); margin-bottom: 20px; }
+        .quick-contact-box { background: #f8fafc; border-radius: 8px; padding: 14px; text-align: left; font-size: 13px; border: 1px solid #edf2f7; }
+        .quick-contact-box div { margin-bottom: 6px; color: var(--text-main); font-weight: 600; display: flex; align-items: center; gap: 8px; }
+
+        .features-section { padding: 60px 6%; background: #ffffff; }
+        .section-heading { text-align: center; max-width: 650px; margin: 0 auto 40px; }
+        .section-heading .subtitle { color: var(--primary); font-size: 13px; font-weight: 800; text-transform: uppercase; }
+        .section-heading h2 { font-size: 30px; font-weight: 900; color: #0f172a; margin-top: 5px; }
+        .features-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 25px; }
+        .feature-card { background: #fff; padding: 26px; border-radius: var(--radius); border: 1px solid var(--border); box-shadow: var(--shadow-sm); transition: var(--transition); }
+        .feature-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); border-color: #bbf7d0; }
+        .feature-icon { width: 48px; height: 48px; border-radius: 10px; background: var(--primary-light); color: var(--primary); display: flex; align-items: center; justify-content: center; font-size: 22px; margin-bottom: 16px; }
+
+        .services-section { padding: 60px 6%; background: var(--bg-body); }
+        .services-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 25px; }
+        .service-card { background: #ffffff; border-radius: var(--radius); border: 1px solid var(--border); padding: 28px; box-shadow: var(--shadow-sm); transition: var(--transition); display: flex; flex-direction: column; justify-content: space-between; }
+        .service-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); border-color: var(--primary); }
+        .service-card-top .badge { display: inline-block; background: #e0f2fe; color: #0369a1; padding: 3px 10px; border-radius: 14px; font-size: 12px; font-weight: 700; margin-bottom: 14px; }
+        .service-card h3 { font-size: 20px; font-weight: 800; color: #0f172a; margin-bottom: 10px; }
+        .service-card p { font-size: 14px; color: var(--text-muted); margin-bottom: 18px; }
+        .service-card ul { list-style: none; margin-bottom: 24px; }
+        .service-card li { font-size: 13.5px; color: #334155; padding: 5px 0; display: flex; align-items: center; gap: 8px; font-weight: 600; }
+        .btn-card-action { display: block; width: 100%; text-align: center; padding: 11px; border-radius: 6px; font-weight: 700; font-size: 14px; text-decoration: none; background: var(--primary-light); color: var(--primary); transition: var(--transition); }
+        .service-card:hover .btn-card-action { background: var(--primary); color: #fff; }
+
+        .downloads-section { padding: 60px 6%; background: #ffffff; border-top: 1px solid var(--border); }
+        .downloads-container { max-width: 1000px; margin: 0 auto; background: #f8fafc; border: 1px solid var(--border); border-radius: var(--radius); padding: 25px 30px; }
+        .download-item { display: flex; justify-content: space-between; align-items: center; padding: 14px 0; border-bottom: 1px solid #e2e8f0; flex-wrap: wrap; gap: 12px; }
+        .download-item:last-child { border-bottom: none; }
+        .download-title { display: flex; align-items: center; gap: 12px; font-weight: 700; font-size: 14.5px; color: #0f172a; }
+        .download-title i { color: #ef4444; font-size: 22px; }
+        .btn-download-pdf { background: #ffffff; color: var(--primary); border: 1.5px solid var(--primary); padding: 6px 16px; border-radius: 6px; font-size: 13px; font-weight: 700; text-decoration: none; transition: var(--transition); }
+        .btn-download-pdf:hover { background: var(--primary); color: #fff; }
+
+        footer { background: #0f172a; color: #cbd5e1; padding: 50px 6% 20px; }
+        .footer-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 35px; margin-bottom: 35px; }
+        .footer-col h4 { color: #ffffff; font-size: 16px; font-weight: 800; margin-bottom: 16px; border-bottom: 2px solid #334155; padding-bottom: 6px; }
+        .footer-col a { display: block; color: #94a3b8; text-decoration: none; font-size: 13.5px; margin-bottom: 9px; transition: var(--transition); }
+        .footer-col a:hover { color: var(--accent); padding-left: 4px; }
+        .footer-col p { font-size: 13.5px; color: #94a3b8; margin-bottom: 8px; line-height: 1.6; }
+        .footer-bottom { border-top: 1px solid #334155; padding-top: 20px; text-align: center; font-size: 12.5px; color: #64748b; }
+
+        .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.65); display: none; align-items: center; justify-content: center; z-index: 2000; padding: 20px; }
+        .modal-box { background: #fff; width: 100%; max-width: 460px; border-radius: 12px; padding: 30px 25px; position: relative; box-shadow: 0 15px 40px rgba(0,0,0,0.25); text-align: center; }
+        .modal-close { position: absolute; top: 12px; right: 15px; font-size: 24px; font-weight: bold; cursor: pointer; color: #94a3b8; }
+        .modal-box input { width: 100%; padding: 12px; border: 1.5px solid #cbd5e1; border-radius: 6px; font-size: 14px; text-align: center; margin: 15px 0 12px; outline: none; }
+        .modal-box input:focus { border-color: var(--primary); }
+
+        @media (max-width: 900px) {
+            header { flex-direction: column; text-align: center; gap: 14px; }
+            .brand-container { flex-direction: column; }
+            nav { flex-direction: column; padding: 10px; }
+            .nav-links { justify-content: center; }
+            .hero-layout { grid-template-columns: 1fr; }
+            .hero-content h2 { font-size: 30px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-bar">
+        <div class="top-bar-left">
+            <span><i class="fas fa-certificate" style="color:var(--accent);"></i> রেজিঃ নং: <strong>৬০৪/১৯৬৯</strong> (নদীয়া)</span>
+            <a href="tel:+917047996714"><i class="fas fa-phone-alt"></i> +91 7047996714</a>
+        </div>
+        <div class="top-bar-right">
+            <span>অফিস সময়: সকাল ১০:০০ - বিকাল ৫:০০</span>
+            <a href="#downloads" style="color:#f8fafc; font-weight:600;"><i class="fas fa-file-pdf"></i> ফর্ম কর্নার</a>
+        </div>
+    </div>
+
+    <header>
+        <div class="brand-container">
+            <div class="society-logo">🌾</div>
+            <div class="society-titles">
+                <h1>প্রতাপপুর সমবায় কৃষি উন্নয়ন সমিতি লিমিটেড</h1>
+                <p>গ্রাম: প্রতাপপুর, ডাকঘর: ডিগম্বরপুর, ব্লক: কৃষ্ণগঞ্জ, জেলা: নদীয়া, পশ্চিমবঙ্গ</p>
+            </div>
+        </div>
+        <div class="lang-box notranslate">
+            <i class="fas fa-globe" style="color:var(--primary);"></i>
+            <div id="google_translate_element"></div>
+        </div>
+    </header>
+
+    <nav>
+        <div class="nav-links">
+            <a href="#home" class="active"><i class="fas fa-home"></i> হোম</a>
+            <a href="#features"><i class="fas fa-shield-halved"></i> বৈশিষ্ট্যসমূহ</a>
+            <a href="#services"><i class="fas fa-hand-holding-dollar"></i> ঋণ ও আমানত</a>
+            <details class="nav-dropdown">
+                <summary><i class="fas fa-file-circle-plus"></i> অনলাইন আবেদন <i class="fas fa-caret-down"></i></summary>
+                <div class="dropdown-menu">
+                    <a href="application.html"><i class="fas fa-seedling" style="color:var(--primary);"></i> <b>KCC ও সাধারণ ঋণ আবেদন</b></a>
+                    <a href="shg-loan-application.html"><i class="fas fa-users" style="color:var(--accent);"></i> <b>স্বনির্ভর দল (SHG) দলগত ঋণ আবেদন</b></a>
+                    <a href="application.html#savingsForm"><i class="fas fa-piggy-bank" style="color:#0284c7;"></i> <b>সঞ্চয়ী ও চলতি খাতা খোলার আবেদন</b></a>
+                    <a href="wdf-application.html"><i class="fas fa-heart-pulse" style="color:#dc2626;"></i> <b>SHG সদস্য কল্যাণ তহবিল (WDF)</b></a>
+                </div>
+            </details>
+            <a href="#downloads"><i class="fas fa-download"></i> ফর্ম ডাউনলোড</a>
+            <a href="#contact"><i class="fas fa-phone"></i> যোগাযোগ</a>
+        </div>
+        <div class="nav-actions">
+            <button class="btn-status-nav" onclick="openStatusModal()"><i class="fas fa-search"></i> স্ট্যাটাস চেক</button>
+            <a href="admin.html" class="btn-admin-nav"><i class="fas fa-lock"></i> অ্যাডমিন লগইন</a>
+        </div>
+    </nav>
+
+    <div class="notice-wrapper">
+        <div class="notice-tag"><i class="fas fa-bullhorn"></i> সমবায় নোটিশ</div>
+        <div class="notice-ticker">
+            <marquee behavior="scroll" direction="left" onmouseover="this.stop();" onmouseout="this.start();" id="noticeText">
+                "প্রধানমন্ত্রী ফসল বীমা যোজনা ও কিষান ক্রেডিট কার্ড (KCC) পুনর্নবীকরণ চলছে। সমস্ত সমবায় সদস্য ও কৃষকদের সঠিক সময়ে নথিপত্র যাচাই ও ঋণ পরিশোধ করার জন্য অনুরোধ করা হচ্ছে।"
+            </marquee>
+        </div>
+    </div>
+
+    <section class="hero" id="home">
+        <div class="hero-layout">
+            <div class="hero-content">
+                <div class="hero-pills">
+                    <div class="hero-pill"><i class="fas fa-award"></i> ৫৫+ বছরের বিশ্বস্ত সেবা</div>
+                    <div class="hero-pill"><i class="fas fa-hand-holding-heart"></i> স্বচ্ছ সমবায় ব্যাংকিং</div>
+                </div>
+                <h2>কৃষকের সমৃদ্ধি ও স্বনির্ভরতায় <span>আপনার পাশে</span></h2>
+                <p>সহজ শর্তে কৃষিঋণ, স্বনির্ভর দল গঠন ও নিরাপদ আমানতের মাধ্যমে গ্রামীণ অর্থনীতির সার্বিক বিকাশই আমাদের অঙ্গীকার। আধুনিক সুযোগ-সুবিধা ও দ্রুত সেবা পেতে যুক্ত হোন আমাদের সাথে।</p>
+                <div class="hero-actions">
+                    <a href="application.html" class="btn-main btn-primary-hero"><i class="fas fa-pen-to-square"></i> ঋণের আবেদন করুন</a>
+                    <a href="shg-loan-application.html" class="btn-main btn-outline-hero"><i class="fas fa-users"></i> SHG দলগত ঋণ পোর্টাল</a>
+                </div>
+            </div>
+            <div class="hero-visual-card">
+                <div class="hero-visual-icon"><i class="fas fa-building-columns"></i></div>
+                <h3>প্রতাপপুর সমবায় সমিতি</h3>
+                <p>১৯৬৯ সাল থেকে গ্রামীণ কৃষকদের নির্ভরযোগ্য প্রতিষ্ঠান</p>
+                <div class="quick-contact-box">
+                    <div><i class="fas fa-location-dot" style="color:var(--primary);"></i> প্রতাপপুর, ডিগম্বরপুর, নদীয়া</div>
+                    <div><i class="fas fa-clock" style="color:var(--primary);"></i> সোম - শনি (সকাল ১০টা - বিকাল ৫টা)</div>
+                    <div><i class="fas fa-envelope" style="color:var(--primary);"></i> pratappurskus@gmail.com</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="features-section" id="features">
+        <div class="section-heading">
+            <span class="subtitle">আমাদের অনন্য বৈশিষ্ট্য</span>
+            <h2>কেন আমাদের সমবায় সমিতিকে বেছে নেবেন?</h2>
+            <p>সদস্য ও সাধারণ কৃষকদের সর্বোচ্চ সুবিধা ও নিরাপত্তা নিশ্চিত করতে আমরা প্রতিশ্রুতিবদ্ধ</p>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-file-shield"></i></div>
+                <h3>স্বচ্ছ হিসাবরক্ষণ</h3>
+                <p>প্রত্যেক সদস্যের জমা ও ঋণের হিসাব সম্পূর্ণ ডিজিটাল ও স্বচ্ছ প্রক্রিয়ায় পরিচালিত হয়।</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-percent"></i></div>
+                <h3>স্বল্প সুদে কৃষিঋণ</h3>
+                <p>সরকারি ভর্তুকি সহ কৃষকদের জন্য নামমাত্র সুদে স্বল্প ও দীর্ঘমেয়াদী ফসলি ঋণ সুবিধা।</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-users-gear"></i></div>
+                <h3>স্বনির্ভর দলের ক্ষমতায়ন</h3>
+                <p>মহিলা স্বনির্ভর দলগুলোর জন্য সহজ কিস্তিতে সর্বোচ্চ ৭০,০০০ টাকা পর্যন্ত দলগত ঋণ সহায়তা।</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-piggy-bank"></i></div>
+                <h3>লাভজনক আমানত প্রকল্প</h3>
+                <p>সঞ্চয়ী, ফিক্সড ডিপোজিট (FD) ও রেকারিং ডিপোজিটে (RD) আকর্ষণীয় সুদের নিশ্চয়তা।</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="services-section" id="services">
+        <div class="section-heading">
+            <span class="subtitle">আমাদের পরিষেবা</span>
+            <h2>সহজ ঋণ ও আমানত প্রকল্পসমূহ</h2>
+            <p>আপনার আর্থিক চাহিদা ও সঞ্চয়ের পরিকল্পনা অনুসারে সঠিক বিকল্প বেছে নিন</p>
+        </div>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-card-top">
+                    <span class="badge">কৃষি সহায়তা</span>
+                    <h3>কিসান ক্রেডিট কার্ড (KCC)</h3>
+                    <p>সার, বীজ ও চাষের প্রয়োজনীয় সরঞ্জামের জন্য স্বল্প সুদের ফসলি ঋণ সুবিধা।</p>
+                    <ul>
+                        <li><i class="fas fa-check-circle"></i> সহজ কিস্তিতে পরিশোধের সুযোগ</li>
+                        <li><i class="fas fa-check-circle"></i> দ্রুত অনলাইন ও অফলাইন প্রসেসিং</li>
+                    </ul>
+                </div>
+                <a href="application.html" class="btn-card-action">আবেদন করুন →</a>
+            </div>
+
+            <div class="service-card">
+                <div class="service-card-top">
+                    <span class="badge" style="background:#fef3c7; color:#b45309;">দলগত ঋণ</span>
+                    <h3>স্বনির্ভর দল যৌথ ঋণ (SHG)</h3>
+                    <p>গ্রামীণ মহিলাদের যৌথ উদ্যোগে ক্ষুদ্র ব্যবসা ও পশুপালন গড়ে তোলার আর্থিক সুবিধা।</p>
+                    <ul>
+                        <li><i class="fas fa-check-circle"></i> সদস্য প্রতি সর্বোচ্চ ৭০,০০০ টাকা ঋণ</li>
+                        <li><i class="fas fa-check-circle"></i> ডিজিটাল শিট যাচাই ভিত্তিক আবেদন</li>
+                    </ul>
+                </div>
+                <a href="shg-loan-application.html" class="btn-card-action">SHG পোর্টালে যান →</a>
+            </div>
+
+            <div class="service-card">
+                <div class="service-card-top">
+                    <span class="badge" style="background:#dcfce7; color:#15803d;">নিরাপদ সঞ্চয়</span>
+                    <h3>সঞ্চয়ী ও মেয়াদী আমানত</h3>
+                    <p>নিরাপদ সঞ্চয়, ৪% থেকে ৭% পর্যন্ত বার্ষিক লাভজনক সুদ এবং সহজে লেনদেন।</p>
+                    <ul>
+                        <li><i class="fas fa-check-circle"></i> ফিক্সড ডিপোজিট (FD) ও MIS স্কিম</li>
+                        <li><i class="fas fa-check-circle"></i> চেক বুক ও নমিনী অন্তর্ভুক্তি সুবিধা</li>
+                    </ul>
+                </div>
+                <a href="application.html#savingsForm" class="btn-card-action">অ্যাকাউন্ট খুলুন →</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="downloads-section" id="downloads">
+        <div class="section-heading">
+            <span class="subtitle">ডাউনলোড কর্নার</span>
+            <h2>প্রয়োজনীয় অফলাইন ফর্মসমূহ</h2>
+            <p>প্রয়োজনে সরাসরি প্রিন্ট নিয়ে সমিতিতে জমা দেওয়ার জন্য ফর্ম সংগ্রহ করুন</p>
+        </div>
+        <div class="downloads-container">
+            <div class="download-item">
+                <div class="download-title"><i class="fas fa-file-pdf"></i> KCC কৃষিঋণ আবেদনপত্র (অফলাইন ফর্ম)</div>
+                <a href="https://drive.google.com/uc?export=download&id=1Vf8wSMY6xQTo7V1X0Yrs_1ovXIPaRgT5" target="_blank" class="btn-download-pdf"><i class="fas fa-download"></i> ডাউনলোড (PDF)</a>
+            </div>
+            <div class="download-item">
+                <div class="download-title"><i class="fas fa-file-pdf"></i> নতুন সমবায় সদস্যপদ অন্তর্ভুক্তি ও শেয়ার আবেদনপত্র</div>
+                <a href="https://drive.google.com/uc?export=download&id=1Vf8wSMY6xQTo7V1X0Yrs_1ovXIPaRgT5" target="_blank" class="btn-download-pdf"><i class="fas fa-download"></i> ডাউনলোড (PDF)</a>
+            </div>
+            <div class="download-item">
+                <div class="download-title"><i class="fas fa-file-pdf"></i> স্বনির্ভর দল (SHG) যৌথ ঋণ প্রস্তাব ফর্ম</div>
+                <a href="https://drive.google.com/uc?export=download&id=1Vf8wSMY6xQTo7V1X0Yrs_1ovXIPaRgT5" target="_blank" class="btn-download-pdf"><i class="fas fa-download"></i> ডাউনলোড (PDF)</a>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h4>সমিতির প্রধান কার্যালয়</h4>
+                <p><strong>প্রতাপপুর সমবায় কৃষি উন্নয়ন সমিতি লিঃ</strong></p>
+                <p>গ্রাম: প্রতাপপুর, ডাকঘর: ডিগম্বরপুর</p>
+                <p>থানা ও ব্লক: কৃষ্ণগঞ্জ, জেলা: নদীয়া, পিন: ৭৪১৫০৮</p>
+                <p>অফিস সময়: সকাল ১০:০০ - বিকাল ৫:০০ (রবিবার ও সরকারি ছুটির দিন বন্ধ)</p>
+            </div>
+            <div class="footer-col">
+                <h4>গুরুত্বপূর্ণ পোর্টাল</h4>
+                <a href="https://cooperationwb.org" target="_blank">পশ্চিমবঙ্গ সমবায় বিভাগ</a>
+                <a href="https://www.wbscb.com" target="_blank">ওয়েস্ট বেঙ্গল স্টেট কো-অপারেটিভ ব্যাংক</a>
+                <a href="https://www.nabard.org" target="_blank">নাবার্ড (NABARD) ইন্ডিয়া</a>
+                <a href="https://rbi.org.in" target="_blank">ভারতীয় রিজার্ভ ব্যাংক</a>
+            </div>
+            <div class="footer-col">
+                <h4>নাগরিক পরিষেবা লিঙ্ক</h4>
+                <a href="application.html">অনলাইন ঋণ আবেদন</a>
+                <a href="shg-loan-application.html">SHG দলগত ঋণ পোর্টাল</a>
+                <a href="wdf-application.html">সদস্য কল্যাণ তহবিল</a>
+                <a href="javascript:void(0)" onclick="openStatusModal()">আবেদনের স্থিতি যাচাই</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© ২০২৬ প্রতাপপুর সমবায় কৃষি উন্নয়ন সমিতি লিমিটেড। সর্বস্বত্ব সংরক্ষিত</p>
+        </div>
+    </footer>
+
+    <div class="modal-overlay" id="statusModal" onclick="if(event.target===this)closeStatusModal()">
+        <div class="modal-box">
+            <span class="modal-close" onclick="closeStatusModal()">&times;</span>
+            <h3 style="color:var(--primary); font-size:20px; font-weight:800;"><i class="fas fa-search"></i> আবেদনের স্থিতি অনুসন্ধান</h3>
+            <p style="font-size:13px; color:var(--text-muted); margin-top:4px;">আপনার Application ID লিখুন (যেমন: KCC_2026-101001 বা SHG_2026-101001)</p>
+            <input type="text" id="checkAppId" placeholder="Application ID প্রদান করুন">
+            <button style="width:100%; padding:12px; border-radius:6px; background:var(--primary); color:#fff; border:none; font-weight:700; cursor:pointer;" onclick="checkApplicationStatus()"><i class="fas fa-search"></i> স্ট্যাটাস দেখুন</button>
+            <div id="statusResult" style="margin-top:15px; text-align:left; font-size:13.5px;"></div>
+        </div>
+    </div>
+
+    <!-- Floating WhatsApp -->
+    <a href="https://wa.me/917047996714" target="_blank" style="position:fixed; bottom:25px; right:25px; background:#25d366; color:#fff; width:56px; height:56px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:30px; box-shadow:0 6px 20px rgba(37,211,102,0.4); z-index:999; text-decoration:none;">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'bn',
+                includedLanguages: 'bn,en',
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+                autoDisplay: false
+            }, 'google_translate_element');
+        }
+    </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+    <script>
+        const API_URL = "https://script.google.com/macros/s/AKfycbyeT-KEMXwrmKtDwU12qX1iSZ2L8rnsUDNTjbJBgHZDahtAiTzLQO6qLGKKikZF4ozM/exec";
+
+        document.addEventListener('DOMContentLoaded', () => {
+            fetch(API_URL + "?action=getNotice")
+                .then(res => res.json())
+                .then(d => { if(d && d.notice) document.getElementById('noticeText').innerText = d.notice; })
+                .catch(() => {});
+        });
+
+        function openStatusModal() {
+            document.getElementById('statusModal').style.display = 'flex';
+            document.getElementById('checkAppId').focus();
+        }
+        function closeStatusModal() {
+            document.getElementById('statusModal').style.display = 'none';
+            document.getElementById('statusResult').innerHTML = '';
+            document.getElementById('checkAppId').value = '';
+        }
+
+        function checkApplicationStatus() {
+            const appId = document.getElementById('checkAppId').value.trim();
+            const resDiv = document.getElementById('statusResult');
+            if(!appId) { resDiv.innerHTML = '<p style="color:#d32f2f; text-align:center;">দয়া করে Application ID লিখুন।</p>'; return; }
+
+            resDiv.innerHTML = '<p style="text-align:center; color:#555;"><i class="fas fa-spinner fa-spin"></i> অনুসন্ধান চলছে...</p>';
+
+            const cb = 'statusCB_' + Date.now();
+            window[cb] = function(data) {
+                delete window[cb];
+                const sc = document.getElementById(cb);
+                if(sc) sc.remove();
+
+                if(data && data.status === "success" && data.appStatus !== "Not Found") {
+                    const st = (data.appStatus || 'Pending').toLowerCase();
+                    const color = st === "approved" ? "#075e3b" : (st === "rejected" ? "#d32f2f" : "#d49b00");
+                    resDiv.innerHTML = `
+                        <div style="background:#f4f9f6; border-left:4px solid ${color}; padding:12px; border-radius:6px;">
+                            <p><b>আইডি:</b> ${data.applicationId}</p>
+                            <p><b>নাম:</b> ${data.name}</p>
+                            <p><b>আবেদনের ধরন:</b> ${data.type}</p>
+                            <p><b>বর্তমান অবস্থা:</b> <span style="color:${color}; font-weight:800; text-transform:uppercase;">${data.appStatus}</span></p>
+                        </div>
+                    `;
+                } else {
+                    resDiv.innerHTML = '<p style="color:#b42318; text-align:center;">এই নম্বরে কোনো আবেদন পাওয়া যায়নি।</p>';
+                }
+            };
+
+            const s = document.createElement('script');
+            s.id = cb;
+            s.src = API_URL + '?id=' + encodeURIComponent(appId) + '&callback=' + cb;
+            document.body.appendChild(s);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,1570 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Portal - PRATAPPUR SKUS LTD.</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+:root{
+  --green:#075e3b;--green2:#06482e;--gold:#d49b00;
+  --bg:#f4f7f5;--white:#fff;--text:#0f172a;
+  --muted:#475569;--danger:#8b0000;--success:#064e2e;
+  --warning:#b45309;--info:#0284c7;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"Segoe UI",Arial,sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+button,input,select{font:inherit}
+button{cursor:pointer}
+.hidden{display:none!important}
+
+/* =========================================================================
+   SNOW FROST LOGIN (WHITE FROSTED GLASS & CRISP BLACK TYPING)
+   ========================================================================= */
+#loginPage {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  position: relative;
+  overflow: hidden;
+  background: radial-gradient(circle at 15% 15%, #e0f2fe 0%, #f0fdf4 50%, #e2e8f0 100%);
+}
+
+#loginPage::before {
+  content: "";
+  position: absolute;
+  width: 480px;
+  height: 480px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,255,255,0.95), rgba(224,242,254,0.4));
+  filter: blur(55px);
+  top: -120px;
+  left: -120px;
+  pointer-events: none;
+}
+
+#loginPage::after {
+  content: "";
+  position: absolute;
+  width: 520px;
+  height: 520px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(240,253,244,0.95), rgba(226,232,240,0.5));
+  filter: blur(65px);
+  bottom: -120px;
+  right: -120px;
+  pointer-events: none;
+}
+
+.snow-frost-card {
+  width: min(440px, 100%);
+  position: relative;
+  z-index: 10;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(28px) saturate(210%);
+  -webkit-backdrop-filter: blur(28px) saturate(210%);
+  border: 1.5px solid rgba(255, 255, 255, 0.95);
+  border-radius: 22px;
+  box-shadow: 0 25px 60px rgba(15, 23, 42, 0.08), inset 0 1px 2px rgba(255, 255, 255, 1);
+  color: #000000;
+  overflow: hidden;
+}
+
+.snow-head {
+  padding: 36px 24px 22px;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.65);
+  border-bottom: 1px solid rgba(226, 232, 240, 0.9);
+}
+
+.snow-logo {
+  width: 76px;
+  height: 76px;
+  margin: 0 auto 14px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 2px solid #e2e8f0;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 34px;
+  color: #000000;
+}
+
+.snow-head h1 {
+  font-size: 21px;
+  font-weight: 900;
+  color: #000000;
+  letter-spacing: -0.3px;
+}
+.snow-head p {
+  font-size: 13.5px;
+  color: #1e293b;
+  margin-top: 4px;
+  font-weight: 700;
+}
+
+.snow-body {
+  padding: 28px 24px 34px;
+}
+
+.snow-field {
+  margin-bottom: 18px;
+}
+.snow-field label {
+  display: block;
+  font-size: 13.5px;
+  font-weight: 800;
+  color: #000000;
+  margin-bottom: 6px;
+}
+.snow-field input {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1.5px solid #94a3b8;
+  background: rgba(255, 255, 255, 0.95);
+  color: #000000;
+  font-size: 15px;
+  font-weight: 700;
+  outline: none;
+  transition: 0.25s;
+}
+.snow-field input:focus {
+  border-color: #000000;
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.12);
+  background: #ffffff;
+}
+.snow-field input::placeholder { color: #64748b; }
+
+.snow-btn {
+  width: 100%;
+  padding: 13px;
+  border-radius: 10px;
+  border: none;
+  background: #000000;
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: 0.25s;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.18);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.snow-btn:hover {
+  background: #1e293b;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.22);
+}
+
+.snow-otp-note {
+  background: rgba(241, 245, 249, 0.95);
+  border-left: 4px solid #000000;
+  padding: 12px;
+  border-radius: 6px;
+  color: #000000;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+.snow-error {
+  color: var(--danger);
+  font-size: 13px;
+  font-weight: 700;
+  margin: 10px 0;
+  min-height: 18px;
+}
+.snow-timer {
+  text-align: center;
+  color: #334155;
+  font-size: 13px;
+  font-weight: 700;
+  margin-top: 12px;
+}
+.snow-back-link {
+  background: none;
+  border: none;
+  color: #000000;
+  font-weight: 800;
+  font-size: 13px;
+  margin-top: 14px;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+/* =========================================================================
+   DASHBOARD CORE & INTERACTIVE SUMMARY CARDS
+   ========================================================================= */
+.topbar{background:#092540;color:#fff;padding:14px 4%;display:flex;align-items:center;justify-content:space-between;gap:15px;flex-wrap:wrap;border-bottom:3px solid var(--gold)}
+.brand{font-weight:900;font-size:18px}.brand small{display:block;font-size:11.5px;font-weight:600;color:#94a3b8;margin-top:2px}
+.top-actions{display:flex;align-items:center;gap:9px}
+.top-actions button{border:0;border-radius:6px;padding:8px 14px;color:#fff;background:rgba(255,255,255,0.12);font-weight:700}
+.top-actions button:hover{background:rgba(255,255,255,0.22)}
+.top-actions .logout{background:var(--danger)}
+.top-actions .logout:hover{background:#6b0000}
+
+.container{max-width:1450px;margin:auto;padding:24px}
+.header{display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid #cbd5e1;padding-bottom:14px;margin-bottom:22px;gap:15px}
+.header h2{color:#092540;font-size:24px;font-weight:900}.header span{color:var(--muted);font-size:13px;font-weight:600}
+
+/* Interactive Summary Cards */
+.summary{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:24px}
+.summary .card{
+  background:#fff;
+  border:1px solid #cbd5e1;
+  border-radius:12px;
+  padding:18px 20px;
+  box-shadow:0 4px 15px rgba(0,0,0,0.04);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  cursor:pointer;
+  transition:all 0.25s ease;
+  position:relative;
+  overflow:hidden;
+}
+.summary .card:hover{
+  transform:translateY(-4px);
+  box-shadow:0 12px 25px rgba(0,0,0,0.09);
+}
+.summary .card h3{font-size:13px;font-weight:700;color:var(--muted);margin-bottom:4px}
+.summary .card .number{font-size:28px;font-weight:900}
+.summary .card .icon{width:46px;height:46px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:20px}
+
+.card-total{border-left:5px solid #092c4c !important}
+.card-total .number{color:#092c4c}
+.card-total .icon{background:#e2e8f0;color:#092c4c}
+
+.card-pending{border-left:5px solid var(--warning) !important}
+.card-pending .number{color:var(--warning)}
+.card-pending .icon{background:#fef3c7;color:var(--warning)}
+
+.card-approved{border-left:5px solid var(--success) !important}
+.card-approved .number{color:var(--success)}
+.card-approved .icon{background:#dcfce7;color:var(--success)}
+
+.card-rejected{border-left:5px solid var(--danger) !important}
+.card-rejected .number{color:var(--danger)}
+.card-rejected .icon{background:#fee2e2;color:var(--danger)}
+
+/* Tabs */
+.tabs{display:flex;gap:6px;flex-wrap:wrap;border-bottom:2px solid #cbd5e1;margin-bottom:20px}
+.tab{border:0;background:transparent;padding:11px 18px;color:var(--muted);font-weight:700;font-size:13.5px;border-bottom:3px solid transparent;border-radius:8px 8px 0 0;cursor:pointer}
+.tab:hover{color:#000;background:#eef2f6}
+.tab.active{color:#092540;border-bottom-color:var(--gold);background:#fff;font-weight:800}
+.tab-content{display:none}.tab-content.active{display:block}
+
+.toolbar{display:flex;gap:10px;flex-wrap:wrap;background:#fff;padding:14px;border-radius:10px;margin-bottom:15px;border:1px solid #e2e8f0}
+.toolbar input,.toolbar select{padding:10px 12px;border:1.5px solid #cbd5e1;border-radius:6px;min-width:180px;font-size:13.5px}
+.action{border:0;background:#092540;color:#fff;padding:10px 16px;border-radius:6px;font-weight:700}
+.action:hover{background:#041527}
+.action-excel{background:#1b874b !important;}
+.action-excel:hover{background:#146c3b !important;}
+
+.table-wrap{background:#fff;border:1px solid #cbd5e1;border-radius:10px;overflow:auto}
+table{width:100%;border-collapse:collapse;min-width:900px;font-size:13px}
+th{background:#092540;color:#fff;text-align:left;padding:11px;white-space:nowrap}
+td{padding:10px 11px;border-bottom:1px solid #e2e8f0;white-space:nowrap}
+tr:hover td{background:#f8fafc}
+
+/* Status Badges */
+.badge{display:inline-block;border-radius:4px;padding:4px 10px;font-weight:800;font-size:11.5px;text-transform:uppercase;letter-spacing:0.3px}
+.badge.pending{background:var(--warning) !important;color:#ffffff !important}
+.badge.approved{background:var(--success) !important;color:#ffffff !important}
+.badge.rejected{background:var(--danger) !important;color:#ffffff !important}
+
+.small-btn{border:0;color:#fff;background:var(--info);padding:6px 11px;border-radius:4px;font-size:12px;font-weight:700}
+.status-select{padding:6px;border:1.5px solid #cbd5e1;border-radius:6px}
+.no-data{text-align:center;padding:30px;color:var(--muted);background:#fff}
+.loading{text-align:center;padding:30px;background:#fff;color:var(--green)}
+
+/* Attendance UI */
+.att-box{max-width:720px;margin:0 auto 20px;background:#fff;border:2px dashed #092540;border-radius:12px;padding:24px}
+.att-box h3{text-align:center;color:#092540;margin-bottom:15px}
+.notice{padding:10px;border-radius:8px;text-align:center;margin-bottom:15px;font-weight:700}
+.notice.open{background:#dcfce7;color:var(--success)}.notice.closed{background:#fee2e2;color:var(--danger)}
+.att-group{margin-bottom:14px}.att-group label{display:block;font-weight:700;color:#092540;margin-bottom:5px}
+.att-group select,.att-group input{width:100%;padding:11px;border:1.5px solid #cbd5e1;border-radius:6px}
+.att-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+
+/* Monthly Report Calendar & Summary Cards */
+.report-wrap{overflow:auto;background:#fff;border-radius:10px;border:1px solid #cbd5e1}
+.monthly-summary{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:18px}
+.monthly-summary-card{background:#fff;border:1px solid #cbd5e1;border-radius:10px;padding:14px 18px;text-align:center;box-shadow:0 3px 10px rgba(0,0,0,0.03)}
+.monthly-summary-card .label{display:block;color:var(--muted);font-size:12.5px;font-weight:800;margin-bottom:4px;text-transform:uppercase}
+.monthly-summary-card .value{display:block;font-size:26px;font-weight:900}
+.monthly-summary-card.present{border-left:5px solid var(--success)}
+.monthly-summary-card.present .value{color:var(--success)}
+.monthly-summary-card.absent{border-left:5px solid var(--danger)}
+.monthly-summary-card.absent .value{color:var(--danger)}
+.monthly-summary-card.holidays{border-left:5px solid var(--gold)}
+.monthly-summary-card.holidays .value{color:var(--gold)}
+.monthly-summary-card.working{border-left:5px solid #092540}
+.monthly-summary-card.working .value{color:#092540}
+
+#reportTable th{text-align:center;padding:8px 6px;font-size:12px}
+#reportTable th.staff-col{text-align:left;padding-left:12px}
+#reportTable td{padding:8px 6px;text-align:center;font-size:12px}
+#reportTable td.present-cell{background:#dcfce7 !important;color:var(--success) !important;font-weight:900 !important;}
+#reportTable td.present-holiday-cell{background:#bbf7d0 !important;color:#065f46 !important;font-weight:900 !important;}
+#reportTable td.absent-cell{background:#fee2e2 !important;color:var(--danger) !important;font-weight:900 !important;}
+#reportTable td.holiday-cell{background:#fef3c7 !important;color:#b45309 !important;font-weight:900 !important;}
+#reportTable td.empty-cell{color:#cbd5e1 !important;}
+.report-total-head{background:#092540 !important;text-align:center !important;font-weight:800 !important}
+.report-total-cell{text-align:center;font-weight:900;white-space:nowrap}
+.report-total-cell.present-total{color:var(--success);background:#f0fdf4}
+.report-total-cell.absent-total{color:var(--danger);background:#fef2f2}
+.report-total-cell.holiday-total{color:#b45309;background:#fffbeb}
+.report-total-cell.working-total{color:#092540;background:#f8fafc}
+.report-total-cell.rate-total{color:#0284c7;background:#f0f9ff}
+
+/* KPI & Analytics */
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-bottom:22px}
+.kpi-card{background:#fff;border-radius:12px;padding:18px 20px;border:1px solid #dbe5e0;box-shadow:0 4px 15px rgba(0,0,0,0.04);position:relative;overflow:hidden}
+.kpi-card::before{content:"";position:absolute;top:0;left:0;bottom:0;width:5px}
+.kpi-disbursed::before{background:var(--success)}
+.kpi-savings::before{background:var(--info)}
+.kpi-fd::before{background:var(--gold)}
+.kpi-popular::before{background:#6f42c1}
+.kpi-title{font-size:12.5px;font-weight:800;color:var(--muted);margin-bottom:6px;text-transform:uppercase}
+.kpi-main-val{font-size:26px;font-weight:900;color:var(--text)}
+.kpi-sub-val{font-size:12px;font-weight:700;color:var(--muted);margin-top:5px}
+
+.analytics-block{background:#fff;border-radius:12px;padding:20px;border:1px solid #dbe5e0;margin-bottom:22px;box-shadow:0 4px 15px rgba(0,0,0,0.03)}
+.analytics-block-title{font-size:16px;font-weight:800;color:#092540;margin-bottom:16px;display:flex;align-items:center;gap:8px;border-bottom:2px solid #eef3f0;padding-bottom:10px}
+.data-table-analytics{width:100%;border-collapse:collapse;font-size:13px;min-width:450px}
+.data-table-analytics th{background:#f8fafc;color:#092540;padding:10px 12px;text-align:left;font-weight:800}
+.data-table-analytics td{padding:11px 12px;border-bottom:1px solid #e2e8f0}
+.demand-progress-bg{background:#e2e8f0;border-radius:20px;height:8px;width:100%;overflow:hidden;margin-top:5px}
+.demand-progress-fill{background:linear-gradient(90deg,var(--primary),var(--gold));height:100%;border-radius:20px}
+.rank-badge{display:inline-block;width:24px;height:24px;line-height:24px;text-align:center;border-radius:50%;font-weight:800;font-size:12px;color:#fff;background:var(--muted)}
+.rank-1{background:#d49b00}.rank-2{background:#64748b}.rank-3{background:#b45309}
+
+.toast{position:fixed;right:20px;bottom:20px;z-index:1000;max-width:380px;background:#092540;color:#fff;padding:13px 16px;border-radius:8px;box-shadow:0 8px 25px rgba(0,0,0,0.2)}
+.toast.success{background:var(--success)}.toast.error{background:var(--danger)}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,0.65);display:none;align-items:center;justify-content:center;padding:20px;z-index:900}
+.modal.show{display:flex}.modal-box{background:#fff;width:min(800px,100%);max-height:85vh;overflow:auto;border-radius:12px}
+.modal-head{padding:15px 18px;background:#092540;color:#fff;display:flex;justify-content:space-between}
+.modal-head button{background:none;border:0;color:#fff;font-size:24px}.modal-body{padding:20px}
+.details-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.detail{border:1px solid #e2e8f0;padding:10px;border-radius:6px}.detail b{display:block;color:#092540;font-size:12px;margin-bottom:3px}.detail span{word-break:break-word}
+
+@media print {
+  body * { visibility: hidden; }
+  #tab-report, #tab-report * { visibility: visible; }
+  #tab-report { position: absolute; left: 0; top: 0; width: 100%; }
+  .toolbar, .topbar, .header, .tabs, .summary { display: none !important; }
+}
+
+@media(max-width:900px){.summary{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:700px){.monthly-summary{grid-template-columns:repeat(2,1fr);}.summary{grid-template-columns:1fr;}}
+</style>
+</head>
+
+<body>
+
+<!-- ================= SNOW FROST LOGIN ================= -->
+<section id="loginPage">
+  <div class="snow-frost-card">
+    <div class="snow-head">
+      <div class="snow-logo"><i class="fas fa-snowflake"></i></div>
+      <h1>PRATAPPUR SKUS LTD.</h1>
+      <p>Secure Administrator Portal</p>
+    </div>
+
+    <div class="snow-body">
+      <div id="step1" class="login-step active">
+        <div class="snow-field">
+          <label><i class="fas fa-user-shield"></i> Username</label>
+          <input id="loginUser" type="text" autocomplete="username" placeholder="Username প্রদান করুন">
+        </div>
+        <div class="snow-field">
+          <label><i class="fas fa-key"></i> Password</label>
+          <input id="loginPass" type="password" autocomplete="current-password" placeholder="••••••••">
+        </div>
+        <div id="loginError1" class="snow-error"></div>
+        <button class="snow-btn" onclick="startAdminLogin()">
+          <i class="fas fa-paper-plane"></i> Verify & Send OTP
+        </button>
+      </div>
+
+      <div id="step2" class="login-step">
+        <div class="snow-otp-note">
+          <i class="fas fa-envelope-open-text"></i> আপনার Admin Email-এ ৬ সংখ্যার OTP পাঠানো হয়েছে।
+        </div>
+        <div class="snow-field">
+          <label><i class="fas fa-shield-halved"></i> One Time Password (OTP)</label>
+          <input id="otpInput" type="text" inputmode="numeric" maxlength="6" placeholder="৬ সংখ্যার OTP কোড" style="letter-spacing:6px; text-align:center; font-size:18px;">
+        </div>
+        <div id="loginError2" class="snow-error"></div>
+        <button class="snow-btn" style="background:#064e2e;" onclick="verifyOTP()">
+          <i class="fas fa-check-double"></i> Verify & Open Dashboard
+        </button>
+        <div id="otpTimer" class="snow-timer"></div>
+        <div style="text-align:center;">
+          <button class="snow-back-link" onclick="backToLogin()">← Back to Credentials</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= DASHBOARD ================= -->
+<section id="dashboard" class="hidden">
+  <div class="topbar">
+    <div class="brand">
+      <i class="fas fa-building-columns"></i> PRATAPPUR SKUS LTD.
+      <small>Administrator Control Panel</small>
+    </div>
+    <div class="top-actions">
+      <button onclick="loadApplications();loadAttendanceData()"><i class="fas fa-sync"></i> Refresh</button>
+      <button class="logout" onclick="logoutAdmin()"><i class="fas fa-sign-out-alt"></i> Logout</button>
+    </div>
+  </div>
+
+  <main class="container">
+    <div class="header">
+      <div>
+        <h2><i class="fas fa-gauge-high"></i> Administrative Control</h2>
+        <span>অনলাইন আবেদন, স্ট্যাটাস, অ্যানালিটিক্স ও স্টাফ হাজিরা ব্যবস্থাপনা</span>
+      </div>
+      <div id="sessionInfo" style="font-weight:700; color:#092540;"></div>
+    </div>
+
+    <!-- INTERACTIVE SUMMARY CARDS (CLICK TO SWITCH TABS) -->
+    <div class="summary">
+      <div class="card card-total" onclick="switchTab('all')" title="ক্লিক করে সব আবেদন দেখুন">
+        <div><h3>মোট আবেদন (ALL)</h3><div id="summaryTotal" class="number">0</div></div>
+        <div class="icon"><i class="fas fa-file-lines"></i></div>
+      </div>
+      <div class="card card-pending" onclick="switchTab('pending')" title="ক্লিক করে পেন্ডিং আবেদন দেখুন">
+        <div><h3>পেন্ডিং (PENDING)</h3><div id="summaryPending" class="number">0</div></div>
+        <div class="icon"><i class="fas fa-clock"></i></div>
+      </div>
+      <div class="card card-approved" onclick="switchTab('approved')" title="ক্লিক করে অ্যাপ্রুভড আবেদন দেখুন">
+        <div><h3 style="color:var(--success);">অ্যাপ্রুভড (DEEP GREEN)</h3><div id="summaryApproved" class="number">0</div></div>
+        <div class="icon"><i class="fas fa-circle-check"></i></div>
+      </div>
+      <div class="card card-rejected" onclick="switchTab('rejected')" title="ক্লিক করে রিজেক্টেড আবেদন দেখুন">
+        <div><h3 style="color:var(--danger);">রিজেক্টেড (DEEP RED)</h3><div id="summaryRejected" class="number">0</div></div>
+        <div class="icon"><i class="fas fa-circle-xmark"></i></div>
+      </div>
+    </div>
+
+    <!-- TABS -->
+    <div class="tabs">
+      <button class="tab active" data-tab="pending">Pending <span id="pendingCount">0</span></button>
+      <button class="tab" data-tab="approved">Approved <span id="approvedCount">0</span></button>
+      <button class="tab" data-tab="rejected">Rejected <span id="rejectedCount">0</span></button>
+      <button class="tab" data-tab="all">সব আবেদন <span id="allCount">0</span></button>
+      <button class="tab" data-tab="analytics"><i class="fas fa-chart-pie"></i> অ্যানালিটিক্স</button>
+      <button class="tab" data-tab="attendance">স্টাফ হাজিরা <span id="attCount">0</span></button>
+      <button class="tab" data-tab="report">মাসিক হাজিরা রিপোর্ট</button>
+    </div>
+
+    <!-- PENDING -->
+    <div id="tab-pending" class="tab-content active">
+      <div class="toolbar">
+        <input id="searchPending" placeholder="ID / নাম / মোবাইল">
+        <select id="filterPendingType"><option value="">সব আবেদন প্রকার</option></select>
+        <button class="action action-excel" onclick="exportApplicationsToCSV('Pending')"><i class="fas fa-file-excel"></i> Export Pending</button>
+        <button class="action" onclick="loadApplications()"><i class="fas fa-sync"></i> Refresh</button>
+      </div>
+      <div id="pendingLoading" class="loading">আবেদন লোড হচ্ছে...</div>
+      <div class="table-wrap"><table id="pendingTable" class="hidden"><thead><tr><th>ক্রম</th><th>তারিখ</th><th>Application ID</th><th>ধরন</th><th>নাম</th><th>মোবাইল</th><th>পরিমাণ</th><th>স্ট্যাটাস</th><th>বিস্তারিত</th><th>পরিবর্তন</th></tr></thead><tbody id="pendingBody"></tbody></table></div>
+      <div id="pendingNoData" class="no-data hidden">কোনো পেন্ডিং আবেদন নেই।</div>
+    </div>
+
+    <!-- APPROVED -->
+    <div id="tab-approved" class="tab-content">
+      <div class="toolbar">
+        <input id="searchApproved" placeholder="ID / নাম / মোবাইল">
+        <select id="filterApprovedType"><option value="">সব আবেদন প্রকার</option></select>
+        <button class="action action-excel" onclick="exportApplicationsToCSV('Approved')"><i class="fas fa-file-excel"></i> Export Approved</button>
+      </div>
+      <div class="table-wrap"><table id="approvedTable" class="hidden"><thead><tr><th>ক্রম</th><th>তারিখ</th><th>Application ID</th><th>ধরন</th><th>নাম</th><th>মোবাইল</th><th>পরিমাণ</th><th>স্ট্যাটাস</th><th>বিস্তারিত</th></tr></thead><tbody id="approvedBody"></tbody></table></div>
+      <div id="approvedNoData" class="no-data hidden">কোনো অ্যাপ্রুভড আবেদন নেই।</div>
+    </div>
+
+    <!-- REJECTED -->
+    <div id="tab-rejected" class="tab-content">
+      <div class="toolbar">
+        <input id="searchRejected" placeholder="ID / নাম / মোবাইল">
+        <button class="action action-excel" onclick="exportApplicationsToCSV('Rejected')"><i class="fas fa-file-excel"></i> Export Rejected</button>
+      </div>
+      <div class="table-wrap"><table id="rejectedTable" class="hidden"><thead><tr><th>ক্রম</th><th>তারিখ</th><th>Application ID</th><th>ধরন</th><th>নাম</th><th>মোবাইল</th><th>পরিমাণ</th><th>স্ট্যাটাস</th><th>রিজেক্ট কারণ</th><th>বিস্তারিত</th></tr></thead><tbody id="rejectedBody"></tbody></table></div>
+      <div id="rejectedNoData" class="no-data hidden">কোনো রিজেক্টেড আবেদন নেই।</div>
+    </div>
+
+    <!-- ALL -->
+    <div id="tab-all" class="tab-content">
+      <div class="toolbar">
+        <input id="searchAll" placeholder="ID / নাম / মোবাইল">
+        <select id="filterAllStatus"><option value="">সব স্ট্যাটাস</option><option>Pending</option><option>Approved</option><option>Rejected</option></select>
+        <select id="filterAllType"><option value="">সব আবেদন প্রকার</option></select>
+        <button class="action action-excel" onclick="exportApplicationsToCSV('All')"><i class="fas fa-file-excel"></i> Export All (CSV)</button>
+        <button class="action" onclick="loadApplications()"><i class="fas fa-sync"></i> Refresh</button>
+      </div>
+      <div class="table-wrap"><table id="allTable" class="hidden"><thead><tr><th>ক্রম</th><th>তারিখ</th><th>Application ID</th><th>ধরন</th><th>নাম</th><th>মোবাইল</th><th>পরিমাণ</th><th>স্ট্যাটাস</th><th>বিস্তারিত</th><th>পরিবর্তন</th></tr></thead><tbody id="allBody"></tbody></table></div>
+      <div id="allNoData" class="no-data hidden">কোনো আবেদন পাওয়া যায়নি।</div>
+    </div>
+
+    <!-- ANALYTICS -->
+    <div id="tab-analytics" class="tab-content">
+      <div class="toolbar" style="justify-content:space-between; align-items:center;">
+        <div style="display:flex; gap:10px; align-items:center;">
+          <label style="font-weight:700; color:#092540;"><i class="fas fa-calendar-alt"></i> বছর:</label>
+          <select id="analyticsYear" onchange="loadAnalytics()" style="min-width:140px;"></select>
+        </div>
+        <button class="action" onclick="window.print()"><i class="fas fa-print"></i> Print Report</button>
+      </div>
+
+      <div class="kpi-grid">
+        <div class="kpi-card kpi-disbursed">
+          <div class="kpi-title">TOTAL LOAN DISBURSED (APPROVED)</div>
+          <div class="kpi-main-val" id="kpiTotalDisbursed" style="color:var(--success);">₹0</div>
+          <div class="kpi-sub-val" id="kpiDisbursedCount">০টি অনুমোদিত</div>
+        </div>
+        <div class="kpi-card kpi-savings">
+          <div class="kpi-title">YEARLY SAVINGS ACCOUNTS</div>
+          <div class="kpi-main-val" id="kpiSavingsCount">0</div>
+          <div class="kpi-sub-val" id="kpiSavingsAmount">মোট ডিপোজিট: ₹0</div>
+        </div>
+        <div class="kpi-card kpi-fd">
+          <div class="kpi-title">YEARLY FIXED DEPOSITS (FD)</div>
+          <div class="kpi-main-val" id="kpiFdCount">0</div>
+          <div class="kpi-sub-val" id="kpiFdAmount">মোট এফডি: ₹0</div>
+        </div>
+        <div class="kpi-card kpi-popular">
+          <div class="kpi-title">MOST DEMANDED PRODUCT</div>
+          <div class="kpi-main-val" id="kpiTopProduct" style="font-size:20px; color:#6f42c1;">-</div>
+          <div class="kpi-sub-val" id="kpiTopProductShare">০% গ্রাহক পছন্দ</div>
+        </div>
+      </div>
+
+      <div class="analytics-block">
+        <div class="analytics-block-title"><i class="fas fa-chart-line"></i> মাসিক লোন আবেদন বনাম অনুমোদিত ডিসবার্সমেন্ট ট্রেন্ড</div>
+        <div style="height:290px; position:relative;"><canvas id="monthlyLoanChart"></canvas></div>
+      </div>
+
+      <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(420px, 1fr)); gap:20px;">
+        <div class="analytics-block" style="margin-bottom:0;">
+          <div class="analytics-block-title"><i class="fas fa-hand-holding-dollar"></i> ঋণ প্রোডাক্ট ভিত্তিক আবেদন ও ডিসবার্সমেন্ট</div>
+          <div style="overflow-x:auto;">
+            <table class="data-table-analytics">
+              <thead><tr><th>লোনের ধরন</th><th>আবেদন</th><th>মোট চাওয়া (₹)</th><th>অনুমোদিত</th><th>বিতরণ (₹)</th><th>হার (%)</th></tr></thead>
+              <tbody id="loanAnalyticsBody"></tbody>
+            </table>
+          </div>
+        </div>
+        <div class="analytics-block" style="margin-bottom:0;">
+          <div class="analytics-block-title"><i class="fas fa-piggy-bank"></i> আমানত প্রোডাক্ট ভিত্তিক বাৎসরিক চিত্র</div>
+          <div style="overflow-x:auto;">
+            <table class="data-table-analytics">
+              <thead><tr><th>আমানতের ধরন</th><th>মোট অ্যাকাউন্ট</th><th>মোট জমার পরিমাণ (₹)</th><th>শেয়ার (%)</th></tr></thead>
+              <tbody id="depositAnalyticsBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="analytics-block" style="margin-top:22px;">
+        <div class="analytics-block-title"><i class="fas fa-fire"></i> গ্রাহকদের সর্বাধিক পছন্দের প্রোডাক্ট র‍্যাঙ্কিং (Demand Ranking)</div>
+        <div style="overflow-x:auto;">
+          <table class="data-table-analytics">
+            <thead><tr><th style="width:60px;">র‍্যাঙ্ক</th><th>প্রোডাক্টের নাম</th><th>মোট আবেদন</th><th style="width:250px;">পছন্দের অনুপাত</th><th>শেয়ার (%)</th></tr></thead>
+            <tbody id="productRankingBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ATTENDANCE TAB -->
+    <div id="tab-attendance" class="tab-content">
+      <div class="att-box">
+        <h3><i class="fas fa-user-clock"></i> Staff Attendance (স্টাফ হাজিরা নিবন্ধন)</h3>
+        <div id="attendanceNotice" class="notice open">হাজিরা গ্রহণের সময় চলছে। শেষ সময়: দুপুর ১২:০০টা</div>
+        
+        <div class="att-grid-2">
+          <div class="att-group">
+            <label>হাজিরার তারিখ</label>
+            <input type="date" id="attManualDate">
+          </div>
+          <div class="att-group">
+            <label>স্টাফ নির্বাচন করুন <span style="color:var(--danger)">*</span></label>
+            <select id="staffSelect">
+              <option value="">-- নির্বাচন করুন --</option>
+              <option value="PATIT PABAN ROY" data-id="PSKUS/001" data-desig="MANAGER">PSKUS/001 - PATIT PABAN ROY (MANAGER)</option>
+              <option value="RAJU MONDAL" data-id="PSKUS/002" data-desig="ACCOUNTANT">PSKUS/002 - RAJU MONDAL (ACCOUNTANT)</option>
+              <option value="PINKI DAS" data-id="PSKUS/003" data-desig="SAJANI">PSKUS/003 - PINKI DAS (SAJANI)</option>
+              <option value="NILIMA BISWAS" data-id="PSKUS/004" data-desig="SAJANI">PSKUS/004 - NILIMA BISWAS (SAJANI)</option>
+              <option value="STAFF NAME 5" data-id="PSKUS/005" data-desig="CLERK">PSKUS/005 - STAFF NAME 5 (CLERK)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="att-group">
+          <label>স্ট্যাটাস</label>
+          <select id="attendanceStatus" onchange="onStatusChanged()">
+            <option value="Present">Present (উপস্থিত)</option>
+            <option value="Absent">Absent (অনুপস্থিত)</option>
+          </select>
+        </div>
+        
+        <div id="absentReasonGroup" class="att-group hidden">
+          <label>অনুপস্থিতির কারণ</label>
+          <input id="absentReasonInput" value="Not presented by self">
+        </div>
+
+        <div style="margin-bottom:12px; font-size:12.5px; display:flex; align-items:center; gap:8px;">
+          <input type="checkbox" id="overrideCutoff" style="width:auto; cursor:pointer;">
+          <label for="overrideCutoff" style="cursor:pointer; color:#092540; font-weight:700;">Admin Override (১২:০০ টার পর অথবা ব্যাকডেটেড হাজিরা অনুমোদন করুন)</label>
+        </div>
+
+        <button id="attendanceSubmitBtn" class="action" style="width:100%" onclick="submitAttendance()"><i class="fas fa-check"></i> হাজিরা সাবমিট করুন</button>
+      </div>
+
+      <div class="toolbar" style="margin-top:20px; justify-content:space-between;">
+        <div style="display:flex; gap:10px; flex-wrap:wrap;">
+          <input id="searchAttendance" placeholder="তারিখ / স্টাফের নাম / আইডি" oninput="filterAttendanceTable()">
+          <button class="action" onclick="loadAttendanceData()"><i class="fas fa-sync"></i> Refresh</button>
+        </div>
+        <button class="action action-excel" onclick="exportAttendanceRecordsToCSV()"><i class="fas fa-file-excel"></i> Export Log (CSV)</button>
+      </div>
+
+      <div class="table-wrap"><table id="attTable" class="hidden"><thead><tr><th>ক্রম</th><th>তারিখ</th><th>সময়</th><th>স্টাফ আইডি</th><th>স্টাফের নাম</th><th>পদবি</th><th>স্ট্যাটাস</th><th>কারণ</th></tr></thead><tbody id="attBody"></tbody></table></div>
+      <div id="attNoData" class="no-data hidden">কোনো হাজিরা রেকর্ড পাওয়া যায়নি।</div>
+    </div>
+
+    <!-- MONTHLY REPORT TAB -->
+    <div id="tab-report" class="tab-content">
+      <div class="toolbar" style="justify-content:space-between; align-items:center;">
+        <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap;">
+          <label style="font-weight:700; color:#092540;"><i class="fas fa-calendar-check"></i> মাস ও বছর:</label>
+          <select id="reportMonth" onchange="generateMonthlyReport()"></select>
+          <select id="reportYear" onchange="generateMonthlyReport()"></select>
+        </div>
+        <div style="display:flex; gap:8px;">
+          <button class="action action-excel" onclick="exportMonthlyReportToCSV()"><i class="fas fa-file-excel"></i> Export Sheet (CSV)</button>
+          <button class="action" onclick="window.print()"><i class="fas fa-print"></i> হাজিরা শিট প্রিন্ট করুন</button>
+        </div>
+      </div>
+
+      <!-- Monthly Attendance Summary Cards -->
+      <div class="monthly-summary">
+        <div class="monthly-summary-card present"><span class="label">এই মাসে মোট PRESENT</span><span id="monthlyPresentTotal" class="value">0</span></div>
+        <div class="monthly-summary-card absent"><span class="label">এই মাসে মোট ABSENT</span><span id="monthlyAbsentTotal" class="value">0</span></div>
+        <div class="monthly-summary-card holidays"><span class="label">মাসিক ছুটি (HOLIDAYS)</span><span id="monthlyHolidaysTotal" class="value">0</span></div>
+        <div class="monthly-summary-card working"><span class="label">মোট কর্মদিবস (WORKING DAYS)</span><span id="monthlyWorkingTotal" class="value">0</span></div>
+      </div>
+
+      <div class="report-wrap"><table id="reportTable"><thead><tr id="reportHeaderRow"></tr></thead><tbody id="reportBodies"></tbody></table></div>
+    </div>
+  </main>
+</section>
+
+<!-- DETAILS MODAL -->
+<div id="detailsModal" class="modal" onclick="if(event.target===this)closeDetails()">
+  <div class="modal-box">
+    <div class="modal-head"><b><i class="fas fa-file-lines"></i> Application Details</b><button onclick="closeDetails()">&times;</button></div>
+    <div id="detailsBody" class="modal-body"></div>
+  </div>
+</div>
+<div id="toast" class="toast hidden"></div>
+
+<script>
+const API_URL = "https://script.google.com/macros/s/AKfycbyeT-KEMXwrmKtDwU12qX1iSZ2L8rnsUDNTjbJBgHZDahtAiTzLQO6qLGKKikZF4ozM/exec";
+const SESSION_KEY = "PSKUS_ADMIN_TOKEN";
+const USER_KEY = "PSKUS_ADMIN_USER";
+let allApplications = [];
+let allAttendance = [];
+let otpTimerHandle = null;
+let currentTabApps = { pending: [], approved: [], rejected: [], all: [] };
+let monthlyLoanChartInstance = null;
+
+const defaultStaffList = [
+  { id: "PSKUS/001", name: "PATIT PABAN ROY", desig: "MANAGER" },
+  { id: "PSKUS/002", name: "RAJU MONDAL", desig: "ACCOUNTANT" },
+  { id: "PSKUS/003", name: "PINKI DAS", desig: "SAJANI" },
+  { id: "PSKUS/004", name: "NILIMA BISWAS", desig: "SAJANI" },
+  { id: "PSKUS/005", name: "STAFF NAME 5", desig: "CLERK" }
+];
+
+const applicationTypes = [
+  "KCC Loan","SHG Loan","Loan Against NSC / KVP / LIC","Consumer Loan",
+  "Savings Deposit Account","Current Account","Fixed Deposit","MIS Deposit","Recurring Deposit","New Member"
+];
+
+function $(id){ return document.getElementById(id); }
+
+function escapeHtml(v){
+  return String(v ?? "").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#039;");
+}
+
+function showToast(msg,type=""){
+  const t=$("toast"); t.textContent=msg; t.className="toast "+type;
+  setTimeout(()=>t.classList.add("hidden"),3500);
+}
+
+function getToken(){ return localStorage.getItem(SESSION_KEY) || ""; }
+
+function clearSession(){
+  localStorage.removeItem(SESSION_KEY);
+  localStorage.removeItem(USER_KEY);
+}
+
+function showLogin(){
+  $("loginPage").classList.remove("hidden");
+  $("dashboard").classList.add("hidden");
+  $("step1").classList.add("active");
+  $("step2").classList.remove("active");
+}
+
+function showDashboard(){
+  $("loginPage").classList.add("hidden");
+  $("dashboard").classList.remove("hidden");
+  $("sessionInfo").textContent="Administrator (" + (localStorage.getItem(USER_KEY) || "Admin") + ")";
+  initDashboard();
+}
+
+function switchTab(tabName) {
+  const target = document.querySelector(`.tab[data-tab="${tabName}"]`);
+  if (target) {
+    target.click();
+    window.scrollTo({ top: 350, behavior: 'smooth' });
+  }
+}
+
+async function getJson(url){
+  const res = await fetch(url,{method:"GET",cache:"no-store"});
+  const txt = await res.text();
+  try{ return JSON.parse(txt); }
+  catch(e){ throw new Error("সঠিক JSON পাওয়া যায়নি।"); }
+}
+
+async function startAdminLogin(){
+  const user=$("loginUser").value.trim();
+  const pass=$("loginPass").value.trim();
+  $("loginError1").textContent="";
+  if(!user || !pass){ $("loginError1").textContent="Username ও Password দিন।"; return; }
+
+  const btn=document.querySelector("#step1 .snow-btn");
+  btn.disabled=true; btn.innerHTML='<i class="fas fa-spinner fa-spin"></i> যাচাই হচ্ছে...';
+
+  try{
+    const d=await getJson(API_URL+"?action=adminLogin&username="+encodeURIComponent(user)+"&password="+encodeURIComponent(pass));
+    if(d.status!=="success") throw new Error(d.message || "ভুল তথ্য।");
+
+    const otp=await getJson(API_URL+"?action=sendOtp&username="+encodeURIComponent(user)+"&password="+encodeURIComponent(pass));
+    if(otp.status!=="success") throw new Error(otp.message || "OTP পাঠানো যায়নি।");
+
+    sessionStorage.setItem("PSKUS_LOGIN_USER",user);
+    sessionStorage.setItem("PSKUS_LOGIN_PASS",pass);
+    $("step1").classList.remove("active");
+    $("step2").classList.add("active");
+    $("otpInput").focus();
+    startOtpTimer(300);
+    showToast("OTP সফলভাবে পাঠানো হয়েছে।","success");
+  }catch(err){
+    $("loginError1").textContent=err.message || "সার্ভার সংযোগ ত্রুটি।";
+  }finally{
+    btn.disabled=false; btn.innerHTML='<i class="fas fa-paper-plane"></i> Verify & Send OTP';
+  }
+}
+
+async function verifyOTP(){
+  const otp=$("otpInput").value.trim();
+  const user=sessionStorage.getItem("PSKUS_LOGIN_USER") || "";
+  $("loginError2").textContent="";
+  if(!/^\d{6}$/.test(otp)){$("loginError2").textContent="সঠিক ৬ সংখ্যার OTP দিন।"; return; }
+
+  const btn=document.querySelector("#step2 .snow-btn");
+  btn.disabled=true; btn.innerHTML='<i class="fas fa-spinner fa-spin"></i> যাচাই হচ্ছে...';
+
+  try{
+    const d=await getJson(API_URL+"?action=verifyOtp&otp="+encodeURIComponent(otp));
+    if(d.status!=="success" || !d.token) throw new Error(d.message || "OTP মেলেনি।");
+
+    localStorage.setItem(SESSION_KEY,d.token);
+    localStorage.setItem(USER_KEY,user);
+    sessionStorage.clear();
+    stopOtpTimer();
+    showDashboard();
+    showToast("লগইন সফল হয়েছে।","success");
+  }catch(err){
+    $("loginError2").textContent=err.message || "যাচাই ত্রুটি।";
+  }finally{
+    btn.disabled=false; btn.innerHTML='<i class="fas fa-check-double"></i> Verify & Open Dashboard';
+  }
+}
+
+function backToLogin(){
+  stopOtpTimer();
+  $("step2").classList.remove("active");
+  $("step1").classList.add("active");
+}
+
+function startOtpTimer(sec){
+  stopOtpTimer();
+  let left=sec;
+  $("otpTimer").textContent="OTP মেয়াদ প্রায় "+Math.ceil(left/60)+" মিনিট।";
+  otpTimerHandle=setInterval(()=>{
+    left--;
+    if(left<=0){ stopOtpTimer(); $("otpTimer").textContent="সময় শেষ। পুনরায় লগইন করুন।"; return; }
+    $("otpTimer").textContent="OTP সময় বাকি: "+Math.floor(left/60)+":"+String(left%60).padStart(2,"0");
+  },1000);
+}
+function stopOtpTimer(){ if(otpTimerHandle)clearInterval(otpTimerHandle); otpTimerHandle=null; }
+
+function logoutAdmin(){ clearSession(); location.reload(); }
+
+async function apiGet(action,params={}){
+  const token=getToken();
+  const q=new URLSearchParams({action,...params});
+  if(token) q.set("token",token);
+  const d=await getJson(API_URL+"?"+q.toString());
+  if(d.status==="error" && /Unauthorized|login required|invalid/i.test(d.message||"")){
+    clearSession(); showLogin(); throw new Error("সেশন শেষ। আবার লগইন করুন।");
+  }
+  return d;
+}
+
+async function apiPost(payload){
+  const body={...payload,token:getToken()};
+  const res=await fetch(API_URL,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(body)});
+  const d=JSON.parse(await res.text());
+  if(d.status==="error" && /Unauthorized|login required|invalid/i.test(d.message||"")){
+    clearSession(); showLogin(); throw new Error("সেশন শেষ। আবার লগইন করুন।");
+  }
+  return d;
+}
+
+function initDashboard(){
+  buildTypeFilters();
+  buildReportSelectors();
+  setupTabs();
+  setupFilters();
+  setDefaultAttendanceDate();
+  updateAttendanceTimeState();
+  loadApplications();
+  loadAttendanceData();
+}
+
+function setDefaultAttendanceDate(){
+  const today = new Date();
+  const yyyy = today.getFullYear();
+  const mm = String(today.getMonth() + 1).padStart(2, '0');
+  const dd = String(today.getDate()).padStart(2, '0');
+  if($("attManualDate")) $("attManualDate").value = `${yyyy}-${mm}-${dd}`;
+}
+
+function buildTypeFilters(){
+  ["filterPendingType","filterApprovedType","filterAllType"].forEach(id=>{
+    const el=$(id); if(!el)return;
+    el.innerHTML='<option value="">সব আবেদন প্রকার</option>'+applicationTypes.map(x=>`<option value="${escapeHtml(x)}">${escapeHtml(x)}</option>`).join("");
+  });
+}
+
+function setupTabs(){
+  document.querySelectorAll(".tab").forEach(b=>{
+    b.onclick=()=>{
+      document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));
+      document.querySelectorAll(".tab-content").forEach(x=>x.classList.remove("active"));
+      b.classList.add("active");
+      $("tab-"+b.dataset.tab).classList.add("active");
+      if(b.dataset.tab==="attendance") loadAttendanceData();
+      if(b.dataset.tab==="report") generateMonthlyReport();
+      if(b.dataset.tab==="analytics") loadAnalytics();
+    };
+  });
+}
+
+function setupFilters(){
+  ["searchPending","searchApproved","searchRejected","searchAll"].forEach(id=>$(id).addEventListener("input",renderAllTables));
+  ["filterPendingType","filterApprovedType","filterAllType","filterAllStatus"].forEach(id=>$(id).addEventListener("change",renderAllTables));
+}
+
+async function loadApplications(){
+  $("pendingLoading").classList.remove("hidden");
+  try{
+    const d=await apiGet("getAll");
+    if(d.status!=="success")throw new Error(d.message||"ডেটা পাওয়া যায়নি।");
+    allApplications=Array.isArray(d.data)?d.data:[];
+    updateCounts();
+    renderAllTables();
+    loadAnalytics();
+  }catch(err){ showToast(err.message,"error"); }
+  finally{ $("pendingLoading").classList.add("hidden"); }
+}
+
+function updateCounts(){
+  const p=allApplications.filter(a=>(a.Status||"Pending")==="Pending").length;
+  const ap=allApplications.filter(a=>a.Status==="Approved").length;
+  const r=allApplications.filter(a=>a.Status==="Rejected").length;
+  $("summaryTotal").textContent=allApplications.length;
+  $("summaryPending").textContent=p;
+  $("summaryApproved").textContent=ap;
+  $("summaryRejected").textContent=r;
+  $("pendingCount").textContent=p;
+  $("approvedCount").textContent=ap;
+  $("rejectedCount").textContent=r;
+  $("allCount").textContent=allApplications.length;
+}
+
+function filterApps(apps,searchId,typeId,statusId){
+  let res=[...apps];
+  const s=searchId?$(searchId).value.trim().toLowerCase():"";
+  const t=typeId?$(typeId).value:"";
+  const st=statusId?$(statusId).value:"";
+  if(s){
+    res=res.filter(a=>String(a["Application ID"]||"").toLowerCase().includes(s)||String(a["Applicant Name"]||"").toLowerCase().includes(s)||String(a["Mobile Number"]||"").toLowerCase().includes(s));
+  }
+  if(t) res=res.filter(a=>String(a["Application Type"]||"")===t);
+  if(st) res=res.filter(a=>(a.Status||"Pending")===st);
+  return res;
+}
+
+function renderAllTables(){
+  renderTable("pending",filterApps(allApplications.filter(a=>(a.Status||"Pending")==="Pending"),"searchPending","filterPendingType",null));
+  renderTable("approved",filterApps(allApplications.filter(a=>a.Status==="Approved"),"searchApproved","filterApprovedType",null));
+  renderTable("rejected",filterApps(allApplications.filter(a=>a.Status==="Rejected"),"searchRejected",null,null));
+  renderTable("all",filterApps(allApplications,"searchAll","filterAllType","filterAllStatus"));
+}
+
+function renderTable(tab,apps){
+  currentTabApps[tab]=apps;
+  const tbody=$(tab+"Body"), table=$(tab+"Table"), noData=$(tab+"NoData");
+  tbody.innerHTML="";
+  if(!apps.length){ table.classList.add("hidden"); noData.classList.remove("hidden"); return; }
+  table.classList.remove("hidden"); noData.classList.add("hidden");
+
+  apps.forEach((a,idx)=>{
+    const status=a.Status||"Pending";
+    const id=String(a["Application ID"]||"");
+    const tr=document.createElement("tr");
+    let change="";
+    if(tab==="pending"||tab==="all"){
+      change=`<select id="status_${tab}_${idx}" class="status-select">
+        <option value="Pending" ${status==="Pending"?"selected":""}>Pending</option>
+        <option value="Approved" ${status==="Approved"?"selected":""}>Approved</option>
+        <option value="Rejected" ${status==="Rejected"?"selected":""}>Rejected</option>
+      </select>
+      <button class="small-btn" onclick="updateAppStatus('${id}','${tab}',${idx})">Save</button>`;
+    }
+    tr.innerHTML=`
+      <td>${idx+1}</td>
+      <td>${escapeHtml(a["Date & Time"]||"")}</td>
+      <td><b>${escapeHtml(id)}</b></td>
+      <td>${escapeHtml(a["Application Type"]||"")}</td>
+      <td>${escapeHtml(a["Applicant Name"]||"")}</td>
+      <td>${escapeHtml(a["Mobile Number"]||"")}</td>
+      <td>${escapeHtml(a["Amount"]||a["Deposit"]||"")}</td>
+      <td><span class="badge ${status==="Approved"?"approved":status==="Rejected"?"rejected":"pending"}">${status}</span></td>
+      ${tab==="rejected"?`<td>${escapeHtml(a["Reject Reason"]||"")}</td>`:""}
+      <td><button class="small-btn" onclick="showDetailsFromTab('${tab}', ${idx})"><i class="fas fa-eye"></i> View</button></td>
+      ${change?`<td>${change}</td>`:""}`;
+    tbody.appendChild(tr);
+  });
+}
+
+function showDetailsFromTab(tab,idx){
+  const a=currentTabApps[tab]&&currentTabApps[tab][idx];
+  if(a) showDetails(a);
+}
+
+function showDetails(a){
+  const body=$("detailsBody");
+  const keys=[
+    "Application ID","Application Type","Date & Time","Applicant Name","Father/Husband Name",
+    "Mother Name","Mobile Number","Address","Amount","PAN","Aadhaar","DOB","Occupation",
+    "Tenure","Nominee Name","SHG Name","Member Count","Security Type","Business Type","Status","Reject Reason"
+  ];
+  body.innerHTML='<div class="details-grid">'+keys.map(k=>`<div class="detail"><b>${k}</b><span>${escapeHtml(a[k]??"—")}</span></div>`).join("")+'</div>';
+  $("detailsModal").classList.add("show");
+}
+function closeDetails(){ $("detailsModal").classList.remove("show"); }
+
+async function updateAppStatus(appId,tab,idx){
+  const sel=$("status_"+tab+"_"+idx); if(!sel)return;
+  const newStatus=sel.value;
+  let reason="";
+  if(newStatus==="Rejected"){ reason=prompt("রিজেক্টের কারণ লিখুন:")||""; if(!reason)return; }
+  try{
+    const d=await apiPost({action:"updateStatus",applicationId:appId,status:newStatus,rejectReason:reason});
+    if(d.status!=="success")throw new Error(d.message);
+    showToast("স্ট্যাটাস আপডেট হয়েছে।","success");
+    await loadApplications();
+  }catch(err){ showToast(err.message,"error"); }
+}
+
+/* =========================================================================
+   EXPORT APPLICATIONS TO EXCEL (CSV)
+   ========================================================================= */
+function exportApplicationsToCSV(category) {
+  let list = allApplications;
+  if (category === "Pending") list = allApplications.filter(a => (a.Status || "Pending") === "Pending");
+  else if (category === "Approved") list = allApplications.filter(a => a.Status === "Approved");
+  else if (category === "Rejected") list = allApplications.filter(a => a.Status === "Rejected");
+
+  if (!list.length) {
+    showToast("ডাউনলোড করার জন্য কোনো আবেদন নেই।", "error");
+    return;
+  }
+
+  const headers = ["SL", "Application ID", "Date", "Application Type", "Applicant Name", "Mobile Number", "Amount", "Status", "Address"];
+  let csvContent = "\uFEFF" + headers.join(",") + "\r\n";
+
+  list.forEach((a, i) => {
+    const row = [
+      i + 1,
+      `"${a["Application ID"] || ""}"`,
+      `"${a["Date & Time"] || ""}"`,
+      `"${a["Application Type"] || ""}"`,
+      `"${a["Applicant Name"] || ""}"`,
+      `"${a["Mobile Number"] || ""}"`,
+      `"${a["Amount"] || a["Deposit"] || "0"}"`,
+      `"${a.Status || "Pending"}"`,
+      `"${(a["Address"] || "").replace(/"/g, '""')}"`
+    ];
+    csvContent += row.join(",") + "\r\n";
+  });
+
+  const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+  const link = document.createElement("a");
+  link.href = URL.createObjectURL(blob);
+  link.download = `Applications_${category}_${new Date().toISOString().slice(0,10)}.csv`;
+  link.click();
+  showToast(`${category} আবেদন সফলভাবে এক্সপোর্ট হয়েছে।`, "success");
+}
+
+/* ---------- ADVANCED REPORTING & KPI ---------- */
+function parseAppAmt(a){ return parseInt(String(a["Amount"]||a["Deposit"]||"0").replace(/[^\d]/g,""),10)||0; }
+
+function loadAnalytics(){
+  let apps = allApplications || [];
+  const loanTypes = ["KCC Loan","SHG Loan","Loan Against NSC / KVP / LIC","Consumer Loan"];
+  const depTypes = ["Savings Deposit Account","Current Account","Fixed Deposit","MIS Deposit","Recurring Deposit"];
+
+  let disAmt = 0, disCount = 0, appCount = 0;
+  let loanData = {}, depData = {}, demand = {};
+
+  loanTypes.forEach(t => loanData[t] = { applied:0, appliedAmt:0, apprv:0, apprvAmt:0 });
+  depTypes.forEach(t => depData[t] = { count:0, amt:0 });
+
+  apps.forEach(a => {
+    const t = String(a["Application Type"] || "Others").trim();
+    const amt = parseAppAmt(a);
+    demand[t] = (demand[t] || 0) + 1;
+
+    if(loanTypes.includes(t)){
+      loanData[t].applied++;
+      loanData[t].appliedAmt += amt;
+      appCount++;
+      if(a.Status === "Approved"){
+        loanData[t].apprv++;
+        loanData[t].apprvAmt += amt;
+        disCount++;
+        disAmt += amt;
+      }
+    }
+    if(depTypes.includes(t)){
+      depData[t].count++;
+      depData[t].amt += amt;
+    }
+  });
+
+  $("kpiTotalDisbursed").textContent = "₹" + disAmt.toLocaleString("en-IN");
+  $("kpiDisbursedCount").textContent = `${disCount}টি অনুমোদিত / মোট ${appCount}টি আবেদন`;
+
+  const sv = depData["Savings Deposit Account"] || { count:0, amt:0 };
+  $("kpiSavingsCount").textContent = sv.count + " টি";
+  $("kpiSavingsAmount").textContent = "মোট ডিপোজিট: ₹" + sv.amt.toLocaleString("en-IN");
+
+  const fd = depData["Fixed Deposit"] || { count:0, amt:0 };
+  $("kpiFdCount").textContent = fd.count + " টি";
+  $("kpiFdAmount").textContent = "মোট এফডি: ₹" + fd.amt.toLocaleString("en-IN");
+
+  const sortedDemand = Object.keys(demand).map(k => ({ name:k, count:demand[k] })).sort((a,b)=>b.count-a.count);
+  if(sortedDemand.length > 0){
+    const top = sortedDemand[0];
+    const sh = Math.round((top.count / (apps.length || 1)) * 100) || 0;
+    $("kpiTopProduct").textContent = top.name;
+    $("kpiTopProductShare").textContent = `${sh}% গ্রাহক পছন্দ (${top.count}টি আবেদন)`;
+  }
+
+  $("loanAnalyticsBody").innerHTML = loanTypes.map(t => {
+    const r = loanData[t];
+    const rt = r.appliedAmt > 0 ? Math.round((r.apprvAmt / r.appliedAmt)*100) : 0;
+    return `<tr><td><b>${t}</b></td><td>${r.applied}</td><td>₹${r.appliedAmt.toLocaleString("en-IN")}</td><td><span class="badge approved">${r.apprv}</span></td><td><b>₹${r.apprvAmt.toLocaleString("en-IN")}</b></td><td>${rt}%</td></tr>`;
+  }).join("");
+
+  $("depositAnalyticsBody").innerHTML = depTypes.map(t => {
+    const r = depData[t];
+    return `<tr><td><b>${t}</b></td><td>${r.count}</td><td><b>₹${r.amt.toLocaleString("en-IN")}</b></td><td>—</td></tr>`;
+  }).join("");
+
+  $("productRankingBody").innerHTML = sortedDemand.map((p,idx) => {
+    const sh = Math.round((p.count / (apps.length || 1)) * 100) || 0;
+    return `<tr><td><span class="rank-badge rank-${idx+1}">${idx+1}</span></td><td><b>${p.name}</b></td><td>—</td><td>${p.count}টি</td><td><div class="demand-progress-bg"><div class="demand-progress-fill" style="width:${sh}%;"></div></div></td><td>${sh}%</td></tr>`;
+  }).join("");
+
+  renderMonthlyChart(apps, loanTypes);
+}
+
+function renderMonthlyChart(apps, loanTypes){
+  const months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+  let appAmt = new Array(12).fill(0), disAmt = new Array(12).fill(0);
+
+  apps.forEach(a => {
+    if(!loanTypes.includes(a["Application Type"])) return;
+    const dt = String(a["Date & Time"] || "");
+    const amt = parseAppAmt(a);
+    let m = -1;
+    const p = dt.split(/[\/\- :]/);
+    if(p.length >= 3) m = (p[0].length === 4 ? parseInt(p[1],10) : parseInt(p[1],10)) - 1;
+    if(m >= 0 && m < 12){
+      appAmt[m] += amt;
+      if(a.Status === "Approved") disAmt[m] += amt;
+    }
+  });
+
+  const ctx = document.getElementById("monthlyLoanChart");
+  if(!ctx) return;
+  if(monthlyLoanChartInstance) monthlyLoanChartInstance.destroy();
+  monthlyLoanChartInstance = new Chart(ctx, {
+    type: "bar",
+    data: {
+      labels: months,
+      datasets: [
+        { label: "মোট লোনের আবেদন (₹)", data: appAmt, backgroundColor: "rgba(13, 110, 253, 0.45)", borderColor: "#0d6efd", borderWidth: 1.5 },
+        { label: "অনুমোদিত বিতরণ (₹)", data: disAmt, backgroundColor: "rgba(6, 78, 46, 0.85)", borderColor: "#064e2e", borderWidth: 1.5 }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      scales: { y: { beginAtZero: true, ticks: { callback: v => "₹" + v.toLocaleString("en-IN") } } }
+    }
+  });
+}
+
+/* =========================================================================
+   STAFF ATTENDANCE FUNCTIONS (FIXED ROBUST LOGIC)
+   ========================================================================= */
+function updateAttendanceTimeState(){
+  const parts=new Intl.DateTimeFormat("en-IN",{timeZone:"Asia/Kolkata",hour:"2-digit",minute:"2-digit",hour12:false}).formatToParts(new Date());
+  const hour=Number(parts.find(x=>x.type==="hour")?.value||0);
+  const minute=Number(parts.find(x=>x.type==="minute")?.value||0);
+  const closed = (hour * 60 + minute >= 720); // 12:00 PM cutoff
+
+  const notice=$("attendanceNotice"), btn=$("attendanceSubmitBtn"), override=$("overrideCutoff");
+  const isOverridden = override && override.checked;
+
+  if(closed && !isOverridden){
+    notice.className="notice closed";
+    notice.innerHTML='<i class="fas fa-lock"></i> আজকের নিয়মিত হাজিরার সময় শেষ (১২:০০ টা)।<br><small>প্রয়োজনে নিচের "Admin Override" চেকবক্সে টিক দিয়ে হাজিরা প্রদান করতে পারেন।</small>';
+    btn.disabled=true; btn.innerHTML='<i class="fas fa-lock"></i> হাজিরা গ্রহণ বন্ধ (১২:০০ PM উত্তীর্ণ)';
+  } else {
+    notice.className="notice open";
+    notice.innerHTML= isOverridden 
+      ? '<i class="fas fa-user-shield"></i> অ্যাডমিন ওভাররাইড সক্রিয় রয়েছে। যেকোনো সময়ের হাজিরা গ্রহণ সম্ভব।'
+      : '<i class="fas fa-clock"></i> আজকের হাজিরা গ্রহণের সময় চলছে। শেষ সময়: দুপুর ১২:০০টা';
+    btn.disabled=false; btn.innerHTML='<i class="fas fa-check"></i> হাজিরা সাবমিট করুন';
+  }
+}
+
+if($("overrideCutoff")){
+  $("overrideCutoff").addEventListener("change", updateAttendanceTimeState);
+}
+
+function onStatusChanged(){
+  const absent=$("attendanceStatus").value==="Absent";
+  $("absentReasonGroup").classList.toggle("hidden",!absent);
+  if(absent) $("absentReasonInput").value="Not presented by self";
+}
+
+async function loadAttendanceData(){
+  try{
+    const d=await apiGet("getAttendance");
+    if(d.status!=="success") throw new Error(d.message || "Attendance data পাওয়া যায়নি।");
+    allAttendance = Array.isArray(d.data) ? d.data : [];
+    $("attCount").textContent = allAttendance.length;
+    renderAttendanceTable(allAttendance);
+    generateMonthlyReport();
+  }catch(err){
+    showToast(err.message || "হাজিরা লোড করা যাচ্ছে না।","error");
+  }
+}
+
+function renderAttendanceTable(records){
+  const tbody=$("attBody");
+  tbody.innerHTML="";
+  if(!records || !records.length){
+    $("attTable").classList.add("hidden"); $("attNoData").classList.remove("hidden"); return;
+  }
+  $("attTable").classList.remove("hidden"); $("attNoData").classList.add("hidden");
+  records.forEach((a,i)=>{
+    const tr=document.createElement("tr");
+    const st = String(a["স্ট্যাটাস"] || a.Status || a.status || "Present").trim();
+    const dt = String(a["তারিখ"] || a.Date || a.date || "");
+    const tm = String(a["সময়"] || a["সময়"] || a.Time || a.time || "");
+    const id = String(a["স্টাফ আইডি"] || a["Staff ID"] || a.staffId || a.ID || "");
+    const name = String(a["স্টাফের নাম"] || a["Staff Name"] || a.staffName || a.Name || "");
+    const desig = String(a["পদবি (Designation)"] || a["পদবি"] || a.Designation || "");
+    const reason = String(a["অনুপস্থিতির কারণ"] || a["Reason"] || a.reason || "—");
+
+    const badgeCls = (st.toLowerCase() === "present") ? "approved" : "rejected";
+    tr.innerHTML=`
+      <td>${i+1}</td>
+      <td>${escapeHtml(dt)}</td>
+      <td>${escapeHtml(tm)}</td>
+      <td><b>${escapeHtml(id)}</b></td>
+      <td>${escapeHtml(name)}</td>
+      <td>${escapeHtml(desig)}</td>
+      <td><span class="badge ${badgeCls}">${escapeHtml(st)}</span></td>
+      <td>${escapeHtml(reason)}</td>`;
+    tbody.appendChild(tr);
+  });
+}
+
+function filterAttendanceTable(){
+  const query = ($("searchAttendance")?.value || "").trim().toLowerCase();
+  if(!query){ renderAttendanceTable(allAttendance); return; }
+  const filtered = allAttendance.filter(a => {
+    const dt = String(a["তারিখ"] || a.Date || "").toLowerCase();
+    const id = String(a["স্টাফ আইডি"] || a["Staff ID"] || "").toLowerCase();
+    const name = String(a["স্টাফের নাম"] || a["Staff Name"] || "").toLowerCase();
+    return dt.includes(query) || id.includes(query) || name.includes(query);
+  });
+  renderAttendanceTable(filtered);
+}
+
+async function submitAttendance(){
+  updateAttendanceTimeState();
+  const btn=$("attendanceSubmitBtn");
+  if(btn.disabled){ showToast("দুপুর ১২:০০টার পর হাজিরা নেওয়া বন্ধ। প্রয়োজনে Override চেকবক্স ব্যবহার করুন।","error"); return; }
+
+  const sel=$("staffSelect"), opt=sel.options[sel.selectedIndex];
+  if(!sel.value){ showToast("দয়া করে স্টাফ নির্বাচন করুন।","error"); return; }
+
+  const manualDateVal = $("attManualDate")?.value;
+  let formattedDate = "";
+  if(manualDateVal) {
+    const parts = manualDateVal.split("-");
+    if(parts.length === 3) formattedDate = `${parts[2]}/${parts[1]}/${parts[0]}`;
+  }
+  if(!formattedDate) {
+    const today = new Date();
+    formattedDate = `${String(today.getDate()).padStart(2,'0')}/${String(today.getMonth()+1).padStart(2,'0')}/${today.getFullYear()}`;
+  }
+
+  const now = new Date();
+  const currentTime = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true });
+
+  btn.disabled=true; btn.innerHTML='<i class="fas fa-spinner fa-spin"></i> সংরক্ষণ হচ্ছে...';
+  try{
+    const status=$("attendanceStatus").value;
+    const reason=$("absentReasonInput").value.trim()||"Not presented by self";
+    const d=await apiPost({
+      action:"saveAttendance",
+      staffId:opt.getAttribute("data-id")||"",
+      staffName:sel.value,
+      designation:opt.getAttribute("data-desig")||"STAFF",
+      status: status,
+      reason: reason,
+      date: formattedDate,
+      time: currentTime
+    });
+    if(d.status!=="success") throw new Error(d.message || "Attendance save failed.");
+    showToast(d.message || "হাজিরা সফলভাবে সংরক্ষিত হয়েছে।","success");
+    sel.value=""; $("attendanceStatus").value="Present"; onStatusChanged();
+    await loadAttendanceData();
+  }catch(err){
+    showToast(err.message || "হাজিরা সেভ করা যায়নি।","error");
+  }finally{
+    updateAttendanceTimeState();
+  }
+}
+
+function exportAttendanceRecordsToCSV(){
+  if(!allAttendance.length){ showToast("ডাউনলোড করার জন্য কোনো হাজিরা নেই।","error"); return; }
+  const headers = ["SL", "Date", "Time", "Staff ID", "Staff Name", "Designation", "Status", "Reason"];
+  let csv = "\uFEFF" + headers.join(",") + "\r\n";
+  allAttendance.forEach((a, i) => {
+    const row = [
+      i + 1,
+      `"${a["তারিখ"] || a.Date || ""}"`,
+      `"${a["সময়"] || a["সময়"] || a.Time || ""}"`,
+      `"${a["স্টাফ আইডি"] || a["Staff ID"] || ""}"`,
+      `"${a["স্টাফের নাম"] || a["Staff Name"] || ""}"`,
+      `"${a["পদবি (Designation)"] || a.Designation || ""}"`,
+      `"${a["স্ট্যাটাস"] || a.Status || "Present"}"`,
+      `"${(a["অনুপস্থিতির কারণ"] || a.Reason || "").replace(/"/g, '""')}"`
+    ];
+    csv += row.join(",") + "\r\n";
+  });
+
+  const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+  const link = document.createElement("a");
+  link.href = URL.createObjectURL(blob);
+  link.download = `Staff_Attendance_Log_${new Date().toISOString().slice(0,10)}.csv`;
+  link.click();
+}
+
+/* =========================================================================
+   MONTHLY REPORT & CALENDAR LOGIC (100% ACCURATE DATE MATCHING)
+   ========================================================================= */
+function buildReportSelectors(){
+  const months=["JANUARY - জানুয়ারি","FEBRUARY - ফেব্রুয়ারি","MARCH - মার্চ","APRIL - এপ্রিল","MAY - মে","JUNE - জুন","JULY - জুলাই","AUGUST - আগস্ট","SEPTEMBER - সেপ্টেম্বর","OCTOBER - অক্টোবর","NOVEMBER - নভেম্বর","DECEMBER - ডিসেম্বর"];
+  $("reportMonth").innerHTML=months.map((m,i)=>`<option value="${i}">${m}</option>`).join("");
+  const y=new Date().getFullYear();
+  $("reportYear").innerHTML=Array.from({length:5},(_,i)=>`<option value="${y-i}">${y-i}</option>`).join("");
+  $("reportMonth").value=new Date().getMonth();
+  $("reportYear").value=y;
+}
+
+// Robust Multi-format Date Matching function
+function matchAttendanceDate(rawDateStr, targetYear, targetMonth, targetDay) {
+  if (!rawDateStr) return false;
+  let s = String(rawDateStr).trim();
+  if (s.includes("T")) s = s.split("T")[0]; // Strip time component
+
+  // Format 1: DD/MM/YYYY or DD-MM-YYYY or YYYY-MM-DD
+  const parts = s.split(/[\/\-\. ]+/);
+  if (parts.length >= 3) {
+    if (parts[0].length === 4) {
+      // YYYY-MM-DD
+      const y = parseInt(parts[0], 10);
+      const m = parseInt(parts[1], 10) - 1;
+      const d = parseInt(parts[2], 10);
+      return y === targetYear && m === targetMonth && d === targetDay;
+    } else {
+      // DD-MM-YYYY
+      const d = parseInt(parts[0], 10);
+      const m = parseInt(parts[1], 10) - 1;
+      let y = parseInt(parts[2], 10);
+      if (y < 100) y += 2000;
+      return y === targetYear && m === targetMonth && d === targetDay;
+    }
+  }
+
+  // Format 2: Fallback to Date.parse
+  const parsed = new Date(s);
+  if (!isNaN(parsed.getTime())) {
+    return parsed.getFullYear() === targetYear && parsed.getMonth() === targetMonth && parsed.getDate() === targetDay;
+  }
+  return false;
+}
+
+function attendanceFor(staffId, staffName, year, month, day){
+  const cleanId = String(staffId).toUpperCase().trim();
+  const cleanName = String(staffName).toUpperCase().trim();
+
+  return allAttendance.find(a => {
+    const recId = String(a["স্টাফ আইডি"] || a["Staff ID"] || a.staffId || a.ID || "").toUpperCase().trim();
+    const recName = String(a["স্টাফের নাম"] || a["Staff Name"] || a.staffName || a.Name || "").toUpperCase().trim();
+    const recDate = a["তারিখ"] || a.Date || a.date || "";
+
+    const idMatches = (recId && recId === cleanId) || 
+                      (recId.replace(/[^0-9]/g, "") === cleanId.replace(/[^0-9]/g, "") && recId.length > 0);
+    const nameMatches = recName && cleanName && (recName === cleanName || recName.includes(cleanName) || cleanName.includes(recName));
+
+    return (idMatches || nameMatches) && matchAttendanceDate(recDate, year, month, day);
+  });
+}
+
+function generateMonthlyReport(){
+  if(!$('reportMonth')) return;
+  const month=Number($('reportMonth').value), year=Number($('reportYear').value);
+  const days=new Date(year,month+1,0).getDate();
+
+  let monthPresent=0, monthAbsent=0;
+  let holidayCount=0;
+
+  // Sunday and 2nd/4th Saturday official calculation
+  for(let d=1; d<=days; d++){
+    const date=new Date(year,month,d);
+    const sun=date.getDay()===0;
+    const sat=date.getDay()===6;
+    const nthSat=Math.floor((d-1)/7)+1;
+    if(sun || (sat && (nthSat===2 || nthSat===4))) holidayCount++;
+  }
+  const workingDays = Math.max(0, days - holidayCount);
+
+  $('reportHeaderRow').innerHTML=
+    '<th class="staff-col">স্টাফ ID ও নাম</th>'+
+    Array.from({length:days},(_,i)=>`<th>${i+1}</th>`).join('')+
+    '<th class="report-total-head">PRESENT</th>'+
+    '<th class="report-total-head">ABSENT</th>'+
+    `<th class="report-total-head">HOLIDAYS (${holidayCount})</th>`+
+    '<th class="report-total-head">WORKING DAYS</th>'+
+    '<th class="report-total-head">উপস্থিতি %</th>';
+
+  // Extract staff list: merge defaults with any dynamically recorded staff
+  let dynamicStaff = [...defaultStaffList];
+  allAttendance.forEach(a => {
+    const id = String(a["স্টাফ আইডি"] || a["Staff ID"] || "").trim();
+    const name = String(a["স্টাফের নাম"] || a["Staff Name"] || "").trim();
+    const desig = String(a["পদবি (Designation)"] || a.Designation || "STAFF").trim();
+    if(id && !dynamicStaff.some(s => s.id === id)) {
+      dynamicStaff.push({ id, name: name || id, desig });
+    }
+  });
+
+  $('reportBodies').innerHTML = dynamicStaff.map(s => {
+    let cells='', presentCount=0, absentCount=0;
+
+    for(let d=1; d<=days; d++){
+      const date=new Date(year,month,d);
+      const sun=date.getDay()===0;
+      const sat=date.getDay()===6;
+      const nthSat=Math.floor((d-1)/7)+1;
+      const isOfficialHoliday = sun || (sat && (nthSat===2 || nthSat===4));
+
+      const rec = attendanceFor(s.id, s.name, year, month, d);
+      const status = rec ? String(rec["স্ট্যাটাস"] || rec.Status || rec.status || "").trim() : "";
+
+      let mark = "-";
+      let cellClass = "empty-cell";
+      let title = "";
+
+      if(status.toLowerCase() === "present") {
+        presentCount++;
+        monthPresent++;
+        if(isOfficialHoliday) {
+          mark = "P*";
+          cellClass = "present-holiday-cell";
+          title = "ছুটির দিনে উপস্থিত (Present on Holiday)";
+        } else {
+          mark = "P";
+          cellClass = "present-cell";
+          title = "উপস্থিত (Present)";
+        }
+      } else if(status.toLowerCase() === "absent") {
+        absentCount++;
+        monthAbsent++;
+        mark = "A";
+        cellClass = "absent-cell";
+        title = "অনুপস্থিত (Absent): " + (rec["অনুপস্থিতির কারণ"] || rec.Reason || "");
+      } else {
+        if(isOfficialHoliday) {
+          mark = "H";
+          cellClass = "holiday-cell";
+          title = "সরকারি সমবায় ছুটি (Holiday)";
+        }
+      }
+
+      cells += `<td class="${cellClass}" title="${title}">${mark}</td>`;
+    }
+
+    const rate = workingDays > 0 ? Math.round((presentCount / workingDays) * 100) : 0;
+
+    return `<tr>
+      <td style="text-align:left; padding-left:12px;"><b>${escapeHtml(s.id)}</b><br><small style="color:var(--muted);">${escapeHtml(s.name)}</small></td>
+      ${cells}
+      <td class="report-total-cell present-total">${presentCount}</td>
+      <td class="report-total-cell absent-total">${absentCount}</td>
+      <td class="report-total-cell holiday-total">${holidayCount}</td>
+      <td class="report-total-cell working-total">${workingDays}</td>
+      <td class="report-total-cell rate-total">${rate}%</td>
+    </tr>`;
+  }).join('');
+
+  // Update Monthly Summary Metric Cards
+  $('monthlyPresentTotal').textContent = monthPresent;
+  $('monthlyAbsentTotal').textContent = monthAbsent;
+  $('monthlyHolidaysTotal').textContent = holidayCount;
+  $('monthlyWorkingTotal').textContent = workingDays;
+}
+
+function exportMonthlyReportToCSV(){
+  const monthIdx = Number($('reportMonth').value);
+  const year = Number($('reportYear').value);
+  const days = new Date(year, monthIdx + 1, 0).getDate();
+  const months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+  
+  let headers = ["Staff ID", "Staff Name", "Designation"];
+  for(let d=1; d<=days; d++) headers.push(String(d));
+  headers.push("Total Present", "Total Absent", "Total Holidays", "Working Days", "Attendance Rate %");
+
+  let csv = "\uFEFF" + headers.join(",") + "\r\n";
+
+  let dynamicStaff = [...defaultStaffList];
+  allAttendance.forEach(a => {
+    const id = String(a["স্টাফ আইডি"] || a["Staff ID"] || "").trim();
+    const name = String(a["স্টাফের নাম"] || a["Staff Name"] || "").trim();
+    const desig = String(a["পদবি (Designation)"] || a.Designation || "STAFF").trim();
+    if(id && !dynamicStaff.some(s => s.id === id)) dynamicStaff.push({ id, name: name || id, desig });
+  });
+
+  dynamicStaff.forEach(s => {
+    let row = [`"${s.id}"`, `"${s.name}"`, `"${s.desig}"`];
+    let presentCount = 0, absentCount = 0;
+
+    for(let d=1; d<=days; d++){
+      const date = new Date(year, monthIdx, d);
+      const sun = date.getDay()===0;
+      const sat = date.getDay()===6;
+      const nthSat = Math.floor((d-1)/7)+1;
+      const isOfficialHoliday = sun || (sat && (nthSat===2 || nthSat===4));
+
+      const rec = attendanceFor(s.id, s.name, year, monthIdx, d);
+      const status = rec ? String(rec["স্ট্যাটাস"] || rec.Status || rec.status || "").trim() : "";
+
+      if(status.toLowerCase() === "present") {
+        presentCount++;
+        row.push(isOfficialHoliday ? '"P*"' : '"P"');
+      } else if(status.toLowerCase() === "absent") {
+        absentCount++;
+        row.push('"A"');
+      } else {
+        row.push(isOfficialHoliday ? '"H"' : '"-"');
+      }
+    }
+
+    let holidayCount = 0;
+    for(let d=1; d<=days; d++){
+      const date = new Date(year, monthIdx, d);
+      const sun = date.getDay()===0;
+      const sat = date.getDay()===6;
+      const nthSat = Math.floor((d-1)/7)+1;
+      if(sun || (sat && (nthSat===2 || nthSat===4))) holidayCount++;
+    }
+    const workingDays = Math.max(0, days - holidayCount);
+    const rate = workingDays > 0 ? Math.round((presentCount / workingDays) * 100) : 0;
+
+    row.push(presentCount, absentCount, holidayCount, workingDays, `"${rate}%"`);
+    csv += row.join(",") + "\r\n";
+  });
+
+  const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+  const link = document.createElement("a");
+  link.href = URL.createObjectURL(blob);
+  link.download = `Monthly_Attendance_Sheet_${months[monthIdx]}_${year}.csv`;
+  link.click();
+  showToast("মাসিক হাজিরা শিট এক্সেল ফরম্যাটে ডাউনলোড হয়েছে।", "success");
+}
+
+/* =========================================================================
+   STARTUP INITIALIZATION
+   ========================================================================= */
+document.addEventListener("DOMContentLoaded",()=>{
+  if(getToken()){
+    showDashboard();
+  }else{
+    showLogin();
+  }
+  setInterval(updateAttendanceTimeState,30000);
+});
+</script>
+</body>
+</html>

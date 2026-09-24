@@ -1,0 +1,140 @@
+<!-- ADMIN ANALYTICS DASHBOARD IMPROVEMENT -->
+<!-- এটি admin.html-এ <div id="dashboard"> এর পরে যোগ করুন -->
+
+<style>
+  .analytics-section {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    margin: 20px 0;
+  }
+  
+  .analytics-card {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    border-left: 4px solid #075e3b;
+  }
+  
+  .chart-container {
+    position: relative;
+    height: 250px;
+    margin: 15px 0;
+  }
+  
+  .stat-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+  }
+  
+  .stat-row:last-child {
+    border-bottom: none;
+  }
+  
+  .stat-label {
+    color: #6b7280;
+    font-weight: 600;
+  }
+  
+  .stat-value {
+    color: #075e3b;
+    font-weight: 800;
+    font-size: 16px;
+  }
+</style>
+
+<section class="analytics-section" id="analyticsSection" style="display: none;">
+  <div class="analytics-card">
+    <h3 style="color: #075e3b; margin-bottom: 15px;">📊 মাসিক আবেদন ট্রেন্ড</h3>
+    <canvas id="monthlyChart"></canvas>
+  </div>
+  
+  <div class="analytics-card">
+    <h3 style="color: #075e3b; margin-bottom: 15px;">📈 আবেদনের ধরন বিতরণ</h3>
+    <canvas id="typeChart"></canvas>
+  </div>
+  
+  <div class="analytics-card">
+    <h3 style="color: #075e3b; margin-bottom: 15px;">✅ অনুমোদন হার</h3>
+    <div style="text-align: center; padding: 20px;">
+      <div style="font-size: 32px; font-weight: 800; color: #138a5b;" id="approvalRate">0%</div>
+      <p style="color: #6b7280; margin: 10px 0;">সফল অনুমোদনের হার</p>
+    </div>
+    <div class="stat-row">
+      <span class="stat-label">মোট অনুমোদিত:</span>
+      <span class="stat-value" id="statsApproved">0</span>
+    </div>
+    <div class="stat-row">
+      <span class="stat-label">মোট প্রত্যাখ্যাত:</span>
+      <span class="stat-value" id="statsRejected">0</span>
+    </div>
+    <div class="stat-row">
+      <span class="stat-label">মোট অপেক্ষাধীন:</span>
+      <span class="stat-value" id="statsPending">0</span>
+    </div>
+  </div>
+  
+  <div class="analytics-card">
+    <h3 style="color: #075e3b; margin-bottom: 15px;">💰 ঋণ পরিসংখ্যান</h3>
+    <div class="stat-row">
+      <span class="stat-label">মোট ঋণ পরিমাণ:</span>
+      <span class="stat-value" id="totalLoanAmount">₹0</span>
+    </div>
+    <div class="stat-row">
+      <span class="stat-label">গড় ঋণ পরিমাণ:</span>
+      <span class="stat-value" id="avgLoanAmount">₹0</span>
+    </div>
+    <div class="stat-row">
+      <span class="stat-label">সর্বোচ্চ ঋণ:</span>
+      <span class="stat-value" id="maxLoanAmount">₹0</span>
+    </div>
+    <div class="stat-row">
+      <span class="stat-label">সর্বনিম্ন ঋণ:</span>
+      <span class="stat-value" id="minLoanAmount">₹0</span>
+    </div>
+  </div>
+</section>
+
+<!-- JAVASCRIPT (admin.html এর স্ক্রিপ্ট সেকশনে যোগ করুন) -->
+<script>
+function loadAnalytics() {
+  const applications = allApplications || [];
+  
+  // Calculate statistics
+  const total = applications.length;
+  const approved = applications.filter(a => a.Status === "Approved").length;
+  const rejected = applications.filter(a => a.Status === "Rejected").length;
+  const pending = applications.filter(a => (a.Status || "Pending") === "Pending").length;
+  
+  const approvalRate = total > 0 ? Math.round((approved / total) * 100) : 0;
+  
+  // Loan statistics
+  const loans = applications.filter(a => a.Amount).map(a => {
+    const amt = parseInt(String(a.Amount).replace(/[^\d]/g, "")) || 0;
+    return amt;
+  });
+  
+  const totalLoan = loans.reduce((a, b) => a + b, 0);
+  const avgLoan = loans.length > 0 ? Math.round(totalLoan / loans.length) : 0;
+  const maxLoan = loans.length > 0 ? Math.max(...loans) : 0;
+  const minLoan = loans.length > 0 ? Math.min(...loans) : 0;
+  
+  // Update UI
+  document.getElementById("approvalRate").textContent = approvalRate + "%";
+  document.getElementById("statsApproved").textContent = approved;
+  document.getElementById("statsRejected").textContent = rejected;
+  document.getElementById("statsPending").textContent = pending;
+  document.getElementById("totalLoanAmount").textContent = "₹" + totalLoan.toLocaleString();
+  document.getElementById("avgLoanAmount").textContent = "₹" + avgLoan.toLocaleString();
+  document.getElementById("maxLoanAmount").textContent = "₹" + maxLoan.toLocaleString();
+  document.getElementById("minLoanAmount").textContent = "₹" + minLoan.toLocaleString();
+  
+  // Show analytics section
+  document.getElementById("analyticsSection").style.display = "grid";
+}
+
+// Call loadAnalytics() after loadApplications() completes
+</script>

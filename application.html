@@ -1,0 +1,1386 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>অনলাইন আবেদন ফর্ম - প্রতাপপুর সমবায় কৃষি উন্নয়ন সমিতি লিমিটেড</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #f0f4f8 0%, #e8f1f8 100%); color: #1f2937; min-height: 100vh; padding: 20px; font-size: 14.5px; }
+        .container { max-width: 1180px; margin: 0 auto; background: white; border-radius: 15px; box-shadow: 0 10px 40px rgba(0,0,0,0.12); overflow: hidden; border: 1px solid #c9e8d9; }
+        header { background: linear-gradient(135deg, #075e3b 0%, #054d2e 100%); color: white; padding: 24px 20px; text-align: center; border-bottom: 4px solid #d49b00; }
+        header h1 { font-size: 25px; margin-bottom: 5px; }
+        header p { font-size: 13.5px; opacity: 0.95; }
+        .content { padding: 30px; background: rgba(255,255,255,.98); }
+        
+        .btn { padding: 10px 20px; border: none; border-radius: 8px; font-size: 14px; font-weight: 700; cursor: pointer; transition: all 0.3s ease; display: inline-flex; align-items: center; justify-content: center; gap: 8px; }
+        .btn-primary { background: #075e3b; color: white; }
+        .btn-primary:hover { background: #06482e; transform: translateY(-2px); }
+        .btn-success { background: #1b874b; color: white; }
+        .btn-success:hover { background: #146c3b; transform: translateY(-2px); }
+        .btn-secondary { background: #e0e0e0; color: #444; }
+        .btn-secondary:hover { background: #d0d0d0; }
+        .btn-danger { background: #d32f2f; color: white; }
+        .btn-danger:hover { background: #b71c1c; }
+        .btn-print { background: #0d6efd; color: white; }
+        .btn-print:hover { background: #0b5ed7; }
+        
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; font-weight: 700; margin-bottom: 5px; color: #17324d; font-size: 13px; }
+        .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 9px 11px; border: 1.5px solid #bddfce; border-radius: 7px; font-size: 13.5px; font-family: inherit; transition: border-color 0.3s; color: #17324d; background: #fbfdff; }
+        .form-group input:focus, .form-group select:focus { border-color: #075e3b; outline: none; box-shadow: 0 0 0 3px rgba(7,94,59,0.12); background: #fff; }
+        .form-group input[readonly] { background: #f0f4f0; color: #555; font-weight: 600; }
+        
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .form-row-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px; }
+        .form-row-4 { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 16px; }
+        .btn-group { display: flex; gap: 12px; margin-top: 25px; }
+        
+        .form-section { display: none; }
+        .form-section.active { display: block; animation: fadeIn 0.3s ease; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        .selection-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(185px, 1fr)); gap: 15px; margin-bottom: 20px; }
+        .product-card { padding: 20px; border: 1px solid #c6dfca; border-radius: 10px; cursor: pointer; transition: all 0.25s ease; text-align: center; background: linear-gradient(145deg, #f4fbf5 0%, #e7f4e9 100%); }
+        .product-card:hover { border-color: #075e3b; background: linear-gradient(145deg, #eef9f0 0%, #dcefe0 100%); transform: translateY(-3px); }
+        .product-card.selected { border: 2px solid #075e3b; background: linear-gradient(145deg, #d8f0dc 0%, #c5e5cb 100%); }
+        .product-card i { font-size: 32px; color: #b8860b; margin-bottom: 10px; }
+        .product-card p { font-weight: 700; color: #173b2a; margin-bottom: 5px; font-size: 15px; }
+
+        .section-title { color: #075e3b; margin-bottom: 20px; font-size: 21px; display: flex; align-items: center; gap: 10px; border-bottom: 3px solid #075e3b; padding-bottom: 8px; }
+        .info-box { background: #e8f5e9; border-left: 4px solid #075e3b; padding: 12px 16px; margin-bottom: 18px; border-radius: 6px; font-size: 13.5px; color: #173b2a; }
+        .sheet-status { display: flex; align-items: center; justify-content: space-between; background: #e8f4fd; border: 1px solid #b6d4fe; padding: 10px 14px; border-radius: 6px; font-size: 13px; color: #084298; margin-bottom: 18px; }
+        .required { color: #d32f2f; font-weight: bold; }
+        h3 { color: #075e3b; margin-top: 22px; margin-bottom: 12px; font-size: 15px; border-bottom: 2px solid #e0ece5; padding-bottom: 5px; display: flex; align-items: center; gap: 8px; }
+
+        .member-table-wrap { overflow-x: auto; border: 1px solid #c8dfd3; border-radius: 8px; margin: 12px 0 18px; background: #fff; }
+        .member-table { width: 100%; border-collapse: collapse; font-size: 12.5px; min-width: 950px; }
+        .member-table th { background: #edf6f1; color: #075e3b; padding: 9px 8px; text-align: left; font-weight: 700; border-bottom: 2px solid #c8dfd3; }
+        .member-table td { padding: 6px 8px; border-bottom: 1px solid #eef3f0; vertical-align: middle; }
+        .member-table input, .member-table select { width: 100%; padding: 6px 8px; border: 1.2px solid #bddacf; border-radius: 5px; font-size: 12.5px; }
+        
+        .total-summary-card { background: linear-gradient(135deg, #075e3b, #0b7a4d); color: #fff; padding: 16px 20px; border-radius: 10px; display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; margin: 15px 0 22px; }
+        .total-summary-card .item { text-align: center; }
+        .total-summary-card .label { font-size: 11px; opacity: 0.9; text-transform: uppercase; font-weight: 600; }
+        .total-summary-card .val { font-size: 20px; font-weight: 900; margin-top: 3px; color: #ffeb99; }
+
+        .declaration-box { background: #fdfdfd; border: 1.5px solid #d8e5dd; border-radius: 8px; padding: 15px; margin-top: 15px; font-size: 13px; line-height: 1.6; color: #2c3e50; }
+        .declaration-box b { color: #075e3b; }
+
+        /* MODALS (STANDARD OVERLAY) */
+        .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.65); display: none; align-items: center; justify-content: center; padding: 20px; z-index: 10000; backdrop-filter: blur(4px); }
+        .modal-overlay.show { display: flex; }
+        .review-modal { background: #fff; width: 100%; max-width: 880px; max-height: 90vh; overflow-y: auto; border-radius: 14px; box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
+        .review-head { background: #075e3b; color: #fff; padding: 16px; text-align: center; }
+        .review-body { padding: 20px; }
+        .review-grid { display: grid; grid-template-columns: 1fr 1fr; border: 1px solid #e0e0e0; border-radius: 8px; overflow: hidden; margin-bottom: 15px; }
+        .review-item { padding: 8px 12px; border-bottom: 1px solid #eee; }
+        .review-item:nth-child(odd) { border-right: 1px solid #eee; }
+        .review-label { display: block; color: #666; font-size: 11.5px; }
+        .review-value { display: block; color: #111; font-weight: 700; font-size: 13.5px; word-break: break-word; }
+        .submit-status { display: none; padding: 12px 20px; color: #075e3b; font-weight: 700; text-align: center; }
+        .submit-status.show { display: block; }
+
+        /* ==================== CENTER BOLD OVERLAY FOR DUPLICATE AADHAAR ==================== */
+        .duplicate-dialog-overlay { 
+            position: fixed !important; 
+            top: 0 !important; 
+            left: 0 !important; 
+            right: 0 !important; 
+            bottom: 0 !important; 
+            width: 100vw !important; 
+            height: 100vh !important; 
+            background: rgba(10, 25, 18, 0.65) !important; 
+            backdrop-filter: blur(8px) !important; 
+            display: none; 
+            align-items: center !important; 
+            justify-content: center !important; 
+            z-index: 999999 !important; 
+            padding: 15px !important; 
+        }
+        .duplicate-dialog-overlay.show { 
+            display: flex !important; 
+        }
+        .duplicate-dialog-card { 
+            background: rgba(255, 255, 255, 0.98) !important; 
+            width: 100% !important; 
+            max-width: 500px !important; 
+            padding: 30px 25px !important; 
+            border-radius: 18px !important; 
+            box-shadow: 0 25px 70px rgba(0,0,0,0.4) !important; 
+            border: 2px solid #ffcdd2 !important; 
+            text-align: center !important; 
+            animation: popIn 0.25s ease-out !important; 
+        }
+        @keyframes popIn {
+            0% { transform: scale(0.85); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        .duplicate-dialog-icon { font-size: 52px; color: #d32f2f; margin-bottom: 12px; }
+        .duplicate-dialog-title { font-size: 22px; font-weight: 900; color: #b71c1c; margin-bottom: 10px; }
+        .duplicate-dialog-body { font-size: 14.5px; line-height: 1.6; color: #263238; font-weight: 600; margin-bottom: 22px; }
+        .duplicate-dialog-highlight { display: block; margin: 12px 0; padding: 12px 14px; background: #ffebee; border-radius: 8px; border-left: 5px solid #d32f2f; font-size: 15.5px; font-weight: 800; color: #c62828; text-align: left; }
+        .duplicate-dialog-actions { display: flex; gap: 14px; justify-content: center; }
+
+        /* OFFICIAL A4 PRINT TEMPLATE */
+        #successModal .success-modal { background: white; width: min(95vw, 920px); max-height: 92vh; overflow-y: auto; border-radius: 12px; box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
+        #successModal .modal-head { background: #075e3b; color: white; padding: 14px; text-align: center; }
+        #successModal .receipt-body { padding: 22px; }
+        #successModal .modal-actions { position: sticky; bottom: 0; background: #fff; padding: 12px 20px; display: flex; gap: 10px; border-top: 1px solid #e0e0e0; }
+
+        .official-form-v2 { width: 100%; background: #fff; font-size: 9.8px; line-height: 1.34; color: #111; }
+        .official-form-v2 .form-header { text-align: center; padding: 0 0 6px; border-bottom: 2px solid #075e3b; }
+        .official-form-v2 .org-en { font-size: 16px; font-weight: 900; color: #075e3b; }
+        .official-form-v2 .org-bn { font-size: 12.5px; font-weight: 800; color: #075e3b; margin-top: 1px; }
+        .official-form-v2 .form-title { display: inline-block; margin-top: 4px; padding: 2px 16px; border: 1.5px solid #075e3b; color: #075e3b; background: #f1f8f2; font-size: 11.5px; font-weight: 900; }
+        .official-form-v2 .application-meta { margin-top: 6px; display: grid; grid-template-columns: 1.2fr 1.2fr 1fr; border: 1px solid #b9cbbd; }
+        .official-form-v2 .meta-cell { padding: 4px 6px; border-right: 1px solid #cfd8d1; }
+        .official-form-v2 .meta-cell:last-child { border-right: 0; }
+        .official-form-v2 .section-head { display: flex; align-items: center; gap: 6px; margin-top: 6px; padding: 3px 6px; border: 1px solid #c8d8cc; border-left: 4px solid #b8860b; background: #edf6ef; color: #075e3b; font-size: 10.5px; font-weight: 800; }
+        .official-form-v2 table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+        .official-form-v2 td, .official-form-v2 th { border: 1px solid #cfd8d1; padding: 4px 5px; word-break: break-word; }
+        .official-form-v2 .label { width: 22%; background: #f6f9f6; color: #404840; font-weight: 700; }
+        .official-form-v2 .value { width: 28%; color: #111; font-weight: 600; }
+        .official-form-v2 .declaration { margin-top: 6px; padding: 5px 7px; border: 1px solid #bdcfc1; background: #fafdfb; font-size: 8.8px; text-align: justify; line-height: 1.4; }
+        .official-form-v2 .signature-row { display: flex; justify-content: space-between; margin-top: 18px; }
+        .official-form-v2 .signature-box { width: 180px; text-align: center; font-size: 8.8px; }
+        .official-form-v2 .signature-line { border-top: 1px solid #333; margin: 25px 0 2px; }
+        .official-form-v2 .office-use { margin-top: 8px; border: 1px solid #9faf9f; }
+        .official-form-v2 .office-title { text-align: center; padding: 2px; background: #f0f5f1; border-bottom: 1px solid #ccc; font-weight: 800; font-size: 9px; }
+        .official-form-v2 .office-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; }
+        .official-form-v2 .office-cell { min-height: 38px; padding: 4px; border-right: 1px solid #ccc; font-size: 8.5px; }
+        .official-form-v2 .office-cell:last-child { border-right: 0; }
+
+        @media print {
+            @page { size: A4 portrait; margin: 4mm 6mm; }
+            body > * { display: none !important; }
+            #successModal, #successModal * { visibility: visible !important; }
+            #successModal { position: static !important; display: block !important; background: #fff !important; padding: 0 !important; }
+            #successModal .success-modal { width: 100% !important; max-width: none !important; box-shadow: none !important; border: none !important; }
+            #successModal .modal-head, #successModal .modal-actions { display: none !important; }
+            #printArea { display: block !important; width: 100% !important; padding: 0 !important; }
+            .official-form-v2 tr, .official-form-v2 .section-head, .official-form-v2 .declaration, .official-form-v2 .office-use { page-break-inside: avoid; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-leaf"></i> অনলাইন আবেদন ফর্ম</h1>
+            <p>প্রতাপপুর সমবায় কৃষি উন্নয়ন সমিতি লিমিটেড | রেজিঃ নং ৬০৪, তারিখ ২৯/০৫/১৯৬৯</p>
+        </header>
+
+        <div class="content">
+            <!-- ==================== SELECTION SCREEN ==================== -->
+            <div id="selection" class="form-section active">
+                <div class="section-title"><i class="fas fa-hand-pointer"></i> সেবা নির্বাচন করুন</div>
+                <div class="info-box"><i class="fas fa-info-circle"></i> আপনার প্রয়োজনীয় সেবাটি নির্বাচন করে আবেদন ফর্মে যান।</div>
+
+                <h3>💎 স্বনির্ভর দল সেবা (SHG Services)</h3>
+                <div class="selection-grid">
+                    <div class="product-card" onclick="selectProduct('newshg', this)"><i class="fas fa-people-roof"></i><p>নতুন SHG গঠন</p><small>New SHG (6-15 Member)</small></div>
+                    <div class="product-card" onclick="selectProduct('shg', this)"><i class="fas fa-users"></i><p>SHG দলগত ঋণ</p><small>স্বনির্ভর দল ঋণ আবেদন</small></div>
+                    <div class="product-card" onclick="selectProduct('wdf', this)"><i class="fas fa-heart"></i><p>SHG সদস্য কল্যাণ</p><small>Welfare Fund আবেদন</small></div>
+                </div>
+
+                <h3>🏦 ঋণ সেবা</h3>
+                <div class="selection-grid">
+                    <div class="product-card" onclick="selectProduct('kcc', this)"><i class="fas fa-seedling"></i><p>KCC লোন</p><small>কৃষক ক্রেডিট কার্ড</small></div>
+                    <div class="product-card" onclick="selectProduct('consumer', this)"><i class="fas fa-shopping-cart"></i><p>ভোক্তা ঋণ</p><small>ব্যক্তিগত ঋণ</small></div>
+                </div>
+
+                <h3>💰 জমা ও সঞ্চয় সেবা</h3>
+                <div class="selection-grid">
+                    <div class="product-card" onclick="selectProduct('savings', this)"><i class="fas fa-piggy-bank"></i><p>সঞ্চয়ী অ্যাকাউন্ট</p><small>Savings Deposit</small></div>
+                    <div class="product-card" onclick="selectProduct('current', this)"><i class="fas fa-building-columns"></i><p>চলতি অ্যাকাউন্ট</p><small>Current Account</small></div>
+                    <div class="product-card" onclick="selectProduct('fd', this)"><i class="fas fa-lock"></i><p>স্থায়ী জমা</p><small>Fixed Deposit</small></div>
+                    <div class="product-card" onclick="selectProduct('mis', this)"><i class="fas fa-chart-line"></i><p>MIS স্কিম</p><small>মাসিক আয় স্কিম</small></div>
+                    <div class="product-card" onclick="selectProduct('rd', this)"><i class="fas fa-circle-notch"></i><p>আবর্তক জমা</p><small>Recurring Deposit</small></div>
+                    <div class="product-card" onclick="selectProduct('newmember', this)"><i class="fas fa-user-plus"></i><p>নতুন সদস্যপদ</p><small>সমিতির সদস্য হন</small></div>
+                </div>
+
+                <div class="btn-group" style="margin-top:25px;">
+                    <button class="btn btn-primary" onclick="proceedToForm()" style="width:100%;">
+                        <i class="fas fa-arrow-right"></i> আবেদন ফর্মে যান
+                    </button>
+                </div>
+            </div>
+
+            <!-- ==================== 1. SHG GROUP LOAN FORM ==================== -->
+            <div id="shgForm" class="form-section">
+                <div class="section-title"><i class="fas fa-users"></i> SHG দলগত ঋণ আবেদন (Group Loan Application)</div>
+                <div class="info-box"><i class="fas fa-info-circle"></i> দলের নাম নির্বাচন করলেই Sheet1 থেকে দলের শাখা, CBS A/C, মোট সদস্য এবং সকল সদস্যের নাম, অভিভাবক, আধার ও পূর্বের বকেয়া ঋণ স্বয়ংক্রিয়ভাবে লোড হবে। দলগত ঋণ বিধায় ব্যক্তিগত KYC-র প্রয়োজন নেই।</div>
+
+                <div class="sheet-status">
+                    <span><i class="fas fa-database"></i> SHG ডেটাবেস সংযোগ: <b id="shgStatusText">তথ্য লোড হচ্ছে...</b></span>
+                    <button type="button" class="btn btn-secondary" style="padding:4px 10px; font-size:12px;" onclick="fetchSHGSheetData()"><i class="fas fa-sync-alt"></i> রিফ্রেশ</button>
+                </div>
+
+                <h3><i class="fas fa-sitemap"></i> ১. স্বনির্ভর দল ও সাধারণ বিবরণী</h3>
+                <div class="form-row-4">
+                    <div class="form-group">
+                        <label>দলের নাম (SHG Group) <span class="required">*</span></label>
+                        <select id="shgSelect" onchange="onGroupSelected()" required>
+                            <option value="">-- দল নির্বাচন করুন --</option>
+                        </select>
+                    </div>
+                    <div class="form-group"><label>শাখা (Branch)</label><input type="text" id="shg_branch" readonly placeholder="স্বয়ংক্রিয়"></div>
+                    <div class="form-group"><label>CBS অ্যাকাউন্ট নং</label><input type="text" id="shg_cbs" readonly placeholder="স্বয়ংক্রিয়"></div>
+                    <div class="form-group"><label>মোট সদস্য সংখ্যা</label><input type="text" id="shg_member_count" readonly placeholder="০ জন"></div>
+                </div>
+
+                <div id="membersSection" style="display:none;">
+                    <h3><i class="fas fa-user-group"></i> ২. সদস্যদের তালিকা ও ঋণ বিভাজন</h3>
+                    <div class="member-table-wrap">
+                        <table class="member-table">
+                            <thead>
+                                <tr>
+                                    <th style="width:40px; text-align:center;">ক্রমিক</th>
+                                    <th style="width:200px;">সদস্যের নাম</th>
+                                    <th style="width:190px;">অভিভাবক / স্বামীর নাম</th>
+                                    <th style="width:150px;">আধার নম্বর</th>
+                                    <th style="width:140px;">পূর্বের বকেয়া ঋণ (₹)</th>
+                                    <th style="width:160px;">নতুন ঋণের দাবি (₹) <small style="display:block; font-weight:normal; color:#555;">(সর্বোচ্চ ₹৭০,০০০)</small></th>
+                                </tr>
+                            </thead>
+                            <tbody id="memberTableBody"></tbody>
+                        </table>
+                    </div>
+
+                    <div class="total-summary-card">
+                        <div class="item"><div class="label">মোট সদস্য</div><div class="val" id="calcMemberCount">০ জন</div></div>
+                        <div class="item"><div class="label">মোট পূর্বের বকেয়া ঋণ</div><div class="val" id="calcTotalPending">₹ ০</div></div>
+                        <div class="item"><div class="label">দলের মোট নতুন ঋণ দাবি</div><div class="val" id="calcTotalNew">₹ ০</div></div>
+                    </div>
+
+                    <h3><i class="fas fa-user-tie"></i> ৩. দলের মূল পদাধিকারী ও যোগাযোগের বিবরণ (Key Bearers)</h3>
+                    <div class="form-row-3">
+                        <div class="form-group">
+                            <label>আবেদনকারী দলনেত্রী / সভাপতি <span class="required">*</span></label>
+                            <select id="shg_leader_pres" required><option value="">-- বাছুন --</option></select>
+                        </div>
+                        <div class="form-group">
+                            <label>সম্পাদিকা (Secretary) <span class="required">*</span></label>
+                            <select id="shg_leader_sec" required><option value="">-- বাছুন --</option></select>
+                        </div>
+                        <div class="form-group">
+                            <label>কোষাধ্যক্ষ (Treasurer) <span class="required">*</span></label>
+                            <select id="shg_leader_trs" required><option value="">-- বাছুন --</option></select>
+                        </div>
+                    </div>
+                    <div class="form-row-3">
+                        <div class="form-group"><label>যোগাযোগের মোবাইল নম্বর <span class="required">*</span></label><input type="tel" id="shg_leader_mobile" maxlength="10" placeholder="১০ সংখ্যার মোবাইল" required></div>
+                        <div class="form-group"><label>জরুরি বিকল্প নম্বর</label><input type="tel" id="shg_leader_alt_mobile" maxlength="10" placeholder="বিকল্প নম্বর"></div>
+                        <div class="form-group"><label>ইমেল অ্যাড্রেস</label><input type="email" id="shg_leader_email" placeholder="example@email.com"></div>
+                    </div>
+
+                    <h3><i class="fas fa-map-location-dot"></i> ৪. দলের স্থায়ী ঠিকানা ও রেজোলিউশন</h3>
+                    <div class="form-row-3">
+                        <div class="form-group"><label>গ্রাম (Village) <span class="required">*</span></label><input type="text" id="shg_village" required></div>
+                        <div class="form-group"><label>পোস্ট অফিস (P.O) <span class="required">*</span></label><input type="text" id="shg_po" required></div>
+                        <div class="form-group"><label>পিন কোড (PIN) <span class="required">*</span></label><input type="text" id="shg_pin" maxlength="6" inputmode="numeric" required></div>
+                    </div>
+                    <div class="form-row-3">
+                        <div class="form-group"><label>দলীয় সভার রেজোলিউশন নং <span class="required">*</span></label><input type="text" id="shg_res_no" placeholder="রেজোলিউশন নং" required></div>
+                        <div class="form-group"><label>রেজোলিউশনের তারিখ <span class="required">*</span></label><input type="date" id="shg_res_date" required></div>
+                        <div class="form-group"><label>ঋণের মেয়াদকাল <span class="required">*</span></label>
+                            <select id="shg_tenure" required>
+                                <option value="১ বছর (১২ মাস)">১ বছর (১২ মাস)</option>
+                                <option value="২ বছর (২৪ মাস)" selected>২ বছর (২৪ মাস)</option>
+                                <option value="৩ বছর (৩৬ মাস)">৩ বছর (৩৬ মাস)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>ঋণের মূল উদ্দেশ্য <span class="required">*</span></label>
+                        <select id="shg_purpose" required>
+                            <option value="স্বনির্ভর ক্ষুদ্র ব্যবসা সম্প্রসারণ">স্বনির্ভর ক্ষুদ্র ব্যবসা সম্প্রসারণ</option>
+                            <option value="পশুপালন ও ডেয়ারি ফার্মিং">পশুপালন ও ডেয়ারি ফার্মিং</option>
+                            <option value="উদ্যানপালন ও ফুল চাষ">উদ্যানপালন ও ফুল চাষ</option>
+                            <option value="হস্তশিল্প ও কুটির শিল্প">হস্তশিল্প ও কুটির শিল্প</option>
+                            <option value="কৃষি ফসল উৎপাদন ও সার-বীজ ক্রয়">কৃষি ফসল উৎপাদন ও সার-বীজ ক্রয়</option>
+                        </select>
+                    </div>
+
+                    <h3><i class="fas fa-file-contract"></i> ৫. আইনানুগ দলগত যৌথ দায়বদ্ধতা ঘোষণা (Joint Liability Declaration)</h3>
+                    <div class="declaration-box">
+                        <b>দলগত অঙ্গীকারনামা:</b> আমরা সর্বসম্মত দলীয় রেজোলিউশনের মাধ্যমে প্রতাপপুর সমবায় কৃষি উন্নয়ন সমিতি লিমিটেড হইতে দলগত ঋণ গ্রহণের জন্য অত্র আবেদনপত্র পেশ করিতেছি। আমরা সমবায় আইন ও স্বনির্ভর দলের নিয়মাবলী মানিয়া চলিতে বাধ্য থাকিব। দলের যেকোনো সদস্য ঋণ পরিশোধে ব্যর্থ হইলে দলের অবশিষ্ট সকল সদস্য যৌথভাবে ও সমবেত দায়িত্বে (Joint Liability) উক্ত বকেয়া ঋণ সুদসহ পরিশোধ করিতে আইনত বাধ্য থাকিব।
+                    </div>
+
+                    <div class="btn-group">
+                        <button class="btn btn-success" onclick="reviewSHGApplication()" style="flex:1;">আবেদন যাচাই করুন</button>
+                        <button class="btn btn-secondary" onclick="backToSelection()">ফিরে যান</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==================== 2. NEW SHG FORMATION FORM ==================== -->
+            <div id="newshgForm" class="form-section">
+                <div class="section-title"><i class="fas fa-people-roof"></i> নতুন স্বনির্ভর দল গঠন আবেদন (New SHG Formation)</div>
+                <div class="info-box"><i class="fas fa-info-circle"></i> দলের বিবরণ, সদস্যদের তথ্য ও পৃথক জীবিকা এবং মূল ৩ জন পদাধিকারী নির্বাচন করুন। এই তথ্য সরাসরি <b>Sheet 2: NEW SHG FORMATION APPLICATION</b>-এ সেভ হবে।</div>
+
+                <h3><i class="fas fa-sitemap"></i> ১. দলের সাধারণ তথ্য ও ব্যাংক বিবরণী</h3>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>নতুন দলের নাম (Name Of SHG) <span class="required">*</span></label>
+                        <input type="text" id="newshg_group_name" placeholder="নতুন দলের নাম লিখুন" required>
+                    </div>
+                    <div class="form-group">
+                        <label>সমিতির নাম (Name of PACS / W.Coop)</label>
+                        <input type="text" id="newshg_pacs_name" value="PRATAPPUR SKUS LTD" readonly>
+                    </div>
+                </div>
+
+                <div class="form-row-3">
+                    <div class="form-group">
+                        <label>প্রধান শাখা (Branch Name)</label>
+                        <input type="text" id="newshg_branch" value="MAJDIA" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label>দল গঠনের তারিখ (GROUP_FORMATION_DT)</label>
+                        <input type="date" id="newshg_formation_date" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label>দলের সেভিংস A/C (SHG_SB_A/C) <small>(ঐচ্ছিক)</small></label>
+                        <input type="text" id="newshg_sb_ac" placeholder="SHG SB A/C">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>IFSC কোড (IFSC_CODEP)</label>
+                        <input type="text" id="newshg_ifsc" value="WBSC0NDCB17" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label>বকেয়া ঋণ (PENDING LOAN)</label>
+                        <input type="text" id="newshg_pending" value="0 (NEW FORMATION)" readonly>
+                    </div>
+                </div>
+
+                <h3>
+                    <span><i class="fas fa-user-group"></i> ২. সদস্যদের তালিকা ও পৃথক জীবিকা (সর্বনিম্ন ৬ জন - সর্বোচ্চ ১৫ জন)</span>
+                    <span style="font-size:13px; font-weight:normal; margin-left:auto; color:#444;">বর্তমান সদস্য: <b id="newshgCountText" style="color:#075e3b;">৬</b> জন</span>
+                </h3>
+
+                <div class="member-table-wrap">
+                    <table class="member-table">
+                        <thead>
+                            <tr>
+                                <th style="width:30px; text-align:center;">#</th>
+                                <th style="width:145px;">সদস্যের নাম <span class="required">*</span></th>
+                                <th style="width:135px;">অভিভাবক / স্বামী <span class="required">*</span></th>
+                                <th style="width:140px;">গ্রাম / ঠিকানা <span class="required">*</span></th>
+                                <th style="width:75px;">পিন <span class="required">*</span></th>
+                                <th style="width:105px;">মোবাইল <span class="required">*</span></th>
+                                <th style="width:130px;">আধার নম্বর <span class="required">*</span></th>
+                                <th style="width:135px;">জীবিকা (Livelihood) <span class="required">*</span></th>
+                                <th style="width:110px;">সদস্যের A/C <small>(ঐচ্ছিক)</small></th>
+                            </tr>
+                        </thead>
+                        <tbody id="newshgMemberBody"></tbody>
+                    </table>
+                </div>
+
+                <div style="display:flex; gap:10px; margin-bottom:20px;">
+                    <button type="button" class="btn btn-primary" onclick="addSHGMemberRow()"><i class="fas fa-plus"></i> সদস্য যোগ করুন</button>
+                    <button type="button" class="btn btn-danger" onclick="removeSHGMemberRow()"><i class="fas fa-trash"></i> শেষ সদস্য মুছুন</button>
+                </div>
+
+                <h3><i class="fas fa-user-tie"></i> ৩. দলের মূল পদাধিকারী নির্বাচন (Key Bearers / Operators)</h3>
+                <div class="form-row-3">
+                    <div class="form-group">
+                        <label>দলনেত্রী / সভাপতি (President) <span class="required">*</span></label>
+                        <select id="newshg_leader_pres" onchange="syncLeaderPhones()" required><option value="">-- নির্বাচন করুন --</option></select>
+                        <input type="text" id="newshg_pres_phone" placeholder="মোবাইল নম্বর" readonly style="margin-top:5px; background:#f4f9f5;">
+                    </div>
+                    <div class="form-group">
+                        <label>সম্পাদিকা (Secretary) <span class="required">*</span></label>
+                        <select id="newshg_leader_sec" onchange="syncLeaderPhones()" required><option value="">-- নির্বাচন করুন --</option></select>
+                        <input type="text" id="newshg_sec_phone" placeholder="মোবাইল নম্বর" readonly style="margin-top:5px; background:#f4f9f5;">
+                    </div>
+                    <div class="form-group">
+                        <label>কোষাধ্যক্ষ (Treasurer) <span class="required">*</span></label>
+                        <select id="newshg_leader_trs" onchange="syncLeaderPhones()" required><option value="">-- নির্বাচন করুন --</option></select>
+                        <input type="text" id="newshg_trs_phone" placeholder="মোবাইল নম্বর" readonly style="margin-top:5px; background:#f4f9f5;">
+                    </div>
+                </div>
+
+                <h3><i class="fas fa-file-contract"></i> ৪. স্ব-ঘোষণা ও অঙ্গীকারবদ্ধ বিবৃতি (Declaration & Resolution)</h3>
+                <div class="declaration-box">
+                    <b>প্রতিজ্ঞাবদ্ধ বিবৃতি:</b> আমরা নিম্নস্বাক্ষরকারীগণ প্রতাপপুর সমবায় কৃষি উন্নয়ন সমিতি লিমিটেডের অধীনে একটি নতুন স্বনির্ভর দল গঠন করার সর্বসম্মত সিদ্ধান্ত গ্রহণ করিলাম। আমরা অঙ্গীকার করিতেছি যে, দলের সকল প্রকার নিয়ম-কানুন, নিয়মিত সাপ্তাহিক/মাসিক সঞ্চয় ও সমবায় আইন নিষ্ঠার সহিত পালন করিব। অত্র আবেদনে উল্লিখিত সকল সদস্যের নাম, অভিভাবক, ব্যক্তিগত আধার নম্বর ও জীবিকা সম্পর্কিত সকল তথ্য সম্পূর্ণ সত্য ও সঠিক।
+                </div>
+
+                <div class="btn-group">
+                    <button class="btn btn-success" onclick="reviewNewSHGForm()" style="flex:1;">আবেদন তথ্য যাচাই করুন</button>
+                    <button class="btn btn-secondary" onclick="backToSelection()">ফিরে যান</button>
+                </div>
+            </div>
+
+            <!-- ==================== 3. SHG WDF CLAIM FORM ==================== -->
+            <div id="wdfForm" class="form-section">
+                <div class="section-title"><i class="fas fa-heart"></i> SHG সদস্য কল্যাণ তহবিল আবেদন (Welfare Fund Claim)</div>
+                <div class="info-box"><i class="fas fa-info-circle"></i> সদস্যা আধার নম্বর দিলে <b>Sheet1</b> থেকে সদস্যা ও দলের বিবরণ স্বয়ংক্রিয়ভাবে লোড হবে। মৃত্যুজনিত দাবির ক্ষেত্রে মৃত্যুর তারিখ, সার্টিফিকেট নম্বর ও কারণ উল্লেখ করুন।</div>
+                
+                <h3><i class="fas fa-id-card"></i> ১. সদস্যা যাচাই (Aadhaar Auto-Verification)</h3>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>সদস্যার আধার নম্বর <span class="required">*</span></label>
+                        <input type="text" id="wdf_aadhar" maxlength="12" placeholder="১২ সংখ্যার আধার দিন" oninput="verifyWDFAadhar()" required>
+                        <small id="wdf_status" style="font-weight:bold;"></small>
+                    </div>
+                    <div class="form-group">
+                        <label>দলের নাম (SHG Group Name)</label>
+                        <input type="text" id="wdf_group" readonly placeholder="স্বয়ংক্রিয়ভাবে আসবে">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>সদস্যার নাম (Member Name)</label>
+                        <input type="text" id="wdf_name" readonly placeholder="স্বয়ংক্রিয়ভাবে আসবে">
+                    </div>
+                    <div class="form-group">
+                        <label>অভিভাবক / স্বামীর নাম</label>
+                        <input type="text" id="wdf_guardian" readonly placeholder="স্বয়ংক্রিয়ভাবে আসবে">
+                    </div>
+                </div>
+
+                <div class="form-row-3">
+                    <div class="form-group"><label>শাখা (Branch)</label><input type="text" id="wdf_branch" readonly></div>
+                    <div class="form-group"><label>গ্রাম (Village)</label><input type="text" id="wdf_address" readonly></div>
+                    <div class="form-group"><label>মোবাইল নম্বর</label><input type="text" id="wdf_mobile" readonly></div>
+                </div>
+
+                <h3><i class="fas fa-hand-holding-dollar"></i> ২. দাবির প্রকার ও মৃত্যুর বিবরণ (Claim Details)</h3>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>দাবির প্রকার (Claim Type) <span class="required">*</span></label>
+                        <select id="wdf_claim_type" onchange="toggleDeathDetails()" required>
+                            <option value="MEMBER DEATH">সদস্যার মৃত্যুজনিত কল্যাণ দাবি (₹ ২০,০০০)</option>
+                            <option value="HUSBAND DEATH">স্বামীর মৃত্যুজনিত কল্যাণ দাবি (₹ ১০,০০০)</option>
+                            <option value="GRADUATION">সন্তানের উচ্চশিক্ষা সহায়তা (₹ ১,০০০)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>দাবিদার / প্রাপকের নাম (Claim Person Name) <span class="required">*</span></label>
+                        <input type="text" id="wdf_claim_person" placeholder="প্রাপকের নাম" required>
+                    </div>
+                </div>
+
+                <div id="wdf_death_fields">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>মৃত্যুর তারিখ (Date of Death) <span class="required">*</span></label>
+                            <input type="date" id="wdf_death_date">
+                        </div>
+                        <div class="form-group">
+                            <label>মৃত্যুর কারণ (Reason of Death) <span class="required">*</span></label>
+                            <select id="wdf_death_reason">
+                                <option value="স্বাভাবিক মৃত্যু (Normal Death)">স্বাভাবিক মৃত্যু (Normal Death)</option>
+                                <option value="দুর্ঘটনাজনিত মৃত্যু (Accidental Death)">দুর্ঘটনাজনিত মৃত্যু (Accidental Death)</option>
+                                <option value="অসুস্থতাজনিত মৃত্যু (Illness / Disease)">অসুস্থতাজনিত মৃত্যু (Illness / Disease)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>মৃত্যু শংসাপত্র নম্বর (Death Certificate No) <span class="required">*</span></label>
+                            <input type="text" id="wdf_cert_no" placeholder="Certificate No">
+                        </div>
+                        <div class="form-group">
+                            <label>প্রদানকারী কর্তৃপক্ষ (Issuing Authority) <span class="required">*</span></label>
+                            <select id="wdf_issue_auth">
+                                <option value="গ্রাম পঞ্চায়েত (Gram Panchayat)">গ্রাম পঞ্চায়েত (Gram Panchayat)</option>
+                                <option value="পৌরসভা / কর্পোরেশন (Municipality)">পৌরসভা / কর্পোরেশন (Municipality)</option>
+                                <option value="স্বাস্থ্য ও পরিবার কল্যাণ দপ্তর (Health Dept)">স্বাস্থ্য ও পরিবার কল্যাণ দপ্তর (Health Dept)</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>আবেদনকারীর নাম <span class="required">*</span></label>
+                        <input type="text" id="wdf_applicant" placeholder="যিনি ফর্ম জমা দিচ্ছেন" required>
+                    </div>
+                    <div class="form-group">
+                        <label>ইমেল অ্যাড্রেস (Email)</label>
+                        <input type="email" id="wdf_email" placeholder="example@email.com">
+                    </div>
+                </div>
+
+                <div class="btn-group">
+                    <button class="btn btn-success" onclick="reviewWDFForm()" style="flex:1;">দাবি আবেদন যাচাই করুন</button>
+                    <button class="btn btn-secondary" onclick="backToSelection()">ফিরে যান</button>
+                </div>
+            </div>
+
+            <!-- Placeholders for general applications (KCC, Savings, Current, FD, etc.) -->
+            <div id="kccForm" class="form-section"><div class="section-title">KCC লোন</div><button class="btn btn-secondary" onclick="backToSelection()">ফিরে যান</button></div>
+            <div id="consumerForm" class="form-section"><div class="section-title">ভোক্তা ঋণ</div><button class="btn btn-secondary" onclick="backToSelection()">ফিরে যান</button></div>
+            <div id="savingsForm" class="form-section"><div class="section-title">সঞ্চয়ী অ্যাকাউন্ট</div><button class="btn btn-secondary" onclick="backToSelection()">ফিরে যান</button></div>
+            <div id="currentForm" class="form-section"><div class="section-title">চলতি অ্যাকাউন্ট</div><button class="btn btn-secondary" onclick="backToSelection()">ফিরে যান</button></div>
+            <div id="fdForm" class="form-section"><div class="section-title">স্থায়ী জমা</div><button class="btn btn-secondary" onclick="backToSelection()">ফিরে যান</button></div>
+            <div id="misForm" class="form-section"><div class="section-title">MIS স্কিম</div><button class="btn btn-secondary" onclick="backToSelection()">ফিরে যান</button></div>
+            <div id="rdForm" class="form-section"><div class="section-title">আবর্তক জমা</div><button class="btn btn-secondary" onclick="backToSelection()">ফিরে যান</button></div>
+            <div id="newmemberForm" class="form-section"><div class="section-title">নতুন সদস্যপদ</div><button class="btn btn-secondary" onclick="backToSelection()">ফিরে যান</button></div>
+        </div>
+    </div>
+
+    <!-- REVIEW MODAL -->
+    <div class="modal-overlay" id="reviewModal">
+        <div class="review-modal">
+            <div class="review-head"><h2><i class="fas fa-clipboard-check"></i> আবেদন তথ্য যাচাই</h2></div>
+            <div class="review-body">
+                <div class="review-grid" id="reviewGrid"></div>
+                <div id="dynamicReviewWrapper" style="display:none;">
+                    <h4 style="color:#075e3b; margin:12px 0 6px;">সদস্যদের তালিকা ও ঋণ বিভাজন:</h4>
+                    <div class="member-table-wrap" style="max-height:220px; overflow-y:auto;">
+                        <table class="member-table">
+                            <thead id="reviewMemberHead"></thead>
+                            <tbody id="reviewMemberBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="btn-group" style="padding: 0 20px 20px;">
+                <button class="btn btn-secondary" style="flex:1;" onclick="closeReviewModal()">সংশোধন</button>
+                <button class="btn btn-success" style="flex:1;" id="confirmSubmitBtn" onclick="confirmFinalSubmit()">নিশ্চিত ও জমা দিন</button>
+            </div>
+            <div class="submit-status" id="submitStatus"><i class="fas fa-spinner fa-spin"></i> গুগল শিটে সেভ হচ্ছে...</div>
+        </div>
+    </div>
+
+    <!-- CENTER BOLD DUPLICATE NOTIFICATION MODAL -->
+    <div class="duplicate-dialog-overlay" id="duplicateDialogOverlay">
+        <div class="duplicate-dialog-card">
+            <div class="duplicate-dialog-icon"><i class="fas fa-exclamation-triangle"></i></div>
+            <div class="duplicate-dialog-title">সতর্কবার্তা: ডুপ্লিকেট আধার!</div>
+            <div class="duplicate-dialog-body">
+                এই আধার নম্বরটি ইতোমধ্যে <b>Sheet 1</b>-এর নিম্নোক্ত দলের সদস্যের নামে অন্তর্ভুক্ত আছে:
+                <span class="duplicate-dialog-highlight" id="duplicateGroupNameText">দল: —</span>
+                আপনি কি নতুন দলেও এই আধার নম্বর নিয়ে <b>চালিয়ে যেতে (Continue)</b> চান?
+            </div>
+            <div class="duplicate-dialog-actions">
+                <button type="button" class="btn btn-secondary" style="flex:1;" onclick="handleDuplicateAction(false)">
+                    <i class="fas fa-times"></i> বাতিল (Cancel)
+                </button>
+                <button type="button" class="btn btn-danger" style="flex:1;" onclick="handleDuplicateAction(true)">
+                    <i class="fas fa-check"></i> চালিয়ে যান (Continue)
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- OFFICIAL A4 PRINT PREVIEW MODAL -->
+    <div class="modal-overlay" id="successModal">
+        <div class="success-modal">
+            <div class="modal-head"><h2><i class="fas fa-check-circle"></i> আবেদন সফলভাবে সম্পন্ন হয়েছে!</h2></div>
+            <div class="receipt-body" id="printArea">
+                <div class="official-form-v2">
+                    <div class="form-header">
+                        <div class="org-en">PRATAPPUR SAMABAY KRISHI UNNAYAN SAMITI LIMITED</div>
+                        <div class="org-bn">প্রতাপপুর সমবায় কৃষি উন্নয়ন সমিতি লিমিটেড</div>
+                        <div class="form-title" id="printFormTitle">OFFICIAL APPLICATION FORM</div>
+                    </div>
+                    <div class="application-meta">
+                        <div class="meta-cell"><b>APPLICATION ID:</b><br><span id="printAppId" style="color:#075e3b; font-weight:800;"></span></div>
+                        <div class="meta-cell"><b>DATE:</b><br><span id="printAppDate"></span></div>
+                        <div class="meta-cell"><b>BRANCH:</b><br><span>MAJDIA / PRATAPPUR</span></div>
+                    </div>
+                    
+                    <div class="section-head">১. আবেদন বিবরণী</div>
+                    <table><tbody id="printPart1"></tbody></table>
+
+                    <div id="printDynamicWrapper" style="display:none;">
+                        <div class="section-head" id="printDynamicHead">২. সদস্যদের তালিকা ও ঋণ বিভাজন বিবরণী</div>
+                        <table>
+                            <thead id="printMemberHead"></thead>
+                            <tbody id="printMemberBody"></tbody>
+                        </table>
+                    </div>
+
+                    <div class="section-head">২. যোগাযোগ ও অন্যান্য বিবরণ</div>
+                    <table><tbody id="printPart2"></tbody></table>
+
+                    <div class="declaration">
+                        <b>স্ব-ঘোষণা ও অঙ্গীকারনামা:</b> আমরা অত্র স্বনির্ভর দলের সকল সদস্য রেজোলিউশনের মাধ্যমে ঘোষণা করিতেছি যে, প্রতাপপুর সমবায় কৃষি উন্নয়ন সমিতি লিমিটেডের সকল নিয়মাবলী মানিয়া চলিব। অত্র আবেদনে প্রদত্ত সকল তথ্য সম্পূর্ণ নির্ভুল। কোনো সদস্য ঋণ খেলাপ করিলে আমরা যৌথ দায়বদ্ধতায় (Joint Liability) উক্ত ঋণ পরিশোধে বাধ্য থাকিব।
+                    </div>
+                    
+                    <div class="signature-row" id="printSigRow">
+                        <div class="signature-box"><div class="signature-line" id="sigLine1">দলনেত্রী / সভাপতি (সীলসহ)</div></div>
+                        <div class="signature-box"><div class="signature-line" id="sigLine2">সম্পাদিকা (সীলসহ)</div></div>
+                        <div class="signature-box"><div class="signature-line" id="sigLine3">কোষাধ্যক্ষ (সীলসহ)</div></div>
+                    </div>
+
+                    <div class="office-use">
+                        <div class="office-title">সমিতির অফিস ব্যবহারের জন্য (FOR OFFICE USE ONLY)</div>
+                        <div class="office-grid">
+                            <div class="office-cell">আবেদন প্রাপ্তির তারিখ:<br>নথি যাচাইকারী:</div>
+                            <div class="office-cell">ফিল্ড সুপারভাইজারের স্বাক্ষর:<br>মন্তব্য: সুপারিশকৃত / অসুপারিশকৃত</div>
+                            <div class="office-cell">অনুমোদন নম্বর:<br>ব্যবস্থাপক / সম্পাদকের অনুমোদন:</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-actions">
+                <button class="btn btn-print" style="flex:1;" onclick="window.print()"><i class="fas fa-print"></i> A4 প্রিন্ট নিন</button>
+                <button class="btn btn-secondary" style="flex:1;" onclick="closeSuccessModal()">বন্ধ করুন</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const SHG_WDF_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyQ6DxmFUylaGTunHTJ_mbKJxbGVWBKUWD_v0u1mx27d69m_Tkwpou0JSPN9wYsd64L/exec";
+        const SHG_SHEET_ID = "1dE3RugTgQP_7dLJCaPgb8K9GMMdp_ucYZve5S_tWpRQ";
+        const GENERAL_APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyeT-KEMXwrmKtDwU12qX1iSZ2L8rnsUDNTjbJBgHZDahtAiTzLQO6qLGKKikZF4ozM/exec";
+
+        let selectedProduct = null;
+        let pendingData = null;
+        let isSubmitting = false;
+
+        let shgGroups = {};
+        let activeSHGGroup = null;
+        let newSHGMemberCount = 0;
+
+        let sheet1AadhaarMap = {};
+        let isSheet1Loaded = false;
+        let activeValidatingIndex = null;
+
+        const livelihoodOptions = [
+            "ফুল চাষ (FLORICULTURE)",
+            "হস্তশিল্প (HANDICRAFT)",
+            "বিড়ি শ্রমিক (BIDI WORKER)",
+            "উদ্যানপালন (HORTICULTURE)",
+            "দর্জি কাজ (TAILORING)",
+            "পশুপালন (ANIMAL HUSBANDRY)",
+            "অন্যান্য (OTHER)"
+        ];
+
+        // ==================== SHEET1 DATA FETCH & CACHE ====================
+        function fetchSHGSheetData() {
+            const status = document.getElementById('shgStatusText');
+            if (status) status.innerHTML = '<i class="fas fa-spinner fa-spin"></i> গুগল শিট থেকে লোড হচ্ছে...';
+
+            const callbackName = "gvizHandler_" + Date.now();
+            window[callbackName] = function(json) {
+                try {
+                    processSHGSheetJSON(json);
+                } catch(e) {
+                    console.error("Sheet process error:", e);
+                } finally {
+                    delete window[callbackName];
+                    const s = document.getElementById(callbackName);
+                    if (s) s.remove();
+                }
+            };
+
+            const script = document.createElement('script');
+            script.id = callbackName;
+            script.src = `https://docs.google.com/spreadsheets/d/${SHG_SHEET_ID}/gviz/tq?tqx=responseHandler:${callbackName}&sheet=Sheet1`;
+            script.onerror = function() {
+                delete window[callbackName];
+                if (script) script.remove();
+                if (status) status.innerHTML = '<span style="color:#b42318;">সংযোগ ব্যর্থ হয়েছে!</span>';
+            };
+            document.body.appendChild(script);
+        }
+
+        function processSHGSheetJSON(json) {
+            const status = document.getElementById('shgStatusText');
+            const rows = json.table.rows;
+            if (!rows || rows.length === 0) throw new Error("তথ্য পাওয়া যায়নি");
+
+            let startRow = 0;
+            if (rows[0] && rows[0].c) {
+                let r0 = rows[0].c.map(c => c ? String(c.v).toUpperCase() : '').join(' ');
+                if (r0.includes("BRANCH") || r0.includes("CBS") || r0.includes("NAME")) startRow = 1;
+            }
+
+            const totalCols = (json.table.cols && json.table.cols.length > 0) ? json.table.cols.length : rows[0].c.length;
+            const colPending = totalCols > 0 ? totalCols - 1 : -1;
+            shgGroups = {};
+            sheet1AadhaarMap = {};
+
+            // Explicitly detect Aadhaar column from Header Row
+            let colAadhar = -1;
+            if (rows[0] && rows[0].c) {
+                for (let c = 0; c < rows[0].c.length; c++) {
+                    const h = (rows[0].c[c] && rows[0].c[c].v !== null) ? String(rows[0].c[c].v).trim().toUpperCase() : '';
+                    if (h.includes("AADHAR") || h.includes("ADHAR")) {
+                        colAadhar = c;
+                        break;
+                    }
+                }
+            }
+
+            for (let i = startRow; i < rows.length; i++) {
+                const r = rows[i];
+                if (!r || !r.c) continue;
+                const getVal = idx => (idx >= 0 && idx < r.c.length && r.c[idx] && r.c[idx].v !== null) ? String(r.c[idx].v).trim() : '';
+
+                const groupName = getVal(2);
+                if (!groupName || groupName.toUpperCase().includes("SHG NAME")) continue;
+
+                const memberName = getVal(3);
+                if (!memberName) continue;
+
+                const branch = getVal(0) || "MAJDIA";
+                const cbs = getVal(1);
+                const guardian = getVal(4);
+                const village = getVal(5);
+
+                let aadhar = "";
+                if (colAadhar >= 0) {
+                    aadhar = getVal(colAadhar).replace(/\D/g, "");
+                }
+                if (!aadhar || aadhar.length !== 12) {
+                    for (let c = 0; c < r.c.length; c++) {
+                        if (c === colPending) continue;
+                        let clean = getVal(c).replace(/\D/g, "");
+                        if (clean.length === 12 && clean !== cbs) { aadhar = clean; break; }
+                    }
+                }
+
+                let pendingLoan = 0;
+                if (colPending >= 0) {
+                    let rawPending = getVal(colPending);
+                    if (rawPending !== "") {
+                        let num = parseFloat(rawPending.replace(/,/g, "").trim());
+                        if (!isNaN(num) && num > 0) pendingLoan = num;
+                    }
+                }
+
+                if (!shgGroups[groupName]) {
+                    shgGroups[groupName] = { name: groupName, branch: branch, cbs: cbs, village: village, members: [] };
+                }
+                shgGroups[groupName].members.push({ name: memberName, guardian: guardian, aadhar: aadhar, pendingLoan: pendingLoan, village: village });
+
+                if (aadhar) {
+                    sheet1AadhaarMap[aadhar] = {
+                        groupName: groupName,
+                        memberName: memberName,
+                        guardian: guardian,
+                        village: village,
+                        branch: branch,
+                        mobile: getVal(11) || getVal(10) || ""
+                    };
+                }
+            }
+
+            const select = document.getElementById('shgSelect');
+            if (select) {
+                select.innerHTML = '<option value="">-- দল নির্বাচন করুন --</option>';
+                Object.keys(shgGroups).sort().forEach(g => {
+                    const opt = document.createElement('option');
+                    opt.value = g;
+                    opt.textContent = `${g} (${shgGroups[g].members.length} জন সদস্য)`;
+                    select.appendChild(opt);
+                });
+            }
+
+            isSheet1Loaded = true;
+            if (status) status.innerHTML = `<span style="color:#075e3b;">সফলভাবে ${Object.keys(shgGroups).length}টি দল লোড হয়েছে ✓</span>`;
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            fetchSHGSheetData();
+            document.querySelectorAll('input[type="tel"]').forEach(el => {
+                el.addEventListener('input', function() { this.value = this.value.replace(/\D/g, ''); });
+            });
+        });
+
+        function selectProduct(prod, el) {
+            document.querySelectorAll('.product-card').forEach(c => c.classList.remove('selected'));
+            if (el) el.classList.add('selected');
+            selectedProduct = prod;
+        }
+
+        function proceedToForm() {
+            if (!selectedProduct) { alert('দয়া করে একটি সেবা নির্বাচন করুন।'); return; }
+            document.querySelectorAll('.form-section').forEach(f => f.classList.remove('active'));
+            const target = document.getElementById(selectedProduct + 'Form');
+            if (target) {
+                target.classList.add('active');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                if (selectedProduct === 'newshg') {
+                    initNewSHGMembers(6);
+                    document.getElementById('newshg_formation_date').value = new Date().toISOString().split('T')[0];
+                }
+            }
+        }
+
+        function backToSelection() {
+            document.querySelectorAll('.form-section').forEach(f => f.classList.remove('active'));
+            document.getElementById('selection').classList.add('active');
+            selectedProduct = null;
+            document.querySelectorAll('.product-card').forEach(c => c.classList.remove('selected'));
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // ==================== SHG GROUP LOAN ====================
+        function onGroupSelected() {
+            const gName = document.getElementById('shgSelect').value;
+            const sec = document.getElementById('membersSection');
+            if (!gName || !shgGroups[gName]) { activeSHGGroup = null; sec.style.display = 'none'; return; }
+
+            activeSHGGroup = shgGroups[gName];
+            document.getElementById('shg_branch').value = activeSHGGroup.branch || 'MAJDIA';
+            document.getElementById('shg_cbs').value = activeSHGGroup.cbs || '—';
+            document.getElementById('shg_member_count').value = `${activeSHGGroup.members.length} জন`;
+            document.getElementById('shg_village').value = activeSHGGroup.village || '';
+
+            const tbody = document.getElementById('memberTableBody');
+            tbody.innerHTML = '';
+            
+            const pres = document.getElementById('shg_leader_pres');
+            const secSel = document.getElementById('shg_leader_sec');
+            const trs = document.getElementById('shg_leader_trs');
+
+            let optHtml = '<option value="">-- বাছুন --</option>';
+
+            activeSHGGroup.members.forEach((m, idx) => {
+                optHtml += `<option value="${m.name}">${m.name}</option>`;
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td style="text-align:center; font-weight:bold;">${idx + 1}</td>
+                    <td><b>${m.name}</b></td>
+                    <td>${m.guardian || '—'}</td>
+                    <td style="font-family:monospace; color:#0d6efd; font-weight:600;">${m.aadhar || '—'}</td>
+                    <td><input type="number" id="shg_pend_${idx}" value="${m.pendingLoan}" min="0" oninput="calculateSHGTotals()"></td>
+                    <td><input type="number" id="shg_new_${idx}" value="0" min="0" max="70000" step="1000" placeholder="0 - 70000" oninput="calculateSHGTotals()"></td>
+                `;
+                tbody.appendChild(tr);
+            });
+
+            pres.innerHTML = optHtml;
+            secSel.innerHTML = optHtml;
+            trs.innerHTML = optHtml;
+
+            sec.style.display = 'block';
+            calculateSHGTotals();
+        }
+
+        function calculateSHGTotals() {
+            if (!activeSHGGroup) return;
+            let totalP = 0, totalN = 0;
+            activeSHGGroup.members.forEach((_, idx) => {
+                totalP += parseFloat(document.getElementById('shg_pend_' + idx)?.value) || 0;
+                totalN += parseFloat(document.getElementById('shg_new_' + idx)?.value) || 0;
+            });
+            document.getElementById('calcMemberCount').textContent = `${activeSHGGroup.members.length} জন`;
+            document.getElementById('calcTotalPending').textContent = "₹ " + totalP.toLocaleString('en-IN');
+            document.getElementById('calcTotalNew').textContent = "₹ " + totalN.toLocaleString('en-IN');
+        }
+
+        function reviewSHGApplication() {
+            if (!activeSHGGroup) return;
+            const pName = document.getElementById('shg_leader_pres').value;
+            const sName = document.getElementById('shg_leader_sec').value;
+            const tName = document.getElementById('shg_leader_trs').value;
+            const mobile = document.getElementById('shg_leader_mobile').value.trim();
+            const resNo = document.getElementById('shg_res_no').value.trim();
+            const resDate = document.getElementById('shg_res_date').value;
+            const pin = document.getElementById('shg_pin').value.trim();
+
+            if (!pName || !sName || !tName) { alert("দলনেত্রী, সম্পাদিকা ও কোষাধ্যক্ষ নির্বাচন করুন।"); return; }
+            if (pName === sName || pName === tName || sName === tName) { alert("একই সদস্য একাধিক পদে থাকতে পারবেন না।"); return; }
+            if (!/^\d{10}$/.test(mobile)) { alert("সঠিক ১০ সংখ্যার মোবাইল দিন।"); return; }
+            if (!resNo || !resDate) { alert("দলীয় রেজোলিউশন নম্বর ও তারিখ দিন।"); return; }
+            if (!/^\d{6}$/.test(pin)) { alert("সঠিক ৬ সংখ্যার পিন কোড দিন।"); return; }
+
+            let alloc = [], totalP = 0, totalN = 0, hasLoan = false;
+            for (let i = 0; i < activeSHGGroup.members.length; i++) {
+                const m = activeSHGGroup.members[i];
+                const p = parseFloat(document.getElementById('shg_pend_' + i)?.value) || 0;
+                const n = parseFloat(document.getElementById('shg_new_' + i)?.value) || 0;
+                if (n > 0) hasLoan = true;
+                totalP += p; totalN += n;
+                alloc.push({ sl: i + 1, name: m.name, guardian: m.guardian || '—', aadhar: m.aadhar, pendingLoan: p, newLoan: n });
+            }
+
+            if (!hasLoan && totalN <= 0) {
+                alert("দলের অন্তত একজন সদস্যের নতুন ঋণের দাবি থাকতে হবে।");
+                return;
+            }
+
+            pendingData = {
+                type: "SHG_GROUP_LOAN",
+                shgName: activeSHGGroup.name,
+                branch: activeSHGGroup.branch,
+                cbs: activeSHGGroup.cbs,
+                membersCount: activeSHGGroup.members.length,
+                president: pName,
+                secretary: sName,
+                treasurer: tName,
+                mobile: mobile,
+                altMobile: document.getElementById('shg_leader_alt_mobile').value.trim(),
+                email: document.getElementById('shg_leader_email').value.trim(),
+                village: document.getElementById('shg_village').value.trim(),
+                po: document.getElementById('shg_po').value.trim(),
+                pin: pin,
+                resNo: resNo,
+                resDate: resDate,
+                amount: totalN,
+                totalPending: totalP,
+                tenure: document.getElementById('shg_tenure').value,
+                purpose: document.getElementById('shg_purpose').value,
+                allocationDetails: alloc,
+                appId: "SHG-LOAN-" + new Date().getFullYear() + "-" + Math.floor(100000 + Math.random() * 900000)
+            };
+
+            const grid = document.getElementById('reviewGrid');
+            grid.innerHTML = `
+                <div class="review-item"><span class="review-label">স্বনির্ভর দলের নাম:</span><span class="review-value">${pendingData.shgName}</span></div>
+                <div class="review-item"><span class="review-label">শাখা / CBS A/C:</span><span class="review-value">${pendingData.branch} / ${pendingData.cbs}</span></div>
+                <div class="review-item"><span class="review-label">দলনেত্রী (President):</span><span class="review-value">${pendingData.president}</span></div>
+                <div class="review-item"><span class="review-label">সম্পাদিকা (Secretary):</span><span class="review-value">${pendingData.secretary}</span></div>
+                <div class="review-item"><span class="review-label">কোষাধ্যক্ষ (Treasurer):</span><span class="review-value">${pendingData.treasurer}</span></div>
+                <div class="review-item"><span class="review-label">যোগাযোগের মোবাইল:</span><span class="review-value">${pendingData.mobile}</span></div>
+                <div class="review-item"><span class="review-label">রেজোলিউশন নং ও তারিখ:</span><span class="review-value">${pendingData.resNo} (তাং: ${pendingData.resDate})</span></div>
+                <div class="review-item"><span class="review-label">মোট নতুন ঋণের দাবি:</span><span class="review-value">₹ ${pendingData.amount.toLocaleString('en-IN')}</span></div>
+            `;
+
+            document.getElementById('dynamicReviewWrapper').style.display = 'block';
+            document.getElementById('reviewMemberHead').innerHTML = '<tr><th>#</th><th>সদস্যের নাম</th><th>অভিভাবক</th><th>আধার নম্বর</th><th>পূর্বের বকেয়া</th><th>নতুন ঋণ</th></tr>';
+            document.getElementById('reviewMemberBody').innerHTML = alloc.map(m => `
+                <tr><td>${m.sl}</td><td><b>${m.name}</b></td><td>${m.guardian}</td><td style="font-family:monospace;">${m.aadhar || '—'}</td><td>₹ ${m.pendingLoan}</td><td><b>₹ ${m.newLoan}</b></td></tr>
+            `).join('');
+
+            document.getElementById('reviewModal').classList.add('show');
+        }
+
+        // ==================== NEW SHG FORMATION ====================
+        function initNewSHGMembers(count) {
+            const tbody = document.getElementById('newshgMemberBody');
+            tbody.innerHTML = '';
+            newSHGMemberCount = 0;
+            for (let i = 0; i < count; i++) addSHGMemberRow();
+        }
+
+        function addSHGMemberRow() {
+            if (newSHGMemberCount >= 15) { alert("সর্বোচ্চ ১৫ জনের বেশি সদস্য যোগ করা যাবে না।"); return; }
+            newSHGMemberCount++;
+            const tbody = document.getElementById('newshgMemberBody');
+            const tr = document.createElement('tr');
+            tr.id = 'new_mem_tr_' + newSHGMemberCount;
+
+            let liveOptionsHtml = livelihoodOptions.map(opt => `<option value="${opt}">${opt}</option>`).join('');
+
+            tr.innerHTML = `
+                <td style="text-align:center; font-weight:bold;">${newSHGMemberCount}</td>
+                <td><input type="text" id="nm_n_${newSHGMemberCount}" placeholder="সদস্যের নাম" oninput="updateLeaderDropdowns()" required></td>
+                <td><input type="text" id="nm_g_${newSHGMemberCount}" placeholder="অভিভাবকের নাম" required></td>
+                <td><input type="text" id="nm_a_${newSHGMemberCount}" placeholder="গ্রাম" required></td>
+                <td><input type="text" id="nm_p_${newSHGMemberCount}" maxlength="6" placeholder="PIN" value="741503" required></td>
+                <td><input type="tel" id="nm_m_${newSHGMemberCount}" maxlength="10" placeholder="মোবাইল" oninput="syncLeaderPhones()" required></td>
+                <td>
+                    <input type="text" id="nm_ad_${newSHGMemberCount}" maxlength="12" placeholder="১২ সংখ্যার আধার" oninput="validateMemberAadhar(${newSHGMemberCount})" required style="transition: all 0.3s ease;">
+                    <small id="ad_status_${newSHGMemberCount}" style="font-size:10px; display:block; margin-top:2px; font-weight:bold;"></small>
+                </td>
+                <td><select id="nm_liv_${newSHGMemberCount}" required>${liveOptionsHtml}</select></td>
+                <td><input type="text" id="nm_acc_${newSHGMemberCount}" placeholder="সদস্য A/C"></td>
+            `;
+            tbody.appendChild(tr);
+            document.getElementById('newshgCountText').textContent = newSHGMemberCount;
+            updateLeaderDropdowns();
+        }
+
+        function removeSHGMemberRow() {
+            if (newSHGMemberCount <= 6) { alert("দলে সর্বনিম্ন ৬ জন সদস্য বাধ্যতামূলক!"); return; }
+            const row = document.getElementById('new_mem_tr_' + newSHGMemberCount);
+            if (row) row.remove();
+            newSHGMemberCount--;
+            document.getElementById('newshgCountText').textContent = newSHGMemberCount;
+            updateLeaderDropdowns();
+        }
+
+        function updateLeaderDropdowns() {
+            const pres = document.getElementById('newshg_leader_pres');
+            const sec = document.getElementById('newshg_leader_sec');
+            const trs = document.getElementById('newshg_leader_trs');
+
+            const prevP = pres.value; const prevS = sec.value; const prevT = trs.value;
+            let optionsHtml = '<option value="">-- সদস্য তালিকা থেকে বাছুন --</option>';
+            for (let i = 1; i <= newSHGMemberCount; i++) {
+                const name = document.getElementById('nm_n_' + i)?.value.trim() || `সদস্য ${i}`;
+                optionsHtml += `<option value="${i}">${name}</option>`;
+            }
+            pres.innerHTML = optionsHtml; sec.innerHTML = optionsHtml; trs.innerHTML = optionsHtml;
+            if (prevP) pres.value = prevP; if (prevS) sec.value = prevS; if (prevT) trs.value = prevT;
+            syncLeaderPhones();
+        }
+
+        function syncLeaderPhones() {
+            const pIdx = document.getElementById('newshg_leader_pres').value;
+            const sIdx = document.getElementById('newshg_leader_sec').value;
+            const tIdx = document.getElementById('newshg_leader_trs').value;
+
+            document.getElementById('newshg_pres_phone').value = pIdx ? (document.getElementById('nm_m_' + pIdx)?.value || '') : '';
+            document.getElementById('newshg_sec_phone').value = sIdx ? (document.getElementById('nm_m_' + sIdx)?.value || '') : '';
+            document.getElementById('newshg_trs_phone').value = tIdx ? (document.getElementById('nm_m_' + tIdx)?.value || '') : '';
+        }
+
+        function validateMemberAadhar(idx) {
+            const input = document.getElementById('nm_ad_' + idx);
+            const statusText = document.getElementById('ad_status_' + idx);
+            const val = input.value.trim().replace(/\D/g, '');
+            
+            if (val.length < 12) {
+                input.style.border = "1.2px solid #bddacf";
+                input.style.backgroundColor = "#fff";
+                input.style.color = "#17324d";
+                statusText.innerHTML = "";
+                return;
+            }
+
+            statusText.innerHTML = "<span style='color:#0d6efd; font-weight:700;'><i class='fas fa-spinner fa-spin'></i> আধার যাচাই হচ্ছে...</span>";
+            input.style.border = "1.8px solid #0d6efd";
+            input.style.backgroundColor = "#f0f7ff";
+
+            setTimeout(() => {
+                const duplicateInfo = sheet1AadhaarMap[val];
+                if (duplicateInfo) {
+                    input.style.border = "2px solid #d32f2f";
+                    input.style.backgroundColor = "#fde8e8";
+                    input.style.color = "#b71c1c";
+                    statusText.innerHTML = "<span style='color:#d32f2f; font-weight:bold;'>⚠️ ডুপ্লিকেট আধার (" + duplicateInfo.groupName + ")</span>";
+
+                    activeValidatingIndex = idx;
+                    document.getElementById('duplicateGroupNameText').textContent = "দলের নাম: " + duplicateInfo.groupName + " (" + duplicateInfo.memberName + ")";
+                    document.getElementById('duplicateDialogOverlay').classList.add('show');
+                } else {
+                    input.style.border = "2px solid #2e7d32";
+                    input.style.backgroundColor = "#e8f5e9";
+                    input.style.color = "#1b5e20";
+                    statusText.innerHTML = "<span style='color:#2e7d32; font-weight:bold;'>✓ সঠিক ও নতুন আধার</span>";
+
+                    const nextField = document.getElementById('nm_liv_' + idx);
+                    if (nextField) nextField.focus();
+                }
+            }, 2000);
+        }
+
+        function handleDuplicateAction(isContinue) {
+            document.getElementById('duplicateDialogOverlay').classList.remove('show');
+            if (activeValidatingIndex === null) return;
+            const input = document.getElementById('nm_ad_' + activeValidatingIndex);
+            const statusText = document.getElementById('ad_status_' + activeValidatingIndex);
+
+            if (!isContinue) {
+                input.value = '';
+                input.style.border = "1.2px solid #bddacf";
+                input.style.backgroundColor = "#fff";
+                input.style.color = "#17324d";
+                statusText.innerHTML = "";
+                input.focus();
+            } else {
+                const nextField = document.getElementById('nm_liv_' + activeValidatingIndex);
+                if (nextField) nextField.focus();
+            }
+            activeValidatingIndex = null;
+        }
+
+        function reviewNewSHGForm() {
+            const groupName = document.getElementById('newshg_group_name').value.trim();
+            const pIdx = document.getElementById('newshg_leader_pres').value;
+            const sIdx = document.getElementById('newshg_leader_sec').value;
+            const tIdx = document.getElementById('newshg_leader_trs').value;
+
+            if (!groupName) { alert("দলের নাম লিখুন।"); return; }
+            if (!pIdx || !sIdx || !tIdx) { alert("দলনেত্রী, সম্পাদিকা এবং কোষাধ্যক্ষ নির্বাচন করুন।"); return; }
+            if (pIdx === sIdx || pIdx === tIdx || sIdx === tIdx) { alert("একই সদস্যকে একাধিক পদে নির্বাচন করা যাবে না।"); return; }
+
+            let members = [];
+            for (let i = 1; i <= newSHGMemberCount; i++) {
+                let name = document.getElementById('nm_n_' + i).value.trim();
+                let gua = document.getElementById('nm_g_' + i).value.trim();
+                let add = document.getElementById('nm_a_' + i).value.trim();
+                let pin = document.getElementById('nm_p_' + i).value.trim();
+                let mob = document.getElementById('nm_m_' + i).value.trim();
+                let aad = document.getElementById('nm_ad_' + i).value.trim();
+                let liv = document.getElementById('nm_liv_' + i).value;
+                let memAcc = document.getElementById('nm_acc_' + i).value.trim();
+
+                if (!name || !gua || !add || !pin || !mob || !aad) { alert(`সদস্য নং ${i}-এর সমস্ত তথ্য পূরণ করুন।`); return; }
+                if (!/^\d{10}$/.test(mob)) { alert(`সদস্য নং ${i}-এর সঠিক ১০ সংখ্যার মোবাইল দিন।`); return; }
+                if (!/^\d{12}$/.test(aad)) { alert(`সদস্য নং ${i}-এর সঠিক ১২ সংখ্যার আধার দিন।`); return; }
+
+                members.push({ sl: i, name, gua, add, pin, mob, aadhar: aad, livelihood: liv, memAcc });
+            }
+
+            const pName = document.getElementById('nm_n_' + pIdx).value.trim();
+            const sName = document.getElementById('nm_n_' + sIdx).value.trim();
+            const tName = document.getElementById('nm_n_' + tIdx).value.trim();
+
+            pendingData = {
+                type: "NEW_SHG_FORMATION",
+                branch: "MAJDIA",
+                shgSbAc: document.getElementById('newshg_sb_ac').value.trim() || 'প্রক্রিয়াধীন',
+                groupName: groupName,
+                pacsName: "PRATAPPUR SKUS LTD",
+                formationDate: document.getElementById('newshg_formation_date').value,
+                president: `${pName} (${document.getElementById('newshg_pres_phone').value})`,
+                secretary: `${sName} (${document.getElementById('newshg_sec_phone').value})`,
+                treasurer: `${tName} (${document.getElementById('newshg_trs_phone').value})`,
+                ifsc: "WBSC0NDCB17",
+                members: members,
+                appId: "SHG-FORM-" + new Date().getFullYear() + "-" + Math.floor(100000 + Math.random() * 900000)
+            };
+
+            const grid = document.getElementById('reviewGrid');
+            grid.innerHTML = `
+                <div class="review-item"><span class="review-label">শাখা:</span><span class="review-value">MAJDIA</span></div>
+                <div class="review-item"><span class="review-label">দলের নাম:</span><span class="review-value">${groupName}</span></div>
+                <div class="review-item"><span class="review-label">দলনেত্রী (President):</span><span class="review-value">${pendingData.president}</span></div>
+                <div class="review-item"><span class="review-label">সম্পাদিকা (Secretary):</span><span class="review-value">${pendingData.secretary}</span></div>
+                <div class="review-item"><span class="review-label">কোষাধ্যক্ষ (Treasurer):</span><span class="review-value">${pendingData.treasurer}</span></div>
+                <div class="review-item"><span class="review-label">মোট সদস্য:</span><span class="review-value">${members.length} জন</span></div>
+            `;
+
+            document.getElementById('dynamicReviewWrapper').style.display = 'block';
+            document.getElementById('reviewMemberHead').innerHTML = '<tr><th>#</th><th>সদস্যের নাম</th><th>অভিভাবক</th><th>ঠিকানা</th><th>মোবাইল</th><th>আধার</th><th>জীবিকা</th><th>A/C</th></tr>';
+            document.getElementById('reviewMemberBody').innerHTML = members.map(m => `
+                <tr><td>${m.sl}</td><td><b>${m.name}</b></td><td>${m.gua}</td><td>${m.add}</td><td>${m.mob}</td><td style="font-family:monospace;">${m.aadhar || '—'}</td><td>${m.livelihood}</td><td>${m.memAcc || '—'}</td></tr>
+            `).join('');
+
+            document.getElementById('reviewModal').classList.add('show');
+        }
+
+        // ==================== WDF AUTO-VERIFY & DEATH DETAILS ====================
+        function toggleDeathDetails() {
+            const type = document.getElementById('wdf_claim_type').value;
+            const div = document.getElementById('wdf_death_fields');
+            div.style.display = (type === "MEMBER DEATH" || type === "HUSBAND DEATH") ? "block" : "none";
+        }
+
+        function verifyWDFAadhar() {
+            const input = document.getElementById('wdf_aadhar');
+            const status = document.getElementById('wdf_status');
+            const val = input.value.trim().replace(/\D/g, '');
+
+            if (val.length < 12) { status.innerHTML = ""; return; }
+            status.innerHTML = "<span style='color:#0d6efd;'>যাচাই করা হচ্ছে...</span>";
+
+            const member = sheet1AadhaarMap[val];
+            if (member) {
+                status.innerHTML = "<span style='color:#2e7d32;'>সদস্যা পাওয়া গেছে ✓</span>";
+                document.getElementById('wdf_group').value = member.groupName;
+                document.getElementById('wdf_name').value = member.memberName;
+                document.getElementById('wdf_guardian').value = member.guardian || '';
+                document.getElementById('wdf_branch').value = member.branch || 'MAJDIA';
+                document.getElementById('wdf_address').value = member.village || '';
+                document.getElementById('wdf_mobile').value = member.mobile || '';
+            } else {
+                status.innerHTML = "<span style='color:#d32f2f;'>সদস্যা পাওয়া যায়নি!</span>";
+                document.getElementById('wdf_group').value = '';
+                document.getElementById('wdf_name').value = '';
+                document.getElementById('wdf_guardian').value = '';
+                document.getElementById('wdf_branch').value = '';
+                document.getElementById('wdf_address').value = '';
+                document.getElementById('wdf_mobile').value = '';
+            }
+        }
+
+        function reviewWDFForm() {
+            const aadhar = document.getElementById('wdf_aadhar').value.trim();
+            const groupName = document.getElementById('wdf_group').value.trim();
+            const memberName = document.getElementById('wdf_name').value.trim();
+            const claimPerson = document.getElementById('wdf_claim_person').value.trim();
+            const applicant = document.getElementById('wdf_applicant').value.trim();
+            const claimType = document.getElementById('wdf_claim_type').value;
+
+            if (!aadhar || !groupName || !memberName || !claimPerson || !applicant) {
+                alert("আধার দিয়ে সদস্যা যাচাই করুন এবং সকল প্রয়োজনীয় তথ্য পূরণ করুন।");
+                return;
+            }
+
+            let deathDate = "", deathReason = "", certNo = "", issueAuth = "";
+            if (claimType === "MEMBER DEATH" || claimType === "HUSBAND DEATH") {
+                deathDate = document.getElementById('wdf_death_date').value;
+                deathReason = document.getElementById('wdf_death_reason').value;
+                certNo = document.getElementById('wdf_cert_no').value.trim();
+                issueAuth = document.getElementById('wdf_issue_auth').value;
+                if (!deathDate || !certNo) {
+                    alert("মৃত্যুর তারিখ এবং মৃত্যু শংসাপত্র নম্বর প্রদান করুন।");
+                    return;
+                }
+            }
+
+            pendingData = {
+                type: "WDF_APPLICATION",
+                applicationType: claimType,
+                aadhar: aadhar,
+                groupName: groupName,
+                memberName: memberName,
+                guardian: document.getElementById('wdf_guardian').value,
+                branch: document.getElementById('wdf_branch').value,
+                address: document.getElementById('wdf_address').value,
+                mobile: document.getElementById('wdf_mobile').value,
+                claimPersonName: claimPerson,
+                deathDate: deathDate,
+                deathReason: deathReason,
+                certNo: certNo,
+                issueAuth: issueAuth,
+                applicantName: applicant,
+                applicantEmail: document.getElementById('wdf_email').value.trim(),
+                appId: "WDF-" + new Date().getFullYear() + "-" + Math.floor(100000 + Math.random() * 900000)
+            };
+
+            const grid = document.getElementById('reviewGrid');
+            grid.innerHTML = `
+                <div class="review-item"><span class="review-label">দাবির প্রকার:</span><span class="review-value">${pendingData.applicationType}</span></div>
+                <div class="review-item"><span class="review-label">দলের নাম:</span><span class="review-value">${pendingData.groupName}</span></div>
+                <div class="review-item"><span class="review-label">সদস্যার নাম:</span><span class="review-value">${pendingData.memberName}</span></div>
+                <div class="review-item"><span class="review-label">দাবিদার / প্রাপক:</span><span class="review-value">${pendingData.claimPersonName}</span></div>
+                ${deathDate ? `<div class="review-item"><span class="review-label">মৃত্যুর তারিখ ও কারণ:</span><span class="review-value">${deathDate} (${deathReason})</span></div>` : ''}
+                ${certNo ? `<div class="review-item"><span class="review-label">শংসাপত্র নং ও কর্তৃপক্ষ:</span><span class="review-value">${certNo} -${issueAuth}</span></div>` : ''}
+                <div class="review-item"><span class="review-label">আধার নম্বর:</span><span class="review-value" style="font-family:monospace;">${pendingData.aadhar}</span></div>
+            `;
+
+            document.getElementById('dynamicReviewWrapper').style.display = 'none';
+            document.getElementById('reviewModal').classList.add('show');
+        }
+
+        function closeReviewModal() {
+            document.getElementById('reviewModal').classList.remove('show');
+        }
+
+        // ==================== FINAL SUBMISSION ROUTER ====================
+        function confirmFinalSubmit() {
+            if (!pendingData || isSubmitting) return;
+            isSubmitting = true;
+            document.getElementById('confirmSubmitBtn').disabled = true;
+            document.getElementById('submitStatus').classList.add('show');
+
+            const isSHGOrWDF = (pendingData.type === "NEW_SHG_FORMATION" || pendingData.type === "SHG_GROUP_LOAN" || pendingData.type === "WDF_APPLICATION");
+            const targetUrl = isSHGOrWDF ? SHG_WDF_SCRIPT_URL : GENERAL_APPS_SCRIPT_URL;
+
+            fetch(targetUrl, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                body: JSON.stringify(pendingData)
+            })
+            .then(() => {
+                closeReviewModal();
+                showSuccessReceipt(pendingData);
+                document.getElementById('submitStatus').classList.remove('show');
+                document.getElementById('confirmSubmitBtn').disabled = false;
+                isSubmitting = false;
+            })
+            .catch(() => {
+                const payloadStr = encodeURIComponent(JSON.stringify(pendingData));
+                const img = new Image();
+                img.src = targetUrl + '?payload=' + payloadStr;
+                img.onload = img.onerror = function() {
+                    closeReviewModal();
+                    showSuccessReceipt(pendingData);
+                    document.getElementById('submitStatus').classList.remove('show');
+                    document.getElementById('confirmSubmitBtn').disabled = false;
+                    isSubmitting = false;
+                };
+            });
+        }
+
+        // ==================== A4 RECEIPT PRINT ====================
+        function showSuccessReceipt(d) {
+            document.getElementById('printAppId').textContent = d.appId;
+            document.getElementById('printAppDate').textContent = new Date().toLocaleDateString('en-GB');
+
+            if (d.type === "SHG_GROUP_LOAN") {
+                document.getElementById('printFormTitle').textContent = "SHG GROUP LOAN APPLICATION FORM";
+                document.getElementById('printDynamicWrapper').style.display = 'block';
+                document.getElementById('printDynamicHead').textContent = "২. স্বনির্ভর দলের সদস্যদের তালিকা ও ঋণ বিভাজন বিবরণী";
+
+                document.getElementById('printPart1').innerHTML = `
+                    <tr><td class="label">স্বনির্ভর দলের নাম</td><td class="value"><b>${d.shgName}</b></td><td class="label">শাখা / CBS</td><td class="value">${d.branch} / ${d.cbs}</td></tr>
+                    <tr><td class="label">রেজোলিউশন নং ও তারিখ</td><td class="value">${d.resNo} (তাং: ${d.resDate})</td><td class="label">মোট সদস্য</td><td class="value">${d.membersCount} জন</td></tr>
+                `;
+
+                document.getElementById('printMemberHead').innerHTML = `
+                    <tr style="background:#f4f8f5;">
+                        <th style="width:30px; text-align:center;">#</th><th>সদস্যের নাম</th><th>অভিভাবক / স্বামীর নাম</th><th>আধার নম্বর</th><th style="text-align:right;">বকেয়া (₹)</th><th style="text-align:right;">নতুন দাবি (₹)</th>
+                    </tr>
+                `;
+                document.getElementById('printMemberBody').innerHTML = d.allocationDetails.map(m => `
+                    <tr><td style="text-align:center;">${m.sl}</td><td><b>${m.name}</b></td><td>${m.guardian}</td><td style="font-family:monospace;">${m.aadhar || '—'}</td><td style="text-align:right;">₹ ${m.pendingLoan}</td><td style="text-align:right;"><b>₹ ${m.newLoan}</b></td></tr>
+                `).join('');
+
+                document.getElementById('printPart2').innerHTML = `
+                    <tr><td class="label">মোট নতুন ঋণের দাবি</td><td class="value" style="color:#075e3b; font-weight:800;">₹ ${d.amount.toLocaleString('en-IN')}</td><td class="label">ঋণের মেয়াদকাল</td><td class="value">${d.tenure}</td></tr>
+                    <tr><td class="label">ঋণের মূল উদ্দেশ্য</td><td class="value">${d.purpose}</td><td class="label">দলের স্থায়ী ঠিকানা</td><td class="value">${d.village}, P.O: ${d.po}, PIN: ${d.pin}</td></tr>
+                    <tr><td class="label">দলনেত্রী (President)</td><td class="value">${d.president} (${d.mobile})</td><td class="label">সম্পাদিকা ও কোষাধ্যক্ষ</td><td class="value">${d.secretary} / ${d.treasurer}</td></tr>
+                `;
+
+                document.getElementById('sigLine1').textContent = "দলনেত্রী / সভাপতি (সীলসহ)";
+                document.getElementById('sigLine2').textContent = "সম্পাদিকা (সীলসহ)";
+                document.getElementById('sigLine3').textContent = "কোষাধ্যক্ষ (সীলসহ)";
+
+            } else if (d.type === "WDF_APPLICATION") {
+                document.getElementById('printFormTitle').textContent = "SHG WELFARE FUND CLAIM APPLICATION FORM";
+                document.getElementById('printDynamicWrapper').style.display = 'none';
+
+                document.getElementById('printPart1').innerHTML = `
+                    <tr><td class="label">দাবির প্রকার</td><td class="value"><b>${d.applicationType}</b></td><td class="label">দলের নাম</td><td class="value">${d.groupName}</td></tr>
+                    <tr><td class="label">সদস্যার নাম</td><td class="value">${d.memberName}</td><td class="label">অভিভাবক / স্বামী</td><td class="value">${d.guardian || '—'}</td></tr>
+                `;
+
+                let deathRows = "";
+                if (d.deathDate) {
+                    deathRows = `
+                        <tr><td class="label">মৃত্যুর তারিখ ও কারণ</td><td class="value">${d.deathDate} (${d.deathReason})</td><td class="label">শংসাপত্র নং ও কর্তৃপক্ষ</td><td class="value">${d.certNo} (${d.issueAuth})</td></tr>
+                    `;
+                }
+
+                document.getElementById('printPart2').innerHTML = `
+                    ${deathRows}
+                    <tr><td class="label">দাবিদার / প্রাপক</td><td class="value"><b>${d.claimPersonName}</b></td><td class="label">আবেদনকারীর নাম</td><td class="value">${d.applicantName}</td></tr>
+                    <tr><td class="label">যোগাযোগের মোবাইল</td><td class="value">${d.mobile}</td><td class="label">সদস্যার আধার নম্বর</td><td class="value" style="font-family:monospace;">${d.aadhar}</td></tr>
+                `;
+
+                document.getElementById('sigLine1').textContent = "দাবিদারের স্বাক্ষর";
+                document.getElementById('sigLine2').textContent = "দলনেত্রীর প্রতিস্বাক্ষর";
+                document.getElementById('sigLine3').textContent = "তারিখ ও স্থান";
+
+            } else if (d.type === "NEW_SHG_FORMATION") {
+                document.getElementById('printFormTitle').textContent = "NEW SELF HELP GROUP (SHG) FORMATION APPLICATION";
+                document.getElementById('printDynamicWrapper').style.display = 'block';
+                document.getElementById('printDynamicHead').textContent = "২. সদস্যদের তালিকা ও পৃথক জীবিকা বিবরণী";
+
+                document.getElementById('printPart1').innerHTML = `
+                    <tr><td class="label">দলের নাম (SHG Name)</td><td class="value">${d.groupName}</td><td class="label">সমিতির নাম (PACS)</td><td class="value">PRATAPPUR SKUS LTD</td></tr>
+                    <tr><td class="label">দলের SB A/C নং</td><td class="value">${d.shgSbAc}</td><td class="label">IFSC কোড</td><td class="value">WBSC0NDCB17</td></tr>
+                `;
+
+                document.getElementById('printMemberHead').innerHTML = `
+                    <tr style="background:#f4f8f5;">
+                        <th style="width:30px; text-align:center;">#</th><th>সদস্যের নাম</th><th>অভিভাবক</th><th>ঠিকানা ও পিন</th><th style="width:90px;">মোবাইল</th><th style="width:115px;">আধার</th><th style="width:120px;">জীবিকা</th>
+                    </tr>
+                `;
+                document.getElementById('printMemberBody').innerHTML = d.members.map(m => `
+                    <tr><td style="text-align:center;">${m.sl}</td><td><b>${m.name}</b></td><td>${m.gua}</td><td>${m.add}, PIN: ${m.pin}</td><td>${m.mob}</td><td style="font-family:monospace;">${m.aadhar || m.aad || '—'}</td><td>${m.livelihood}</td></tr>
+                `).join('');
+
+                document.getElementById('printPart2').innerHTML = `
+                    <tr><td class="label">দলনেত্রী / সভাপতি</td><td class="value">${d.president}</td><td class="label">সম্পাদিকা</td><td class="value">${d.secretary}</td></tr>
+                    <tr><td class="label">কোষাধ্যক্ষ</td><td class="value">${d.treasurer}</td><td class="label">মোট সদস্য</td><td class="value">${d.members.length} জন</td></tr>
+                `;
+
+                document.getElementById('sigLine1').textContent = "দলনেত্রী / সভাপতি (সীলসহ)";
+                document.getElementById('sigLine2').textContent = "সম্পাদিকা (সীলসহ)";
+                document.getElementById('sigLine3').textContent = "কোষাধ্যক্ষ (সীলসহ)";
+            }
+
+            document.getElementById('successModal').classList.add('show');
+        }
+
+        function closeSuccessModal() {
+            document.getElementById('successModal').classList.remove('show');
+            backToSelection();
+            document.querySelectorAll('input:not([readonly])').forEach(el => el.value = '');
+        }
+    </script>
+</body>
+</html>
